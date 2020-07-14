@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/07/15 19:06:04.000.186,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/07/15 19:07:04.000.980,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Temp\Videos\54 - Tela de loading sem componentes de terceiros ----------\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2019/07/15 19:07:04.000.980,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Temp\Videos\54 - Tela de loading sem componentes de terceiros ----------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/07/15 19:07:20.000.988,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Temp\Videos\54 - Tela de loading sem componentes de terceiros ----------\Fontes\Carregando.dproj</Transaction>
+    <Transaction>2019/07/15 19:09:08.000.286,=C:\Temp\Videos\54 - Tela de loading sem componentes de terceiros ----------\Fontes\Loading.pas</Transaction>
+    <Transaction>2019/07/15 19:33:15.000.909,=C:\Temp\Videos\54 - Tela de loading sem componentes de terceiros ----------\Fontes\Unit2.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android=""/>
+	</ActiveMobileDevice>
+</BorlandProject>

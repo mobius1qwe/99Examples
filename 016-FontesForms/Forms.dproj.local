@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/04/15 21:01:23.446,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/04/15 21:01:46.245,H:\99Coders\Posts\16 - Trabalhando com Forms\Fontes\Form_Principal.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2018/04/15 21:01:46.245,H:\99Coders\Posts\16 - Trabalhando com Forms\Fontes\Form_Principal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/04/15 21:01:53.919,H:\99Coders\Posts\16 - Trabalhando com Forms\Fontes\Forms.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2018/04/15 22:11:50.824,=H:\99Coders\Posts\16 - Trabalhando com Forms\Fontes\Unit2.pas</Transaction>
+    <Transaction>2018/04/15 22:51:48.742,=H:\99Coders\Posts\16 - Trabalhando com Forms\Fontes\Unit3.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+</BorlandProject>

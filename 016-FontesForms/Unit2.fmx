@@ -1,0 +1,68 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 497
+  ClientWidth = 282
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object LayoutPadrao: TLayout
+    Align = Client
+    Size.Width = 282.000000000000000000
+    Size.Height = 354.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Rectangle1: TRectangle
+      Align = Client
+      Fill.Color = xFFB3B3B3
+      Size.Width = 282.000000000000000000
+      Size.Height = 354.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Label1: TLabel
+      Align = Center
+      StyledSettings = [Family, Style]
+      Size.Width = 120.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'FORM 2'
+    end
+  end
+  object Button1: TButton
+    Align = Bottom
+    Position.Y = 415.000000000000000000
+    Size.Width = 282.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Fechar (showmodal) - OK'
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Align = Bottom
+    Margins.Bottom = 20.000000000000000000
+    Position.Y = 354.000000000000000000
+    Size.Width = 282.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Fechar (show)'
+    OnClick = Button2Click
+  end
+  object Button3: TButton
+    Align = Bottom
+    Position.Y = 456.000000000000000000
+    Size.Width = 282.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Fechar (showmodal) - Cancelar'
+    OnClick = Button3Click
+  end
+end

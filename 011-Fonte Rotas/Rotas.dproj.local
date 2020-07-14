@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/12 11:07:40.209,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/12 11:09:17.529,H:\99Coders\Posts\11 - Consumir Webservice\Fontes2\Form_Principal.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2017/05/12 11:09:17.529,H:\99Coders\Posts\11 - Consumir Webservice\Fontes2\Form_Principal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/05/12 11:10:31.957,H:\99Coders\Posts\11 - Consumir Webservice\Fontes2\Rotas.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="AYEES8IZ7PSOC6AQ"/>  <PMACANDREA iOSSimulator="iPhone5"/>
+  </ActiveMobileDevice>
+</BorlandProject>

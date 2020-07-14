@@ -1,0 +1,163 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 526
+  ClientWidth = 309
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object ToolBar1: TToolBar
+    Margins.Left = -10.000000000000000000
+    Margins.Right = -10.000000000000000000
+    Position.X = -10.000000000000000000
+    Size.Width = 329.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = xFF3F3F3F
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, Size, Style]
+      Size.Width = 329.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Rotas'
+    end
+    object btn_calcular: TSpeedButton
+      Align = Right
+      IconTintColor = claWhite
+      Margins.Right = 15.000000000000000000
+      Position.X = 266.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'infotoolbutton'
+      OnClick = btn_calcularClick
+    end
+  end
+  object Layout1: TLayout
+    Align = Client
+    Margins.Left = 20.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 269.000000000000000000
+    Size.Height = 458.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label2: TLabel
+      Align = Top
+      Size.Width = 269.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Origem'
+    end
+    object Label3: TLabel
+      Align = Top
+      Position.Y = 85.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Destino'
+    end
+    object edt_origem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Top
+      TabOrder = 3
+      Position.Y = 23.000000000000000000
+      Margins.Bottom = 30.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object edt_destino: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Top
+      TabOrder = 2
+      Position.Y = 108.000000000000000000
+      Margins.Bottom = 60.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lbl_distancia: TLabel
+      Align = Top
+      StyledSettings = [Family, Size, Style]
+      Margins.Bottom = 10.000000000000000000
+      Position.Y = 200.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = xFF6F6F6F
+      Text = 'Dist'#226'ncia: 0km'
+    end
+    object lbl_valor: TLabel
+      Align = Bottom
+      StyledSettings = [Family, Style]
+      Margins.Bottom = 10.000000000000000000
+      Position.Y = 333.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 115.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 36.000000000000000000
+      TextSettings.FontColor = xFF1357A0
+      TextSettings.HorzAlign = Center
+      Text = 'R$ 0,00'
+      object Label7: TLabel
+        Align = Bottom
+        StyledSettings = [Family, Style]
+        Margins.Bottom = 10.000000000000000000
+        Position.Y = 82.000000000000000000
+        Size.Width = 269.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF6F6F6F
+        TextSettings.HorzAlign = Center
+        Text = 'VALOR DA CORRIDA'
+      end
+    end
+    object lbl_tempo: TLabel
+      Align = Top
+      StyledSettings = [Family, Size, Style]
+      Margins.Bottom = 30.000000000000000000
+      Position.Y = 233.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = xFF6F6F6F
+      Text = 'Tempo: 0hs'
+    end
+  end
+  object RESTClient1: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'UTF-8, *;q=0.8'
+    BaseURL = 'http://maps.googleapis.com/maps/api/distancematrix'
+    Params = <>
+    HandleRedirects = True
+    RaiseExceptionOn500 = False
+    Left = 192
+    Top = 72
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Resource = 
+      'json?origins=CAMPINAS+SP&destinations=SAO+PAULO+SP&mode=driving&' +
+      'language=pt-BR&key='
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 192
+    Top = 144
+  end
+  object RESTResponse1: TRESTResponse
+    ContentType = 'application/json'
+    Left = 192
+    Top = 216
+  end
+end

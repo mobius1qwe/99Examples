@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2019/06/26 14:04:17.071,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/06/26 14:06:17.516,C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Form_Principal.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2019/06/26 14:06:17.516,C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Form_Principal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/06/26 14:06:28.968,C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Editor.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019/06/26 14:29:27.829,=C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Unit1.pas</Transaction>
+    <Transaction>2019/06/26 14:29:57.574,C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Form_Editor.fmx=C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Unit1.fmx</Transaction>
+    <Transaction>2019/06/26 14:29:57.574,C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Form_Editor.pas=C:\Temp\Videos\64 - Editor de Fotos --------\Fontes_Editor\Unit1.pas</Transaction>
+  </Transactions>
+  <ActiveMobileDevice>   <NoProfile iOSSimulator="iPhone5" Android=""/>
+  </ActiveMobileDevice>
+</BorlandProject>

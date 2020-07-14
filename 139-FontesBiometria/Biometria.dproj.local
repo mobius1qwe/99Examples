@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/05/10 18:28:07.000.409,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/08/16 13:51:06.000.870,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/12 00:17:31.000.142,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 13:54:42.000.810,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 02:22:20.000.973,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 02:22:51.000.733,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\UnitLogin.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2020/06/10 02:22:51.000.733,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\UnitLogin.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 02:23:02.000.327,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Biometria.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/06/10 02:40:18.000.780,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit2.pas</Transaction>
+    <Transaction>2020/06/10 02:40:37.000.735,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\UnitPrincipal.pas=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit2.pas</Transaction>
+    <Transaction>2020/06/10 02:40:37.000.735,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\UnitPrincipal.fmx=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit2.fmx</Transaction>
+    <Transaction>2020/06/10 13:52:28.000.683,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\Android.KeyguardManager.pas</Transaction>
+    <Transaction>2020/06/10 13:52:28.000.697,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\DW.Androidapi.JNI.KeyguardManager.pas</Transaction>
+    <Transaction>2020/06/10 14:11:22.000.275,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\iOSapi.LocalAuthentication.pas</Transaction>
+    <Transaction>2020/06/10 14:17:44.000.631,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 14:18:33.000.857,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit1.pas=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\iOS.Authentication.pas</Transaction>
+    <Transaction>2020/06/10 14:40:18.000.062,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 16:16:15.000.812,D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\iOS.Authentication.pas=</Transaction>
+    <Transaction>2020/06/10 16:37:18.006,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\DW.Androidapi.JNI.KeyguardManager.pas</Transaction>
+    <Transaction>2020/06/10 17:22:19.118,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/06/10 17:34:52.782,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\Android.KeyguardManager.pas</Transaction>
+    <Transaction>2020/06/10 17:34:52.815,=D:\99Coders\Posts\139 - Trabalhando com biometria no Delphi -------\Fontes\Units\DW.Androidapi.JNI.KeyguardManager.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="AVD_for_Nexus_9_by_Google"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+		<PMacBook iOSSimulator="iPhone5"/>
+		<PMacVirtual iOSSimulator="iPhone5"/>
+		<PMacMini iOSSimulator="_iossimulator_F0687261-8CB8-47DB-B261-461A4CDA5509" iOSDevice64="_iosdevice_8c705f340da7912c8bbb33f3537f3cef0d5702df"/>
+	</ActiveMobileDevice>
+</BorlandProject>

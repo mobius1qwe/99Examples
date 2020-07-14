@@ -1,0 +1,67 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Carregando'
+  ClientHeight = 526
+  ClientWidth = 278
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object ToolBar1: TToolBar
+    Size.Width = 278.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 278.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = xFF5C5C5C
+      TextSettings.HorzAlign = Center
+      Text = 'Clientes'
+      TabOrder = 1
+    end
+    object btn_menu: TSpeedButton
+      Align = Right
+      IconTintColor = xFF5C5C5C
+      Margins.Right = 5.000000000000000000
+      Position.X = 225.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'addtoolbutton'
+      OnClick = btn_menuClick
+    end
+  end
+  object rect_botao: TRoundRect
+    Align = Bottom
+    Fill.Color = xFF34B698
+    Margins.Left = 15.000000000000000000
+    Margins.Right = 15.000000000000000000
+    Margins.Bottom = 15.000000000000000000
+    Position.X = 15.000000000000000000
+    Position.Y = 463.000000000000000000
+    Size.Width = 248.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    OnClick = rect_botaoClick
+    object Label10: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 248.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Consultar Clientes'
+      TabOrder = 0
+    end
+  end
+end

@@ -1,0 +1,92 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 588
+  ClientWidth = 343
+  Fill.Kind = Solid
+  SystemStatusBar.BackgroundColor = claWhite
+  SystemStatusBar.Visibility = VisibleAndOverlap
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object WebBrowser: TWebBrowser
+    Align = Client
+    Size.Width = 343.000000000000000000
+    Size.Height = 450.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 343.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Switch: TSwitch
+      Align = Right
+      IsChecked = False
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 289.000000000000000000
+      Position.Y = 12.000000000000000000
+      Size.Width = 44.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      OnClick = SwitchClick
+    end
+    object Label1: TLabel
+      Align = Left
+      StyledSettings = [Family]
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF16AEE9
+      Text = 'GPS'
+      TabOrder = 1
+    end
+  end
+  object Layout2: TLayout
+    Align = Bottom
+    Position.Y = 500.000000000000000000
+    Size.Width = 343.000000000000000000
+    Size.Height = 88.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object RoundRect1: TRoundRect
+      Align = Center
+      Fill.Color = xFF0FA7E1
+      Size.Width = 228.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFF1EADE4
+      object lbl_endereco: TLabel
+        Align = Client
+        StyledSettings = [Family]
+        HitTest = True
+        Size.Width = 228.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFFFCFCFC
+        TextSettings.HorzAlign = Center
+        Text = 'Detalhes'
+        TabOrder = 0
+        OnClick = lbl_enderecoClick
+      end
+    end
+  end
+  object LocationSensor: TLocationSensor
+    OnLocationChanged = LocationSensorLocationChanged
+    Left = 48
+    Top = 74
+  end
+end

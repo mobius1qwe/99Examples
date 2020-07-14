@@ -1,0 +1,39 @@
+object Frm_LoginFacebook: TFrm_LoginFacebook
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 480
+  ClientWidth = 320
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object WebBrowser: TWebBrowser
+    EnableCaching = False
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    OnDidFinishLoad = WebBrowserDidFinishLoad
+  end
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = xFF4563AB
+    Size.Width = 320.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object btn_voltar: TSpeedButton
+      Align = Left
+      StyledSettings = [Family, Size, Style]
+      Position.Y = 1.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Cancelar'
+      TextSettings.FontColor = claWhite
+      OnClick = btn_voltarClick
+    end
+  end
+end

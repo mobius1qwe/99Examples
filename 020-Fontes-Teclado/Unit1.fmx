@@ -1,0 +1,281 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 510
+  ClientWidth = 280
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnVirtualKeyboardHidden = FormVirtualKeyboardHidden
+  DesignerMasterStyle = 3
+  object ToolBar1: TToolBar
+    Margins.Left = -10.000000000000000000
+    Margins.Right = -10.000000000000000000
+    Position.X = -10.000000000000000000
+    Size.Width = 300.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = xFF386B90
+    object Label3: TLabel
+      Align = Contents
+      StyledSettings = [Family, Size, Style]
+      Size.Width = 300.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Novo Cliente'
+      TabOrder = 1
+    end
+    object btn_salvar: TSpeedButton
+      Align = Right
+      StyledSettings = [Family, Style]
+      Margins.Right = 15.000000000000000000
+      Position.X = 228.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Salvar'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = claWhite
+    end
+    object ColorAnimation1: TColorAnimation
+      Duration = 0.200000002980232200
+      StartValue = claWhite
+      StopValue = claWhite
+    end
+  end
+  object VScroll: TVertScrollBox
+    Align = Client
+    Size.Width = 280.000000000000000000
+    Size.Height = 462.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Viewport.Width = 275.000000000000000000
+    Viewport.Height = 462.000000000000000000
+    object layout_endereco: TLayout
+      Align = Top
+      Position.Y = 198.000000000000000000
+      Size.Width = 275.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Label1: TLabel
+        Align = Top
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 255.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'ENDERE'#199'O'
+      end
+      object edt_endereco: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 33.000000000000000000
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 235.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        OnEnter = edt_nomeEnter
+      end
+    end
+    object layout_fone: TLayout
+      Align = Top
+      Position.Y = 396.000000000000000000
+      Size.Width = 275.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object Label2: TLabel
+        Align = Top
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 255.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'TELEFONE'
+      end
+      object edt_fone: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        KeyboardType = PhonePad
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 33.000000000000000000
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 235.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        OnEnter = edt_nomeEnter
+      end
+    end
+    object layout_codigo: TLayout
+      Align = Top
+      Size.Width = 275.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object Label5: TLabel
+        Align = Top
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 255.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'C'#211'DIGO'
+      end
+      object edt_codigo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        KeyboardType = NumberPad
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 33.000000000000000000
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 235.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+      end
+    end
+    object layout_prazo: TLayout
+      Align = Top
+      Position.Y = 495.000000000000000000
+      Size.Width = 275.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      object Label8: TLabel
+        Align = Left
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Size.Width = 143.000000000000000000
+        Size.Height = 88.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'PERMITIR VENDA A PRAZO'
+      end
+      object sw_prazo: TSwitch
+        Align = Right
+        IsChecked = False
+        Margins.Right = 30.000000000000000000
+        Position.X = 201.000000000000000000
+        Position.Y = 31.000000000000000000
+        Size.Width = 44.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+      end
+    end
+    object layout_cidade: TLayout
+      Align = Top
+      Position.Y = 297.000000000000000000
+      Size.Width = 275.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object Label6: TLabel
+        Align = Top
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 255.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'CIDADE'
+      end
+      object edt_cidade: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 33.000000000000000000
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 235.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        OnEnter = edt_nomeEnter
+      end
+    end
+    object layout_nome: TLayout
+      Align = Top
+      Position.Y = 99.000000000000000000
+      Size.Width = 275.000000000000000000
+      Size.Height = 99.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      object Label4: TLabel
+        Align = Top
+        StyledSettings = [Family, Style]
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 255.000000000000000000
+        Size.Height = 23.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 11.000000000000000000
+        TextSettings.FontColor = xFF959595
+        Text = 'NOME'
+      end
+      object edt_nome: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 0
+        TextSettings.Font.Size = 14.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 33.000000000000000000
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 15.000000000000000000
+        Size.Width = 235.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Style, FontColor]
+        OnEnter = edt_nomeEnter
+      end
+    end
+  end
+end

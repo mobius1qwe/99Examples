@@ -1,0 +1,124 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 573
+  ClientWidth = 350
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 350.000000000000000000
+    Size.Height = 573.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    Sizes = (
+      350s
+      573s
+      350s
+      573s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'PRINCIPAL'
+      object Button1: TButton
+        Align = Top
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 310.000000000000000000
+        Size.Height = 58.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Abrir form com abas'
+        OnClick = Button1Click
+      end
+      object Button2: TButton
+        Align = Top
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 98.000000000000000000
+        Size.Width = 310.000000000000000000
+        Size.Height = 58.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Abrir form (show)'
+        OnClick = Button2Click
+      end
+      object Button3: TButton
+        Align = Top
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 176.000000000000000000
+        Size.Width = 310.000000000000000000
+        Size.Height = 58.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Abrir form (showmodal)'
+        OnClick = Button3Click
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'DETALHE'
+      object LayoutDetalhe: TLayout
+        Align = Client
+        Size.Width = 350.000000000000000000
+        Size.Height = 525.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
+      object ToolBar1: TToolBar
+        Size.Width = 350.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object SpeedButton1: TSpeedButton
+          Align = Left
+          Margins.Left = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backtoolbutton'
+          OnClick = SpeedButton1Click
+        end
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 32
+    Top = 304
+    object actMudar: TChangeTabAction
+      Category = 'Tab'
+      Tab = TabItem2
+    end
+  end
+end
