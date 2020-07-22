@@ -91,6 +91,7 @@ type
     procedure ExibirCampos;
     procedure ErroPermissao(Sender: TObject);
     function Base64FromBitmap(Bitmap: TBitmap): string;
+    procedure AbrirPrincipal(cod: string);
     { Private declarations }
   public
     { Public declarations }
@@ -102,6 +103,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses UnitPrincipal;
 
 function TFrmLogin.Base64FromBitmap(Bitmap: TBitmap): string;
 var
@@ -147,6 +150,19 @@ begin
     TabControl.Opacity := 1;
 end;
 
+procedure TFrmLogin.AbrirPrincipal(cod: string);
+begin
+    if NOT Assigned(FrmPrincipal) then
+        Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+
+    FrmPrincipal.cod_usuario := cod;
+
+    Application.MainForm := FrmPrincipal;
+
+    FrmPrincipal.Show;
+    FrmLogin.Close;
+end;
+
 procedure ProcessaLogin;
 var
     jsonObj : TJsonObject;
@@ -155,10 +171,11 @@ begin
     FrmLogin.FloatAnimation2.Stop;
     FrmLogin.FloatAnimation3.Stop;
 
-    if FrmLogin.RequestLogin.Response.JSONValue = nil then
+
+    if FrmLogin.RequestLogin.Response.StatusCode <> 200 then
     begin
         FrmLogin.ExibirCampos;
-        ShowMessage('Erro ao validar login (JSON inválido)');
+        ShowMessage('Erro ao validar login: ' + FrmLogin.RequestLogin.Response.StatusText);
         exit;
     end;
 
@@ -169,19 +186,18 @@ begin
         sucesso := jsonObj.GetValue('sucesso').Value;
         erro := jsonObj.GetValue('erro').Value;
         cod_usuario := jsonObj.GetValue('codusuario').Value;
-
-        if sucesso <> 'S' then
-        begin
-            FrmLogin.ExibirCampos;
-            ShowMessage(erro);
-            exit;
-        end
-        else
-            showmessage('Usuário validado: ' + cod_usuario);
-
     finally
         jsonObj.DisposeOf;
     end;
+
+    if sucesso <> 'S' then
+    begin
+        FrmLogin.ExibirCampos;
+        ShowMessage(erro);
+        exit;
+    end
+    else
+        FrmLogin.AbrirPrincipal(cod_usuario);
 
 end;
 
@@ -193,10 +209,10 @@ begin
     FrmLogin.FloatAnimation2.Stop;
     FrmLogin.FloatAnimation3.Stop;
 
-    if FrmLogin.RequestConta.Response.JSONValue = nil then
+    if FrmLogin.RequestConta.Response.StatusCode <> 200 then
     begin
         FrmLogin.ExibirCampos;
-        ShowMessage('Erro ao criar conta (JSON inválido)');
+        ShowMessage('Erro ao criar conta: ' + FrmLogin.RequestConta.Response.StatusText);
         exit;
     end;
 
@@ -207,20 +223,19 @@ begin
         sucesso := jsonObj.GetValue('sucesso').Value;
         erro := jsonObj.GetValue('erro').Value;
         cod_usuario := jsonObj.GetValue('codusuario').Value;
-
-        if sucesso <> 'S' then
-        begin
-            FrmLogin.ExibirCampos;
-            ShowMessage(erro);
-            exit;
-        end
-        else
-            showmessage('Usuário criado: ' + cod_usuario);
-
     finally
         jsonObj.DisposeOf;
     end;
 
+
+    if sucesso <> 'S' then
+    begin
+        FrmLogin.ExibirCampos;
+        ShowMessage(erro);
+        exit;
+    end
+    else
+        FrmLogin.AbrirPrincipal(cod_usuario);
 end;
 
 procedure ProcessaLoginErro(Sender: TObject);
@@ -234,7 +249,7 @@ end;
 
 procedure TFrmLogin.FloatAnimation1Finish(Sender: TObject);
 var
-    foto64 : string;
+    foto64, json : string;
 begin
     TabControl.Visible := false;
     img_loading.Visible := true;
@@ -260,6 +275,7 @@ begin
             RequestConta.AddParameter('email', edt_cad_email.Text);
             RequestConta.AddParameter('senha', MD5(edt_cad_senha.Text));
             RequestConta.AddParameter('foto', foto64);
+
             RequestConta.ExecuteAsync(ProcessaConta, true, true, ProcessaLoginErro);
         end;
 
@@ -272,6 +288,9 @@ end;
 procedure TFrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     permissao.DisposeOf;
+
+    Action := TCloseAction.caFree;
+    FrmLogin := nil;
 end;
 
 procedure TFrmLogin.FormCreate(Sender: TObject);

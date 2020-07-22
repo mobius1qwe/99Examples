@@ -62,9 +62,16 @@ object dm: Tdm
         JsonMode = jmPureJSON
         Name = 'CriarConta'
         OnReplyEvent = DWEventsEventsCriarContaReplyEvent
+      end
+      item
+        Routes = [crAll]
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'ListarCategoria'
+        OnReplyEvent = DWEventsEventsListarCategoriaReplyEvent
       end>
-    Left = 136
-    Top = 120
+    Left = 48
+    Top = 96
   end
   object conn: TFDConnection
     Params.Strings = (
@@ -76,6 +83,11 @@ object dm: Tdm
       'DriverID=FB')
     LoginPrompt = False
     Left = 48
+    Top = 24
+  end
+  object QryGeral: TFDQuery
+    Connection = conn
+    Left = 144
     Top = 24
   end
 end

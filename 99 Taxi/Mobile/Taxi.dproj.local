@@ -14,10 +14,16 @@
     <Transaction>2020/03/04 22:57:57.000.274,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Posts\125 - Login completo - Backend REST Full ------\Fontes\UnitLogin.pas</Transaction>
     <Transaction>2020/03/04 22:58:02.000.555,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Posts\125 - Login completo - Backend REST Full ------\Fontes\Taxi.dproj</Transaction>
     <Transaction>2020/04/19 19:36:50.000.919,=D:\99Coders\Posts\131 - Login completo - Backend REST Full - Parte 7\Fontes\Mobile\Units\u99Permissions.pas</Transaction>
-    <Transaction>2020/05/14 09:08:56.897,=D:\99Coders\Posts\135 - Login completo - Backend REST Full - Parte 10 -----------\Fontes\Mobile\Units\uMD5.pas</Transaction>
+    <Transaction>2020/05/14 09:08:56.000.897,=D:\99Coders\Posts\135 - Login completo - Backend REST Full - Parte 10 -----------\Fontes\Mobile\Units\uMD5.pas</Transaction>
+    <Transaction>2020/07/10 13:56:25.288,=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.pas</Transaction>
+    <Transaction>2020/07/10 13:56:48.494,D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\UnitPrincipal.pas=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.pas</Transaction>
+    <Transaction>2020/07/10 13:56:48.494,D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\UnitPrincipal.fmx=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.fmx</Transaction>
+    <Transaction>2020/07/10 14:23:53.950,=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.pas</Transaction>
+    <Transaction>2020/07/10 14:24:27.862,D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\UnitFrameCategoria.fmx=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.fmx</Transaction>
+    <Transaction>2020/07/10 14:24:27.862,D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\UnitFrameCategoria.pas=D:\99Coders\Posts\150 - Login completo - Backend REST Full - Parte 11\Fontes\Mobile\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="AVD_for_Nexus_9_by_Google" iOSSimulator="iPhone5" Android64="AVD_for_Nexus_9_by_Google"/>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="AVD_for_Nexus_9_by_Google"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

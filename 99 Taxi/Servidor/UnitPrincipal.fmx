@@ -28,6 +28,16 @@ object FrmPrincipal: TFrmPrincipal
     TabOrder = 1
     OnSwitch = SwitchSwitch
   end
+  object btn_categoria: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 504.000000000000000000
+    Size.Width = 113.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'Inserir Categoria'
+    OnClick = btn_categoriaClick
+  end
   object RESTServicePooler: TRESTServicePooler
     Active = False
     CORS = False
@@ -61,5 +71,9 @@ object FrmPrincipal: TFrmPrincipal
     MultiCORE = False
     Left = 80
     Top = 96
+  end
+  object OpenDialog: TOpenDialog
+    Left = 160
+    Top = 496
   end
 end
