@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
-  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  UnitCategorias, UnitLancamentos;
 
 type
   TFrmPrincipal = class(TForm)
@@ -49,6 +50,7 @@ type
       const ARect: TRectF);
     procedure lbl_todos_lancClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure img_menuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +62,9 @@ type
       foto: TStream);
     procedure SetupLancamento(lv: TListView;
                               Item: TListViewItem);
+    procedure AddCategoria(listview: TListView; id_categoria, categoria: string;
+              foto: TStream);
+    procedure SetupCategoria(lv: TListView; Item: TListViewItem);
   end;
 
 var
@@ -69,7 +74,6 @@ implementation
 
 {$R *.fmx}
 
-uses UnitLancamentos;
 
 //*********  UNIT FUNCOES GLOBAIS *******************
 
@@ -132,6 +136,49 @@ begin
     }
 end;
 
+
+procedure TFrmPrincipal.AddCategoria(listview: TListView;
+                                      id_categoria,
+                                      categoria: string;
+                                      foto: TStream);
+var
+    txt : TListItemText;
+    img : TListItemImage;
+    bmp : TBitmap;
+begin
+    with listview.Items.Add do
+    begin
+        TagString := id_categoria;
+
+        txt := TListItemText(Objects.FindDrawable('TxtCategoria'));
+        txt.Text := categoria;
+
+        // Icone...
+        img := TListItemImage(Objects.FindDrawable('ImgIcone'));
+
+        if foto <> nil then
+        begin
+            bmp := TBitmap.Create;
+            bmp.LoadFromStream(foto);
+
+            img.OwnsBitmap := true;
+            img.Bitmap := bmp;
+        end;
+
+    end;
+end;
+
+
+procedure TFrmPrincipal.SetupCategoria(lv: TListView;
+                                       Item: TListViewItem);
+var
+    txt : TListItemText;
+begin
+    txt := TListItemText(Item.Objects.FindDrawable('TxtCategoria'));
+    txt.Width := lv.Width - txt.PlaceOffset.X - 20;
+end;
+
+
 //***************************************************
 
 procedure TFrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -159,6 +206,14 @@ begin
                       'Transporte', -45, date, foto);
 
     foto.DisposeOf;
+end;
+
+procedure TFrmPrincipal.img_menuClick(Sender: TObject);
+begin
+    if NOT Assigned(FrmCategorias) then
+        Application.CreateForm(TFrmCategorias, FrmCategorias);
+
+    FrmCategorias.Show;
 end;
 
 procedure TFrmPrincipal.lbl_todos_lancClick(Sender: TObject);

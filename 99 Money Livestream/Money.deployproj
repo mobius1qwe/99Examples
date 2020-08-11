@@ -5,7 +5,7 @@
     </ProjectExtensions>
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'">5200711f02614531</DeviceId>
-        <DeviceId Condition="'$(Platform)'=='Android64'">AVD_for_Nexus_9_by_Google</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'">Emulador_Nexus_7</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone</DeviceId>

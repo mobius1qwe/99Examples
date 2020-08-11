@@ -6,7 +6,7 @@
         <MainSource>Money.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Android</Platform>
         <TargetedPlatforms>33883</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -407,6 +407,14 @@
         </DCCReference>
         <DCCReference Include="UnitLancamentosCad.pas">
             <Form>FrmLancamentosCad</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="UnitCategorias.pas">
+            <Form>FrmCategorias</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="UnitCategoriasCad.pas">
+            <Form>FrmCategoriasCad</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
