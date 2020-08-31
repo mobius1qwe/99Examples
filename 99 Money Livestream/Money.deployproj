@@ -10,9 +10,47 @@
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone</DeviceId>
     </PropertyGroup>
-    <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice64'">
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
-    <ItemGroup Condition="'$(Platform)'=='iOSDevice32'"/>
+    <ItemGroup Condition="'$(Platform)'=='iOSDevice32'">
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
         <DeployFile Include="Win32\Debug\Money.exe" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Money\</RemoteDir>
@@ -108,6 +146,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Money\assets\internal\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>Money\library\lib\mips\</RemoteDir>
             <RemoteName>libMoney.so</RemoteName>
@@ -140,6 +187,15 @@
             <RemoteName>styles.xml</RemoteName>
             <DeployClass>AndroidSplashStyles</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Money\assets\internal\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
@@ -263,6 +319,15 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSSimulator'">
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib">
             <RemoteDir>Money.app\</RemoteDir>
             <RemoteName>libcgunwind.1.0.dylib</RemoteName>
@@ -281,6 +346,34 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Money.app\StartUp\Documents\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
     </ItemGroup>
-    <ItemGroup Condition="'$(Platform)'=='Android64'"/>
+    <ItemGroup Condition="'$(Platform)'=='Android64'">
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>Money\assets\internal\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="DB\banco.db" Condition="'$(Config)'=='Release'">
+            <RemoteDir>Money\assets\internal\</RemoteDir>
+            <RemoteName>banco.db</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+    </ItemGroup>
 </Project>

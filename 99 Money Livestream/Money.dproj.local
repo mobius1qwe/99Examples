@@ -17,23 +17,26 @@
     <Transaction>2020/06/29 20:08:31.000.856,D:\99Coders\Curso99Money2\Aula 05\Fontes\Money.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2020/07/06 20:30:58.000.797,=D:\99Coders\Curso99Money2\Fontes\Units\u99Permissions.pas</Transaction>
     <Transaction>2020/07/13 20:25:33.000.499,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/07/13 20:26:51.000.534,D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
     <Transaction>2020/07/13 20:26:51.000.533,D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 20:26:51.000.534,D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
     <Transaction>2020/07/27 20:05:20.000.641,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/07/27 20:05:37.000.226,D:\99Coders\Curso99Money2\Fontes\UnitLancamentos.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
     <Transaction>2020/07/27 20:05:37.000.226,D:\99Coders\Curso99Money2\Fontes\UnitLancamentos.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/08/03 20:04:30.000.222,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.fmx</Transaction>
     <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.pas</Transaction>
-    <Transaction>2020/08/10 20:04:45.206,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/10 20:05:07.704,D:\99Coders\Curso99Money2\Fontes\UnitCategorias.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
-    <Transaction>2020/08/10 20:05:07.704,D:\99Coders\Curso99Money2\Fontes\UnitCategorias.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/10 20:36:12.017,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/10 20:36:35.851,D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/10 20:36:35.851,D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.fmx</Transaction>
+    <Transaction>2020/08/10 20:04:45.000.206,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/10 20:05:07.000.704,D:\99Coders\Curso99Money2\Fontes\UnitCategorias.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/10 20:05:07.000.704,D:\99Coders\Curso99Money2\Fontes\UnitCategorias.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/08/10 20:36:12.000.017,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/10 20:36:35.000.851,D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/10 20:36:35.000.851,D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/08/17 20:31:41.296,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/17 20:31:59.836,D:\99Coders\Curso99Money2\Fontes\UnitDM.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/08/17 20:31:59.836,D:\99Coders\Curso99Money2\Fontes\UnitDM.dfm=D:\99Coders\Curso99Money2\Fontes\Unit1.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  UnitCategorias, UnitLancamentos;
+  UnitCategorias, UnitLancamentos, FMX.Ani;
 
 type
   TFrmPrincipal = class(TForm)
@@ -38,6 +38,12 @@ type
     lv_lancamento: TListView;
     img_categoria: TImage;
     StyleBook1: TStyleBook;
+    rect_menu: TRectangle;
+    layout_principal: TLayout;
+    AnimationMenu: TFloatAnimation;
+    img_fechar_menu: TImage;
+    layout_menu_cat: TLayout;
+    Label9: TLabel;
     procedure FormShow(Sender: TObject);
     procedure lv_lancamentoUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
@@ -51,6 +57,11 @@ type
     procedure lbl_todos_lancClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure img_menuClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure AnimationMenuFinish(Sender: TObject);
+    procedure AnimationMenuProcess(Sender: TObject);
+    procedure img_fechar_menuClick(Sender: TObject);
+    procedure layout_menu_catClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -115,6 +126,17 @@ begin
 end;
 
 
+
+procedure TFrmPrincipal.AnimationMenuFinish(Sender: TObject);
+begin
+    layout_principal.Enabled := AnimationMenu.Inverse;
+    AnimationMenu.Inverse := NOT AnimationMenu.Inverse;
+end;
+
+procedure TFrmPrincipal.AnimationMenuProcess(Sender: TObject);
+begin
+    layout_principal.Margins.Right := -260 - rect_menu.Margins.Left;
+end;
 
 procedure TFrmPrincipal.SetupLancamento(lv: TListView;
                                         Item: TListViewItem);
@@ -190,6 +212,13 @@ begin
     end;
 end;
 
+procedure TFrmPrincipal.FormCreate(Sender: TObject);
+begin
+    rect_menu.Margins.Left := -260;
+    rect_menu.Align := TAlignLayout.Left;
+    rect_menu.Visible := true;
+end;
+
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 var
     foto : TStream;
@@ -208,8 +237,20 @@ begin
     foto.DisposeOf;
 end;
 
+procedure TFrmPrincipal.img_fechar_menuClick(Sender: TObject);
+begin
+    AnimationMenu.Start;
+end;
+
 procedure TFrmPrincipal.img_menuClick(Sender: TObject);
 begin
+    AnimationMenu.Start;
+end;
+
+procedure TFrmPrincipal.layout_menu_catClick(Sender: TObject);
+begin
+    AnimationMenu.Start;
+
     if NOT Assigned(FrmCategorias) then
         Application.CreateForm(TFrmCategorias, FrmCategorias);
 
@@ -234,7 +275,8 @@ procedure TFrmPrincipal.lv_lancamentoItemClickEx(const Sender: TObject;
   ItemIndex: Integer; const LocalClickPos: TPointF;
   const ItemObject: TListItemDrawable);
 begin
-    {
+
+{
     if TListView(Sender).Selected <> nil then
     begin
         if ItemObject is TListItemImage then
@@ -247,7 +289,7 @@ begin
             Label2.Text := TListItemText(ItemObject).Text;
         end;
     end;
-    }
+ }
 end;
 
 procedure TFrmPrincipal.lv_lancamentoPaint(Sender: TObject; Canvas: TCanvas;
