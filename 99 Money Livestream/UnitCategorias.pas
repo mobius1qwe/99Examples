@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView;
+  FMX.ListView, FireDAC.Comp.Client, FireDAC.DApt, Data.DB;
 
 type
   TFrmCategorias = class(TForm)
@@ -16,7 +16,7 @@ type
     img_voltar: TImage;
     Rectangle1: TRectangle;
     Layout3: TLayout;
-    Label6: TLabel;
+    lbl_qtd: TLabel;
     img_add: TImage;
     lv_categoria: TListView;
     procedure img_voltarClick(Sender: TObject);
@@ -32,6 +32,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure ListarCategorias;
   end;
 
 var
@@ -41,17 +42,68 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, UnitCategoriasCad;
+uses UnitPrincipal, UnitCategoriasCad, cCategoria, UnitDM;
+
+procedure TFrmCategorias.ListarCategorias;
+var
+    cat : TCategoria;
+    qry: TFDQuery;
+    erro: string;
+    icone: TStream;
+begin
+    try
+        lv_categoria.Items.Clear;
+
+        cat := TCategoria.Create(dm.conn);
+        qry := cat.ListarCategoria(erro);
+
+        while NOT qry.Eof do
+        begin
+            // Icone...
+            if qry.FieldByName('ICONE').AsString <> '' then
+                icone := qry.CreateBlobStream(qry.FieldByName('ICONE'), TBlobStreamMode.bmRead)
+            else
+                icone := nil;
+
+            FrmPrincipal.AddCategoria(lv_categoria,
+                                      qry.FieldByName('ID_CATEGORIA').AsString,
+                                      qry.FieldByName('DESCRICAO').AsString,
+                                      icone);
+
+            if icone <> nil then
+                icone.DisposeOf;
+
+            qry.Next;
+        end;
+
+        lbl_qtd.Text := lv_categoria.Items.Count.ToString + ' categoria(s)';
+
+    finally
+        qry.DisposeOf;
+        cat.DisposeOf;
+    end;
+end;
 
 procedure TFrmCategorias.CadCategoria(id_cat: string);
 begin
     if NOT Assigned(FrmCategoriasCad) then
         Application.CreateForm(TFrmCategoriasCad, FrmCategoriasCad);
 
+    // INCLUSAO
     if id_cat = '' then
+    begin
+        FrmCategoriasCad.id_cat := 0;
+        FrmCategoriasCad.modo := 'I';
         FrmCategoriasCad.lbl_titulo.text := 'Nova Categoria'
+    end
     else
+
+    // ALTERACAO
+    begin
+        FrmCategoriasCad.id_cat := id_cat.tointeger;
+        FrmCategoriasCad.modo := 'A';
         FrmCategoriasCad.lbl_titulo.text := 'Editar Categoria';
+    end;
 
     FrmCategoriasCad.Show;
 end;
@@ -63,23 +115,9 @@ begin
 end;
 
 procedure TFrmCategorias.FormShow(Sender: TObject);
-var
-    foto : TStream;
-    x : integer;
 begin
-    foto := TMemoryStream.Create;
-    FrmPrincipal.img_categoria.Bitmap.SaveToStream(foto);
-    foto.Position := 0;
-
-    for x := 1 to 10 do
-        FrmPrincipal.AddCategoria(lv_categoria,
-                                 '00001',
-                                 'Transporte',
-                                 foto);
-
-    foto.DisposeOf;
+    ListarCategorias;
 end;
-
 
 procedure TFrmCategorias.img_addClick(Sender: TObject);
 begin
