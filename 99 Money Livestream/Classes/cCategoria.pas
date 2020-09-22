@@ -212,6 +212,8 @@ begin
                 ParamByName('ID_CATEGORIA').Value := ID_CATEGORIA;
             end;
 
+            sql.Add('ORDER BY DESCRICAO');
+
             Active := true;
         end;
 

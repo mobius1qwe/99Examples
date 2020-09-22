@@ -100,6 +100,7 @@ var
     qry: TFDQuery;
     erro: string;
     item : TListBoxItem;
+    img : TImage;
 begin
     if modo = 'I' then
     begin
@@ -120,9 +121,11 @@ begin
             edt_descricao.Text := qry.FieldByName('DESCRICAO').AsString;
 
             // Icone...
-            item := lb_icone.ItemByIndex(qry.FieldByName('INDICE_ICONE').AsInteger);
+            item := lb_icone.ItemByIndex(qry.FieldByName('INDICE_ICONE').AsInteger); // Item da listbox...
             img_selecao.Parent := item;
 
+            img := FrmCategoriasCad.FindComponent('Image' + (item.Index + 1).tostring) as TImage;
+            SelecionaIcone(img);
         finally
             qry.DisposeOf;
             cat.DisposeOf;

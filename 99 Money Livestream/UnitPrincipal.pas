@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  UnitCategorias, UnitLancamentos, FMX.Ani;
+  UnitCategorias, UnitLancamentos, FMX.Ani, FireDAC.Comp.Client, FireDAC.DApt,
+  Data.DB;
 
 type
   TFrmPrincipal = class(TForm)
@@ -30,7 +31,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Rectangle1: TRectangle;
-    Image4: TImage;
+    img_add: TImage;
     Rectangle2: TRectangle;
     Layout7: TLayout;
     Label8: TLabel;
@@ -62,7 +63,9 @@ type
     procedure AnimationMenuProcess(Sender: TObject);
     procedure img_fechar_menuClick(Sender: TObject);
     procedure layout_menu_catClick(Sender: TObject);
+    procedure img_addClick(Sender: TObject);
   private
+    procedure ListarUltLanc;
     { Private declarations }
   public
     { Public declarations }
@@ -84,6 +87,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses cLancamento, UnitDM, UnitLancamentosCad;
 
 
 //*********  UNIT FUNCOES GLOBAIS *******************
@@ -219,22 +224,67 @@ begin
     rect_menu.Visible := true;
 end;
 
-procedure TFrmPrincipal.FormShow(Sender: TObject);
+procedure TFrmPrincipal.ListarUltLanc;
 var
-    foto : TStream;
-    x : integer;
+    lanc : TLancamento;
+    qry : TFDQuery;
+    erro: string;
+    foto: TStream;
 begin
-    foto := TMemoryStream.Create;
-    img_categoria.Bitmap.SaveToStream(foto);
-    foto.Position := 0;
+    try
+        FrmPrincipal.lv_lancamento.Items.Clear;
 
-    for x := 1 to 10 do
-        AddLancamento(FrmPrincipal.lv_lancamento,
-                      '00001',
-                      'Compra de Passagem teste 123456 aaaaa bbbbb cccccc ddddddddd',
-                      'Transporte', -45, date, foto);
+        lanc := TLancamento.Create(dm.conn);
+        qry := lanc.ListarLancamento(10, erro);
 
-    foto.DisposeOf;
+        if erro <> '' then
+        begin
+            ShowMessage(erro);
+            exit;
+        end;
+
+        while NOT qry.Eof do
+        begin
+            if qry.FieldByName('ICONE').AsString <> '' then
+                foto := qry.CreateBlobStream(qry.FieldByName('ICONE'), TBlobStreamMode.bmRead)
+            else
+                foto := nil;
+
+            AddLancamento(FrmPrincipal.lv_lancamento,
+                    qry.FieldByName('ID_LANCAMENTO').AsString,
+                    qry.FieldByName('DESCRICAO').AsString,
+                    qry.FieldByName('DESCRICAO_CATEGORIA').AsString,
+                    qry.FieldByName('VALOR').AsFloat,
+                    qry.FieldByName('DATA').AsDateTime,
+                    foto);
+
+            qry.Next;
+
+            foto.DisposeOf;
+        end;
+
+    finally
+        lanc.DisposeOf;
+    end;
+
+end;
+
+procedure TFrmPrincipal.FormShow(Sender: TObject);
+begin
+    ListarUltLanc;
+end;
+
+procedure TFrmPrincipal.img_addClick(Sender: TObject);
+begin
+    if NOT Assigned(FrmLancamentosCad) then
+        Application.CreateForm(TFrmLancamentosCad, FrmLancamentosCad);
+
+    FrmLancamentosCad.modo := 'I';
+    FrmLancamentosCad.id_lanc := 0;
+    FrmLancamentosCad.ShowModal(procedure(ModalResult: TModalResult)
+        begin
+            ListarUltLanc;
+        end);
 end;
 
 procedure TFrmPrincipal.img_fechar_menuClick(Sender: TObject);
@@ -268,7 +318,16 @@ end;
 procedure TFrmPrincipal.lv_lancamentoItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
-    //showmessage(Aitem.TagString);
+    if NOT Assigned(FrmLancamentosCad) then
+        Application.CreateForm(TFrmLancamentosCad, FrmLancamentosCad);
+
+    FrmLancamentosCad.modo := 'A';
+    FrmLancamentosCad.id_lanc := Aitem.TagString.ToInteger;
+
+    FrmLancamentosCad.ShowModal(procedure(ModalResult: TModalResult)
+        begin
+            ListarUltLanc;
+        end);
 end;
 
 procedure TFrmPrincipal.lv_lancamentoItemClickEx(const Sender: TObject;

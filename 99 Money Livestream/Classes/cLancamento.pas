@@ -13,15 +13,19 @@ type
         FVALOR: double;
         FDATA: TDateTime;
         FID_LANCAMENTO: Integer;
+        FDATA_ATE: string;
+        FDATA_DE: string;
     public
         constructor Create(conn: TFDConnection);
         property ID_LANCAMENTO: Integer read FID_LANCAMENTO write FID_LANCAMENTO;
         property ID_CATEGORIA: Integer read FID_CATEGORIA write FID_CATEGORIA;
         property VALOR: double read FVALOR write FVALOR;
         property DATA: TDateTime read FDATA write FDATA;
+        property DATA_DE: string read FDATA_DE write FDATA_DE;
+        property DATA_ATE: string read FDATA_ATE write FDATA_ATE;
         property DESCRICAO: string read FDESCRICAO write FDESCRICAO;
 
-        function ListarLancamento(out erro: string): TFDQuery;
+        function ListarLancamento(qtd_result: integer; out erro: string): TFDQuery;
         function Inserir(out erro: string): Boolean;
         function Alterar(out erro: string): Boolean;
         function Excluir(out erro: string): Boolean;
@@ -70,7 +74,7 @@ begin
                 SQL.Add('VALUES(:ID_CATEGORIA, :VALOR, :DATA, :DESCRICAO)');
                 ParamByName('ID_CATEGORIA').Value := ID_CATEGORIA;
                 ParamByName('VALOR').Value := VALOR;
-                ParamByName('DATA').Value := DATA;
+                ParamByName('DATA').Value := FDATA;
                 ParamByName('DESCRICAO').Value := DESCRICAO;
                 ExecSQL;
             end;
@@ -133,7 +137,7 @@ begin
                 ParamByName('ID_LANCAMENTO').Value := ID_LANCAMENTO;
                 ParamByName('ID_CATEGORIA').Value := ID_CATEGORIA;
                 ParamByName('VALOR').Value := VALOR;
-                ParamByName('DATA').Value := DATA;
+                ParamByName('DATA').Value := FDATA;
                 ParamByName('DESCRICAO').Value := DESCRICAO;
                 ExecSQL;
             end;
@@ -197,7 +201,8 @@ begin
 end;
 
 
-function TLancamento.ListarLancamento(out erro: string): TFDQuery;
+function TLancamento.ListarLancamento(qtd_result: integer;
+                                      out erro: string): TFDQuery;
 var
     qry : TFDQuery;
 begin
@@ -214,11 +219,25 @@ begin
             sql.Add('JOIN TAB_CATEGORIA C ON (C.ID_CATEGORIA = L.ID_CATEGORIA)');
             sql.Add('WHERE 1 = 1');
 
+            if ID_LANCAMENTO > 0 then
+            begin
+                SQL.Add('AND L.ID_LANCAMENTO = :ID_LANCAMENTO');
+                ParamByName('ID_LANCAMENTO').Value := ID_LANCAMENTO;
+            end;
+
             if ID_CATEGORIA > 0 then
             begin
                 SQL.Add('AND L.ID_CATEGORIA = :ID_CATEGORIA');
                 ParamByName('ID_CATEGORIA').Value := ID_CATEGORIA;
             end;
+
+            if (DATA_DE <> '') AND (DATA_ATE <> '') then
+                SQL.Add('AND L.DATA BETWEEN ''' + DATA_DE + ''' AND ''' + DATA_ATE + '''');
+
+            sql.Add('ORDER BY L.DATA DESC');
+
+            if qtd_result > 0 then
+                sql.Add('LIMIT ' + qtd_result.ToString);
 
             Active := true;
         end;
