@@ -45,6 +45,8 @@ type
     img_fechar_menu: TImage;
     layout_menu_cat: TLayout;
     Label9: TLabel;
+    layout_menu_logoff: TLayout;
+    Label10: TLabel;
     procedure FormShow(Sender: TObject);
     procedure lv_lancamentoUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
@@ -64,6 +66,7 @@ type
     procedure img_fechar_menuClick(Sender: TObject);
     procedure layout_menu_catClick(Sender: TObject);
     procedure img_addClick(Sender: TObject);
+    procedure layout_menu_logoffClick(Sender: TObject);
   private
     procedure ListarUltLanc;
     { Private declarations }
@@ -88,7 +91,7 @@ implementation
 
 {$R *.fmx}
 
-uses cLancamento, UnitDM, UnitLancamentosCad;
+uses cLancamento, UnitDM, UnitLancamentosCad, cUsuario, UnitLogin;
 
 
 //*********  UNIT FUNCOES GLOBAIS *******************
@@ -215,6 +218,9 @@ begin
         FrmLancamentos.DisposeOf;
         FrmLancamentos := nil;
     end;
+
+    Action := TCloseAction.caFree;
+    FrmPrincipal := nil;
 end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
@@ -305,6 +311,32 @@ begin
         Application.CreateForm(TFrmCategorias, FrmCategorias);
 
     FrmCategorias.Show;
+end;
+
+procedure TFrmPrincipal.layout_menu_logoffClick(Sender: TObject);
+var
+    u : TUsuario;
+    erro : string;
+begin
+    try
+        u := TUsuario.Create(dm.conn);
+
+        if NOT u.Logout(erro) then
+        begin
+            showmessage(erro);
+            exit;
+        end;
+
+    finally
+        u.DisposeOf;
+    end;
+
+    if NOT Assigned(FrmLogin) then
+        Application.CreateForm(TFrmLogin, FrmLogin);
+
+    Application.MainForm := FrmLogin;
+    FrmLogin.Show;
+    FrmPrincipal.Close;
 end;
 
 procedure TFrmPrincipal.lbl_todos_lancClick(Sender: TObject);

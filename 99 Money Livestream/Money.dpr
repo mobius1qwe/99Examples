@@ -13,7 +13,8 @@ uses
   UnitDM in 'UnitDM.pas' {dm: TDataModule},
   cCategoria in 'Classes\cCategoria.pas',
   cLancamento in 'Classes\cLancamento.pas',
-  uFormat in 'Units\uFormat.pas';
+  uFormat in 'Units\uFormat.pas',
+  cUsuario in 'Classes\cUsuario.pas';
 
 {$R *.res}
 

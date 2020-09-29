@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Edit,
-  FMX.DateTimeCtrls, FMX.ListBox, FireDAC.Comp.Client, FireDAC.DApt, uFormat;
+  FMX.DateTimeCtrls, FMX.ListBox, FireDAC.Comp.Client, FireDAC.DApt, uFormat,
+  FMX.DialogService;
 
 type
   TFrmLancamentosCad = class(TForm)
@@ -31,7 +32,7 @@ type
     dt_lanc: TDateEdit;
     img_ontem: TImage;
     rect_delete: TRectangle;
-    img_add: TImage;
+    img_delete: TImage;
     img_tipo_lanc: TImage;
     img_despesa: TImage;
     img_receita: TImage;
@@ -43,6 +44,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure img_saveClick(Sender: TObject);
     procedure edt_valorTyping(Sender: TObject);
+    procedure img_deleteClick(Sender: TObject);
   private
     procedure ComboCategoria;
     { Private declarations }
@@ -152,6 +154,41 @@ begin
             lanc.DisposeOf;
         end;
     end;
+end;
+
+procedure TFrmLancamentosCad.img_deleteClick(Sender: TObject);
+var
+    lanc : TLancamento;
+    erro : string;
+begin
+    TDialogService.MessageDialog('Confirma exclusão do lançamento?',
+                     TMsgDlgType.mtConfirmation,
+                     [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+                     TMsgDlgBtn.mbNo,
+                     0,
+     procedure(const AResult: TModalResult)
+     var
+        erro: string;
+     begin
+        if AResult = mrYes then
+        begin
+            try
+                lanc := TLancamento.Create(dm.conn);
+                lanc.ID_LANCAMENTO := id_lanc;
+
+                if lanc.Excluir(erro) = false then
+                begin
+                    showmessage(erro);
+                    exit;
+                end;
+
+                close;
+
+            finally
+                lanc.DisposeOf;
+            end;
+        end;
+     end);
 end;
 
 procedure TFrmLancamentosCad.img_hojeClick(Sender: TObject);
