@@ -9,6 +9,15 @@ uses
   FMX.DateTimeCtrls, FMX.ListBox, FireDAC.Comp.Client, FireDAC.DApt, uFormat,
   FMX.DialogService;
 
+{$IFDEF AUTOREFCOUNT}
+type
+  TIntegerWrapper = class
+  public
+    Value: Integer;
+    constructor Create(AValue: Integer);
+  end;
+{$ENDIF}
+
 type
   TFrmLancamentosCad = class(TForm)
     Layout1: TLayout;
@@ -36,7 +45,9 @@ type
     img_tipo_lanc: TImage;
     img_despesa: TImage;
     img_receita: TImage;
-    cmb_categoria: TComboBox;
+    lbl_categoria: TLabel;
+    Line3: TLine;
+    Image1: TImage;
     procedure img_voltarClick(Sender: TObject);
     procedure img_tipo_lancClick(Sender: TObject);
     procedure img_hojeClick(Sender: TObject);
@@ -45,14 +56,16 @@ type
     procedure img_saveClick(Sender: TObject);
     procedure edt_valorTyping(Sender: TObject);
     procedure img_deleteClick(Sender: TObject);
+    procedure lbl_categoriaClick(Sender: TObject);
   private
-    procedure ComboCategoria;
+    //procedure ComboCategoria;
     { Private declarations }
   public
     { Public declarations }
     modo : string; // I (Inclusao) ou A (Alteracao)
     id_lanc : Integer;
   end;
+
 
 var
   FrmLancamentosCad: TFrmLancamentosCad;
@@ -61,8 +74,18 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, cCategoria, UnitDM, cLancamento;
+uses UnitPrincipal, cCategoria, UnitDM, cLancamento, UnitComboCategoria;
 
+
+{$IFDEF AUTOREFCOUNT}
+constructor TIntegerWrapper.Create(AValue: Integer);
+begin
+  inherited Create;
+  Value := AValue;
+end;
+{$ENDIF}
+
+{
 procedure TFrmLancamentosCad.ComboCategoria;
 var
     c : TCategoria;
@@ -84,8 +107,11 @@ begin
         while NOT qry.Eof do
         begin
             cmb_categoria.Items.AddObject(qry.FieldByName('DESCRICAO').AsString,
-                                          TObject(qry.FieldByName('ID_CATEGORIA').AsInteger));
 
+            {$IFDEF AUTOREFCOUNT}
+            //TIntegerWrapper.Create(qry.FieldByName('ID_CATEGORIA').AsInteger){$ELSE}TObject(qry.FieldByName('ID_CATEGORIA').AsInteger){$ENDIF});
+
+            {
             qry.Next;
         end;
 
@@ -94,7 +120,7 @@ begin
         c.DisposeOf;
     end;
 end;
-
+         }
 procedure TFrmLancamentosCad.edt_valorTyping(Sender: TObject);
 begin
     Formatar(edt_valor, TFormato.Valor);
@@ -106,7 +132,7 @@ var
     qry: TFDQuery;
     erro : string;
 begin
-    ComboCategoria;
+    //ComboCategoria;
 
     if modo = 'I' then
     begin
@@ -116,6 +142,8 @@ begin
         img_tipo_lanc.Bitmap := img_despesa.Bitmap;
         img_tipo_lanc.Tag := -1;
         rect_delete.Visible := false;
+        lbl_categoria.Text := '';
+        lbl_categoria.Tag := 0;
     end
     else
     begin
@@ -146,7 +174,9 @@ begin
                 img_tipo_lanc.Tag := 1;
             end;
 
-            cmb_categoria.ItemIndex := cmb_categoria.Items.IndexOf(qry.FieldByName('DESCRICAO_CATEGORIA').AsString);
+            //cmb_categoria.ItemIndex := cmb_categoria.Items.IndexOf(qry.FieldByName('DESCRICAO_CATEGORIA').AsString);
+            lbl_categoria.Text := qry.FieldByName('DESCRICAO_CATEGORIA').AsString;
+            lbl_categoria.Tag := qry.FieldByName('ID_CATEGORIA').AsInteger;
             rect_delete.Visible := true;
 
         finally
@@ -223,7 +253,15 @@ begin
         lanc := TLancamento.Create(dm.conn);
         lanc.DESCRICAO := edt_descricao.Text;
         lanc.VALOR := TrataValor(edt_valor.Text) * img_tipo_lanc.Tag;
-        lanc.ID_CATEGORIA := integer(cmb_categoria.Items.Objects[cmb_categoria.ItemIndex]);
+
+
+        {$IFDEF AUTOREFCOUNT}
+        //lanc.ID_CATEGORIA := TIntegerWrapper(cmb_categoria.Items.Objects[cmb_categoria.ItemIndex]).Value;
+        {$ELSE}
+        //lanc.ID_CATEGORIA := Integer(cmb_categoria.Items.Objects[cmb_categoria.ItemIndex]);
+        {$ENDIF}
+
+        lanc.ID_CATEGORIA := lbl_categoria.Tag;
         lanc.DATA := dt_lanc.Date;
 
         if modo = 'I' then
@@ -264,6 +302,24 @@ end;
 procedure TFrmLancamentosCad.img_voltarClick(Sender: TObject);
 begin
     close;
+end;
+
+
+procedure TFrmLancamentosCad.lbl_categoriaClick(Sender: TObject);
+begin
+    // Abre listagem das categorias...
+    if NOT Assigned(FrmComboCategoria) then
+        Application.CreateForm(TFrmComboCategoria, FrmComboCategoria);
+
+    FrmComboCategoria.ShowModal(procedure(ModalResult: TModalResult)
+    begin
+        if FrmComboCategoria.IdCategoriaSelecao > 0 then
+        begin
+            lbl_categoria.Text := FrmComboCategoria.CategoriaSelecao;
+            lbl_categoria.Tag := FrmComboCategoria.IdCategoriaSelecao;
+        end;
+    end);
+
 end;
 
 end.

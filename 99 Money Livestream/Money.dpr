@@ -14,7 +14,8 @@ uses
   cCategoria in 'Classes\cCategoria.pas',
   cLancamento in 'Classes\cLancamento.pas',
   uFormat in 'Units\uFormat.pas',
-  cUsuario in 'Classes\cUsuario.pas';
+  cUsuario in 'Classes\cUsuario.pas',
+  UnitComboCategoria in 'UnitComboCategoria.pas' {FrmComboCategoria};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmComboCategoria, FrmComboCategoria);
   Application.Run;
 end.

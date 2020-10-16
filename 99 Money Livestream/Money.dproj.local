@@ -20,30 +20,33 @@
     <Transaction>2020/07/13 20:26:51.000.534,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.fmx</Transaction>
     <Transaction>2020/07/13 20:26:51.000.533,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.pas</Transaction>
     <Transaction>2020/07/27 20:05:20.000.641,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/07/27 20:05:37.000.226,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitLancamentos.pas</Transaction>
     <Transaction>2020/07/27 20:05:37.000.226,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitLancamentos.fmx</Transaction>
+    <Transaction>2020/07/27 20:05:37.000.226,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitLancamentos.pas</Transaction>
     <Transaction>2020/08/03 20:04:30.000.222,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/08/03 20:04:55.000.069,D:\99Coders\Curso99Money2\Fontes\UnitLancamentosCad.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/08/10 20:04:45.000.206,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/08/10 20:05:07.000.704,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitCategorias.pas</Transaction>
     <Transaction>2020/08/10 20:05:07.000.704,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitCategorias.fmx</Transaction>
     <Transaction>2020/08/10 20:36:12.000.017,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/10 20:36:35.000.851,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.fmx</Transaction>
     <Transaction>2020/08/10 20:36:35.000.851,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.pas</Transaction>
+    <Transaction>2020/08/10 20:36:35.000.851,D:\99Coders\Curso99Money2\Fontes\Unit1.fmx=D:\99Coders\Curso99Money2\Fontes\UnitCategoriasCad.fmx</Transaction>
     <Transaction>2020/08/17 20:31:41.000.296,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/08/17 20:31:59.000.836,D:\99Coders\Curso99Money2\Fontes\Unit1.dfm=D:\99Coders\Curso99Money2\Fontes\UnitDM.dfm</Transaction>
     <Transaction>2020/08/17 20:31:59.000.836,D:\99Coders\Curso99Money2\Fontes\Unit1.pas=D:\99Coders\Curso99Money2\Fontes\UnitDM.pas</Transaction>
+    <Transaction>2020/08/17 20:31:59.000.836,D:\99Coders\Curso99Money2\Fontes\Unit1.dfm=D:\99Coders\Curso99Money2\Fontes\UnitDM.dfm</Transaction>
     <Transaction>2020/08/24 20:05:56.000.387,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/08/24 20:15:40.000.765,D:\99Coders\Curso99Money2\Fontes\Classes\cCategoria.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/09/07 20:10:26.000.907,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/09/07 20:10:58.000.765,D:\99Coders\Curso99Money2\Fontes\Classes\cLancamento.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
     <Transaction>2020/09/21 21:32:55.000.329,=D:\99Coders\Curso99Money2\Fontes\Units\uFormat.pas</Transaction>
-    <Transaction>2020/09/22 20:03:30.372,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
-    <Transaction>2020/09/22 20:03:54.551,D:\99Coders\Curso99Money2\Fontes\Classes\cUsuario.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/09/22 20:03:30.000.372,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/09/22 20:03:54.000.551,D:\99Coders\Curso99Money2\Fontes\Classes\cUsuario.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/10/05 20:12:47.658,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/10/05 20:13:28.688,D:\99Coders\Curso99Money2\Fontes\UnitComboCategoria.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/10/05 20:13:28.688,D:\99Coders\Curso99Money2\Fontes\UnitComboCategoria.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="5200711f02614531"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

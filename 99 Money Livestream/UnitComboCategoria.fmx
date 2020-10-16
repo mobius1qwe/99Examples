@@ -1,0 +1,120 @@
+object FrmComboCategoria: TFrmComboCategoria
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 551
+  ClientWidth = 367
+  Fill.Kind = Solid
+  Position = MainFormCenter
+  StyleBook = FrmPrincipal.StyleBook1
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 367.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lbl_titulo: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style]
+      Size.Width = 367.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.FontColor = xFF9BA2B4
+      TextSettings.HorzAlign = Center
+      Text = 'Categorias'
+      TabOrder = 3
+    end
+    object img_voltar: TImage
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            02E549444154785EEDDA4D6B13411807F06766B28D4A407CFB0ADE7C3D483C26
+            4190D6DA0FA0D648B4F6E445A87E031114AFA555B4EA5DAB5614938227CFBE22
+            82DE7D4788D2DDCDCE98A73EC9A1DB4D7693052793F95D32FB104AFFFFEE4E36
+            4BC1B22CCBB22CCBB2ACA1C4E83555730B4B3B199357C16525DF77A5931BA92A
+            C567A64E8E7DA0B76823F502E66E3EDA0B02AACD1FBC8D46AB5C087E64A47360
+            BA3CFA91465AE0F49A8AA8F0280B622BE7F2121D6A23B5023A856F71010ED352
+            1BA91410273C127537D5332E0D7DFF4218DE1341AD5B782472CE535A6AA3AF02
+            5AE1F1FAA651244FC2671938E7E9501BCD3F5C6F9284074F7DE15951A89C187D
+            47136DF4548029E151E24BE0FAC2E37DA68447890AC0F02BCCAFC60DAF32B2A8
+            737814FB12E825FC5479E22D4DB425E8B5A324E11BD0F8CA180C4478D4F50C98
+            BDF3607F43A96771C30BC90A83121E752C00C30BCFAB82B3610B8D2261780744
+            F1F4E4F81B1A0D84C80286213C5AB78024E175E7D7DDDF62537619949C397BEA
+            E87B1AB7850AC087191E6BBC88B5DB0F12257F4909F9B52584EE031453D78C0B
+            8F18DFCC39BF4C476DA102B80B055A9A474291566DA102EA59BFEB47A3494205
+            E4C0794E4BE32806555AB685F700C5CE2980EF74680E7FE5273076818EDA4205
+            E0A36B01AA644C0901D49584FB2AB331BFDE63F9C8EBFDC6ED877B0260B11E75
+            ADDEFF73A7347D7CEC358D0646C70D6F184AE8BAE39B5E42680F58AB3239FE92
+            C9A018674FC8406687927E6DF6EED22E1A69AFEB19D0327F6B71B7E262D9B433
+            217601C8C412121580B00450A20602B6D328D2209490B8006452093D15804C29
+            A1E70250E212E4C841A3FE3FE04C79E215B0A0D4BCDDFC46A348F811C9415EA1
+            436DF45500C212028715E394D0F8E31EA2A536FA2E00E1B51DA784209795B4D4
+            462A05A0382564019ED0521BA915805A25E08647A336BC9516022ED2A136522D
+            006109B8DB37232FE22369FC3EDE1CDF6310E42BC78E7CFAF72ECBB22CCBB22C
+            CBB2ACFF09E02F4C615E960604258B0000000049454E44AE426082}
+          FileName = 'D:\99Coders\Curso99Money2\Aula 05\Fontes\Images\back.png'
+        end>
+      Align = Left
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 41.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_voltarClick
+    end
+  end
+  object lv_categoria: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 367.000000000000000000
+    Size.Height = 494.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    ItemAppearance.ItemHeight = 70
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'TxtCategoria'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF6B6B6B
+        Appearance.Width = 240.000000000000000000
+        Appearance.Height = 50.000000000000000000
+        Appearance.PlaceOffset.X = 65.000000000000000000
+        Appearance.PlaceOffset.Y = 11.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'ImgIcone'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 50.000000000000000000
+        Appearance.Height = 50.000000000000000000
+        Appearance.PlaceOffset.X = 8.000000000000000000
+        Appearance.PlaceOffset.Y = 10.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    OnItemClick = lv_categoriaItemClick
+    ShowSelection = False
+  end
+end

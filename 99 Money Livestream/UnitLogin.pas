@@ -98,6 +98,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure rect_contaClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure FormVirtualKeyboardShown(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
+    procedure FormVirtualKeyboardHidden(Sender: TObject;
+      KeyboardVisible: Boolean; const Bounds: TRect);
   private
     { Private declarations }
     permissao: T99Permissions;
@@ -195,6 +199,18 @@ procedure TFrmLogin.FormShow(Sender: TObject);
 begin
     TabControl1.ActiveTab := TabLogin;
     Timer1.Enabled := true;
+end;
+
+procedure TFrmLogin.FormVirtualKeyboardHidden(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+    TabControl1.Margins.Bottom := 0;
+end;
+
+procedure TFrmLogin.FormVirtualKeyboardShown(Sender: TObject;
+  KeyboardVisible: Boolean; const Bounds: TRect);
+begin
+    TabControl1.Margins.Bottom := 160;
 end;
 
 procedure TFrmLogin.Timer1Timer(Sender: TObject);
