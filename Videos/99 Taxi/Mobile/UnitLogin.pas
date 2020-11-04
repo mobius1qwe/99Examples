@@ -33,8 +33,6 @@ type
     img_loading: TImage;
     FloatAnimation2: TFloatAnimation;
     FloatAnimation3: TFloatAnimation;
-    RESTClient: TRESTClient;
-    RequestLogin: TRESTRequest;
     HTTPBasicAuthenticator: THTTPBasicAuthenticator;
     TabControl: TTabControl;
     TabLogin: TTabItem;
@@ -69,7 +67,10 @@ type
     ActFoto: TChangeTabAction;
     ActLibrary: TTakePhotoFromLibraryAction;
     ActCamera: TTakePhotoFromCameraAction;
+    RESTClient: TRESTClient;
     RequestConta: TRESTRequest;
+    HTTPBasicAuthenticator1: THTTPBasicAuthenticator;
+    RequestLogin: TRESTRequest;
     procedure FormCreate(Sender: TObject);
     procedure rect_botaoMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Single);
@@ -272,9 +273,10 @@ begin
             foto64 := Base64FromBitmap(c_foto.Fill.Bitmap.Bitmap);
 
             RequestConta.Params.Clear;
-            RequestConta.AddParameter('email', edt_cad_email.Text);
             RequestConta.AddParameter('senha', MD5(edt_cad_senha.Text));
-            RequestConta.AddParameter('foto', foto64);
+            RequestConta.AddParameter('email', edt_cad_email.Text);
+            //RequestConta.AddParameter('foto', foto64);
+            RequestConta.AddParameter('foto', foto64, TRESTRequestParameterKind.pkREQUESTBODY);
 
             RequestConta.ExecuteAsync(ProcessaConta, true, true, ProcessaLoginErro);
         end;

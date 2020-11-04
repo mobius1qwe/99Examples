@@ -15175,7 +15175,7 @@ object FrmPrincipal: TFrmPrincipal
     Authenticator = HTTPBasicAuthenticator
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
-    BaseURL = 'http://52.73.142.221:8082'
+    BaseURL = 'http://localhost:8082'
     Params = <>
     RaiseExceptionOn500 = False
     Left = 48

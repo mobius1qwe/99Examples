@@ -4,7 +4,8 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   UnitLogin in 'UnitLogin.pas' {FrmLogin},
-  UnitPrincipal in 'UnitPrincipal.pas' {FrmPrincipal};
+  UnitPrincipal in 'UnitPrincipal.pas' {FrmPrincipal},
+  UnitNotificacao in 'UnitNotificacao.pas' {FrmNotificacao};
 
 {$R *.res}
 

@@ -42,6 +42,7 @@ begin
         dm.QryGeral.sql.Add('INSERT INTO TAB_CATEGORIA(COD_CATEGORIA, DESCRICAO, ICONE, IND_ATIVO, TAXA_BASE, ORDEM)');
         dm.QryGeral.sql.Add('VALUES(''Utilitário'', ''Ideal para transporte de cargas maiores e mais pesadas'', :ICONE, ''S'', 2.5, 4)');
         dm.QryGeral.ParamByName('ICONE').LoadFromFile(OpenDialog.FileName, ftBlob);
+        //dm.QryGeral.ParamByName('ICONE').Assign(bmp);
         dm.QryGeral.ExecSQL;
     end;
 end;

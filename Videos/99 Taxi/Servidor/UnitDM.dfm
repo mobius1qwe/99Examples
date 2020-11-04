@@ -9,13 +9,17 @@ object dm: Tdm
     Events = <
       item
         Routes = [crAll]
+        NeedAuthorization = True
         DWParams = <>
         JsonMode = jmPureJSON
         Name = 'hora'
+        EventName = 'hora'
+        OnlyPreDefinedParams = False
         OnReplyEvent = DWEventsEventshoraReplyEvent
       end
       item
         Routes = [crAll]
+        NeedAuthorization = True
         DWParams = <
           item
             TypeObject = toParam
@@ -33,10 +37,13 @@ object dm: Tdm
           end>
         JsonMode = jmPureJSON
         Name = 'ValidaLogin'
+        EventName = 'ValidaLogin'
+        OnlyPreDefinedParams = False
         OnReplyEvent = DWEventsEventsValidaLoginReplyEvent
       end
       item
         Routes = [crAll]
+        NeedAuthorization = True
         DWParams = <
           item
             TypeObject = toParam
@@ -61,13 +68,18 @@ object dm: Tdm
           end>
         JsonMode = jmPureJSON
         Name = 'CriarConta'
+        EventName = 'CriarConta'
+        OnlyPreDefinedParams = False
         OnReplyEvent = DWEventsEventsCriarContaReplyEvent
       end
       item
         Routes = [crAll]
+        NeedAuthorization = True
         DWParams = <>
         JsonMode = jmPureJSON
         Name = 'ListarCategoria'
+        EventName = 'ListarCategoria'
+        OnlyPreDefinedParams = False
         OnReplyEvent = DWEventsEventsListarCategoriaReplyEvent
       end>
     Left = 48

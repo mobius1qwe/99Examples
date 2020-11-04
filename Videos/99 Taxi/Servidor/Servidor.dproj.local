@@ -20,7 +20,7 @@
     <Transaction>2020/03/19 16:35:33.000.215,D:\99Coders\Posts\127 - Login completo - Backend REST Full - Parte 3\Fontes\Servidor\Classes\cUsuario.pas=D:\99Coders\Posts\127 - Login completo - Backend REST Full - Parte 3\Fontes\Servidor\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="AVD_for_Nexus_9_by_Google"/>
+		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

@@ -14,6 +14,7 @@ uses
 begin
   ReportMemoryLeaksOnShutdown := true;
   Application.Initialize;
+  Application.CreateForm(TFrmLogin, FrmLogin);
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.Run;
 end.

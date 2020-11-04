@@ -9,7 +9,8 @@ uses
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
   FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client, cUsuario, System.JSON,
   FMX.Graphics, Soap.EncdDecd, FireDAC.Stan.Param, FireDAC.DatS,
-  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.NetEncoding;
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.NetEncoding,
+  Datasnap.DSHTTP;
 
 type
   Tdm = class(TServerMethodDataModule)
