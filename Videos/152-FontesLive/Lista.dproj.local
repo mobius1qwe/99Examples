@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/05/10 18:28:07.000.409,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/08/16 13:51:06.000.870,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/12 00:17:31.000.142,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 13:54:42.000.810,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 20:05:56.000.583,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 20:08:23.000.640,D:\99Coders\Curso99Money2\Aula 05\Fontes\UnitLogin.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2020/06/29 20:08:23.000.640,D:\99Coders\Curso99Money2\Aula 05\Fontes\UnitLogin.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 20:08:31.000.856,D:\99Coders\Curso99Money2\Aula 05\Fontes\Money.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2020/07/06 20:30:58.000.797,=D:\99Coders\Curso99Money2\Fontes\Units\u99Permissions.pas</Transaction>
+    <Transaction>2020/07/13 20:25:33.000.499,=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/07/13 20:26:51.000.534,D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.fmx=D:\99Coders\Curso99Money2\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2020/07/13 20:26:51.000.533,D:\99Coders\Curso99Money2\Fontes\UnitPrincipal.pas=D:\99Coders\Curso99Money2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2020/07/23 19:30:11.962,D:\99Coders\Posts\152 - Live listview profissional com Delphi -----------\Fontes\UnitLogin.pas=</Transaction>
+    <Transaction>2020/07/23 19:30:14.734,D:\99Coders\Posts\152 - Live listview profissional com Delphi -----------\Fontes\Units\u99Permissions.pas=</Transaction>
+    <Transaction>2020/07/23 19:31:16.348,D:\99Coders\Posts\152 - Live listview profissional com Delphi -----------\Fontes\Lista.dproj=D:\99Coders\Posts\152 - Live listview profissional com Delphi -----------\Fontes\Money.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="AVD_for_Nexus_9_by_Google"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+		<PMacBook iOSSimulator="iPhone5"/>
+		<PMacVirtual iOSSimulator="iPhone5"/>
+		<PMacMini iOSSimulator="iPhone"/>
+	</ActiveMobileDevice>
+</BorlandProject>

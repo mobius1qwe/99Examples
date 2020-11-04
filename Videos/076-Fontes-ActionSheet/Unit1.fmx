@@ -1,0 +1,424 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Clientes'
+  ClientHeight = 542
+  ClientWidth = 293
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object ToolBar1: TToolBar
+    Size.Width = 293.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 293.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = xFF5C5C5C
+      TextSettings.HorzAlign = Center
+      Text = 'Clientes'
+      TabOrder = 1
+    end
+    object btn_menu: TSpeedButton
+      Align = Right
+      IconTintColor = xFF5C5C5C
+      Margins.Right = 5.000000000000000000
+      Position.X = 240.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'detailstoolbutton'
+      OnClick = btn_menuClick
+    end
+  end
+  object layout_menu: TLayout
+    Align = Contents
+    Size.Width = 293.000000000000000000
+    Size.Height = 542.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object rect_fundo: TRectangle
+      Align = Contents
+      Fill.Color = xFF0F0F0F
+      Opacity = 0.400000005960464500
+      Size.Width = 293.000000000000000000
+      Size.Height = 542.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object rect_base: TRectangle
+      Fill.Color = claWhite
+      Position.X = 8.000000000000000000
+      Position.Y = 264.000000000000000000
+      Size.Width = 277.000000000000000000
+      Size.Height = 270.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 10.000000000000000000
+      YRadius = 10.000000000000000000
+      object Label2: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Margins.Top = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFF1C1C1C
+        TextSettings.HorzAlign = Center
+        Text = 'Hist'#243'rico do Cliente'
+        TabOrder = 0
+      end
+      object HorzScrollBox1: THorzScrollBox
+        Align = Top
+        Margins.Bottom = 3.000000000000000000
+        Position.Y = 71.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ShowScrollBars = False
+        Viewport.Width = 277.000000000000000000
+        Viewport.Height = 60.000000000000000000
+        object Layout1: TLayout
+          Align = Left
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          object Label4: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2015'
+            TabOrder = 3
+          end
+        end
+        object Layout2: TLayout
+          Align = Left
+          Position.X = 360.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          object Label5: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2021'
+            TabOrder = 3
+          end
+        end
+        object Layout3: TLayout
+          Align = Left
+          Position.X = 300.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          object Label6: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2020'
+            TabOrder = 3
+          end
+        end
+        object Layout4: TLayout
+          Align = Left
+          Position.X = 240.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object Label7: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2019'
+            TabOrder = 3
+          end
+        end
+        object Layout5: TLayout
+          Align = Left
+          Position.X = 180.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object Label8: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2018'
+            TabOrder = 3
+          end
+        end
+        object Layout6: TLayout
+          Align = Left
+          Position.X = 120.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object Label9: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = xFF717171
+            TextSettings.HorzAlign = Center
+            Text = '2017'
+            TabOrder = 3
+          end
+        end
+        object Layout7: TLayout
+          Align = Left
+          Position.X = 60.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          object rect_selecao: TRoundRect
+            Fill.Color = xFF34B698
+            Position.X = 3.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 57.000000000000000000
+            Size.Height = 28.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+          end
+          object Label10: TLabel
+            Align = Contents
+            StyledSettings = [Family]
+            Size.Width = 60.000000000000000000
+            Size.Height = 60.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = '2016'
+            TabOrder = 3
+          end
+        end
+      end
+      object Label3: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Margins.Bottom = 8.000000000000000000
+        Position.Y = 42.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 21.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = xFF9B9B9B
+        TextSettings.HorzAlign = Center
+        Text = 'Selecione o ano para filtrar os dados'
+        TabOrder = 2
+      end
+      object lbl_cancelar: TLabel
+        Align = Bottom
+        StyledSettings = [Family]
+        HitTest = True
+        Margins.Top = 20.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Position.Y = 219.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 41.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = xFF434343
+        TextSettings.HorzAlign = Center
+        Text = 'Cancelar'
+        TabOrder = 3
+        OnClick = lbl_cancelarClick
+      end
+      object Line1: TLine
+        Align = Top
+        LineType = Diagonal
+        Position.Y = 134.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 1.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDDDDDD
+      end
+      object Layout8: TLayout
+        Align = Top
+        Position.Y = 135.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 79.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        object Layout9: TLayout
+          Align = Center
+          Margins.Bottom = 8.000000000000000000
+          Size.Width = 82.000000000000000000
+          Size.Height = 68.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object Rectangle1: TRectangle
+            Position.X = 2.000000000000000000
+            Position.Y = 38.000000000000000000
+            Size.Width = 78.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 4.000000000000000000
+            YRadius = 4.000000000000000000
+            object Label13: TLabel
+              Align = Contents
+              StyledSettings = [Family]
+              Size.Width = 78.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 10.000000000000000000
+              TextSettings.FontColor = xFF828282
+              TextSettings.HorzAlign = Center
+              Text = 'VENDAS'
+              TabOrder = 0
+            end
+            object Label12: TLabel
+              StyledSettings = [Family]
+              Position.X = -1.000000000000000000
+              Position.Y = -27.000000000000000000
+              Size.Width = 79.000000000000000000
+              Size.Height = 28.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF626262
+              TextSettings.HorzAlign = Center
+              Text = 'R$ 960,00'
+              TabOrder = 1
+            end
+          end
+        end
+        object Layout10: TLayout
+          Align = Center
+          Margins.Right = 180.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Size.Width = 82.000000000000000000
+          Size.Height = 68.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object Rectangle2: TRectangle
+            Position.X = 2.000000000000000000
+            Position.Y = 38.000000000000000000
+            Size.Width = 78.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 4.000000000000000000
+            YRadius = 4.000000000000000000
+            object Label14: TLabel
+              Align = Contents
+              StyledSettings = [Family]
+              Size.Width = 78.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 10.000000000000000000
+              TextSettings.FontColor = xFF828282
+              TextSettings.HorzAlign = Center
+              Text = 'PEDIDOS'
+              TabOrder = 0
+            end
+            object Label15: TLabel
+              StyledSettings = [Family]
+              Position.Y = -27.000000000000000000
+              Size.Width = 77.000000000000000000
+              Size.Height = 28.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF626262
+              TextSettings.HorzAlign = Center
+              Text = '47'
+              TabOrder = 1
+            end
+          end
+        end
+        object Layout11: TLayout
+          Align = Center
+          Margins.Left = 180.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Size.Width = 82.000000000000000000
+          Size.Height = 68.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object Rectangle3: TRectangle
+            Position.X = 2.000000000000000000
+            Position.Y = 38.000000000000000000
+            Size.Width = 78.000000000000000000
+            Size.Height = 25.000000000000000000
+            Size.PlatformDefault = False
+            Stroke.Kind = None
+            XRadius = 4.000000000000000000
+            YRadius = 4.000000000000000000
+            object Label16: TLabel
+              Align = Contents
+              StyledSettings = [Family]
+              Size.Width = 78.000000000000000000
+              Size.Height = 25.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 10.000000000000000000
+              TextSettings.FontColor = xFF828282
+              TextSettings.HorzAlign = Center
+              Text = 'CHAMADOS'
+              TabOrder = 0
+            end
+            object Label17: TLabel
+              StyledSettings = [Family]
+              Position.Y = -27.000000000000000000
+              Size.Width = 78.000000000000000000
+              Size.Height = 28.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.Font.Size = 16.000000000000000000
+              TextSettings.Font.StyleExt = {00060000000000000004000000}
+              TextSettings.FontColor = xFF626262
+              TextSettings.HorzAlign = Center
+              Text = '03'
+              TabOrder = 1
+            end
+          end
+        end
+      end
+      object Line2: TLine
+        Align = Top
+        LineType = Diagonal
+        Position.Y = 214.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 1.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFDDDDDD
+      end
+    end
+  end
+end

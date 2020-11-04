@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/07/05 15:43:55.000.018,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/07/05 15:44:18.000.786,D:\GoogleDrive\99money\Form_Principal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2016/07/05 15:44:18.000.786,D:\GoogleDrive\99money\Form_Principal.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2016/07/05 15:44:28.000.203,D:\GoogleDrive\99money\money.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2016/07/07 20:38:25.000.007,=D:\GoogleDrive\99money\Unit1.pas</Transaction>
+    <Transaction>2016/07/07 20:38:41.000.737,D:\GoogleDrive\99money\DataModule.dfm=D:\GoogleDrive\99money\Unit1.dfm</Transaction>
+    <Transaction>2016/07/07 20:38:41.000.737,D:\GoogleDrive\99money\DataModule.pas=D:\GoogleDrive\99money\Unit1.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="AYEES8IZ7PSOC6AQ"/>
+		<PMac-Andrea iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+	<BT_BuildType>Debug</BT_BuildType>
+</BorlandProject>

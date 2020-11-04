@@ -1,0 +1,188 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Tarefas'
+  ClientHeight = 567
+  ClientWidth = 364
+  Fill.Color = xFFF6F6F6
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
+  object listview: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    OnUpdateObjects = listviewUpdateObjects
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 364.000000000000000000
+    Size.Height = 519.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    ItemAppearance.ItemHeight = 70
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 16.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF7E7E7E
+        Appearance.Width = 226.000000000000000000
+        Appearance.Height = 65.000000000000000000
+        Appearance.PlaceOffset.X = 18.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Image2'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 10.000000000000000000
+        Appearance.Height = 44.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    OnDeletingItem = listviewDeletingItem
+    ShowSelection = False
+  end
+  object ToolBar1: TToolBar
+    Size.Width = 364.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    TintColor = claWhite
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, Style, FontColor]
+      Size.Width = 364.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Tarefas'
+      TabOrder = 1
+    end
+    object SpeedButton1: TSpeedButton
+      Align = Left
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'drawertoolbutton'
+    end
+    object SpeedButton2: TSpeedButton
+      Align = Right
+      Position.X = 316.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'refreshtoolbutton'
+      OnClick = SpeedButton2Click
+    end
+    object Line1: TLine
+      Align = Bottom
+      LineType = Diagonal
+      Position.Y = 47.000000000000000000
+      Size.Width = 364.000000000000000000
+      Size.Height = 1.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFFF2F2F2
+    end
+  end
+  object img_andamento: TImage
+    MultiResBitmap.Height = 20
+    MultiResBitmap.Width = 20
+    MultiResBitmap = <
+      item
+        Width = 20
+        Height = 20
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+          0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          002A49444154384F63ACDAEDF79F818A80094A530D8C1A483918359072306A20
+          E560D440CAC16037908101005DA602AA3074AEE30000000049454E44AE426082}
+        FileName = 
+          'D:\99Coders\Posts\67 - Swipedelete na listview -----------\Fonte' +
+          's\Images\green.png'
+      end>
+    Position.X = 16.000000000000000000
+    Position.Y = 256.000000000000000000
+    Size.Width = 9.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+  object img_importante: TImage
+    MultiResBitmap.Height = 20
+    MultiResBitmap.Width = 20
+    MultiResBitmap = <
+      item
+        Width = 20
+        Height = 20
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+          0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          002A49444154384F63FCB623E63F0315011394A61A18359072306A20E560D440
+          CAC1A8819483C16E20030300B37F0331FC83F7E80000000049454E44AE426082}
+        FileName = 
+          'D:\99Coders\Posts\67 - Swipedelete na listview -----------\Fonte' +
+          's\Images\yellow.png'
+      end>
+    Position.X = 32.000000000000000000
+    Position.Y = 256.000000000000000000
+    Size.Width = 9.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+  object img_feito: TImage
+    MultiResBitmap.Height = 20
+    MultiResBitmap.Width = 20
+    MultiResBitmap = <
+      item
+        Width = 20
+        Height = 20
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+          0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          002A49444154384F637459BEFD3F0315011394A61A18359072306A20E560D440
+          CAC1A8819483C16E20030300210402C94381621F0000000049454E44AE426082}
+        FileName = 
+          'D:\99Coders\Posts\67 - Swipedelete na listview -----------\Fonte' +
+          's\Images\blue.png'
+      end>
+    Position.X = 64.000000000000000000
+    Position.Y = 256.000000000000000000
+    Size.Width = 9.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+  object img_fazer: TImage
+    MultiResBitmap.Height = 20
+    MultiResBitmap.Width = 20
+    MultiResBitmap = <
+      item
+        Width = 20
+        Height = 20
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000140000001408060000008D891D
+          0D000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          002A49444154384F63FC9E13F59F818A80094A530D8C1A483918359072306A20
+          E560D440CAC1603790810100CCBA02E46764331E0000000049454E44AE426082}
+        FileName = 
+          'D:\99Coders\Posts\67 - Swipedelete na listview -----------\Fonte' +
+          's\Images\red.png'
+      end>
+    Position.X = 48.000000000000000000
+    Position.Y = 256.000000000000000000
+    Size.Width = 9.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+end

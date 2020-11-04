@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 549
+  ClientWidth = 315
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    TextSettings.WordWrap = True
+    Align = Client
+    Size.Width = 315.000000000000000000
+    Size.Height = 549.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 307.000000000000000000
+    Viewport.Height = 541.000000000000000000
+  end
+  object PushEvents1: TPushEvents
+    Provider = EMSProvider1
+    AutoActivate = False
+    AutoRegisterDevice = False
+    Left = 56
+    Top = 272
+  end
+  object EMSProvider1: TEMSProvider
+    AndroidPush.GCMAppID = '333488200000'
+    ApiVersion = '1'
+    URLPort = 0
+    Left = 56
+    Top = 336
+  end
+  object NotificationCenter: TNotificationCenter
+    Left = 56
+    Top = 24
+  end
+end

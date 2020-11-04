@@ -1,0 +1,44 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Back Button'
+  ClientHeight = 503
+  ClientWidth = 302
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 3
+  object ToolBar1: TToolBar
+    Margins.Left = -15.000000000000000000
+    Margins.Right = -15.000000000000000000
+    Position.X = -15.000000000000000000
+    Size.Width = 332.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = claWhite
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, Size, Style]
+      HitTest = True
+      Size.Width = 332.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.FontColor = xFF057D9C
+      TextSettings.HorzAlign = Center
+      Text = 'Meu App'
+      TabOrder = 0
+    end
+    object btn_compartilhar: TSpeedButton
+      Align = Left
+      Margins.Left = 15.000000000000000000
+      Position.X = 15.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'actiontoolbutton'
+      OnClick = btn_compartilharClick
+    end
+  end
+end

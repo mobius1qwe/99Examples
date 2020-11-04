@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/06/11 20:25:26.000.368,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/06/11 20:26:45.000.784,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Temp\00 - Reajustando a tela em tempo de execução\Unit1.fmx</Transaction>
+    <Transaction>2019/06/11 20:26:45.000.784,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Temp\00 - Reajustando a tela em tempo de execução\Unit1.pas</Transaction>
+    <Transaction>2019/06/11 20:26:53.000.827,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Temp\00 - Reajustando a tela em tempo de execução\Layout.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android="5200711f02614531"/>
+	</ActiveMobileDevice>
+</BorlandProject>

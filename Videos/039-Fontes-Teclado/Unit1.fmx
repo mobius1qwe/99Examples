@@ -1,0 +1,602 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 541
+  ClientWidth = 316
+  Fill.Color = xFF1B3249
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object TabControl1: TTabControl
+    Align = Client
+    Size.Width = 316.000000000000000000
+    Size.Height = 541.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 1
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      316s
+      492s
+      316s
+      492s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 69.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem1'
+      ExplicitSize.cx = 157.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Rectangle2: TRectangle
+        Align = Client
+        Fill.Color = xFF1B3249
+        Size.Width = 316.000000000000000000
+        Size.Height = 492.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+      end
+      object RoundRect1: TRoundRect
+        Align = Center
+        Fill.Color = xFFF8B807
+        Size.Width = 278.000000000000000000
+        Size.Height = 114.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object Label1: TLabel
+          Align = Center
+          StyledSettings = [Family]
+          HitTest = True
+          Size.Width = 257.000000000000000000
+          Size.Height = 98.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 48.000000000000000000
+          TextSettings.Font.StyleExt = {00030000000000000004000000}
+          TextSettings.FontColor = xFF1B3249
+          TextSettings.HorzAlign = Center
+          Text = '497,00'
+          TabOrder = 0
+          OnClick = Label1Click
+        end
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 69.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem2'
+      ExplicitSize.cx = 157.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Rectangle3: TRectangle
+        Align = Contents
+        Fill.Color = xFF1B3249
+        Size.Width = 316.000000000000000000
+        Size.Height = 492.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+      end
+      object layout_valor: TLayout
+        Align = Top
+        Margins.Top = 30.000000000000000000
+        Position.Y = 150.000000000000000000
+        Size.Width = 316.000000000000000000
+        Size.Height = 345.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        object Layout2: TLayout
+          Align = Scale
+          Position.X = 10.000000000000000000
+          Position.Y = 11.000000000000000000
+          Size.Width = 88.000000000000000000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 12
+          object lbl_tecla7: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000000000000000000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '7'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout3: TLayout
+          Align = Scale
+          Position.X = 115.000007629394500000
+          Position.Y = 11.000000000000000000
+          Size.Width = 88.000007629394530000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 8
+          object lbl_tecla8: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000007629394530000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '8'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout4: TLayout
+          Align = Scale
+          Position.X = 220.000015258789100000
+          Position.Y = 11.000000000000000000
+          Size.Width = 87.999984741210940000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 4
+          object lbl_tecla9: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 71.999984741210940000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '9'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object lbl_tecla4: TLayout
+          Align = Scale
+          Position.X = 10.000000000000000000
+          Position.Y = 96.000000000000000000
+          Size.Width = 88.000000000000000000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 11
+          object Label5: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '4'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout6: TLayout
+          Align = Scale
+          Position.X = 115.000007629394500000
+          Position.Y = 96.000000000000000000
+          Size.Width = 88.000007629394530000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 7
+          object lbl_tecla5: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000007629394530000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '5'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout7: TLayout
+          Align = Scale
+          Position.X = 220.000015258789100000
+          Position.Y = 96.000000000000000000
+          Size.Width = 87.999984741210940000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object lbl_tecla6: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 71.999984741210940000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '6'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout8: TLayout
+          Align = Scale
+          Position.X = 10.000000000000000000
+          Position.Y = 180.000000000000000000
+          Size.Width = 88.000000000000000000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 10
+          object lbl_tecla1: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '1'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout9: TLayout
+          Align = Scale
+          Position.X = 115.000007629394500000
+          Position.Y = 180.000000000000000000
+          Size.Width = 88.000007629394530000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 6
+          object lbl_tecla2: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000007629394530000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '2'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout10: TLayout
+          Align = Scale
+          Position.X = 220.000015258789100000
+          Position.Y = 180.000000000000000000
+          Size.Width = 87.999984741210940000
+          Size.Height = 72.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object lbl_tecla3: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 71.999984741210940000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '3'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout11: TLayout
+          Align = Scale
+          Position.X = 10.000000000000000000
+          Position.Y = 263.000000000000000000
+          Size.Width = 88.000000000000000000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 9
+          object lbl_tecla00: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000000000000000000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '00'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout12: TLayout
+          Align = Scale
+          Position.X = 115.000007629394500000
+          Position.Y = 263.000000000000000000
+          Size.Width = 88.000007629394530000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 5
+          object lbl_tecla0: TLabel
+            Align = Client
+            StyledSettings = [Family]
+            HitTest = True
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Size.Width = 72.000007629394530000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 48.000000000000000000
+            TextSettings.Font.StyleExt = {00020000000000000004000000}
+            TextSettings.FontColor = claWhitesmoke
+            TextSettings.HorzAlign = Center
+            Text = '0'
+            TabOrder = 0
+            OnClick = lbl_tecla0Click
+          end
+        end
+        object Layout13: TLayout
+          Align = Scale
+          Position.X = 220.000015258789100000
+          Position.Y = 263.000000000000000000
+          Size.Width = 87.999984741210940000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object img_backspace: TImage
+            MultiResBitmap.Height = 48
+            MultiResBitmap.Width = 48
+            MultiResBitmap = <
+              item
+                Width = 48
+                Height = 48
+                PNG = {
+                  89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                  87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                  02C5494441546843ED98CB6AD54018C7CF490E8A7567154BE903282E14E92314
+                  5CA9880FE03BA89B3E81A074EDC28D78295E0A155C08BA296E445C55F0051404
+                  11DCD9A270527F5FF277C8B1B94C72628EC2FC6098992FDF75E664929C412010
+                  08040281FF9524494E8EC7E335DA7BDACE5EC7E07397F69A389714B21B70388F
+                  E37BB444B1FE3AC4BAA9F0D341F2A770F6497E7B85D81795862352EF053E1668
+                  2FA3285A92A857887D5543877701180F5981FB24BF28D12C5856EF6852C03592
+                  5FD17426107F4E43C7507D25ACFC590A7883830312CD8C21689852BB03243E47
+                  5BF7499E4237D03DCAF0988D336939E83CCEE93FCBA41DC3897387205E90C4BC
+                  CCACF018DB47D995FD70ED215D2C75D3B703A216A9FB41429765E78BADA68379
+                  6111C8D6E95CF206B116B3ABD548BD1E1C2E11E89BECBC40FF29DD446236CF17
+                  51943CF311F2CD54A1069954835E44DB4A2D1AA2640B8BA848DE0AF74266D5B0
+                  FAABD26F45591105B246C91B322D87E49771FA53FAAD292A220FD71A276FC8BC
+                  1C9C6E4B776ACA8A40D62A79432E1C45CF81447D17F8FD66BB8422CFB03A3FB2
+                  7ADB838F7D376C1EAE8D684F4CB70932AF86FBE0BAF45B41F2130F2983B9253C
+                  D234C5E6E8DAD3D81B995683DE10C7AF32936660F780AEECB4B1159FAA0899D5
+                  634F461C7F959D17E8171D9F1337AC92FDB3087B4ED87B542D32F183222EC8CE
+                  0BF4DDBB9081A8F0B42929A2FB77218360B765EB837B17625C98FC6F5484DB2D
+                  DBF1EC4A3552F707C78708F641F695A0B789FE71860B36CEA4E5A0B391D37F9E
+                  49AB515A0EDF0F9AD3D8BEE59BE0A04433A3F1078D41E2DBD8AD6AFA4FE1B503
+                  063B601FF52F28E69C44BD43FC9D388E0F6B9AE2FD51CF0EECD1AEE0E4B344BD
+                  C3E2BDD3D0E15D8081832F14B142111F25EA157E056B1A4E07051CC1D95D4E8E
+                  3EFF5ABCA1F0DD81DF1338BE45B33F7777B350DD81CFEF745B2CD879850C0402
+                  814020C760F00B4B8D7F932E38BA900000000049454E44AE426082}
+                FileName = 
+                  'H:\99Coders\Posts\39 - Teclado Virtual para Valores Numericos\Fo' +
+                  'ntes\icon-backspace.png'
+              end>
+            Align = Center
+            OnClick = img_backspaceClick
+          end
+        end
+      end
+      object Rectangle1: TRectangle
+        Align = Top
+        Fill.Color = xFFF8B807
+        Size.Width = 316.000000000000000000
+        Size.Height = 120.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object lbl_valor: TLabel
+          Align = Contents
+          StyledSettings = [Family]
+          Margins.Top = 10.000000000000000000
+          Size.Width = 316.000000000000000000
+          Size.Height = 110.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 48.000000000000000000
+          TextSettings.Font.StyleExt = {00030000000000000004000000}
+          TextSettings.FontColor = xFF1B3249
+          TextSettings.HorzAlign = Center
+          Text = '497,00'
+          TabOrder = 0
+        end
+        object img_salvar: TImage
+          MultiResBitmap.Height = 32
+          MultiResBitmap.Width = 32
+          MultiResBitmap = <
+            item
+              Width = 32
+              Height = 32
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+                F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0236494441545847ED94CB4F534114C6CF3C2ED58D0F54908A2512631453042A
+                6ADCD842A18D684C5CF93FBA558AF615D76A6CACE2DB46504459B8218672EF9C
+                F1CCED2891D6964A9B98787F9BE9CC37F77E5FCF3D33101010F0DFC3ECD85586
+                63C9FD5594B7B566EB2BA5CC4DBBECC3EDD83586CEDD38B0A19D2C3036C3188C
+                D8E55F7435803177C54696CA3C49D38A0296AA295B74ED1344A2730795A3B264
+                11A3690599887F7E7C67A9A66E21ECD851062FCDF622B21C953DA611DF834032
+                CF2C5BF9373A5E0163AEAB82CC611C11DE71A5E39FCA0B1FAD5C47477B203C39
+                7D486FB2BC6F0EF0B695B9A163017C73D593A7578E21E83742F196E686BA4F10
+                9E48CD6BCDD1AB7EBFB5B6F860DD2E37652076ED306895A77F330A80AFB95689
+                E527B9152B37657B05E8A8C2086730D7B367EFBDDE0BE97D76FD8F1C1D4B1F01
+                E5167C730DAFDA31376C0FA039B06940A08E6597439BFABEB9C5AC568731A7B0
+                05CE79D4980B866D991B1A9E82FED1991352F222E51BD2808FA42B6797CA77BF
+                59D987F6F409290BF482B314F8A57458E2C3C3F9552BEF98864DF8E569B6A2B4
+                B8423F2B0CF8792530678E574D05E8BB78BD5F4A59F4CD015FB82119FF1B7343
+                C30AFC849A2BC2945B649C0F9351490B2FE940C8F1942A50F633B465D1F3BC04
+                05FE5A7BA27D9A06301C8BA607D161452AD549442C73E00ED5EDB40678AE3C6F
+                6A37E68696010CC7C79361BACB4D4F9C3273ADF533D430B55A5A58F337EC821D
+                0530442652032EF00C0374E99EBFDA09F38080807F00801F3EE7D56F1FB73BC6
+                0000000049454E44AE426082}
+              FileName = 
+                'H:\99Coders\Posts\39 - Teclado Virtual para Valores Numericos\Fo' +
+                'ntes\icon-salvar.png'
+            end>
+          Anchors = [akTop, akRight]
+          Position.X = 270.000000000000000000
+          Position.Y = 3.000000000000000000
+          Size.Width = 43.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          WrapMode = Center
+          OnClick = img_salvarClick
+        end
+      end
+      object Circle1: TCircle
+        Fill.Color = xFFF8B807
+        Position.X = 124.000000000000000000
+        Position.Y = 88.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object img_limpar: TImage
+          MultiResBitmap.Height = 32
+          MultiResBitmap.Width = 32
+          MultiResBitmap = <
+            item
+              Width = 32
+              Height = 32
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+                F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                0429494441545847ED954D6C545514C7CFB96F867ECE4C332D7466DA19709C69
+                341A6A3BAD0231B22180290A8956372C6A8804624C5CE892604C246ED818A331
+                212E70616274630C1FA2C418341181521620CC94D0D0763A6D17964E6D6B3BF7
+                F8BF6F5E13EBCCEB0C1B56FD252FEFDDFBCEBDF7DCFF39E75E5A679D752A11EB
+                E98B87BBFB524EB36ACC98B6EEBD879DA62B96F32E65E74E4F24F8E480903E49
+                A47B7DAD89DCECC4F05DE7AF2BA954CAABC29DCFB2967789F9757F38B975369B
+                F9CEF95D82AB03D16032A4853F61569D4C1C66961702E144FA417678D831298B
+                595C931C15517DCC14425757D3A6C7BF79901B9E2A5AAC4639EF12E6BC9E3C93
+                FA4993FE0BCD46D22A2E441F47BA5FDC57B4584D22B1B7C60E95F01145EA15A5
+                2860FAB5D6BFDB062EB82A303F9659F4B576E494623F698AC1D546ADF12DB4DD
+                17EA18C94FA46F3BA63675B1F8D3CCFC9626DA8F9D07B0F2DFC2F2A387D47BF7
+                AF9F1B72CC4A70CF01309B4B4FF85BE323A4B89E883763621F0BF959D1767F28
+                393A3B91B945FDFD56DB86F6AD5A5947912FAF2AE6A03D98E90693F5FEE8E0D9
+                DFECB60B6B3A6040E2E510C37BA2A80EB36EC1C43E28E28322CF2127A69B660A
+                B305E277A04CBFBDB8A665617D09A138D6B4D878696AEA66C199AA2C151D3098
+                046A0875DC63A25A618A1625269F66DEA1A51053C42FA3AFC5D86AD17F28B68E
+                8D0F9EBD58697143550E1810F3E940389E810AD8A8C4506241D6BA1E55D285DF
+                0D66E7780F210F3E42387ECE67EF2CD9032B804D3D1CEDDB7607E51FF52112F2
+                1032DDEB741B26990B2F8D5EFDE1B2D3AE0AD7322C0B0EA7E50565A11C1B14EB
+                05A7D746506F5A548FD3AC9AAA436008059F8A5A2C4710823DD02E64028EA5E7
+                108E1A48DF20C49D817052E3E45BB3F6FF4BD50E8453FB6216E937B1D841442E
+                818791F9A3A4D445ADA90EAD20E269CE8C5E5F24619C58B3FC56A8CA8148CFEE
+                288BBC811D1EC2229B9DEE9B88E00748B85350615184E2C60928532F24BD8150
+                12259CF9D5B175A5A203D1AE5D11116B40840714D39662AFBE43A24E8C0D9EF9
+                12D93ED31CED182E082D336B38C7CDB83BEA344B8F3FDCB1014AFC521C539E35
+                1C38AEC2295F143B3A88090F637771D30BB9B350E2A467597D3B3399B6137166
+                3C9D6FD8F4589AD95A8242E6B06AC1985AD694C26DD80C252E18BB72B83AD0BE
+                6D632D15165E43A2BD0DF94DDD9B92BD252227B2D7CF7DBEB2F80A73B9BB738D
+                6D4FA491188B68C6F06C842335787634469243F96CE64FDBF07FB896E168CDD4
+                1292EC79562A8E44B350677912394596E72BC7A484ECD5EFA7AD25751A65FAA9
+                1D26032E254BF4BCFD5D06F7108C8C68DC7A13B87C0EA0D62E4380CFE6BDF4C5
+                D4953379C7A22C46196F3471DB5BC039C99283025F8F5D3B7FDAF95D42C59330
+                F2CC9E5DE4A1FBE357CEAFBA7E2B81B2C50D4A2D7A69712177E3C264B1F79173
+                FCE14EDA75D679F410FD0BC5797D35CB2FD81C0000000049454E44AE426082}
+              FileName = 
+                'H:\99Coders\Posts\39 - Teclado Virtual para Valores Numericos\Fo' +
+                'ntes\icon-clear.png'
+            end>
+          Align = Center
+          Size.Width = 43.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          WrapMode = Center
+          OnClick = img_limparClick
+        end
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 56
+    Top = 120
+    object ChangeTabAction1: TChangeTabAction
+      Category = 'Tab'
+      Tab = TabItem1
+    end
+    object ChangeTabAction2: TChangeTabAction
+      Category = 'Tab'
+      Tab = TabItem2
+    end
+  end
+end

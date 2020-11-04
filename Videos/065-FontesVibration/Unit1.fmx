@@ -1,0 +1,42 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Vibrar'
+  ClientHeight = 563
+  ClientWidth = 363
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object rect_vibrar: TRectangle
+    Align = Bottom
+    Fill.Color = xFF4394DF
+    Margins.Left = 20.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Margins.Bottom = 20.000000000000000000
+    Position.X = 20.000000000000000000
+    Position.Y = 495.000000000000000000
+    Size.Width = 323.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 4.000000000000000000
+    YRadius = 4.000000000000000000
+    OnClick = rect_vibrarClick
+    object Label1: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Locked = True
+      Size.Width = 323.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Vibrar'
+      TabOrder = 0
+    end
+  end
+end

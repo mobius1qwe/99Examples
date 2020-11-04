@@ -1,0 +1,91 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 484
+  ClientWidth = 291
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object img_temp: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Size.Width = 481.000000000000000000
+    Size.Height = 233.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+  end
+  object Layout1: TLayout
+    Align = Left
+    Size.Width = 50.000000000000000000
+    Size.Height = 484.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label1: TLabel
+      Align = Center
+      StyledSettings = [Family, Style, FontColor]
+      Margins.Bottom = 53.000000000000000000
+      RotationAngle = 270.000000000000000000
+      Size.Width = 220.000000000000000000
+      Size.Height = 575.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Assinatura do Cliente'
+      TabOrder = 2
+    end
+    object btn_ok: TSpeedButton
+      Align = Top
+      Margins.Top = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      RotationAngle = 270.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'OK'
+      OnClick = btn_okClick
+    end
+    object btn_voltar: TSpeedButton
+      Align = Bottom
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 1.000000000000000000
+      Position.Y = 426.000000000000000000
+      RotationAngle = 270.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'backtoolbutton'
+      OnClick = btn_voltarClick
+    end
+    object btn_clear: TSpeedButton
+      Align = Top
+      Margins.Top = 10.000000000000000000
+      Position.X = 9.000000000000000000
+      Position.Y = 78.000000000000000000
+      RotationAngle = 270.000000000000000000
+      Size.Width = 32.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'cleareditbutton'
+      OnClick = btn_clearClick
+    end
+  end
+  object rect_assinatura: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Size.Width = 241.000000000000000000
+    Size.Height = 484.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    OnMouseMove = rect_assinaturaMouseMove
+    OnMouseUp = rect_assinaturaMouseUp
+    OnPaint = rect_assinaturaPaint
+  end
+end

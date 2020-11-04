@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "333488200397",
+    "firebase_url": "https://eastern-entity-90720.firebaseio.com",
+    "project_id": "eastern-entity-90720",
+    "storage_bucket": "eastern-entity-90720.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333488200397:android:4e3de32a9ff97b9f",
+        "android_client_info": {
+          "package_name": "com.embarcadero.Push"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333488200397-qsdjpqcjihlcnobv4u60tcfs1haj399h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsVgyoanoL6OL-_X8TSgABaHxcjaKKoXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333488200397-qsdjpqcjihlcnobv4u60tcfs1haj399h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
