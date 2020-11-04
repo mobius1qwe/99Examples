@@ -1,0 +1,494 @@
+object FrmPrincipal: TFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Comanda'
+  ClientHeight = 553
+  ClientWidth = 369
+  Fill.Color = xFFF2F4FC
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnResize = FormResize
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 369.000000000000000000
+    Size.Height = 498.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    Sizes = (
+      369s
+      498s
+      369s
+      498s
+      369s
+      498s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem1'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Rectangle1: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Sides = [Bottom]
+        Size.Width = 369.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFE2E2E2
+        object Label1: TLabel
+          Align = Center
+          StyledSettings = [Family]
+          Size.Width = 120.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFFB0BAC9
+          TextSettings.HorzAlign = Center
+          Text = 'Comanda'
+          TabOrder = 0
+        end
+      end
+      object Layout1: TLayout
+        Align = Center
+        Margins.Bottom = 100.000000000000000000
+        Size.Width = 284.000000000000000000
+        Size.Height = 266.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label4: TLabel
+          Align = Top
+          StyledSettings = [Family]
+          Size.Width = 284.000000000000000000
+          Size.Height = 30.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFFB0BAC9
+          TextSettings.HorzAlign = Center
+          Text = 'Comanda ou Mesa'
+          TabOrder = 0
+        end
+        object edt_comanda: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 1
+          KeyboardType = NumberPad
+          TextSettings.FontColor = xFFB0BAC9
+          Position.Y = 30.000000000000000000
+          Size.Width = 284.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          StyledSettings = [Family, Size, Style]
+        end
+        object rect_add_item: TRectangle
+          Fill.Color = xFF4A70F7
+          Margins.Top = 20.000000000000000000
+          Position.Y = 82.000000000000000000
+          Size.Width = 129.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          OnClick = rect_add_itemClick
+          object Label5: TLabel
+            Align = Center
+            StyledSettings = [Family]
+            Locked = True
+            Size.Width = 271.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Inserir Item'
+            TabOrder = 0
+          end
+        end
+        object rect_detalhes: TRectangle
+          Fill.Color = xFF4A70F7
+          Margins.Top = 20.000000000000000000
+          Position.X = 154.000000000000000000
+          Position.Y = 82.000000000000000000
+          Size.Width = 129.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          OnClick = rect_detalhesClick
+          object Label6: TLabel
+            Align = Center
+            StyledSettings = [Family]
+            Locked = True
+            Size.Width = 271.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Exibir Detalhes'
+            TabOrder = 0
+          end
+        end
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem2'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Rectangle3: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Sides = [Bottom]
+        Size.Width = 369.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFE2E2E2
+        object Label2: TLabel
+          Align = Center
+          StyledSettings = [Family]
+          Size.Width = 120.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFFB0BAC9
+          TextSettings.HorzAlign = Center
+          Text = 'Mapa'
+          TabOrder = 0
+        end
+      end
+      object lb_mapa: TListBox
+        Align = Client
+        Size.Width = 369.000000000000000000
+        Size.Height = 448.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
+        TabOrder = 1
+        Columns = 3
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnItemClick = lb_mapaItemClick
+        Viewport.Width = 369.000000000000000000
+        Viewport.Height = 448.000000000000000000
+      end
+    end
+    object TabItem3: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem3'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object Rectangle4: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Sides = [Bottom]
+        Size.Width = 369.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFE2E2E2
+        object Label3: TLabel
+          Align = Center
+          StyledSettings = [Family]
+          Size.Width = 120.000000000000000000
+          Size.Height = 27.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = xFFB0BAC9
+          TextSettings.HorzAlign = Center
+          Text = 'Produtos'
+          TabOrder = 0
+        end
+      end
+      object Rectangle6: TRectangle
+        Align = Top
+        Fill.Color = claWhite
+        Position.Y = 50.000000000000000000
+        Sides = [Bottom]
+        Size.Width = 369.000000000000000000
+        Size.Height = 55.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFFE2E2E2
+        object edt_busca_produto: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFFB0BAC9
+          Margins.Left = 20.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Size.Width = 214.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Pesquisar...'
+          StyledSettings = [Family, Style]
+        end
+        object rect_busca_produto: TRectangle
+          Align = Right
+          Fill.Color = xFF4A70F7
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 20.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 254.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 95.000000000000000000
+          Size.Height = 45.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          XRadius = 22.500000000000000000
+          YRadius = 20.000000000000000000
+          OnClick = rect_busca_produtoClick
+          object Label7: TLabel
+            Align = Center
+            StyledSettings = [Family]
+            Locked = True
+            Size.Width = 271.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Buscar'
+            TabOrder = 0
+          end
+        end
+      end
+      object lv_produto: TListView
+        ItemAppearanceClassName = 'TDynamicAppearance'
+        ItemEditAppearanceClassName = 'TDynamicAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        ItemSpaces.Left = 0.000000000000000000
+        ItemSpaces.Right = 0.000000000000000000
+        Align = Client
+        Size.Width = 369.000000000000000000
+        Size.Height = 393.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'TxtDescricao'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 14.000000000000000000
+            Appearance.TextAlign = Leading
+            Appearance.TextColor = xFFB0BAC9
+            Appearance.Width = 243.000000000000000000
+            Appearance.Height = 44.000000000000000000
+            Appearance.PlaceOffset.X = 6.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'TxtPreco'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 14.000000000000000000
+            Appearance.TextAlign = Trailing
+            Appearance.TextColor = xFF4A70F7
+            Appearance.Width = 104.000000000000000000
+            Appearance.Height = 44.000000000000000000
+            Appearance.Align = Trailing
+            Appearance.PlaceOffset.X = -7.000000000000000000
+          end>
+        ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'Text1'
+            AppearanceClassName = 'TTextObjectAppearance'
+          end>
+        CanSwipeDelete = False
+        ShowSelection = False
+      end
+    end
+  end
+  object rect_abas: TRectangle
+    Align = Bottom
+    Fill.Color = claWhite
+    Position.Y = 498.000000000000000000
+    Sides = [Top]
+    Size.Width = 369.000000000000000000
+    Size.Height = 55.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFE2E2E2
+    object img_aba1: TImage
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            05BD49444154785EED9A5D6C54451480CF997BCB0A0421212906115F303E800A
+            D8DDA54D9590C89688955D126BE29348107C131313638C04F5C19FC4187CC05F
+            62A22FFE402B46D32D0F8D5A4A77B7DA4A0C0FFE2456222284084190EDCE9DE3
+            99BBE302BAEDEE2DD37637BDDFCB9C33733BCC3DF79C39678685909090909090
+            9090990A9A764CF6A70F373AE82E35EA9838A0CEB5279A7F346ADD50D1005D3D
+            991DDCEC2D6AE343045B526DF1F78C5A1708D35A01091246AC1B2A7B403A7337
+            3FF59051CB22A57CD4755D54A0BEDA9C685E6BBAEB828A06A8060E933FB869E4
+            18F839D9B66659B1B73EB012024AD16FBA95084B88C88A51A70A4B1E70E433B6
+            E57D458D3EE069F34579FAE00D79E4D442E7C5ED4D4D05D355165B21F00637DB
+            8B5AEDC02FD7B12911FFD8A865B112026C6D3F046A0D0530DF886362C703BA07
+            1E0181EF6A99805E00C2FDFEC034C0A9F801FEAC4F6B9900B6A512F177FC8131
+            B06280CE9E4C1B4FD4AD65F686E7B818DAE50F4C0357166ED518C04E16202C85
+            0022DC68C4BAC08A012285FCE53D40A92546AA0BAC1860E3C6D6B3BCE3FCED2B
+            62067A002292274C26F060E67980C631D5203862413A3D3CD797EB006B06E0FC
+            53DA072E887CDD84813503108A9201844733CF0008AA640012F5B30FD80B81AB
+            6A019C791EA0C46503909AFA54A8EF2EBB7A06362A50816EA5AC94C29A838706
+            972AF2468CDA954CC45346B6CE478706E74794BC532146B9F68F2A4F45852BFE
+            7F71AB686B72C39A7D462B8B3503BC3938D8B0F0543EAFAFC688542ED5D61C33
+            43D7C487FDFDB31B2E382B858228679AA807147540DC6A86C744291A6A70557B
+            FB3D2D25CF2C873503683EF92273D27561115743BF27132D8B4D77D5F4F6F6BA
+            6747E7ACE0F3449488A25C5F45A5142B784ED73C521629E1043F9365CB674988
+            1CB90D83A975ABCE9AE171B16A003E157EC313AE9652D299C64864BCDB985DBB
+            48DCD19A5D263C7E5941315E7C94CBC955E8C275E691F248794E394E4E1066F9
+            E89D735D95ABF495C7C3AA0178133AC853B66B99142E4D6D881DF76522EC4AE7
+            9608C1F14A8AE396A2ECA34DE0BAE35E5848A0BCA37008047F591239DD7ED717
+            FB69F76E54E6916BC6AE07A48FEC4514FA3CAEDFFA099E7D1E0BDA8DA3C5D018
+            0FC92F258E11882C2F2A273C2F7BE9FCF5DF7774AC18350F4C0A763D209D7986
+            677CDEA895F8858D9425448E5DC88DCEBAF86DC7BA757F99B129C3AE07F4645E
+            E6099F34EA15D06950E8BBB08EDB5119C93D78EFEAD366705AB16680621AF48E
+            6B57E75D59BA0EEDE53CDD879ECA722E1ED14766F3684D61CD00ECFE299EED80
+            96F94DF7A512F1ADFE408D63F338BCCD482CAAB78C58F358F180CEEEEC4D9E2A
+            8CF8FF414A70349588ADAC5597FF2F560CC0F9FF599E6AB7967993DB8380EFFB
+            035342E14432D17AC22881999001F486B7E88CF718A0DAC2E97BB9042E69F8EB
+            9BE12985489E440F164A170A02DC0CBBE09E645BFCD36A3D30F0A23B7B871660
+            21FF39FF698BE9AA39B8F27C7BB83FBEA39A8A31B801D2992E3EAC6CD23249B8
+            440EF509C05B78A69BFD07188FE018EFAE93F87B211947746F288AB2C067832F
+            05D05C40D1ECF731FCF99FE24CF49251C72490010E74E76242A88CAF28F98370
+            22EBEF5FDFF4AB3F76E8482BD7F9693EB8CDE19038AF1A2E2E9E8CCACEF61A02
+            A541213CF31B00B6B0103BFFFD87359BD737F7B9CA7D4DCB7C769DE78ECEBDCB
+            1FB08CED3504AC03B074A051128F1AB1040A183622BB165538FC4C14BB6B0864
+            00223869444047DC66C4129C024B7D04A87F37649D4A6B5040B71BB1AA350434
+            80E0DDBF08A27A55174046D5C5500B48DCA9651D7F72D685AFFD01CB545A034A
+            7C5CCBD5AE217016E8EAC9747293D4B2BEB070150CB01967F354A53BC06A77E0
+            89526E0D8434075144759FA6DA3504DC030046D17998A7EFD7B20B1801816BAF
+            7A799D830FC75E31EAA4506E0D57BD7C80354CA87AD39560E39FDE0EF2680BEF
+            CACB3DAE477515068A5E0F52855D0BB5B086909090909090909090FA05E01FCF
+            DD72AFCAF5D2180000000049454E44AE426082}
+          FileName = 'D:\Comanda\Mobile\Images\cart.png'
+        end>
+      Align = Scale
+      Position.X = 1.054284811019897000
+      Position.Y = 5.000000000000000000
+      Size.Width = 123.351394653320300000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_aba1Click
+    end
+    object img_aba2: TImage
+      Tag = 1
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            01F549444154785EEDDACF4B1B411407F037BB9B824884D04B3D79F2287A10E2
+            A1088BD416F4905CFC0F2C9EF47F112F257F4285F4B0501291504AA1A1979EF5
+            E449C19B8A4A77937167790B7B987667C34AB6CEF7038F373F3684BCECCCCE61
+            090000000000AC24381B0B82EF8DB0F6EA408AB1EF9033CBC3533526BA71A53C
+            910FD151ABF5F696878D142AC0F1E98F052FF2BEC59F5AE0A14A91119DD76668
+            7DDB6F5EF1502E87B31177E475AAFAE315E1D16218D221778D18DF01C160F826
+            0AE932E948BA187BCE46C3B9BB48FA537456AF8BF9EB3F4BA1EB0E5CA2B928A2
+            E8F5CC7DDDF7FD47BEE49F8C0BF0A53F5C8DD32FD5965276DAEFD73EAA765574
+            7B3FBF0A213EA8B657A379D365506809A4E22F8AF79DAA11236E143251015E12
+            EB0B30D11E10FBD4DA6CEE713B11CFFFE6A6567CFD8ACA655F97EAF6868110B4
+            A5DACFBE07FCC5724EA47473D948E9E6B2510AEC019CAD850270B656694F8169
+            ABC253E0BF8425C039170E42F97487956CA47473D948E9E6B2510AEC019CAD85
+            0270B6160E429CAD8525C039170E42F97487956CA47473D948E9E6B2510AEC01
+            9CAD850270B6160E429CAD8502702E444A59C1C249971B8518EF01D6BF20A174
+            FBC37EFC8177DCAD2449F4B9BDD9DCE16EAE42B7F2C88D76D5BFCFDDCA495E92
+            AAD13E778D14BA0394E085BD2607000000000036227A02DFF1E57CE2E86E8600
+            00000049454E44AE426082}
+          FileName = 'D:\Comanda\Mobile\Images\tables.png'
+        end>
+      Align = Scale
+      Position.X = 123.351371765136700000
+      Position.Y = 5.000000000000000000
+      Size.Width = 122.297218322753900000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_aba1Click
+    end
+    object img_aba3: TImage
+      Tag = 2
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            02AA49444154785EEDD94D6813411400E037B39B625BA22D22B460C18B374585
+            96D49F83411A154BB35E72F4A4201EF4EAC1BBDE44F0A037F166145224AD241E
+            F620A546C5A3A09E0A428552B5FED492CCEE7376F779EB663787988DFB3E086F
+            DE4B523A2F33B3DB0618638C31C61863A92428B6552E978D8191890B88A22404
+            8E01C858EFEB0517E08B44986F6E0CDF2B950E34A91C2A7222B66D9BDF9A434F
+            84802295FA02022E195B66616E6E72934ADB9214436D3487AEF4DBE43D02C471
+            67877383D250912BA0525B7E25849C0A329C2DCEE41685DE07419E2CA8F7E8D3
+            FA9B63E8346D30CD8C2E7DB20AB989E0D9ED45AE00BDABE80738AB56617A21A9
+            93F778BF5BF1F4D41298F23D95F6520C15D900C731FD55E2BA863E5FFA857468
+            1029C60AF8BFA5BE019187E0FCB3E5AF60C811506A1DA57191CA8926A4B8ADC3
+            3E6FAC0FC1B6738C6E40BD91D8432F8EA806F016A018AA526FD4858B03FA1A83
+            7A29FCF26A7AB8A62FB92BFE0B124280BB1F41EE0A3234F4C57AD01B5967A64F
+            FAA510910DF84B6F85491D5E0719DCD74BEB328D13A1526B54F51DEB396FAC6F
+            81C667F3B9CFFE1311F8324831B5B8011453EB9F1C8295DACB9BFA0F95B394C6
+            E07AF71E0FACC2D13B411E2DB187E0A3C5B77BF4E4AFEBE1A1F80F791895BCA5
+            C75DD7F506BC6B1C59D737100B94C6A2944261C2434ABB8AEF0328A616378062
+            6A710328A6163780626A710328A6163780626A710328A616378062471031818D
+            4383061D89FDFF80AADD18532D58F5138415D794A746E5CF9E7F39F2219B15E3
+            6BCD832DC3B07507762A056AF7E066369FCF6FD14BDA8ADD008FFF2D11C00CA5
+            8984008FCF1772254A2375B4941D435DF23E7D4A1307157CCC64E02AA5B174B4
+            023CD5EA8BD15666E01A0A372F410E53B9A75C80EF06E273FCADEE5AD6891F54
+            668C31C618638CB110007F003F52CBCFA77C4F580000000049454E44AE426082}
+          FileName = 'D:\Comanda\Mobile\Images\prod.png'
+        end>
+      Align = Scale
+      Position.X = 245.648513793945300000
+      Position.Y = 5.000000000000000000
+      Size.Width = 123.351425170898400000
+      Size.Height = 46.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_aba1Click
+    end
+  end
+end

@@ -1,0 +1,128 @@
+object FrameNotificacao: TFrameNotificacao
+  Size.Width = 448.000000000000000000
+  Size.Height = 120.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = xFFEFEFEF
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Size.Width = 428.000000000000000000
+    Size.Height = 100.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 10.000000000000000000
+    YRadius = 10.000000000000000000
+    object Layout1: TLayout
+      Align = Left
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object c_icone: TCircle
+        Align = Top
+        Fill.Bitmap.WrapMode = TileStretch
+        Fill.Kind = Bitmap
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+      end
+    end
+    object Layout2: TLayout
+      Align = Client
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Size.Width = 364.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object Layout3: TLayout
+        Align = Top
+        Size.Width = 364.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object lbl_usuario: TLabel
+          Align = Client
+          StyledSettings = [Family]
+          Size.Width = 308.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF565656
+          Text = 'Heber'
+          TabOrder = 1
+        end
+        object lbl_data: TLabel
+          Align = Right
+          StyledSettings = [Family]
+          Position.X = 308.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF959595
+          TextSettings.HorzAlign = Trailing
+          Text = '10/01'
+          TabOrder = 0
+        end
+      end
+      object Layout4: TLayout
+        Align = Bottom
+        Position.Y = 59.000000000000000000
+        Size.Width = 364.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btn_aceitar: TSpeedButton
+          Align = Right
+          StyledSettings = [Family, Style]
+          Margins.Right = 30.000000000000000000
+          Position.X = 186.000000000000000000
+          Size.Width = 74.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Aceitar'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF2EA420
+          OnClick = btn_aceitarClick
+        end
+        object btn_excluir: TSpeedButton
+          Align = Right
+          StyledSettings = [Family, Style]
+          Position.X = 290.000000000000000000
+          Size.Width = 74.000000000000000000
+          Size.Height = 25.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Excluir'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFFE85454
+          OnClick = btn_excluirClick
+        end
+      end
+      object lbl_texto: TLabel
+        Align = Client
+        StyledSettings = [Family]
+        Size.Width = 364.000000000000000000
+        Size.Height = 34.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.FontColor = xFF959595
+        TextSettings.VertAlign = Leading
+        Text = 
+          'O usu'#225'rio Jo'#227'o est'#225' convidando voc'#234' para a atividade Reuni'#227'o de ' +
+          'Trabalho.'
+        TabOrder = 0
+      end
+    end
+  end
+end

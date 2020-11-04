@@ -1,0 +1,65 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Anima'#231#245'es'
+  ClientHeight = 504
+  ClientWidth = 319
+  Fill.Color = xFFE3E6EC
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout2: TLayout
+    Align = Center
+    Size.Width = 319.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object rect_upload: TRectangle
+      Align = Center
+      Fill.Color = xFF228CF6
+      Size.Width = 240.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 4.000000000000000000
+      YRadius = 4.000000000000000000
+      OnClick = rect_uploadClick
+      object Label3: TLabel
+        Align = Contents
+        StyledSettings = [Family]
+        Size.Width = 240.000000000000000000
+        Size.Height = 57.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Upload Foto'
+        TabOrder = 1
+      end
+      object rect_progress: TRectangle
+        Align = Bottom
+        Corners = [BottomLeft]
+        Fill.Color = xFF3D5164
+        Position.Y = 50.000000000000000000
+        Size.Width = 240.000000000000000000
+        Size.Height = 7.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        Visible = False
+        XRadius = 2.500000000000000000
+        YRadius = 2.500000000000000000
+        object AnimationUpload: TFloatAnimation
+          Duration = 10.000000000000000000
+          Loop = True
+          PropertyName = 'Margins.Right'
+          StartValue = 0.000000000000000000
+          StartFromCurrent = True
+          StopValue = 0.000000000000000000
+        end
+      end
+    end
+  end
+end

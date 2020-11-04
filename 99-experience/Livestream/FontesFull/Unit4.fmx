@@ -1,0 +1,73 @@
+object Form4: TForm4
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 451
+  ClientWidth = 252
+  Fill.Color = xFFE3E6EC
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout5: TLayout
+    Align = Center
+    Size.Width = 252.000000000000000000
+    Size.Height = 112.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object RoundRect3: TRoundRect
+      Align = Center
+      Fill.Kind = None
+      Size.Width = 200.000000000000000000
+      Size.Height = 55.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFF292D3D
+      Stroke.Thickness = 3.000000000000000000
+      Stroke.Cap = Round
+      Stroke.Join = Round
+      object lbl_arc: TLabel
+        Align = Contents
+        StyledSettings = [Family]
+        Margins.Top = 9.000000000000000000
+        Margins.Bottom = 9.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 37.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF292D3D
+        TextSettings.HorzAlign = Center
+        Text = 'Enviar'
+        TabOrder = 0
+      end
+      object Arc1: TArc
+        Align = Center
+        Size.Width = 30.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = xFF60667F
+        Stroke.Thickness = 3.000000000000000000
+        Stroke.Cap = Round
+        Stroke.Dash = Dash
+        Stroke.Join = Round
+        Visible = False
+        EndAngle = -360.000000000000000000
+        object AnimationArc: TFloatAnimation
+          Duration = 2.000000000000000000
+          Loop = True
+          PropertyName = 'RotationAngle'
+          StartValue = 0.000000000000000000
+          StopValue = 360.000000000000000000
+        end
+      end
+      object AnimationLarg: TFloatAnimation
+        Duration = 0.400000005960464500
+        Interpolation = Circular
+        PropertyName = 'Width'
+        StartValue = 200.000000000000000000
+        StopValue = 55.000000000000000000
+      end
+    end
+  end
+end

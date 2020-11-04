@@ -1,0 +1,77 @@
+object FrmNotificacao: TFrmNotificacao
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 564
+  ClientWidth = 359
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 359.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label4: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 359.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.FontColor = xFF959595
+      TextSettings.HorzAlign = Center
+      Text = 'Notifica'#231#245'es'
+      TabOrder = 0
+    end
+    object img_fechar: TImage
+      MultiResBitmap.Height = 48
+      MultiResBitmap.Width = 48
+      MultiResBitmap = <
+        item
+          Width = 48
+          Height = 48
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            009C494441546843EDD5410AC2301484E168C13BA95D783017EAC95CF4189E42
+            0FA0F3DA085D1804A14D47FE0F869774358F2C9A000000309B93721E8E7EA2FC
+            33E7121F9C8CCBBF73542C7C2A7F57B6CAE251BE16CAD742F95A28FFAB759E53
+            58E569A1F40A3BC5466989BD62E36F9778282C31B7D212AD628325BE69F29CD2
+            55899FDAA1BF0D36CA4DE9FA9B89F14BC4D95214B72D0F0000B02C29BD002E3E
+            6FD39079947E0000000049454E44AE426082}
+          FileName = 'D:\99Coders\Fontes\Mobile\Images\icon-prior.png'
+        end>
+      Align = Left
+      Opacity = 0.699999988079071000
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_fecharClick
+    end
+  end
+  object lb_notificacao: TListBox
+    Align = Client
+    Size.Width = 359.000000000000000000
+    Size.Height = 514.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'transparentlistboxstyle'
+    TabOrder = 1
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 359.000000000000000000
+    Viewport.Height = 514.000000000000000000
+  end
+end

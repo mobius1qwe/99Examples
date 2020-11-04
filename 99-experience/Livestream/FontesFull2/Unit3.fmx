@@ -1,0 +1,93 @@
+object Form3: TForm3
+  Left = 0
+  Top = 0
+  Caption = 'Form3'
+  ClientHeight = 486
+  ClientWidth = 285
+  Fill.Color = xFFE3E6EC
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout4: TLayout
+    Align = Center
+    Size.Width = 285.000000000000000000
+    Size.Height = 124.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object rect_inserir: TRoundRect
+      Align = Center
+      Fill.Color = xFF228CF6
+      Size.Width = 150.000000000000000000
+      Size.Height = 55.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFF228CF6
+      Stroke.Cap = Round
+      Stroke.Join = Round
+      object lbl_email: TLabel
+        Align = Center
+        StyledSettings = [Family]
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Inserir'
+        TabOrder = 0
+        object AnimationInserirLabel: TFloatAnimation
+          Duration = 0.400000005960464500
+          PropertyName = 'Opacity'
+          StartValue = 1.000000000000000000
+          StopValue = 0.000000000000000000
+        end
+      end
+      object AnimationInserirWidth: TFloatAnimation
+        AnimationType = Out
+        Duration = 0.400000005960464500
+        Interpolation = Circular
+        PropertyName = 'Width'
+        StartValue = 150.000000000000000000
+        StopValue = 300.000000000000000000
+      end
+      object EditInserir: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        StyleLookup = 'Edit1Style1'
+        TabOrder = 1
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 70.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'E-mail'
+        StyledSettings = [Family]
+        Visible = False
+        object lbl_enviar_email: TLabel
+          Align = Right
+          Cursor = crHandPoint
+          StyledSettings = [Family]
+          HitTest = True
+          Margins.Right = -60.000000000000000000
+          Position.X = 64.000000000000000000
+          Size.Width = 56.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Center
+          Text = 'Enviar'
+          TabOrder = 0
+        end
+      end
+    end
+  end
+end

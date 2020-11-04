@@ -1,0 +1,401 @@
+object FrmCompromisso: TFrmCompromisso
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 564
+  ClientWidth = 361
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 361.000000000000000000
+    Size.Height = 564.000000000000000000
+    Size.PlatformDefault = False
+    TabHeight = 49.000000000000000000
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      361s
+      515s
+      361s
+      515s)
+    object TabCompromisso: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 180.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'COMPROMISSO'
+      ExplicitSize.cx = 180.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Label1: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Margins.Left = 20.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 209.000000000000000000
+        Size.Width = 321.000000000000000000
+        Size.Height = 39.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 18.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        Text = 'Adicionar Participantes'
+        TabOrder = 0
+        object img_cad_partic: TImage
+          MultiResBitmap.Height = 85
+          MultiResBitmap.Width = 85
+          MultiResBitmap = <
+            item
+              Width = 85
+              Height = 85
+              PNG = {
+                89504E470D0A1A0A0000000D494844520000005500000055080600000038F5A8
+                5A000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                076F49444154785EED9D7D68557518C79FE777E6D926922FE01B81A109420629
+                85321004AD100C2171D63FF68F6EAB393510A4501221319424F53ADBA67F497F
+                D4C448108C42108A91644951600C1746E50BBEC570DBDDCEEFE9F7DC3D776EEE
+                9C73CFBDF79CFBB6F381719EE7B7333CCFF7FCDECEEF4D888989898989296550
+                AE45A739D13B274955750A6121012C44A21739DD4135D3029897BAC9E000DCB0
+                48DF619B10AF9800BA3541B78D435DAD2D536EA66E2A324515F5EDD6FE458E03
+                1B0861AD02AC93E49CD1405D4870DEB2E0CCA7CD35D724B9E0145CD486E3C995
+                A4698DC9916F1877FE706A24F4981CFC392ABCD0B1D5BE246905A120A2D67F41
+                D6D4DBC94D2617BD87088B24B96010C135531A3E7A38CB3EDDB9114D0D122D91
+                8BDA7474603329D86DCC287365507A50C3FEB6EDD5A7C48F84C844DD92185882
+                A0DB10D432492A1908F46502D574B2A5FAAA24854AE8A2D6EF257BDACCE40174
+                9C1D609926A354711C872CEBC8833BF6FB9DFB3029A9A110AAA85B8EF6CD370D
+                5027A04A7587CA02D2574C83567F727B6D8FA4E48D926BDE341CEF5FAB887E2E
+                2B4119F3BCFCDC0DC7FAD7494ADE84226AE3B164230EE9AF4C719F2A49E58579
+                6ED4FA2CC721297991B7A8E60D7F00486D255D7F06819FDFC4918A274FF2AA53
+                CD03EC46C40FC5AD1888684FC7B69AFDE2664DCEA2362492EF2050ABB8150701
+                3677B4D827C4CD8A9C44E54A9DEBA0B22FF27E70974BA9F526C79E9394C0642D
+                6AAADBC4AD7CB9364AD9E0380F35E2D26CBB5B593554DCB1377FC039B4F20565
+                4C9C1C2FC72D2981C84AD4E933930741A925E24E0C4CBCA9B8B32070F1E76F79
+                E5383F56743DEA85A95FB565BD1474AC20504EE5A13BD31EB64E48419954DCD4
+                3AAC436602893AFDD6E0E63046E6CB198E9F7510D7978CC59FDFCE53B793D7CD
+                2B1A99279AA8F0FCD87FB3EC059906BA33E6541EB18F051D8675603DC4F5C457
+                54CEA53C05226E8C81F5C854B7FA8A3AE356FFAA62CC299532AC07EB22AE2BBE
+                A21261C6AC1E352F2FB1E044B30DC79AECD4757D9DC58115954CBA788ADA9CA0
+                298ED21BC42D1A9679426544B4AB86AF55813A35D1C2BAB03EE28EC353D4414A
+                AEB3C0AA15376614AC0BEB23EE38BC8B3FD24AB162DC40F2AC573D4545C057C4
+                8C7141FBE8E32A6AE3278FB85F5A0A8B1F4A16EEB38A4EE37015555B6536235A
+                24B0CA7DA188ABA8A6917D4ECC181F34B9F7E1DD45F5B839662C5E3AB9177F05
+                0BC58CF1C14B278F9C8A33C42C3A8E1643609F489C22A300E7883906F79C4AE0
+                F9B51006FC95C99F9ABE3FC3B78E1B9B4CFF7EB4EDFB337C6B34388E6BE673FD
+                371B8F3C7A10E5E45EFD0AF3FD2EB6179C191D07E0D9B9A68CCD7D7CF75F7708
+                FEF847A7722B8B9609BEAFF3FB88D6F93A8ED3BE63B2F9801E8BBBA88981480B
+                58DBD6AC2627F3A6E978A82B25C7D0DE523D4E43D7E26F5E41744F61188A7C81
+                F8630606C588029353C51A83BBA80EF4891509851C69AA9E244634F4CA750C5E
+                C5FFBAB944F699FAEAD26063A28343008BE7213CFFCCE377DFFD2FC12F7F06AF
+                53B9B7F0EDD5C88A468F29FE0BC41EC1F5B11A127D3F94CA5AFDD52F58B0D134
+                6C69BEFEC981B35D05AC3F7CE0BD031D2DB5CBC51DC1A34E85D0966AE70B0F52
+                8FA6C4561EB8EAE42AAAC9A5DD62169D278B38BB418A7D21F0D2C93DA76AF855
+                AC183F3C74F210D5E9122BC60F0F9D5C456D7F77F20DD314DC1037C605D68775
+                12770CEE39D5A080BE1133C6053F7D3C4505C28B62C5B8E1A38FA7A893D03EE7
+                8013E99755B9C2BAB03EE28EC353D4D616ECB5B43A236ECC285817D647DC7178
+                177F03229D16B368A407A4D383303AD2F1B36064D2C5B71BCDABDBA6DD4AFE66
+                3ADBF19C95605EF2B507B3EDC57E6B547D732AFFA12238246E8C81F5C87BD1EF
+                BDBBF6E9B8CF3A0CEBC07A88EB494651F980018B30E77D9A9504EB10E4C0858C
+                A232F7674F3AC5870D883B3131F1A77408402051B90ED1A8B6784D1F543CBC8F
+                CAC49FA92E4D13485426B531CBB212E24E2C4CDCD91C62135854E6FE1D7B1768
+                1DC90939258B893715771664252A57D2AA0ADF34C5E1A1245536264E8E37DBD3
+                80B21295E133F448A9B72ABE7E35F1719CB99C1998B5A80C1F2C4056D536712B
+                128E2F970314989C4465F8280C22DA2B6E45913A4325C7A33E98BCA7D0F8741C
+                44DC276E79C3559A52BBDAB7D51C96949C08655E32759E931E2AEBADEB46CF5E
+                CBC2FAF696DA0B929433A14DF6F261355AEBCF8CAE912EC38C0407BAD5247A2D
+                AC836C439D41DF9CE85B6869E82CAB2341882E39497BFDA99DEA9EA4E44DCE0D
+                951BA75A6ABBEFDFAD594E00874BBECBC55D268243F76757AF0E535026D49C3A
+                1ACEB58AD4014428FAFED62731629EB12CDA13D5B9D591899AA6E96872D910E8
+                8F2D852B24A968389ABEAB02B5B36DBB7D599222217251D3F051A04478D0D437
+                05DFA3A5017E47A45D1D5B6BCE4B52A4144CD4348D89BE3526C84D04F47A94BB
+                B4791A1901BF342FF17418DDA46C28B8A86978BFFC904EAE05A4350EE22ADEEB
+                29BFCA199EEEB0882E02E1852A659FF79B468E92A289FA24A9CDB3CAAA0345F3
+                4DEF81FF478A54B74C6BF5B4B26064BF9276E0A652FA6FB609F1AA09A01B34F6
+                68D097C33C02392626262626A64201F81F3600952AA1C2AE5C0000000049454E
+                44AE426082}
+              FileName = 'D:\99Coders\Fontes\Mobile\Images\icon-add.png'
+            end>
+          Align = Right
+          Position.X = 271.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 39.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = img_cad_particClick
+        end
+      end
+      object Layout1: TLayout
+        Align = Top
+        Size.Width = 361.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object lbl_titulo: TLabel
+          Align = Contents
+          StyledSettings = [Family]
+          Size.Width = 361.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xFF959595
+          TextSettings.HorzAlign = Center
+          Text = 'Compromisso'
+          TabOrder = 0
+        end
+        object img_fechar: TImage
+          MultiResBitmap.Height = 48
+          MultiResBitmap.Width = 48
+          MultiResBitmap = <
+            item
+              Width = 48
+              Height = 48
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                009C494441546843EDD5410AC2301484E168C13BA95D783017EAC95CF4189E42
+                0FA0F3DA085D1804A14D47FE0F869774358F2C9A000000309B93721E8E7EA2FC
+                33E7121F9C8CCBBF73542C7C2A7F57B6CAE251BE16CAD742F95A28FFAB759E53
+                58E569A1F40A3BC5466989BD62E36F9778282C31B7D212AD628325BE69F29CD2
+                55899FDAA1BF0D36CA4DE9FA9B89F14BC4D95214B72D0F0000B02C29BD002E3E
+                6FD39079947E0000000049454E44AE426082}
+              FileName = 'D:\99Coders\Fontes\Mobile\Images\icon-prior.png'
+            end>
+          Align = Left
+          Opacity = 0.699999988079071000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = img_fecharClick
+        end
+        object btn_salvar: TSpeedButton
+          Align = Right
+          StyledSettings = [Family]
+          Position.X = 285.000000000000000000
+          Position.Y = 1.000000000000000000
+          Size.Width = 76.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Salvar'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.FontColor = xFF588CFC
+          OnClick = btn_salvarClick
+        end
+      end
+      object Layout3: TLayout
+        Align = Top
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 321.000000000000000000
+        Size.Height = 149.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object edt_descricao: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Top
+          TabOrder = 0
+          TextSettings.Font.Size = 14.000000000000000000
+          Position.Y = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Size.Width = 321.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Descri'#231#227'o do compromisso'
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object Layout2: TLayout
+          Align = Top
+          Margins.Top = 20.000000000000000000
+          Position.Y = 57.000000000000000000
+          Size.Width = 321.000000000000000000
+          Size.Height = 76.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object edt_data: TDateEdit
+            Date = 43848.000000000000000000
+            Position.X = 2.000000000000000000
+            Position.Y = 25.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+          end
+          object edt_hora: TTimeEdit
+            Time = 0.639864895833333300
+            Position.X = 152.000000000000000000
+            Position.Y = 26.000000000000000000
+            TabOrder = 2
+          end
+          object Label4: TLabel
+            Align = Top
+            StyledSettings = [Family]
+            Size.Width = 321.000000000000000000
+            Size.Height = 21.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = xFFB7B7B7
+            Text = 'Data e Hora'
+            TabOrder = 0
+          end
+        end
+      end
+      object lb_convite: TListBox
+        Align = Client
+        Size.Width = 361.000000000000000000
+        Size.Height = 267.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
+        TabOrder = 3
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 361.000000000000000000
+        Viewport.Height = 267.000000000000000000
+      end
+    end
+    object TabBusca: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 181.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'BUSCA'
+      ExplicitSize.cx = 181.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      object Layout4: TLayout
+        Align = Top
+        Size.Width = 361.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object Label2: TLabel
+          Align = Contents
+          StyledSettings = [Family]
+          Size.Width = 361.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = xFF959595
+          TextSettings.HorzAlign = Center
+          Text = 'Buscar Participante'
+          TabOrder = 0
+        end
+        object img_voltar: TImage
+          MultiResBitmap.Height = 48
+          MultiResBitmap.Width = 48
+          MultiResBitmap = <
+            item
+              Width = 48
+              Height = 48
+              PNG = {
+                89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+                87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                009C494441546843EDD5410AC2301484E168C13BA95D783017EAC95CF4189E42
+                0FA0F3DA085D1804A14D47FE0F869774358F2C9A000000309B93721E8E7EA2FC
+                33E7121F9C8CCBBF73542C7C2A7F57B6CAE251BE16CAD742F95A28FFAB759E53
+                58E569A1F40A3BC5466989BD62E36F9778282C31B7D212AD628325BE69F29CD2
+                55899FDAA1BF0D36CA4DE9FA9B89F14BC4D95214B72D0F0000B02C29BD002E3E
+                6FD39079947E0000000049454E44AE426082}
+              FileName = 'D:\99Coders\Fontes\Mobile\Images\icon-prior.png'
+            end>
+          Align = Left
+          Opacity = 0.699999988079071000
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Position.X = 5.000000000000000000
+          Position.Y = 5.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          OnClick = img_voltarClick
+        end
+      end
+      object lb_busca: TListBox
+        Align = Client
+        Size.Width = 361.000000000000000000
+        Size.Height = 415.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'transparentlistboxstyle'
+        TabOrder = 2
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnItemClick = lb_buscaItemClick
+        Viewport.Width = 361.000000000000000000
+        Viewport.Height = 415.000000000000000000
+      end
+      object Layout5: TLayout
+        Align = Top
+        Position.Y = 50.000000000000000000
+        Size.Width = 361.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object edt_busca: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Client
+          TabOrder = 0
+          TextSettings.Font.Size = 14.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 265.000000000000000000
+          Size.Height = 32.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Digite para pesquisar...'
+          StyledSettings = [Family, Style, FontColor]
+        end
+        object btn_busca: TSpeedButton
+          Align = Right
+          StyledSettings = [Family]
+          Position.X = 285.000000000000000000
+          Position.Y = 1.000000000000000000
+          Size.Width = 76.000000000000000000
+          Size.Height = 48.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Buscar'
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.FontColor = xFF588CFC
+          OnClick = btn_buscaClick
+        end
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 64
+    Top = 337
+    object ActCompromisso: TChangeTabAction
+      Category = 'Tab'
+      Tab = TabCompromisso
+    end
+    object ActBusca: TChangeTabAction
+      Category = 'Tab'
+      Tab = TabBusca
+    end
+  end
+end
