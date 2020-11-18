@@ -16,10 +16,10 @@ type
     img_notificacao: TImage;
     Line1: TLine;
     rect_abas: TRectangle;
-    rect_conta_finalizar: TRectangle;
-    Label25: TLabel;
-    Rectangle1: TRectangle;
-    Label1: TLabel;
+    rect_aba1: TRectangle;
+    lbl_aba1: TLabel;
+    rect_aba2: TRectangle;
+    lbl_aba2: TLabel;
     TabControl1: TTabControl;
     TabPedido: TTabItem;
     TabOrcamentos: TTabItem;
@@ -57,8 +57,17 @@ type
     Rectangle2: TRectangle;
     Label2: TLabel;
     lv_orcamentos: TListView;
+    img_aprovar: TImage;
+    img_chat: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure rect_aba1Click(Sender: TObject);
+    procedure img_notificacaoClick(Sender: TObject);
   private
+    procedure ListarOrcamento;
+    procedure AddOrcamento(seq_orcamento, seq_usuario: integer; foto64, nome,
+      dt: string; valor: double);
+    procedure MudarAba(indice: integer);
     { Private declarations }
   public
     { Public declarations }
@@ -71,10 +80,87 @@ implementation
 
 {$R *.fmx}
 
+uses UnitPrincipal;
+
+procedure TFrmPedido.AddOrcamento(seq_orcamento, seq_usuario : integer;
+                                  foto64, nome, dt: string;
+                                  valor: double);
+begin
+    with lv_orcamentos.Items.Add do
+    begin
+        Tag := seq_orcamento;
+        TagString := seq_usuario.ToString;
+
+        Height := 80;
+
+        // Foto base64...
+        if foto64 <> '' then
+            TListItemImage(Objects.FindDrawable('ImgIcone')).Bitmap := FrmPrincipal.BitmapFromBase64(foto64);
+        //
+
+        TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
+        TListItemText(Objects.FindDrawable('TxtValor')).Text := FormatFloat('#,##0.00', valor);
+        TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
+
+        TListItemImage(Objects.FindDrawable('ImgAprovar')).Bitmap := img_aprovar.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgChat')).Bitmap := img_chat.Bitmap;
+    end;
+end;
+
+procedure TFrmPedido.ListarOrcamento;
+var
+    x : integer;
+begin
+    // Buscar notificacaoes no servidor...
+
+    lv_orcamentos.Items.Clear;
+
+    for x := 1 to 10 do
+        AddOrcamento(x, 0, '', 'Heber Mazutti', '20/10', 150.25 * x);
+end;
+
+procedure TFrmPedido.MudarAba(indice: integer);
+begin
+    // Reset para fundo branco...
+    rect_aba1.Fill.Color := $FFFFFFFF;
+    lbl_aba1.FontColor := $FFADADAD;
+    rect_aba2.Fill.Color := $FFFFFFFF;
+    lbl_aba2.FontColor := $FFADADAD;
+
+    if indice = 0 then
+    begin
+        rect_aba1.Fill.Color := $FF1878F3;
+        lbl_aba1.FontColor := $FFFFFFFF;
+    end
+    else
+    begin
+        rect_aba2.Fill.Color := $FF1878F3;
+        lbl_aba2.FontColor := $FFFFFFFF;
+    end;
+
+    TabControl1.GotoVisibleTab(indice, TTabTransition.Slide);
+end;
+
+procedure TFrmPedido.rect_aba1Click(Sender: TObject);
+begin
+    MudarAba(TRectangle(Sender).Tag);
+end;
+
 procedure TFrmPedido.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     Action := TCloseAction.caFree;
     FrmPedido := nil;
+end;
+
+procedure TFrmPedido.FormShow(Sender: TObject);
+begin
+    MudarAba(0);
+    ListarOrcamento;
+end;
+
+procedure TFrmPedido.img_notificacaoClick(Sender: TObject);
+begin
+    close;
 end;
 
 end.
