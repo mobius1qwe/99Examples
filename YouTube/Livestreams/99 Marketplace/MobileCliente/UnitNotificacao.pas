@@ -20,6 +20,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure img_refreshClick(Sender: TObject);
     procedure img_notificacaoClick(Sender: TObject);
+    procedure lv_notificacoesUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     procedure AddNotificacao(seq_notificacao, seq_orcamento: integer; foto64,
       nome, dt, mensagem: string);
@@ -70,7 +72,37 @@ begin
     lv_notificacoes.Items.Clear;
 
     for x := 1 to 10 do
-        AddNotificacao(x, x, '', 'Heber Mazutti', '20/10', 'Mensagem de teste ' + x.ToString);
+        AddNotificacao(x, x, '', 'Heber Stein Mazutti', '20/10', 'Mensagem de teste Mensagem de teste Mensagem de teste ' + x.ToString);
+end;
+
+procedure TFrmNotificacao.lv_notificacoesUpdateObjects(const Sender: TObject;
+  const AItem: TListViewItem);
+var
+    txt, txt_msg: TListItemText;
+    img: TListItemImage;
+begin
+    // Calcula tamanho da descricao...
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
+    txt.Width := lv_notificacoes.Width - 145;
+    txt.Height := FrmPrincipal.GetTextHeight(txt, txt.Width, txt.Text) - 15;
+
+    // Calcula obejto texto da mensagem...
+    txt_msg := TListItemText(AItem.Objects.FindDrawable('TxtMensagem'));
+    txt_msg.Width := lv_notificacoes.Width - 175;
+    txt_msg.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height;
+    txt_msg.Height := FrmPrincipal.GetTextHeight(txt_msg, txt_msg.Width, txt_msg.Text);
+
+
+    // Calcula altura do item da listview...
+    Aitem.Height := Trunc(txt_msg.PlaceOffset.Y + txt_msg.Height + 20);
+
+    if Aitem.Height < 95 then
+        Aitem.Height := 95;
+
+    // Botao excluir...
+    img := TListItemImage(AItem.Objects.FindDrawable('ImgExcluir'));
+    img.PlaceOffset.Y := Aitem.Height - 55;
+
 end;
 
 procedure TFrmNotificacao.FormClose(Sender: TObject; var Action: TCloseAction);

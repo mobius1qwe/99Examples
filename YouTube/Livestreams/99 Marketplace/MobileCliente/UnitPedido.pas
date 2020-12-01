@@ -63,6 +63,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure rect_aba1Click(Sender: TObject);
     procedure img_notificacaoClick(Sender: TObject);
+    procedure lv_orcamentosUpdateObjects(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     procedure ListarOrcamento;
     procedure AddOrcamento(seq_orcamento, seq_usuario: integer; foto64, nome,
@@ -99,7 +101,9 @@ begin
         //
 
         TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
-        TListItemText(Objects.FindDrawable('TxtValor')).Text := FormatFloat('#,##0.00', valor);
+        //TListItemText(Objects.FindDrawable('TxtValor')).Text := FormatFloat('#,##0.00', valor);
+        TListItemText(Objects.FindDrawable('TxtValor')).Text := Format('%.2m', [valor]);
+
         TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
 
         TListItemImage(Objects.FindDrawable('ImgAprovar')).Bitmap := img_aprovar.Bitmap;
@@ -116,8 +120,48 @@ begin
     lv_orcamentos.Items.Clear;
 
     for x := 1 to 10 do
-        AddOrcamento(x, 0, '', 'Heber Mazutti', '20/10', 150.25 * x);
+        AddOrcamento(x, 0, '', 'Heber Stein Stein Mazutti', '20/10', 150.25 * x);
 end;
+
+procedure TFrmPedido.lv_orcamentosUpdateObjects(const Sender: TObject;
+  const AItem: TListViewItem);
+var
+    txt, txt2: TListItemText;
+    img: TListItemImage;
+begin
+    // Calcula tamanho do nome...
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
+    txt.Width := lv_orcamentos.Width - 110;
+    txt.Height := FrmPrincipal.GetTextHeight(txt, txt.Width, txt.Text) - 15;
+
+    // Calcula objeto valor...
+    txt2 := TListItemText(AItem.Objects.FindDrawable('TxtValor'));
+    //txt2.Width := lv_orcamentos.Width - 255;
+    txt2.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height;
+
+
+    // Calcula objeto data...
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtData'));
+    //txt.Width := lv_orcamentos.Width - 255;
+    txt.PlaceOffset.Y := txt2.PlaceOffset.Y + txt2.Height;
+
+
+
+    // Calcula altura do item da listview...
+    Aitem.Height := Trunc(txt.PlaceOffset.Y + txt.Height + 20);
+
+    if lv_orcamentos.Width < 330 then
+        AItem.Height := AItem.Height + 40;
+
+
+    // Botoes...
+    img := TListItemImage(AItem.Objects.FindDrawable('ImgAprovar'));
+    img.PlaceOffset.Y := Aitem.Height - 55;
+
+    img := TListItemImage(AItem.Objects.FindDrawable('ImgChat'));
+    img.PlaceOffset.Y := Aitem.Height - 55;
+end;
+
 
 procedure TFrmPedido.MudarAba(indice: integer);
 begin
