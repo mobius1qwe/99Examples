@@ -13,23 +13,26 @@
     <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/07/20 13:59:26.000.824,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/10/26 20:29:38.000.192,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/10/26 20:30:10.000.158,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/10/26 20:30:10.000.158,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
-    <Transaction>2020/10/26 20:30:29.000.751,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Cliente.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2020/10/26 20:30:57.000.951,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitLogin.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.pas</Transaction>
-    <Transaction>2020/10/26 20:30:57.000.951,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitLogin.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.fmx</Transaction>
+    <Transaction>2020/10/26 20:30:10.000.158,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.fmx</Transaction>
+    <Transaction>2020/10/26 20:30:10.000.158,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.pas</Transaction>
+    <Transaction>2020/10/26 20:30:29.000.751,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Cliente.dproj</Transaction>
+    <Transaction>2020/10/26 20:30:57.000.951,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitLogin.fmx</Transaction>
+    <Transaction>2020/10/26 20:30:57.000.951,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitInicial.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitLogin.pas</Transaction>
     <Transaction>2020/10/26 21:11:21.000.067,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
-    <Transaction>2020/10/26 21:11:36.000.117,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPrincipal.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx</Transaction>
-    <Transaction>2020/10/26 21:11:36.000.117,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPrincipal.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
+    <Transaction>2020/10/26 21:11:36.000.117,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPrincipal.fmx</Transaction>
+    <Transaction>2020/10/26 21:11:36.000.117,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPrincipal.pas</Transaction>
     <Transaction>2020/11/02 21:02:41.000.019,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
-    <Transaction>2020/11/02 21:03:06.000.809,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitNotificacao.fmx</Transaction>
-    <Transaction>2020/11/02 21:03:06.000.808,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitNotificacao.pas</Transaction>
+    <Transaction>2020/11/02 21:03:06.000.808,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitNotificacao.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
+    <Transaction>2020/11/02 21:03:06.000.809,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitNotificacao.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx</Transaction>
     <Transaction>2020/11/09 20:07:40.000.643,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
-    <Transaction>2020/11/09 20:09:12.000.790,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPedido.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx</Transaction>
-    <Transaction>2020/11/09 20:09:12.000.790,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPedido.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
+    <Transaction>2020/11/09 20:09:12.000.790,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPedido.pas</Transaction>
+    <Transaction>2020/11/09 20:09:12.000.790,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitPedido.fmx</Transaction>
     <Transaction>2020/11/09 20:44:03.000.945,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
-    <Transaction>2020/11/09 20:44:30.000.002,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitChat.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx</Transaction>
-    <Transaction>2020/11/09 20:44:30.000.002,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitChat.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
+    <Transaction>2020/11/09 20:44:30.000.002,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitChat.pas</Transaction>
+    <Transaction>2020/11/09 20:44:30.000.002,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.fmx=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitChat.fmx</Transaction>
+    <Transaction>2020/12/07 20:40:49.000.288,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
+    <Transaction>2020/12/07 20:41:15.000.490,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitDM.pas</Transaction>
+    <Transaction>2020/12/07 20:41:15.000.490,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.dfm=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitDM.dfm</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>

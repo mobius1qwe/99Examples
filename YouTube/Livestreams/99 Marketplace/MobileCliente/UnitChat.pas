@@ -58,8 +58,7 @@ begin
         TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
     end;
 
-    lv_chat.Margins.Bottom := 1;
-    lv_chat.Margins.Bottom := 0;
+    lv_chat.RecalcSize;
 end;
 
 procedure TFrmChat.FormShow(Sender: TObject);
