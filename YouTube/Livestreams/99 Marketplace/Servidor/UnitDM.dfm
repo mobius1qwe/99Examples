@@ -48,11 +48,12 @@ object dm: Tdm
             Encoded = False
           end>
         JsonMode = jmPureJSON
-        Name = 'login'
-        EventName = 'login'
+        Name = 'usuario'
+        EventName = 'usuario'
         OnlyPreDefinedParams = False
-        OnReplyEvent = DWEventsEventsloginReplyEvent
+        OnReplyEventByType = DWEventsEventsusuarioReplyEventByType
       end>
+    ContextName = 'usuarios'
     Left = 160
     Top = 32
   end

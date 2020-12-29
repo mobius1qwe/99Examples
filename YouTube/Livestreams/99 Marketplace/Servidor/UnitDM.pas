@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, uDWAbout, uRESTDWServerEvents, uDWJSONObject,
-  System.JSON, FireDAC.DApt;
+  System.JSON, FireDAC.DApt, uDWConsts;
 
 type
   Tdm = class(TServerMethodDataModule)
@@ -16,8 +16,9 @@ type
     DWEvents: TDWServerEvents;
     procedure DWEventsEventshoraReplyEvent(var Params: TDWParams;
       var Result: string);
-    procedure DWEventsEventsloginReplyEvent(var Params: TDWParams;
-      var Result: string);
+    procedure DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
   private
     { Private declarations }
   public
@@ -79,41 +80,88 @@ begin
     Result := '{"data":"' + FormatDateTime('dd/mm/yyyy hh:nn', now) +  '"}';
 end;
 
-procedure Tdm.DWEventsEventsloginReplyEvent(var Params: TDWParams;
-  var Result: string);
+procedure Tdm.DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
 var
     u : TUsuario;
     erro : string;
     json : TJSONObject;
 begin
-    try
-        u := TUsuario.Create(dm.conn);
-        u.EMAIL := Params.ItemsString['email'].AsString;
-        u.SENHA := Params.ItemsString['senha'].AsString;
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+    begin
+        try
+            u := TUsuario.Create(dm.conn);
+            u.EMAIL := Params.ItemsString['email'].AsString;
+            u.SENHA := Params.ItemsString['senha'].AsString;
 
-        json := TJSONObject.Create;
+            json := TJSONObject.Create;
 
-        // {"retorno":"OK", "id_usuario": 123, "nome": "Heber...."}
-        // {"retorno":"Erro xyz....", "id_usuario": 0, "nome": ""}
-        if NOT u.ValidarLogin(erro) then
-        begin
-            json.AddPair('retorno', erro);
-            json.AddPair('id_usuario', '0');
-            json.AddPair('nome', '');
-        end
-        else
-        begin
-            json.AddPair('retorno', 'OK');
-            json.AddPair('id_usuario', u.ID_USUARIO.ToString);
-            json.AddPair('nome', u.NOME);
+            // {"retorno":"OK", "id_usuario": 123, "nome": "Heber...."}
+            // {"retorno":"Erro xyz....", "id_usuario": 0, "nome": ""}
+            if NOT u.DadosUsuario(erro) then
+            begin
+                json.AddPair('retorno', erro);
+                json.AddPair('id_usuario', '0');
+                json.AddPair('nome', '');
+                StatusCode := 401;
+            end
+            else
+            begin
+                json.AddPair('retorno', 'OK');
+                json.AddPair('id_usuario', u.ID_USUARIO.ToString);
+                json.AddPair('nome', u.NOME);
+                StatusCode := 200;
+            end;
+
+            Result := json.ToString;
+
+        finally
+            json.DisposeOf;
+            u.DisposeOf;
         end;
+    end
+    else
+    // POST.......
+    if RequestType = TRequestType.rtPost then
+    begin
+        try
+            u := TUsuario.Create(dm.conn);
+            u.EMAIL := Params.ItemsString['email'].AsString;
+            u.SENHA := Params.ItemsString['senha'].AsString;
+            u.NOME := Params.ItemsString['nome'].AsString;
+            u.FONE := Params.ItemsString['fone'].AsString;
+            u.FOTO := nil;
 
-        Result := json.ToString;
+            json := TJSONObject.Create;
 
-    finally
-        json.DisposeOf;
-        u.DisposeOf;
+            if NOT u.Inserir(erro) then
+            begin
+                json.AddPair('retorno', erro);
+                StatusCode := 400;
+            end
+            else
+            begin
+                json.AddPair('retorno', 'OK');
+                json.AddPair('id_usuario', u.ID_USUARIO.ToString);
+                json.AddPair('nome', u.NOME);
+                StatusCode := 201;
+            end;
+
+            Result := json.ToString;
+
+        finally
+            json.DisposeOf;
+            u.DisposeOf;
+        end;
+    end
+    else
+    begin
+        StatusCode := 403;
+        Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
     end;
+
 end;
 
 end.

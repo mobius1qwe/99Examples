@@ -19,11 +19,11 @@
     <Transaction>2020/12/14 20:33:53.000.965,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
     <Transaction>2020/12/14 20:34:10.000.541,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitDM.pas</Transaction>
     <Transaction>2020/12/14 20:34:10.000.541,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.dfm=D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitDM.dfm</Transaction>
-    <Transaction>2020/12/21 20:48:36.241,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
-    <Transaction>2020/12/21 20:50:03.368,D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cUsuario.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2020/12/21 20:48:36.000.241,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2020/12/21 20:50:03.000.368,D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cUsuario.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64=""/>
+		<NoProfile Android="" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>
