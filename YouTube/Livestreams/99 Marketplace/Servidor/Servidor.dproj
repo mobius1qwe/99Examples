@@ -386,6 +386,7 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="Classes\cUsuario.pas"/>
+        <DCCReference Include="Classes\cPedido.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

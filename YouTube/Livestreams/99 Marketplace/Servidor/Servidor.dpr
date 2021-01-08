@@ -5,7 +5,8 @@ uses
   FMX.Forms,
   UnitPrincipal in 'UnitPrincipal.pas' {FrmPrincipal},
   UnitDM in 'UnitDM.pas' {dm: TDataModule},
-  cUsuario in 'Classes\cUsuario.pas';
+  cUsuario in 'Classes\cUsuario.pas',
+  cPedido in 'Classes\cPedido.pas';
 
 {$R *.res}
 

@@ -16,7 +16,7 @@ object dm: Tdm
     Left = 56
     Top = 32
   end
-  object DWEvents: TDWServerEvents
+  object DWEventsUsuario: TDWServerEvents
     IgnoreInvalidParams = False
     Events = <
       item
@@ -56,5 +56,21 @@ object dm: Tdm
     ContextName = 'usuarios'
     Left = 160
     Top = 32
+  end
+  object DWEventsPedido: TDWServerEvents
+    IgnoreInvalidParams = False
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'pedido'
+        EventName = 'pedido'
+        OnlyPreDefinedParams = False
+      end>
+    ContextName = 'pedidos'
+    Left = 160
+    Top = 96
   end
 end

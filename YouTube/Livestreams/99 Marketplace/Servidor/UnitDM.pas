@@ -13,13 +13,18 @@ uses
 type
   Tdm = class(TServerMethodDataModule)
     conn: TFDConnection;
-    DWEvents: TDWServerEvents;
+    DWEventsUsuario: TDWServerEvents;
+    DWEventsPedido: TDWServerEvents;
     procedure DWEventsEventshoraReplyEvent(var Params: TDWParams;
       var Result: string);
     procedure DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
   private
+    function ValidarLogin(email, senha: string;
+                          out status: integer): string;
+    function CriarUsuario(email, senha, nome, fone, foto64: string;
+      out status: integer): string;
     { Private declarations }
   public
     { Public declarations }
@@ -80,82 +85,114 @@ begin
     Result := '{"data":"' + FormatDateTime('dd/mm/yyyy hh:nn', now) +  '"}';
 end;
 
+
+function TDm.ValidarLogin(email, senha: string;
+                          out status: integer): string;
+var
+    u : TUsuario;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        u := TUsuario.Create(dm.conn);
+        u.EMAIL := email;
+        u.SENHA := senha;
+
+        json := TJSONObject.Create;
+
+        // {"retorno":"OK", "id_usuario": 123, "nome": "Heber...."}
+        // {"retorno":"Erro xyz....", "id_usuario": 0, "nome": ""}
+        if NOT u.ValidarLogin(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
+            Status := 401;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_usuario', u.ID_USUARIO.ToString);
+            json.AddPair('nome', u.NOME);
+            Status := 200;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        u.DisposeOf;
+    end;
+end;
+
+function TDm.CriarUsuario(email, senha, nome, fone, foto64 : string;
+                          out status: integer): string;
+var
+    u : TUsuario;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        u := TUsuario.Create(dm.conn);
+        u.ID_USUARIO := 0;
+        u.EMAIL := email;
+        u.SENHA := senha;
+        u.NOME := nome;
+        u.FONE := fone;
+        u.FOTO := nil;  //  Revisar....
+
+        json := TJSONObject.Create;
+
+        // Validar se usuario existe...
+        if u.DadosUsuario(erro) then
+        begin
+            json.AddPair('retorno', 'Já existe um usuário com esse email');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        if NOT u.Inserir(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_usuario', u.ID_USUARIO.ToString);
+            json.AddPair('nome', u.NOME);
+            Status := 201;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        u.DisposeOf;
+    end;
+end;
+
+
+
 procedure Tdm.DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
   RequestHeader: TStringList);
-var
-    u : TUsuario;
-    erro : string;
-    json : TJSONObject;
 begin
     // GET.......
     if RequestType = TRequestType.rtGet then
-    begin
-        try
-            u := TUsuario.Create(dm.conn);
-            u.EMAIL := Params.ItemsString['email'].AsString;
-            u.SENHA := Params.ItemsString['senha'].AsString;
-
-            json := TJSONObject.Create;
-
-            // {"retorno":"OK", "id_usuario": 123, "nome": "Heber...."}
-            // {"retorno":"Erro xyz....", "id_usuario": 0, "nome": ""}
-            if NOT u.DadosUsuario(erro) then
-            begin
-                json.AddPair('retorno', erro);
-                json.AddPair('id_usuario', '0');
-                json.AddPair('nome', '');
-                StatusCode := 401;
-            end
-            else
-            begin
-                json.AddPair('retorno', 'OK');
-                json.AddPair('id_usuario', u.ID_USUARIO.ToString);
-                json.AddPair('nome', u.NOME);
-                StatusCode := 200;
-            end;
-
-            Result := json.ToString;
-
-        finally
-            json.DisposeOf;
-            u.DisposeOf;
-        end;
-    end
+        Result := ValidarLogin(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               StatusCode)
     else
     // POST.......
     if RequestType = TRequestType.rtPost then
-    begin
-        try
-            u := TUsuario.Create(dm.conn);
-            u.EMAIL := Params.ItemsString['email'].AsString;
-            u.SENHA := Params.ItemsString['senha'].AsString;
-            u.NOME := Params.ItemsString['nome'].AsString;
-            u.FONE := Params.ItemsString['fone'].AsString;
-            u.FOTO := nil;
-
-            json := TJSONObject.Create;
-
-            if NOT u.Inserir(erro) then
-            begin
-                json.AddPair('retorno', erro);
-                StatusCode := 400;
-            end
-            else
-            begin
-                json.AddPair('retorno', 'OK');
-                json.AddPair('id_usuario', u.ID_USUARIO.ToString);
-                json.AddPair('nome', u.NOME);
-                StatusCode := 201;
-            end;
-
-            Result := json.ToString;
-
-        finally
-            json.DisposeOf;
-            u.DisposeOf;
-        end;
-    end
+        Result := CriarUsuario(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               Params.ItemsString['nome'].AsString,
+                               Params.ItemsString['fone'].AsString,
+                               '', // foto base64...
+                               StatusCode)
     else
     begin
         StatusCode := 403;

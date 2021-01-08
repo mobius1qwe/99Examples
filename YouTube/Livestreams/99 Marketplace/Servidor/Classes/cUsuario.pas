@@ -26,6 +26,7 @@ type
         property DT_GERACAO : TDateTime read FDT_GERACAO write FDT_GERACAO;
 
         function DadosUsuario(out erro: string): Boolean;
+        function ValidarLogin(out erro: string): Boolean;
         function Inserir(out erro: string): Boolean;
 end;
 
@@ -45,6 +46,84 @@ function TUsuario.DadosUsuario(out erro: string): Boolean;
 var
     qry : TFDQuery;
 begin
+    if (ID_USUARIO = 0) and (EMAIL = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o id. do usuário ou o email';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            Active := false;
+            sql.Clear;
+            SQL.Add('SELECT * FROM TAB_USUARIO');
+
+            if ID_USUARIO > 0 then
+            begin
+                SQL.Add('WHERE ID_USUARIO=:ID_USUARIO');
+                ParamByName('ID_USUARIO').Value := ID_USUARIO;
+            end
+            else
+            if EMAIL <> '' then
+            begin
+                SQL.Add('WHERE EMAIL=:EMAIL');
+                ParamByName('EMAIL').Value := EMAIL;
+            end;
+
+            Active := true;
+
+            if RecordCount > 0 then
+            begin
+                ID_USUARIO := FieldByName('ID_USUARIO').AsInteger;
+                EMAIL := FieldByName('EMAIL').AsString;
+                SENHA := FieldByName('SENHA').AsString;
+                NOME := FieldByName('NOME').AsString;
+                FONE := FieldByName('FONE').AsString;
+                //FOTO
+                DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
+
+                erro := '';
+                Result := true;
+            end
+            else
+            begin
+                erro := 'Usuário não encontrado';
+                Result := false;
+            end;
+
+            DisposeOf;
+        end;
+    except on ex:exception do
+        begin
+            erro := 'Erro ao buscar dados do usuário: ' + ex.Message;
+            Result := false;
+        end;
+    end;
+end;
+
+function TUsuario.ValidarLogin(out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (EMAIL = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o email do usuário';
+        exit;
+    end;
+
+    if (SENHA = '')  then
+    begin
+        Result := false;
+        erro := 'Informe a senha do usuário';
+        exit;
+    end;
+
     try
         qry := TFDQuery.Create(nil);
         qry.Connection := FConn;
@@ -92,6 +171,34 @@ function TUsuario.Inserir(out erro: string): Boolean;
 var
     qry : TFDQuery;
 begin
+    if (EMAIL = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o email do usuário';
+        exit;
+    end;
+
+    if (SENHA = '')  then
+    begin
+        Result := false;
+        erro := 'Informe a senha do usuário';
+        exit;
+    end;
+
+    if (NOME = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o nome do usuário';
+        exit;
+    end;
+
+    if (FONE = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o telefone do usuário';
+        exit;
+    end;
+
     try
         qry := TFDQuery.Create(nil);
         qry.Connection := FConn;
