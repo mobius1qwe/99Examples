@@ -387,6 +387,8 @@
         </DCCReference>
         <DCCReference Include="Classes\cUsuario.pas"/>
         <DCCReference Include="Classes\cPedido.pas"/>
+        <DCCReference Include="Classes\cNotificacao.pas"/>
+        <DCCReference Include="Classes\cChat.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

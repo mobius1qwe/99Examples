@@ -8,7 +8,8 @@ uses
   UnitNotificacao in 'UnitNotificacao.pas' {FrmNotificacao},
   UnitPedido in 'UnitPedido.pas' {FrmPedido},
   UnitChat in 'UnitChat.pas' {FrmChat},
-  UnitDM in 'UnitDM.pas' {dm: TDataModule};
+  UnitDM in 'UnitDM.pas' {dm: TDataModule},
+  uFunctions in '..\Units\uFunctions.pas';
 
 {$R *.res}
 

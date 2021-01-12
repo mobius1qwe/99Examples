@@ -7,11 +7,16 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.FMXUI.Wait,
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.ExprFuncs, System.IOUtils;
+  FireDAC.Stan.ExprFuncs, System.IOUtils, REST.Types, REST.Client,
+  REST.Authenticator.Basic, Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   Tdm = class(TDataModule)
     conn: TFDConnection;
+    RESTClient: TRESTClient;
+    RequestLogin: TRESTRequest;
+    HTTPBasicAuthenticator: THTTPBasicAuthenticator;
+    RequestLoginCad: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

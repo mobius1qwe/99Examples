@@ -6,6 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Platform,
+  System.JSON,
 
   {$IFDEF ANDROID}
   FMX.VirtualKeyboard,
@@ -48,8 +49,8 @@ type
     Label12: TLabel;
     Layout5: TLayout;
     Label13: TLabel;
-    Edit1: TEdit;
-    Edit2: TEdit;
+    edt_cad_email: TEdit;
+    edt_cad_senha: TEdit;
     Label14: TLabel;
     rect_prox1: TRectangle;
     Label15: TLabel;
@@ -59,8 +60,8 @@ type
     Label17: TLabel;
     Layout6: TLayout;
     Label18: TLabel;
-    Edit3: TEdit;
-    Edit4: TEdit;
+    edt_cad_nome: TEdit;
+    edt_cad_fone: TEdit;
     Label19: TLabel;
     rect_prox2: TRectangle;
     Label20: TLabel;
@@ -76,7 +77,9 @@ type
     Rectangle7: TRectangle;
     Label26: TLabel;
     img_voltar: TImage;
-    Circle1: TCircle;
+    c_foto: TCircle;
+    Label23: TLabel;
+    edt_cad_endereco: TEdit;
     procedure rect_conta_finalizarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -88,6 +91,9 @@ type
       Shift: TShiftState);
   private
     procedure NavegarAbas(pag: integer);
+    procedure ProcessarLogin;
+    procedure ProcessarLoginErro(Sender: TObject);
+    procedure ProcessarLoginCad;
     { Private declarations }
   public
     { Public declarations }
@@ -100,7 +106,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal;
+uses UnitPrincipal, UnitDM, REST.Types;
 
 
 
@@ -170,9 +176,29 @@ begin
     NavegarAbas(2);
 end;
 
-procedure TFrmLogin.rect_conta_finalizarClick(Sender: TObject);
+procedure TFrmLogin.ProcessarLogin;
+var
+    jsonObj : TJsonObject;
+    json, retorno, id_usuario, nome: string;
 begin
-    // Criar a conta no server...
+    try
+        json := dm.RequestLogin.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+        id_usuario := jsonObj.GetValue('id_usuario').Value;
+        nome := jsonObj.GetValue('nome').Value;
+
+        // Se deu erro...
+        if dm.RequestLogin.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    finally
+        jsonObj.DisposeOf;
+    end;
 
 
     if NOT Assigned(FrmPrincipal) then
@@ -184,9 +210,29 @@ begin
     FrmLogin.Close;
 end;
 
-procedure TFrmLogin.rect_loginClick(Sender: TObject);
+procedure TFrmLogin.ProcessarLoginCad;
+var
+    jsonObj : TJsonObject;
+    json, retorno, id_usuario, nome: string;
 begin
-    // Validar o login no server...
+    try
+        json := dm.RequestLoginCad.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+        id_usuario := jsonObj.GetValue('id_usuario').Value;
+        nome := jsonObj.GetValue('nome').Value;
+
+        // Se deu erro...
+        if dm.RequestLoginCad.Response.StatusCode <> 201 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    finally
+        jsonObj.DisposeOf;
+    end;
 
 
     if NOT Assigned(FrmPrincipal) then
@@ -196,6 +242,35 @@ begin
 
     FrmPrincipal.Show;
     FrmLogin.Close;
+end;
+
+procedure TFrmLogin.ProcessarLoginErro(Sender: TObject);
+begin
+    if Assigned(Sender) and (Sender is Exception) then
+        ShowMessage(Exception(Sender).Message);
+end;
+
+procedure TFrmLogin.rect_conta_finalizarClick(Sender: TObject);
+begin
+    // Criar a conta no server...
+    dm.RequestLoginCad.Params.Clear;
+    dm.RequestLoginCad.AddParameter('id', '');
+    dm.RequestLoginCad.AddParameter('email', edt_cad_email.Text);
+    dm.RequestLoginCad.AddParameter('senha', edt_cad_senha.Text);
+    dm.RequestLoginCad.AddParameter('nome', edt_cad_nome.Text);
+    dm.RequestLoginCad.AddParameter('fone', edt_cad_fone.Text);
+    dm.RequestLoginCad.AddParameter('endereco', edt_cad_endereco.Text);
+    dm.RequestLoginCad.AddParameter('foto', edt_cad_senha.Text, TRESTRequestParameterKind.pkREQUESTBODY);
+    dm.RequestLoginCad.ExecuteAsync(ProcessarLoginCad, true, true, ProcessarLoginErro);
+end;
+
+procedure TFrmLogin.rect_loginClick(Sender: TObject);
+begin
+    // Validar o login no server...
+    dm.RequestLogin.Params.Clear;
+    dm.RequestLogin.AddParameter('email', edt_login_email.Text);
+    dm.RequestLogin.AddParameter('senha', edt_login_senha.Text);
+    dm.RequestLogin.ExecuteAsync(ProcessarLogin, true, true, ProcessarLoginErro);
 end;
 
 procedure TFrmLogin.TabConta1Click(Sender: TObject);

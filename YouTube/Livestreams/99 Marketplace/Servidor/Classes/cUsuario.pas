@@ -15,6 +15,9 @@ type
         FFOTO: TBitmap;
         FSENHA: string;
         FNOME: string;
+        FENDERECO: string;
+        FAVALIACAO_PRESTADOR: Double;
+        FAVALIACAO_CLIENTE: Double;
     public
         constructor Create(conn : TFDConnection);
         property ID_USUARIO : integer read FID_USUARIO write FID_USUARIO;
@@ -22,6 +25,9 @@ type
         property SENHA : string read FSENHA write FSENHA;
         property NOME : string read FNOME write FNOME;
         property FONE : string read FFONE write FFONE;
+        property ENDERECO : string read FENDERECO write FENDERECO;
+        property AVALIACAO_CLIENTE : Double read FAVALIACAO_CLIENTE write FAVALIACAO_CLIENTE;
+        property AVALIACAO_PRESTADOR : Double read FAVALIACAO_PRESTADOR write FAVALIACAO_PRESTADOR;
         property FOTO : TBitmap read FFOTO write FFOTO;
         property DT_GERACAO : TDateTime read FDT_GERACAO write FDT_GERACAO;
 
@@ -84,6 +90,10 @@ begin
                 SENHA := FieldByName('SENHA').AsString;
                 NOME := FieldByName('NOME').AsString;
                 FONE := FieldByName('FONE').AsString;
+                ENDERECO := FieldByName('ENDERECO').AsString;
+                AVALIACAO_CLIENTE := FieldByName('AVALIACAO_CLIENTE').AsFloat;
+                AVALIACAO_PRESTADOR := FieldByName('AVALIACAO_PRESTADOR').AsFloat;
+
                 //FOTO
                 DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
 
@@ -145,6 +155,10 @@ begin
                 SENHA := FieldByName('SENHA').AsString;
                 NOME := FieldByName('NOME').AsString;
                 FONE := FieldByName('FONE').AsString;
+                ENDERECO := FieldByName('ENDERECO').AsString;
+                AVALIACAO_CLIENTE := FieldByName('AVALIACAO_CLIENTE').AsFloat;
+                AVALIACAO_PRESTADOR := FieldByName('AVALIACAO_PRESTADOR').AsFloat;
+
                 //FOTO
                 DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
 
@@ -207,12 +221,17 @@ begin
         begin
             Active := false;
             sql.Clear;
-            SQL.Add('INSERT INTO TAB_USUARIO(EMAIL, SENHA, NOME, FONE, FOTO, DT_GERACAO)');
-            SQL.Add('VALUES(:EMAIL, :SENHA, :NOME, :FONE, :FOTO, current_timestamp)');
+            SQL.Add('INSERT INTO TAB_USUARIO(EMAIL, SENHA, NOME, FONE, FOTO,');
+            SQL.Add('DT_GERACAO, ENDERECO, AVALIACAO_CLIENTE, AVALIACAO_PRESTADOR)');
+            SQL.Add('VALUES(:EMAIL, :SENHA, :NOME, :FONE, :FOTO, ');
+            SQL.Add('current_timestamp, :ENDERECO, :AVALIACAO_CLIENTE, :AVALIACAO_PRESTADOR)');
             ParamByName('EMAIL').Value := EMAIL;
             ParamByName('SENHA').Value := SENHA;
             ParamByName('NOME').Value := NOME;
             ParamByName('FONE').Value := FONE;
+            ParamByName('ENDERECO').Value := ENDERECO;
+            ParamByName('AVALIACAO_CLIENTE').Value := AVALIACAO_CLIENTE;
+            ParamByName('AVALIACAO_PRESTADOR').Value := AVALIACAO_PRESTADOR;
 
             if FOTO <> nil then
                 ParamByName('FOTO').Assign(FOTO)

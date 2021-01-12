@@ -147,6 +147,8 @@ begin
         if u.DadosUsuario(erro) then
         begin
             json.AddPair('retorno', 'Já existe um usuário com esse email');
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
             Status := 400;
             Result := json.ToString;
             exit;
@@ -155,6 +157,8 @@ begin
         if NOT u.Inserir(erro) then
         begin
             json.AddPair('retorno', erro);
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
             Status := 400;
         end
         else
