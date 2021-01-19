@@ -8,7 +8,8 @@ uses
   cUsuario in 'Classes\cUsuario.pas',
   cPedido in 'Classes\cPedido.pas',
   cNotificacao in 'Classes\cNotificacao.pas',
-  cChat in 'Classes\cChat.pas';
+  cChat in 'Classes\cChat.pas',
+  uFunctions in '..\Units\uFunctions.pas';
 
 {$R *.res}
 

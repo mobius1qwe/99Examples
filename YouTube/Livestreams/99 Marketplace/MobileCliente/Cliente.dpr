@@ -9,7 +9,8 @@ uses
   UnitPedido in 'UnitPedido.pas' {FrmPedido},
   UnitChat in 'UnitChat.pas' {FrmChat},
   UnitDM in 'UnitDM.pas' {dm: TDataModule},
-  uFunctions in '..\Units\uFunctions.pas';
+  uFunctions in '..\Units\uFunctions.pas',
+  u99Permissions in '..\Units\u99Permissions.pas';
 
 {$R *.res}
 

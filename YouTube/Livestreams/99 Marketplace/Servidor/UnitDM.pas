@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, uDWAbout, uRESTDWServerEvents, uDWJSONObject,
-  System.JSON, FireDAC.DApt, uDWConsts;
+  System.JSON, FireDAC.DApt, uDWConsts, FMX.Graphics, uFunctions;
 
 type
   Tdm = class(TServerMethodDataModule)
@@ -131,17 +131,44 @@ var
     u : TUsuario;
     json : TJSONObject;
     erro: string;
+    foto_bmp : TBitmap;
 begin
     try
+        json := TJSONObject.Create;
         u := TUsuario.Create(dm.conn);
+
+
+        if foto64 = '' then
+        begin
+            json.AddPair('retorno', 'Foto do usuário não enviada');
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        // Criar foto bitmap...
+        try
+            foto_bmp := TFunctions.BitmapFromBase64(foto64);
+        except on ex:exception do
+            begin
+                json.AddPair('retorno', 'Erro ao criar imagem no servidor: ' + ex.Message);
+                json.AddPair('id_usuario', '0');
+                json.AddPair('nome', '');
+                Status := 400;
+                Result := json.ToString;
+                exit;
+            end;
+        end;
+
+
         u.ID_USUARIO := 0;
         u.EMAIL := email;
         u.SENHA := senha;
         u.NOME := nome;
         u.FONE := fone;
-        u.FOTO := nil;  //  Revisar....
-
-        json := TJSONObject.Create;
+        u.FOTO := foto_bmp;
 
         // Validar se usuario existe...
         if u.DadosUsuario(erro) then
@@ -172,6 +199,7 @@ begin
         Result := json.ToString;
 
     finally
+        foto_bmp.DisposeOf;
         json.DisposeOf;
         u.DisposeOf;
     end;
@@ -195,7 +223,7 @@ begin
                                Params.ItemsString['senha'].AsString,
                                Params.ItemsString['nome'].AsString,
                                Params.ItemsString['fone'].AsString,
-                               '', // foto base64...
+                               Params.ItemsString['foto'].AsString,
                                StatusCode)
     else
     begin

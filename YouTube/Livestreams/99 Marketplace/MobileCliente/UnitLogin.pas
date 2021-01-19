@@ -6,13 +6,14 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Platform,
-  System.JSON,
+  System.JSON, u99Permissions,
 
   {$IFDEF ANDROID}
   FMX.VirtualKeyboard,
   {$ENDIF}
 
-  FMX.Edit;
+  FMX.Edit, uFunctions, System.Actions, FMX.ActnList, FMX.StdActns,
+  FMX.MediaLibrary.Actions;
 
 type
   TFrmLogin = class(TForm)
@@ -80,6 +81,9 @@ type
     c_foto: TCircle;
     Label23: TLabel;
     edt_cad_endereco: TEdit;
+    OpenDialog: TOpenDialog;
+    ActionList1: TActionList;
+    ActFoto: TTakePhotoFromCameraAction;
     procedure rect_conta_finalizarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -89,11 +93,17 @@ type
     procedure img_voltarClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
       Shift: TShiftState);
+    procedure c_fotoClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure ActFotoDidFinishTaking(Image: TBitmap);
   private
+    permissao : T99Permissions;
     procedure NavegarAbas(pag: integer);
     procedure ProcessarLogin;
     procedure ProcessarLoginErro(Sender: TObject);
     procedure ProcessarLoginCad;
+    procedure TrataPermissaoFotoErro(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -120,10 +130,40 @@ begin
     TabControl1.GotoVisibleTab(TabControl1.TabIndex + pag, TTabTransition.Slide);
 end;
 
+procedure TFrmLogin.TrataPermissaoFotoErro(Sender: TObject);
+begin
+    showmessage('O app não possui acesso a câmera');
+end;
+
+procedure TFrmLogin.ActFotoDidFinishTaking(Image: TBitmap);
+begin
+    c_foto.Fill.Bitmap.Bitmap := Image;
+end;
+
+procedure TFrmLogin.c_fotoClick(Sender: TObject);
+begin
+    {$IFDEF MSWINDOWS}
+    if OpenDialog.Execute then
+        c_foto.Fill.Bitmap.Bitmap.LoadFromFile(OpenDialog.FileName);
+    {$ELSE}
+        permissao.Camera(ActFoto, TrataPermissaoFotoErro);
+    {$ENDIF}
+end;
+
 procedure TFrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     Action := TCloseAction.caFree;
     FrmLogin := nil;
+end;
+
+procedure TFrmLogin.FormCreate(Sender: TObject);
+begin
+    permissao := T99Permissions.Create;
+end;
+
+procedure TFrmLogin.FormDestroy(Sender: TObject);
+begin
+    permissao.DisposeOf;
 end;
 
 procedure TFrmLogin.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
@@ -260,7 +300,8 @@ begin
     dm.RequestLoginCad.AddParameter('nome', edt_cad_nome.Text);
     dm.RequestLoginCad.AddParameter('fone', edt_cad_fone.Text);
     dm.RequestLoginCad.AddParameter('endereco', edt_cad_endereco.Text);
-    dm.RequestLoginCad.AddParameter('foto', edt_cad_senha.Text, TRESTRequestParameterKind.pkREQUESTBODY);
+    dm.RequestLoginCad.AddParameter('foto', TFunctions.Base64FromBitmap(c_foto.Fill.Bitmap.Bitmap),
+                                            TRESTRequestParameterKind.pkREQUESTBODY);
     dm.RequestLoginCad.ExecuteAsync(ProcessarLoginCad, true, true, ProcessarLoginErro);
 end;
 

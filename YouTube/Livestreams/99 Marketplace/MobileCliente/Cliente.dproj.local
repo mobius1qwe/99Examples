@@ -33,10 +33,11 @@
     <Transaction>2020/12/07 20:40:49.000.288,=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
     <Transaction>2020/12/07 20:41:15.000.490,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitDM.pas=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.pas</Transaction>
     <Transaction>2020/12/07 20:41:15.000.490,D:\99Coders\CursoMarketplace\Fontes\MobileCliente\UnitDM.dfm=D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Unit1.dfm</Transaction>
-    <Transaction>2021/01/11 20:19:11.367,=D:\99Coders\CursoMarketplace\Fontes\Units\uFunctions.pas</Transaction>
+    <Transaction>2021/01/11 20:19:11.000.367,=D:\99Coders\CursoMarketplace\Fontes\Units\uFunctions.pas</Transaction>
+    <Transaction>2021/01/18 20:36:55.000.249,=D:\99Coders\CursoMarketplace\Fontes\Units\u99Permissions.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>
