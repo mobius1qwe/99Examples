@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/05/10 18:28:07.000.409,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/08/16 13:51:06.000.870,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/12 00:17:31.000.142,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 13:54:42.000.810,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/20 13:59:26.000.824,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 13:40:11.000.707,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 13:46:03.000.377,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitLogin.fmx</Transaction>
+    <Transaction>2021/01/17 13:46:03.000.377,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitLogin.pas</Transaction>
+    <Transaction>2021/01/17 13:46:13.000.083,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Agendei.dproj</Transaction>
+    <Transaction>2021/01/17 14:21:02.000.978,=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit2.pas</Transaction>
+    <Transaction>2021/01/17 14:22:04.000.812,D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit2.pas=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitPrincipal.pas</Transaction>
+    <Transaction>2021/01/17 14:22:04.000.812,D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit2.fmx=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitPrincipal.fmx</Transaction>
+    <Transaction>2021/01/17 14:50:46.000.177,=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 14:51:05.000.960,D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit1.pas=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitFrameCategoria.pas</Transaction>
+    <Transaction>2021/01/17 14:51:05.000.960,D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Unit1.fmx=D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\UnitFrameCategoria.fmx</Transaction>
+    <Transaction>2021/01/17 20:18:39.000.348,=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 20:18:59.000.630,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.fmx=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitFrameAgendamento.fmx</Transaction>
+    <Transaction>2021/01/17 20:18:59.000.630,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitFrameAgendamento.pas</Transaction>
+    <Transaction>2021/01/17 20:55:10.000.849,=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 20:55:38.000.687,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitDetalheEmpresa.pas</Transaction>
+    <Transaction>2021/01/17 20:55:38.000.687,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.fmx=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitDetalheEmpresa.fmx</Transaction>
+    <Transaction>2021/01/17 21:05:01.000.444,=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/17 21:05:41.000.043,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.pas=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitFrameServico.pas</Transaction>
+    <Transaction>2021/01/17 21:05:41.000.043,D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\Unit1.fmx=D:\99Coders\Lancamento 11\CPL\CPL2\Fontes\UnitFrameServico.fmx</Transaction>
+    <Transaction>2021/01/23 20:01:59.000.594,=D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/23 20:02:39.000.927,D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\UnitAgenda.fmx=D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2021/01/23 20:02:39.000.927,D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\UnitAgenda.pas=D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/01/23 20:14:50.000.102,=D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Units\uCustomCalendar.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+		<PMacBook iOSSimulator="iPhone5"/>
+		<PMacVirtual iOSSimulator="iPhone5"/>
+		<PMacMini iOSSimulator="iPhone"/>
+	</ActiveMobileDevice>
+</BorlandProject>

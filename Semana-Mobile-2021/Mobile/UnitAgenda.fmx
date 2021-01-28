@@ -1,0 +1,303 @@
+object FrmAgenda: TFrmAgenda
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 549
+  ClientWidth = 366
+  Fill.Kind = Solid
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object Layout3: TLayout
+    Align = Top
+    Size.Width = 366.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family]
+      Size.Width = 366.000000000000000000
+      Size.Height = 57.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF5CC6BA
+      TextSettings.HorzAlign = Center
+      Text = 'Fazer um agendamento'
+      TabOrder = 0
+    end
+    object img_exp_voltar: TImage
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            03F549444154785EED994168146714C7DFFB7666B7118B0DA5BD78520A158456
+            50526236C418324910ECA11634D9F4505AF12045B0C7427BE9A9A75228F6546A
+            76A3B6502C4835BBA16A36BBB98420285EC443112A926A6BD2AABB9999D7F76D
+            5EAD4B367177B395FDD6EF7799F7FEF3CD4EE63FB3DFFEBF09582C168BC562B1
+            582C16CBF308CAB6E1BC7BEDFB686C61D37122DC0E442753F181B4EC6A2AFE17
+            030EE4F36DD170F147A57050F7BE0FA1EB62CF5867FF74694013A164DB30DE9F
+            3EFB622C5C38FFEFC56B1C0714059490B6A968A801C3D973ED45DA30894AF588
+            F41F082F49D55434CC80446EE25544F71244A0432423688801EFE5273703E214
+            2A7C43246358B701C3D9CCD62285592E5F5F56CC625D061CCA5DD846144C3908
+            5B44328EBA0D48642FBCA9504D451CB5592423A9CB80C4CCC45B1051173944BC
+            2292B1D46CC0C84C660F5030C965FBB262363519303C3331844BC1CF1C6D368A
+            643C551B9098CEBCA396F02C38AA4DA496A0AAB5C0682E3D4A08DF721959566A
+            87806610D409DE46797114E553BB7C7217905C22E01F1270785884CFE320A122
+            DD23F7440A354FFCADBC8F9028E422E05B18F082ABC87B1FB1FC1009EEF367CC
+            133973E35D7DBFCA21ABF2540346F3E923E4FB5F73A07FEAD86683C2F032011E
+            1B8F0F5C1169056B5E542297FE98477C21AD91F8E03F7250ED4F760E66442A63
+            55034672139FF183F7A9B446E3FBFEDD58D0F6DA77BDBD7F8AF4988A9360229F
+            3EDA2A17AF711CE7653F5A1C96B68C8A0604001F48D932F00DDD296519150DE0
+            A99E27DAE7838A06F0C4F08D94AD03C2AC54655434606CB777827F4B3F91D678
+            F8719E2FB8382E6D19150DD0A43ABDCF39A01C93D658021F1E70683AF8C3AEFE
+            FB2295B1AA019A5497F725BBF7A17EAB2B925184041917838E64D7C02F22ADA0
+            AA7437924B1F42F44F96DEEFD6093B9857445F214760CEB151BD0D4B7138D49F
+            E97262D3DB5224D6D19823B2BE3911EE91832F275C9EC839F3EA92351ECE2199
+            30E0E37D4055E4BAC0F5031EB61842381F929A3B1DF77ED3E75E8BAA0CD08C4E
+            67DE0E159DE1036222D506C19964977750BAA661CDAFC0938CC5FB7FE2676ABF
+            FE4E89D412546D8046FF7B4BA9609003F68248C65393019A547C288B0AFAD884
+            7B22194DCD0668C6E2DE2C4F5D7B789571472463A9CB00CDF86EEF6AE03ADD3C
+            B9DD12C948EA364073AAD3BB1142A49B806E8A641CEB3240537AEDB414F29340
+            D745328A751BA049F50CDD0E62D11E4E3B73221943430CD09CDAD5FB7BE105DC
+            AB139F4846D03003347AC1A13690C726ACC8DE3C4FFC216553D1500334C91D03
+            7FBB05771F97E79695128122C56B89E6A3EAB540AD1C9E9D75FF2ADCFB88172D
+            DB154172AD1599C562B1582C168BC562B1589E2900FF00489238AF9E7DA8F400
+            00000049454E44AE426082}
+          FileName = 'D:\99Coders\Lancamento 11\CPL\CPL1\Fontes\Imagens\back.png'
+        end>
+      Align = Left
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 56.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object Line2: TLine
+      Align = Bottom
+      LineType = Diagonal
+      Position.Y = 56.000000000000000000
+      Size.Width = 366.000000000000000000
+      Size.Height = 1.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Color = xFFF2F2F2
+    end
+  end
+  object layout_calendario: TLayout
+    Align = Top
+    Position.Y = 94.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 215.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object Line1: TLine
+    Align = Top
+    LineType = Diagonal
+    Margins.Top = 10.000000000000000000
+    Position.Y = 319.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 1.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFF2F2F2
+  end
+  object lbl_servico: TLabel
+    Align = Top
+    StyledSettings = [Family]
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 330.000000000000000000
+    Size.Width = 346.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Font.StyleExt = {00060000000000000004000000}
+    TextSettings.FontColor = xFF717F7F
+    Text = 'Selecione o hor'#225'rio'
+    TabOrder = 5
+  end
+  object lb_horario: TListBox
+    Align = Top
+    Position.Y = 356.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 55.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'transparentlistboxstyle'
+    TabOrder = 6
+    ShowScrollBars = False
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    ListStyle = Horizontal
+    Viewport.Width = 366.000000000000000000
+    Viewport.Height = 55.000000000000000000
+  end
+  object Line3: TLine
+    Align = Top
+    LineType = Diagonal
+    Margins.Top = 10.000000000000000000
+    Position.Y = 421.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 1.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFF2F2F2
+  end
+  object Label2: TLabel
+    Align = Top
+    StyledSettings = [Family]
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 432.000000000000000000
+    Size.Width = 346.000000000000000000
+    Size.Height = 26.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.FontColor = xFF717F7F
+    Text = 'Consulta Dr. Alberto Souza'
+    TabOrder = 2
+  end
+  object lbl_valor: TLabel
+    Align = Top
+    StyledSettings = [Family]
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 458.000000000000000000
+    Size.Width = 346.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = xFF5CC6BA
+    Text = 'R$ 300,00'
+    TabOrder = 0
+  end
+  object Line4: TLine
+    Align = Top
+    LineType = Diagonal
+    Margins.Top = 10.000000000000000000
+    Position.Y = 493.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 1.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFF2F2F2
+  end
+  object rect_confirmar: TRectangle
+    Align = Bottom
+    Fill.Color = xFF5CC6BA
+    Margins.Left = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 489.000000000000000000
+    Size.Width = 346.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 25.000000000000000000
+    YRadius = 25.000000000000000000
+    OnClick = rect_confirmarClick
+    object Label6: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Locked = True
+      Size.Width = 346.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Confirmar agendamento'
+      TabOrder = 0
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Position.Y = 57.000000000000000000
+    Size.Width = 366.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    object lbl_mes: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Size.Width = 246.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF323434
+      TextSettings.HorzAlign = Center
+      Text = 'Janeiro'
+      TabOrder = 0
+    end
+    object img_anterior: TImage
+      MultiResBitmap.Height = 48
+      MultiResBitmap.Width = 48
+      MultiResBitmap = <
+        item
+          Width = 48
+          Height = 48
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            009C494441546843EDD5410AC2301484E168C13BA95D783017EAC95CF4189E42
+            0FA0F3DA085D1804A14D47FE0F869774358F2C9A000000309B93721E8E7EA2FC
+            33E7121F9C8CCBBF73542C7C2A7F57B6CAE251BE16CAD742F95A28FFAB759E53
+            58E569A1F40A3BC5466989BD62E36F9778282C31B7D212AD628325BE69F29CD2
+            55899FDAA1BF0D36CA4DE9FA9B89F14BC4D95214B72D0F0000B02C29BD002E3E
+            6FD39079947E0000000049454E44AE426082}
+          FileName = 'D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Imagens\icon-prior.png'
+        end>
+      Align = Left
+      Opacity = 0.600000023841857900
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_anteriorClick
+    end
+    object img_proximo: TImage
+      MultiResBitmap.Height = 48
+      MultiResBitmap.Width = 48
+      MultiResBitmap = <
+        item
+          Width = 48
+          Height = 48
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000300000003008060000005702F9
+            87000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            007A494441546843EDD2DD0980301843D1EA56FE2C26F8A08EAC03688AED06D6
+            36700F84AF8F0934000000E033BBB2BD4F3F8772A7D88D58955CDE72C4A09C0A
+            236A63442B18D10A46B4A2D8883EDDD2BA742D8D8AED179A14CAD710CB5F0AE5
+            FF362B94AFC1BA7CB428B6E5B358D8B67C168BDB96070000F012C20313B1721E
+            CF03089D0000000049454E44AE426082}
+          FileName = 'D:\99Coders\Lancamento 11\CPL\CPL3\Fontes\Imagens\icon-next.png'
+        end>
+      Align = Right
+      Opacity = 0.600000023841857900
+      Margins.Right = 10.000000000000000000
+      Position.X = 306.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 37.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_proximoClick
+    end
+  end
+end

@@ -1,0 +1,71 @@
+object FrameServico: TFrameServico
+  HitTest = False
+  Size.Width = 357.000000000000000000
+  Size.Height = 60.000000000000000000
+  Size.PlatformDefault = False
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 264.000000000000000000
+    Size.Height = 60.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lbl_valor: TLabel
+      StyledSettings = [Family]
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 27.000000000000000000
+      Size.Width = 232.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = xFF5CC6BA
+      Text = 'R$ 300,00'
+      TabOrder = 0
+    end
+    object lbl_servico: TLabel
+      StyledSettings = [Family]
+      Margins.Left = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 228.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.FontColor = xFF717F7F
+      Text = 'Consulta Dr. Alberto Souza'
+      TabOrder = 1
+    end
+  end
+  object rect_agendar: TRectangle
+    Align = Right
+    Fill.Color = xFF5CC6BA
+    HitTest = False
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 264.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 83.000000000000000000
+    Size.Height = 44.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 18.500000000000000000
+    YRadius = 18.500000000000000000
+    object Label6: TLabel
+      Align = Client
+      StyledSettings = [Family]
+      Locked = True
+      Size.Width = 83.000000000000000000
+      Size.Height = 44.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Agendar'
+      TabOrder = 0
+    end
+  end
+end
