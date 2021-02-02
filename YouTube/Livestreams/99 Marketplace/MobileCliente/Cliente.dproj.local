@@ -37,7 +37,7 @@
     <Transaction>2021/01/18 20:36:55.000.249,=D:\99Coders\CursoMarketplace\Fontes\Units\u99Permissions.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="5200711f02614531"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

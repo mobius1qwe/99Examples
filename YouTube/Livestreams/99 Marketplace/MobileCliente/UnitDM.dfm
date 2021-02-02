@@ -20,7 +20,7 @@ object dm: Tdm
     Authenticator = HTTPBasicAuthenticator
     Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
     AcceptCharset = 'utf-8, *;q=0.8'
-    BaseURL = 'http://localhost:8082'
+    BaseURL = 'http://192.168.0.103:8082'
     Params = <>
     RaiseExceptionOn500 = False
     Left = 56
@@ -64,5 +64,53 @@ object dm: Tdm
     SynchronizedEvents = False
     Left = 168
     Top = 224
+  end
+  object RequestPedido: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/pedido'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 288
+  end
+  object RequestAceito: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/pedido'
+    SynchronizedEvents = False
+    Left = 168
+    Top = 288
+  end
+  object RequestRealizado: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/pedido'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 352
   end
 end

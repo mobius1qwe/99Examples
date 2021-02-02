@@ -17,6 +17,9 @@ type
     RequestLogin: TRESTRequest;
     HTTPBasicAuthenticator: THTTPBasicAuthenticator;
     RequestLoginCad: TRESTRequest;
+    RequestPedido: TRESTRequest;
+    RequestAceito: TRESTRequest;
+    RequestRealizado: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -35,6 +38,13 @@ implementation
 
 procedure Tdm.DataModuleCreate(Sender: TObject);
 begin
+    {$IFDEF MSWINDOWS}
+    dm.RESTClient.BaseURL := 'http://localhost:8082';
+    {$ELSE}
+    dm.RESTClient.BaseURL := 'http://192.168.0.103:8082'; // COLOCA O IP DO SEU SERVIDOR AQUI...
+    {$ENDIF}
+
+
     with Conn do
     begin
         {$IFDEF MSWINDOWS}

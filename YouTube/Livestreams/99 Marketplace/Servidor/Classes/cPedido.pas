@@ -123,23 +123,33 @@ begin
         begin
             Active := false;
             sql.Clear;
-            SQL.Add('SELECT * FROM TAB_PEDIDO');
-            SQL.Add('WHERE ID_PEDIDO > 0');
+            SQL.Add('SELECT P.ID_PEDIDO, P.ID_USUARIO, P.STATUS, P.CATEGORIA, P.GRUPO,');
+            SQL.Add('P.ENDERECO, P.DT_GERACAO, P.DT_SERVICO, P.DETALHE, P.QTD_MAX_ORC,');
+            SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE,');
+            SQL.Add('COUNT(O.ID_ORCAMENTO) AS QTD_ORCAMENTO');
+            SQL.Add('FROM TAB_PEDIDO P');
+            SQL.Add('LEFT JOIN TAB_PEDIDO_ORCAMENTO O ON (O.ID_PEDIDO = P.ID_PEDIDO)');
+            SQL.Add('LEFT JOIN TAB_USUARIO U ON (U.ID_USUARIO = P.ID_USUARIO_PRESTADOR)');
+            SQL.Add('WHERE P.ID_PEDIDO > 0');
 
             if STATUS <> '' then
             begin
-                SQL.Add('AND STATUS = :STATUS');
+                SQL.Add('AND P.STATUS = :STATUS');
                 ParamByName('STATUS').Value := STATUS;
             end;
 
             if ID_USUARIO > 0 then
             begin
-                SQL.Add('AND ID_USUARIO = :ID_USUARIO');
+                SQL.Add('AND P.ID_USUARIO = :ID_USUARIO');
                 ParamByName('ID_USUARIO').Value := ID_USUARIO;
             end;
 
+            SQL.Add('GROUP BY P.ID_PEDIDO, P.ID_USUARIO, P.STATUS, P.CATEGORIA, P.GRUPO,');
+            SQL.Add('P.ENDERECO, P.DT_GERACAO, P.DT_SERVICO, P.DETALHE, P.QTD_MAX_ORC,');
+            SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE');
+
             if order_by = '' then
-                SQL.Add('ORDER BY ID_PEDIDO DESC')
+                SQL.Add('ORDER BY P.ID_PEDIDO DESC')
             else
                 SQL.Add('ORDER BY ' + order_by);
 

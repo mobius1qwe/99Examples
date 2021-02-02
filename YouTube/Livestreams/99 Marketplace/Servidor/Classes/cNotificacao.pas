@@ -47,11 +47,7 @@ var
     qry : TFDQuery;
 begin
     if (ID_USUARIO <= 0)  then
-    begin
-        Result := nil;
-        erro := 'Usuário não informado';
-        exit;
-    end;
+        ID_USUARIO := 0;
 
     try
         qry := TFDQuery.Create(nil);

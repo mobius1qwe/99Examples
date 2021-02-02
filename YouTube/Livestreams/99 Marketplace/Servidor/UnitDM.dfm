@@ -68,9 +68,27 @@ object dm: Tdm
         Name = 'pedido'
         EventName = 'pedido'
         OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsPedidoEventspedidoReplyEventByType
       end>
     ContextName = 'pedidos'
     Left = 160
     Top = 96
+  end
+  object DWEventsNotificacao: TDWServerEvents
+    IgnoreInvalidParams = False
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'notificacao'
+        EventName = 'notificacao'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsNotificacaoEventsnotificacaoReplyEventByType
+      end>
+    ContextName = 'notificacoes'
+    Left = 160
+    Top = 160
   end
 end

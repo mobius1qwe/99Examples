@@ -92,7 +92,7 @@ type
     procedure MudarAba(img: TImage);
     procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
       qtd_orc_enviada: integer; categoria, dt, pedido, descricao: string);
-    procedure ListarPedido;
+    procedure ListarPendente;
     procedure AddAceito(seq_pedido, seq_usuario : integer;
                         nome, categoria, dt, pedido, descricao: string;
                         valor: double);
@@ -100,6 +100,10 @@ type
     procedure AddRealizado(seq_pedido, seq_usuario: integer; nome, categoria,
       dt, pedido, descricao: string; valor: double);
     procedure ListarRealizados;
+    procedure ProcessarPedidoAberto;
+    procedure ProcessarPedidoErro(Sender: TObject);
+    procedure ProcessarPedidoAceito;
+    procedure ProcessarPedidoRealizado;
     { Private declarations }
   public
     function Base64FromBitmap(Bitmap: TBitmap): string;
@@ -115,7 +119,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitNotificacao, UnitPedido, UnitChat;
+uses UnitNotificacao, UnitPedido, UnitChat, System.JSON, UnitDM;
 
 function TFrmPrincipal.Base64FromBitmap(Bitmap: TBitmap): string;
 var
@@ -218,7 +222,7 @@ end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
-    ListarPedido;
+    ListarPendente;
     ListarAceito;
     ListarRealizados;
 end;
@@ -235,7 +239,7 @@ begin
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
         TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
         TListItemText(Objects.FindDrawable('TxtOrcamentos')).Text := 'Orçamentos Recebidos (' +
                                                                      qtd_orc_enviada.ToString + ' / ' +
@@ -266,7 +270,7 @@ begin
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
         TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
         TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
         TListItemText(Objects.FindDrawable('TxtValor')).Text := Format('%.2m', [valor]);
@@ -288,7 +292,7 @@ begin
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
         TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
         TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
         TListItemText(Objects.FindDrawable('TxtValor')).Text := Format('%.2m', [valor]);
@@ -298,61 +302,197 @@ begin
     end;
 end;
 
-
-procedure TFrmPrincipal.ListarPedido;
+procedure TFrmPrincipal.ProcessarPedidoAberto;
 var
-    x : integer;
+    jsonArray : TJsonArray;
+    json, retorno, id_usuario, nome: string;
+    i : integer;
+begin
+    try
+        json := dm.RequestPedido.Response.JSONValue.ToString;
+        jsonArray := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONArray;
+
+        // Se deu erro...
+        if dm.RequestPedido.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    except on ex:exception do
+        begin
+            showmessage(ex.Message);
+            exit;
+        end;
+    end;
+
+    try
+        // Popular listview dos pedidos...
+        lv_pedidos.Items.Clear;
+        lv_pedidos.BeginUpdate;
+
+        for i := 0 to jsonArray.Size - 1 do
+        begin
+            AddPedido(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
+                      jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                      jsonArray.Get(i).GetValue<integer>('QTD_MAX_ORC', 0),
+                      jsonArray.Get(i).GetValue<integer>('QTD_ORCAMENTO', 0),
+                      jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
+                             jsonArray.Get(i).GetValue<string>('GRUPO', ''),
+                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                      jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
+                      jsonArray.Get(i).GetValue<string>('DETALHE', '')
+                      );
+        end;
+
+        jsonArray.DisposeOf;
+
+    finally
+        lv_pedidos.EndUpdate;
+        lv_pedidos.RecalcSize;
+    end;
+end;
+
+
+procedure TFrmPrincipal.ProcessarPedidoAceito;
+var
+    jsonArray : TJsonArray;
+    json, retorno, id_usuario, nome: string;
+    i : integer;
+begin
+    try
+        json := dm.RequestAceito.Response.JSONValue.ToString;
+        jsonArray := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONArray;
+
+        // Se deu erro...
+        if dm.RequestAceito.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    except on ex:exception do
+        begin
+            showmessage(ex.Message);
+            exit;
+        end;
+    end;
+
+    try
+        // Popular listview dos pedidos...
+        lv_aceitos.Items.Clear;
+        lv_aceitos.BeginUpdate;
+
+        for i := 0 to jsonArray.Size - 1 do
+        begin
+            AddAceito(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
+                      jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                      jsonArray.Get(i).GetValue<string>('NOME', '') + ' - ' +
+                             jsonArray.Get(i).GetValue<string>('FONE', ''),
+                      jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
+                             jsonArray.Get(i).GetValue<string>('GRUPO', ''),
+                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                      jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
+                      jsonArray.Get(i).GetValue<string>('DETALHE', ''),
+                      jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
+                      );
+        end;
+
+        jsonArray.DisposeOf;
+
+    finally
+        lv_aceitos.EndUpdate;
+        lv_aceitos.RecalcSize;
+    end;
+end;
+
+procedure TFrmPrincipal.ProcessarPedidoRealizado;
+var
+    jsonArray : TJsonArray;
+    json, retorno, id_usuario, nome: string;
+    i : integer;
+begin
+    try
+        json := dm.RequestRealizado.Response.JSONValue.ToString;
+        jsonArray := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONArray;
+
+        // Se deu erro...
+        if dm.RequestRealizado.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    except on ex:exception do
+        begin
+            showmessage(ex.Message);
+            exit;
+        end;
+    end;
+
+    try
+        // Popular listview dos pedidos...
+        lv_realizados.Items.Clear;
+        lv_realizados.BeginUpdate;
+
+        for i := 0 to jsonArray.Size - 1 do
+        begin
+            AddRealizado(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
+                      jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                      jsonArray.Get(i).GetValue<string>('NOME', '') + ' - ' +
+                             jsonArray.Get(i).GetValue<string>('FONE', ''),
+                      jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
+                             jsonArray.Get(i).GetValue<string>('GRUPO', ''),
+                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                      jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
+                      jsonArray.Get(i).GetValue<string>('DETALHE', ''),
+                      jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
+                      );
+        end;
+
+        jsonArray.DisposeOf;
+
+    finally
+        lv_realizados.EndUpdate;
+        lv_realizados.RecalcSize;
+    end;
+end;
+
+procedure TFrmPrincipal.ProcessarPedidoErro(Sender: TObject);
+begin
+    if Assigned(Sender) and (Sender is Exception) then
+        ShowMessage(Exception(Sender).Message);
+end;
+
+procedure TFrmPrincipal.ListarPendente;
 begin
     // Buscar pedidos no servidor...
-
-    lv_pedidos.Items.Clear;
-
-    lv_pedidos.BeginUpdate;
-    for x := 1 to 10 do
-        AddPedido(x, 0, 10, x, 'Serviços Domésticos - Limpeza',
-                  '15/07', (10000 + x).ToString,
-                  'Preciso de uma diarista para realizar limpeza na minha casa. Das 08:00 às 17:00. Ofereço refeição no local.'
-                  );
-
-    lv_pedidos.EndUpdate;
+    dm.RequestPedido.Params.Clear;
+    dm.RequestPedido.AddParameter('id', '');
+    dm.RequestPedido.AddParameter('id_usuario', '1');
+    dm.RequestPedido.AddParameter('status', 'P');
+    dm.RequestPedido.ExecuteAsync(ProcessarPedidoAberto, true, true, ProcessarPedidoErro);
 end;
 
 procedure TFrmPrincipal.ListarAceito;
-var
-    x : integer;
 begin
     // Buscar pedidos no servidor...
-
-    lv_aceitos.Items.Clear;
-
-    lv_aceitos.BeginUpdate;
-    for x := 1 to 10 do
-        AddAceito(x, 0, 'Heber Mazutti', 'Serviços Domésticos - Limpeza',
-                  '15/07', (10000 + x).ToString,
-                  'Preciso de uma diarista para realizar limpeza na minha casa. Das 08:00 às 17:00. Ofereço refeição no local.',
-                  x * 15.25);
-
-    lv_aceitos.EndUpdate;
+    dm.RequestAceito.Params.Clear;
+    dm.RequestAceito.AddParameter('id', '');
+    dm.RequestAceito.AddParameter('id_usuario', '1');
+    dm.RequestAceito.AddParameter('status', 'A');
+    dm.RequestAceito.ExecuteAsync(ProcessarPedidoAceito, true, true, ProcessarPedidoErro);
 end;
 
 procedure TFrmPrincipal.ListarRealizados;
-var
-    x : integer;
 begin
     // Buscar pedidos no servidor...
-
-    lv_realizados.Items.Clear;
-
-    lv_realizados.BeginUpdate;
-    for x := 1 to 10 do
-        AddRealizado(x, 0, 'João da Silva', 'Serviços Gerais - Pet',
-                  '08/06', (9000 + x).ToString,
-                  'Preciso de uma diarista para realizar limpeza na minha casa. Das 08:00 às 17:00. Ofereço refeição no local.',
-                  x * 8.25);
-
-    lv_realizados.EndUpdate;
+    dm.RequestRealizado.Params.Clear;
+    dm.RequestRealizado.AddParameter('id', '');
+    dm.RequestRealizado.AddParameter('id_usuario', '1');
+    dm.RequestRealizado.AddParameter('status', 'R');
+    dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
-
 
 procedure TFrmPrincipal.lv_aceitosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
@@ -389,7 +529,7 @@ end;
 procedure TFrmPrincipal.lv_pedidosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
-    max_orcamentos, qtd_orc_enviada: double;
+    max_orcamentos, qtd_orc_enviada, progresso: double;
     txt, txt_orc: TListItemText;
 begin
     max_orcamentos := TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).TagFloat;
@@ -404,7 +544,7 @@ begin
     txt.Width := lv_pedidos.Width - 30;
     txt.Height := GetTextHeight(txt, txt.Width, txt.Text);
 
-    // Calcula obejto texto do orcamento...
+    // Calcula objeto texto do orcamento...
     txt_orc := TListItemText(AItem.Objects.FindDrawable('TxtOrcamentos'));
     txt_orc.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height + 10;
 
@@ -416,11 +556,13 @@ begin
 
 
     // Calcula tamanho da barra de progressao...
+    progresso := (qtd_orc_enviada / max_orcamentos) * TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).Width;
+
     TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).PlaceOffset.Y := txt_orc.PlaceOffset.Y + txt_orc.Height + 10;
     TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).Width := lv_pedidos.Width - 30;
-    TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).Width := (qtd_orc_enviada / max_orcamentos) *
-                                                          TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).Width;
+    TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).Width := progresso;
     TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).PlaceOffset.Y := TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).PlaceOffset.Y;
+    TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).Visible := progresso > 0;
 
     Aitem.Height := Trunc(TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).PlaceOffset.Y + 25);
 end;

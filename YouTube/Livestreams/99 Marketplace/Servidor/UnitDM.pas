@@ -15,16 +15,28 @@ type
     conn: TFDConnection;
     DWEventsUsuario: TDWServerEvents;
     DWEventsPedido: TDWServerEvents;
+    DWEventsNotificacao: TDWServerEvents;
     procedure DWEventsEventshoraReplyEvent(var Params: TDWParams;
       var Result: string);
     procedure DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
+    procedure DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
+    procedure DWEventsNotificacaoEventsnotificacaoReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
     function CriarUsuario(email, senha, nome, fone, foto64: string;
       out status: integer): string;
+    function ListaPedidos(sts, id_usuario: string;
+      out status_code: integer): string;
+    function ListaNotificacoes(id_usuario: string;
+      out status_code: integer): string;
     { Private declarations }
   public
     { Public declarations }
@@ -40,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses System.IniFiles, cUsuario;
+uses System.IniFiles, cUsuario, cPedido, cNotificacao;
 
 function TDm.CarregarConfig(): string;
 var
@@ -206,6 +218,65 @@ begin
 end;
 
 
+function TDm.ListaPedidos(sts, id_usuario: string;
+                          out status_code: integer): string;
+var
+    p : TPedido;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        p := TPedido.Create(dm.conn);
+        p.STATUS := sts;
+        p.ID_USUARIO := id_usuario.ToInteger;
+
+        qry := p.ListarPedido('', erro);
+
+        json := uDWJSONObject.TJSONValue.Create;
+        json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
+
+        Result := json.ToJSON;
+        status_code := 200;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+function TDm.ListaNotificacoes(id_usuario: string;
+                          out status_code: integer): string;
+var
+    n : TNotificacao;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        try
+            n := TNotificacao.Create(dm.conn);
+            n.ID_USUARIO := id_usuario.ToInteger;
+
+            qry := n.ListarNotificacao('', erro);
+
+            json := uDWJSONObject.TJSONValue.Create;
+            json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
+
+            Result := json.ToJSON;
+            status_code := 200;
+        except on ex:exception do
+            begin
+                status_code := 400;
+                Result := '[{"retorno": "' + ex.Message + '"}]';
+            end;
+        end;
+
+    finally
+        json.DisposeOf;
+        n.DisposeOf;
+    end;
+end;
 
 procedure Tdm.DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
@@ -231,6 +302,59 @@ begin
         Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
     end;
 
+end;
+
+procedure Tdm.DWEventsNotificacaoEventsnotificacaoReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
+begin
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+        Result := ListaNotificacoes(Params.ItemsString['id_usuario'].AsString,
+                               StatusCode)
+    {
+    else
+    // POST.......
+    if RequestType = TRequestType.rtPost then
+        Result := CriarUsuario(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               Params.ItemsString['nome'].AsString,
+                               Params.ItemsString['fone'].AsString,
+                               Params.ItemsString['foto'].AsString,
+                               StatusCode)
+    }
+    else
+    begin
+        StatusCode := 403;
+        Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
+    end;
+end;
+
+procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+begin
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+        Result := ListaPedidos(Params.ItemsString['status'].AsString,
+                               Params.ItemsString['id_usuario'].AsString,
+                               StatusCode)
+    {
+    else
+    // POST.......
+    if RequestType = TRequestType.rtPost then
+        Result := CriarUsuario(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               Params.ItemsString['nome'].AsString,
+                               Params.ItemsString['fone'].AsString,
+                               Params.ItemsString['foto'].AsString,
+                               StatusCode)
+    }
+    else
+    begin
+        StatusCode := 403;
+        Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
+    end;
 end;
 
 end.
