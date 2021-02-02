@@ -135,6 +135,13 @@ object dm: Tdm
             ObjectValue = ovString
             ParamName = 'id_empresa'
             Encoded = True
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'id_categoria'
+            Encoded = True
           end>
         JsonMode = jmPureJSON
         Name = 'listar'
@@ -257,9 +264,31 @@ object dm: Tdm
         EventName = 'listar'
         OnlyPreDefinedParams = False
         OnReplyEventByType = EventsReservaEventslistarReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'id_reserva'
+            Encoded = True
+          end>
+        JsonMode = jmPureJSON
+        Name = 'excluir'
+        EventName = 'excluir'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = EventsReservaEventsexcluirReplyEventByType
       end>
     ContextName = 'reserva'
     Left = 272
     Top = 256
+  end
+  object QryEmpresa: TFDQuery
+    Connection = conn
+    Left = 64
+    Top = 336
   end
 end

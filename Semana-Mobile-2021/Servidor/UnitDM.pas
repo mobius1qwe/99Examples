@@ -20,6 +20,7 @@ type
     EventsServico: TDWServerEvents;
     conn: TFDConnection;
     EventsReserva: TDWServerEvents;
+    QryEmpresa: TFDQuery;
     procedure ServerMethodDataModuleCreate(Sender: TObject);
     procedure EventsUsuarioEventsloginReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
@@ -43,6 +44,9 @@ type
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
     procedure EventsReservaEventslistarReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
+    procedure EventsReservaEventsexcluirReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
   private
@@ -95,7 +99,7 @@ begin
 end;
 
 // empresa/listar
-// Parametros: cidade, id_empresa, busca, ind_foto (algumas consultas nao precisam de foto)
+// Parametros: cidade, id_categoria, id_empresa, busca, ind_foto (algumas consultas nao precisam de foto)
 procedure Tdm.EventsEmpresaEventslistarReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
   RequestHeader: TStringList);
@@ -128,6 +132,17 @@ begin
         begin
             qry.sql.Add('AND E.NOME LIKE :NOME');
             qry.ParamByName('NOME').Value := '%' + Params.ItemsString['busca'].AsString + '%';
+        end;
+
+        if Params.ItemsString['id_categoria'].AsString <> '' then
+        begin
+            qry.sql.Add('AND E.ID_CATEGORIA =  :ID_CATEGORIA');
+
+            try
+                qry.ParamByName('ID_CATEGORIA').Value := Params.ItemsString['id_categoria'].AsInteger
+            except
+                qry.ParamByName('ID_CATEGORIA').Value := 0;
+            end;
         end;
 
         if Params.ItemsString['id_empresa'].AsString <> '' then
@@ -185,6 +200,62 @@ begin
     finally
         json.DisposeOf;
         qry.DisposeOf;
+    end;
+end;
+
+// reserva/excluir
+// Parametros: id_reserva
+procedure Tdm.EventsReservaEventsexcluirReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+var
+    json : TJsonObject;
+    qry : TFDQuery;
+begin
+    try
+        json := TJsonObject.Create;
+        qry := TFDQuery.Create(nil);
+        qry.Connection := dm.conn;
+
+        // Valida parametros...
+        if (Params.ItemsString['id_reserva'].AsString = '') then
+        begin
+            json.AddPair('retorno', 'Informa a reserva');
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            Params.ItemsString['id_reserva'].AsInteger;
+        except
+            json.AddPair('retorno', 'Reserva inválida');
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            with dm do
+            begin
+                qry.Active := false;
+                qry.SQL.Clear;
+                qry.sql.Add('DELETE FROM TAB_RESERVA WHERE ID_RESERVA = :ID_RESERVA');
+                qry.ParamByName('ID_RESERVA').Value := Params.ItemsString['id_reserva'].AsInteger;
+                qry.ExecSQL;
+
+                json.AddPair('retorno', 'OK');
+
+                Result := json.ToString;
+            end;
+        except on ex:exception do
+            begin
+                json.AddPair('retorno', ex.Message);
+                Result := json.ToString;
+            end;
+        end;
+
+    finally
+        qry.DisposeOf;
+        json.DisposeOf;
     end;
 end;
 
@@ -386,6 +457,10 @@ begin
         if dt = date then
             qry.sql.Add('AND H.HORA > ''' + FormatDateTime('HH:nn', now) + '''');
 
+        // Se for data passada, nao listar dados...
+        if dt < date then
+            qry.sql.Add('AND 1 = 0');
+
 
         qry.sql.Add('AND NOT EXISTS( SELECT  0');
         qry.sql.Add('        FROM    TAB_RESERVA R');
@@ -520,6 +595,8 @@ var
     qry : TFDQuery;
 begin
     try
+        sleep(5000);
+
         json := TJsonObject.Create;
         qry := TFDQuery.Create(nil);
         qry.Connection := dm.conn;
@@ -570,7 +647,7 @@ procedure Tdm.ServerMethodDataModuleCreate(Sender: TObject);
 begin
     dm.conn.Params.Clear;
     dm.conn.Params.Values['DriverID'] := 'FB';
-    dm.conn.Params.Values['Database'] := 'D:\caminho-do-seu-banco\BANCO.FDB';
+    dm.conn.Params.Values['Database'] := 'D:\99Coders\Lancamento 11\CPL\CPL5\Fontes\Servidor\DB\BANCO.FDB';
     dm.conn.Params.Values['User_Name'] := 'SYSDBA';
     dm.conn.Params.Values['Password'] := 'masterkey';
     dm.conn.Connected := true;

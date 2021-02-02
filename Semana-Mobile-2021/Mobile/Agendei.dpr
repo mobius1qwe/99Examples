@@ -10,15 +10,18 @@ uses
   UnitDetalheEmpresa in 'UnitDetalheEmpresa.pas' {FrmDetalheEmpresa},
   UnitFrameServico in 'UnitFrameServico.pas' {FrameServico: TFrame},
   UnitAgenda in 'UnitAgenda.pas' {FrmAgenda},
-  uCustomCalendar in 'Units\uCustomCalendar.pas';
+  uCustomCalendar in 'Units\uCustomCalendar.pas',
+  UnitDM in 'UnitDM.pas' {dm: TDataModule},
+  uFunctions in 'Units\uFunctions.pas',
+  UnitConfirmacao in 'UnitConfirmacao.pas' {FrmConfirmacao},
+  uLoading in 'Units\uLoading.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+  Application.FormFactor.Orientations := [TFormOrientation.Portrait];
+  Application.CreateForm(Tdm, dm);
   Application.CreateForm(TFrmLogin, FrmLogin);
-  Application.CreateForm(TFrmDetalheEmpresa, FrmDetalheEmpresa);
-  Application.CreateForm(TFrmAgenda, FrmAgenda);
   Application.Run;
 end.

@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.ListBox,
-  uCustomCalendar;
+  uCustomCalendar, System.JSON;
 
 type
   TFrmAgenda = class(TForm)
@@ -16,10 +16,10 @@ type
     Line2: TLine;
     layout_calendario: TLayout;
     Line1: TLine;
-    lbl_servico: TLabel;
+    label11: TLabel;
     lb_horario: TListBox;
     Line3: TLine;
-    Label2: TLabel;
+    lbl_servico: TLabel;
     lbl_valor: TLabel;
     Line4: TLine;
     rect_confirmar: TRectangle;
@@ -28,13 +28,17 @@ type
     lbl_mes: TLabel;
     img_anterior: TImage;
     img_proximo: TImage;
+    lbl_nao_horario: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure img_anteriorClick(Sender: TObject);
     procedure img_proximoClick(Sender: TObject);
     procedure rect_confirmarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure img_exp_voltarClick(Sender: TObject);
   private
     cal : TCustomCalendar;
+    hora_selecao : string;
     procedure DayClick(Sender: TObject);
     procedure ListarHorarios;
     procedure AddHorario(hora: string);
@@ -42,6 +46,7 @@ type
     procedure SelecionaDiaTap(Sender: TObject; const Point: TPointF);
   public
     { Public declarations }
+    id_servico : integer;
   end;
 
 var
@@ -50,6 +55,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses UnitDM, UnitPrincipal, UnitConfirmacao;
 
 procedure TFrmAgenda.SelecionaDia(Sender: TObject);
 var
@@ -61,6 +68,7 @@ begin
     for i := 0 to lb_horario.Items.Count - 1 do
     begin
         item := lb_horario.ItemByIndex(i);
+
 
         for x := 0 to item.ComponentCount - 1 do
         begin
@@ -76,6 +84,8 @@ begin
     TRectangle(Sender).Fill.Color := $FF5CC6BA;
     TRectangle(Sender).Tag := 1;
     TLabel(TRectangle(Sender).Components[0]).TextSettings.FontColor := $FFFFFFFF;
+    hora_selecao := TLabel(TRectangle(Sender).Components[0]).text;
+    rect_confirmar.Visible := true;
 end;
 
 procedure TFrmAgenda.SelecionaDiaTap(Sender: TObject; const Point: TPointF);
@@ -101,6 +111,8 @@ begin
     TRectangle(Sender).Fill.Color := $FF5CC6BA;
     TRectangle(Sender).Tag := 1;
     TLabel(TRectangle(Sender).Components[0]).TextSettings.FontColor := $FFFFFFFF;
+    hora_selecao := TLabel(TRectangle(Sender).Components[0]).text;
+    rect_confirmar.Visible := true;
 end;
 
 procedure TFrmAgenda.AddHorario(hora : string);
@@ -114,6 +126,7 @@ begin
     item.Text := '';
     item.Height := 55;
     item.Width := 100;
+    item.TagString := hora;
 
 
     // Criar retangulo...
@@ -162,16 +175,68 @@ end;
 procedure TFrmAgenda.ListarHorarios;
 var
     i : integer;
+    jsonArray : TJSONArray;
+    erro: string;
 begin
     lbl_mes.Text := cal.MonthName;
+    hora_selecao := '';
+    rect_confirmar.Visible := false;
 
-    for i := 9 to 15 do
-        AddHorario(FormatFloat('00', i) + ':00');
+    if NOT dm.ListarHorario(id_servico,
+                            cal.SelectedDate,
+                            jsonArray,
+                            erro) then
+    begin
+        showmessage(erro);
+        exit;
+    end;
+
+    lb_horario.Items.Clear;
+
+    for i := 0 to jsonArray.Size - 1 do
+        AddHorario(jsonArray.Get(i).GetValue<string>('HORA', ''));
+
+    // Mensagem de horario nao disponivel...
+    lbl_nao_horario.Visible := jsonArray.Size = 0;
+
+    jsonArray.DisposeOf;
 end;
 
 procedure TFrmAgenda.rect_confirmarClick(Sender: TObject);
+var
+    jsonArray : TJSONArray;
+    erro : string;
+    id_reserva : integer;
 begin
-    close;
+    if hora_selecao = '' then
+    begin
+        showmessage('Selecione um horário');
+        exit;
+    end;
+
+    if NOT dm.Agendar(FrmPrincipal.id_usuario_global,
+                      id_servico,
+                      cal.SelectedDate,
+                      hora_selecao,
+                      id_reserva,
+                      erro) then
+    begin
+        showmessage(erro);
+        exit;
+    end;
+
+    if NOT Assigned(FrmConfirmacao) then
+        Application.CreateForm(TFrmConfirmacao, FrmConfirmacao);
+
+    FrmConfirmacao.img_ok.Opacity := 0;
+    FrmConfirmacao.lbl_id_reserva.Text := 'Cód. Reserva: ' + id_reserva.ToString;
+
+
+    FrmConfirmacao.Showmodal(procedure(ModalResult: TModalResult)
+    begin
+        if FrmPrincipal.ind_fechar_telas then
+            close;
+    end);
 end;
 
 procedure TFrmAgenda.DayClick(Sender: TObject);
@@ -194,6 +259,7 @@ begin
     cal.BackgroundColor := $FFFFFFFF;
 
     cal.ShowCalendar;
+
 end;
 
 procedure TFrmAgenda.FormDestroy(Sender: TObject);
@@ -201,11 +267,21 @@ begin
     cal.DisposeOf;
 end;
 
+procedure TFrmAgenda.FormShow(Sender: TObject);
+begin
+    ListarHorarios;
+end;
+
 procedure TFrmAgenda.img_anteriorClick(Sender: TObject);
 begin
     cal.PriorMonth;
 
     ListarHorarios;
+end;
+
+procedure TFrmAgenda.img_exp_voltarClick(Sender: TObject);
+begin
+    close;
 end;
 
 procedure TFrmAgenda.img_proximoClick(Sender: TObject);

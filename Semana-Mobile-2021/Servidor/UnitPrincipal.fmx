@@ -1,26 +1,175 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 375
-  ClientWidth = 291
+  Caption = 'Servidor Agendei'
+  ClientHeight = 280
+  ClientWidth = 364
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnShow = FormShow
   DesignerMasterStyle = 0
   object Label1: TLabel
-    Position.X = 24.000000000000000000
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 32.000000000000000000
     Position.Y = 32.000000000000000000
+    TextSettings.Font.Size = 16.000000000000000000
     Text = 'Servidor Ativo'
     TabOrder = 0
   end
   object Switch1: TSwitch
     IsChecked = True
-    Position.X = 184.000000000000000000
-    Position.Y = 24.000000000000000000
+    Position.X = 146.000000000000000000
+    Position.Y = 27.000000000000000000
     TabOrder = 1
     OnSwitch = Switch1Switch
+  end
+  object TabControl1: TTabControl
+    Align = Bottom
+    Position.Y = 80.000000000000000000
+    Size.Width = 364.000000000000000000
+    Size.Height = 200.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 1
+    TabOrder = 3
+    TabPosition = PlatformDefault
+    Sizes = (
+      364s
+      174s
+      364s
+      174s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 66.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Empresa'
+      ExplicitSize.cx = 66.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object edt_empresa_id: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 16.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Id'
+      end
+      object btn_foto_empresa: TButton
+        Position.X = 87.000000000000000000
+        Position.Y = 99.000000000000000000
+        Size.Width = 108.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Carregar Foto'
+        OnClick = btn_foto_empresaClick
+      end
+      object btn_empresa_update: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 19.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Alterar'
+        OnClick = btn_empresa_updateClick
+      end
+      object Rectangle1: TRectangle
+        Position.X = 87.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 108.000000000000000000
+        Size.Height = 75.000000000000000000
+        Size.PlatformDefault = False
+        object img_empresa: TImage
+          MultiResBitmap = <
+            item
+            end>
+          Align = Client
+          Margins.Left = 1.000000000000000000
+          Margins.Top = 1.000000000000000000
+          Margins.Right = 1.000000000000000000
+          Margins.Bottom = 1.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+    end
+    object TabItem2: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 72.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Categoria'
+      ExplicitSize.cx = 72.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object Rectangle2: TRectangle
+        Position.X = 87.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 108.000000000000000000
+        Size.Height = 75.000000000000000000
+        Size.PlatformDefault = False
+        object img_categoria: TImage
+          MultiResBitmap = <
+            item
+            end>
+          Align = Client
+          Margins.Left = 1.000000000000000000
+          Margins.Top = 1.000000000000000000
+          Margins.Right = 1.000000000000000000
+          Margins.Bottom = 1.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 73.000000000000000000
+          Size.PlatformDefault = False
+        end
+      end
+      object edt_categoria_id: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 0
+        Position.X = 16.000000000000000000
+        Position.Y = 22.000000000000000000
+        Size.Width = 57.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Id Cat'
+      end
+      object btn_foto_cat: TButton
+        Position.X = 87.000000000000000000
+        Position.Y = 99.000000000000000000
+        Size.Width = 108.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Carregar Foto'
+        OnClick = btn_foto_catClick
+      end
+      object btn_cat_update: TButton
+        Position.X = 240.000000000000000000
+        Position.Y = 19.000000000000000000
+        Size.Width = 105.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Alterar'
+        OnClick = btn_cat_updateClick
+      end
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 24
+    Top = 216
   end
   object ServicePooler: TRESTServicePooler
     Active = False
@@ -54,7 +203,7 @@ object FrmPrincipal: TFrmPrincipal
     CriptOptions.Use = False
     CriptOptions.Key = 'RDWBASEKEY256'
     MultiCORE = False
-    Left = 72
-    Top = 96
+    Left = 304
+    Top = 16
   end
 end
