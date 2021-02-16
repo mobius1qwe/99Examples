@@ -9,7 +9,8 @@ uses
   cPedido in 'Classes\cPedido.pas',
   cNotificacao in 'Classes\cNotificacao.pas',
   cChat in 'Classes\cChat.pas',
-  uFunctions in '..\Units\uFunctions.pas';
+  uFunctions in '..\Units\uFunctions.pas',
+  cPedidoOrcamento in 'Classes\cPedidoOrcamento.pas';
 
 {$R *.res}
 

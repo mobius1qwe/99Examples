@@ -113,4 +113,54 @@ object dm: Tdm
     Left = 56
     Top = 352
   end
+  object RequestNotif: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'notificacoes/notificacao'
+    SynchronizedEvents = False
+    Left = 272
+    Top = 288
+  end
+  object RequestNotifDelete: TRESTRequest
+    Client = RESTClient
+    Method = rmDELETE
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'notificacoes/notificacao'
+    SynchronizedEvents = False
+    Left = 272
+    Top = 224
+  end
+  object RequestPedidoCad: TRESTRequest
+    Client = RESTClient
+    Method = rmPOST
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/pedido'
+    SynchronizedEvents = False
+    Left = 168
+    Top = 352
+  end
 end

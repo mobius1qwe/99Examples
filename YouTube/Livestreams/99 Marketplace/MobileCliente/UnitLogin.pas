@@ -246,6 +246,7 @@ begin
 
     Application.MainForm := FrmPrincipal;
 
+    FrmPrincipal.id_usuario_logado := id_usuario.ToInteger;
     FrmPrincipal.Show;
     FrmLogin.Close;
 end;
@@ -280,6 +281,7 @@ begin
 
     Application.MainForm := FrmPrincipal;
 
+    FrmPrincipal.id_usuario_logado := id_usuario.ToInteger;
     FrmPrincipal.Show;
     FrmLogin.Close;
 end;

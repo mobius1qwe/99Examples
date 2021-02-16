@@ -3,7 +3,7 @@ unit uFunctions;
 interface
 
 uses SysUtils, FMX.TextLayout, FMX.ListView.Types, System.Types, FMX.Graphics,
-     System.Classes, Soap.EncdDecd, Data.DB;
+     System.Classes, Soap.EncdDecd, Data.DB, DateUtils;
 
 type
     TFunctions = class
@@ -122,8 +122,8 @@ end;
 // Trata conversao de string para data
 class function TFunctions.StrToData(dt, formato: string): TDateTime;
 var
-    dia, mes, ano : Word;
-    pos_d, pos_m, pos_y : Integer;
+    dia, mes, ano, hora, min, seg : Word;
+    pos_d, pos_m, pos_y, pos_h, pos_n, pos_s : Integer;
 begin
     try
         if formato = '' then
@@ -133,12 +133,22 @@ begin
         pos_m := Pos('m', formato);
         pos_y := Pos('y', formato);
 
+        pos_h := Pos('h', formato);
+        pos_n := Pos('n', formato);
+        pos_s := Pos('s', formato);
 
         dia := Copy(dt, pos_d, OccurrencesOfChar(formato, 'd')).ToInteger;
         mes := Copy(dt, pos_m, OccurrencesOfChar(formato, 'm')).ToInteger;
         ano := Copy(dt, pos_y, OccurrencesOfChar(formato, 'y')).ToInteger;
 
-        Result := EncodeDate(ano, mes, dia);
+        hora := Copy(dt, pos_h, OccurrencesOfChar(formato, 'h')).ToInteger;
+        min := Copy(dt, pos_n, OccurrencesOfChar(formato, 'n')).ToInteger;
+        seg := Copy(dt, pos_s, OccurrencesOfChar(formato, 's')).ToInteger;
+
+        if pos_h > 0 then
+            Result := EncodeDateTime(ano, mes, dia, hora, min, seg, 0)
+        else
+            Result := EncodeDate(ano, mes, dia)
     except
         Result := date;
     end;

@@ -320,7 +320,7 @@ begin
             ParamByName('CATEGORIA').Value := CATEGORIA;
             ParamByName('GRUPO').Value := GRUPO;
             ParamByName('ENDERECO').Value := ENDERECO;
-            ParamByName('DT_SERVICO').Value := DT_SERVICO;
+            ParamByName('DT_SERVICO').Value := FormatDateTime('yyyy-mm-dd hh:nn:ss', DT_SERVICO);
             ParamByName('DETALHE').Value := DETALHE;
             ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
             ExecSQL;
@@ -367,8 +367,9 @@ begin
             // Apaga o pedido...
             Active := false;
             sql.Clear;
-            SQL.Add('DELETE FROM TAB_PEDIDO WHERE ID_PEDIDO=:ID_PEDIDO');
+            SQL.Add('DELETE FROM TAB_PEDIDO WHERE ID_PEDIDO=:ID_PEDIDO AND ID_USUARIO=:ID_USUARIO');
             ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_USUARIO').Value := ID_USUARIO;
             ExecSQL;
 
             DisposeOf;

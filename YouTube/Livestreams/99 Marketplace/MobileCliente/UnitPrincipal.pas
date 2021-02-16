@@ -88,11 +88,12 @@ type
       const AItem: TListViewItem);
     procedure lv_realizadosUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure lv_pedidosItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     procedure MudarAba(img: TImage);
     procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
       qtd_orc_enviada: integer; categoria, dt, pedido, descricao: string);
-    procedure ListarPendente;
     procedure AddAceito(seq_pedido, seq_usuario : integer;
                         nome, categoria, dt, pedido, descricao: string;
                         valor: double);
@@ -106,6 +107,8 @@ type
     procedure ProcessarPedidoRealizado;
     { Private declarations }
   public
+    id_usuario_logado : Integer;
+    procedure ListarPendente;
     function Base64FromBitmap(Bitmap: TBitmap): string;
     function BitmapFromBase64(const base64: string): TBitmap;
     function GetTextHeight(const D: TListItemText; const Width: single;
@@ -239,7 +242,7 @@ begin
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
         TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
         TListItemText(Objects.FindDrawable('TxtOrcamentos')).Text := 'Orçamentos Recebidos (' +
                                                                      qtd_orc_enviada.ToString + ' / ' +
@@ -338,8 +341,8 @@ begin
                       jsonArray.Get(i).GetValue<integer>('QTD_MAX_ORC', 0),
                       jsonArray.Get(i).GetValue<integer>('QTD_ORCAMENTO', 0),
                       jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
-                             jsonArray.Get(i).GetValue<string>('GRUPO', ''),
-                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                            jsonArray.Get(i).GetValue<string>('GRUPO', ''),
+                      jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                       jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
                       jsonArray.Get(i).GetValue<string>('DETALHE', '')
                       );
@@ -391,7 +394,7 @@ begin
                              jsonArray.Get(i).GetValue<string>('FONE', ''),
                       jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
                              jsonArray.Get(i).GetValue<string>('GRUPO', ''),
-                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                      jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                       jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
                       jsonArray.Get(i).GetValue<string>('DETALHE', ''),
                       jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
@@ -443,7 +446,7 @@ begin
                              jsonArray.Get(i).GetValue<string>('FONE', ''),
                       jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
                              jsonArray.Get(i).GetValue<string>('GRUPO', ''),
-                      jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                      jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                       jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
                       jsonArray.Get(i).GetValue<string>('DETALHE', ''),
                       jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
@@ -524,6 +527,17 @@ begin
     img.PlaceOffset.Y := txt.PlaceOffset.Y - 5;
 
     Aitem.Height := Trunc(img.PlaceOffset.Y + img.Height + 20);
+end;
+
+procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+    if NOT Assigned(FrmPedido) then
+        Application.CreateForm(TFrmPedido, FrmPedido);
+
+    FrmPedido.id_pedido := AItem.Tag;
+    FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
+    FrmPedido.Show;
 end;
 
 procedure TFrmPrincipal.lv_pedidosUpdateObjects(const Sender: TObject;
@@ -621,6 +635,8 @@ begin
     if NOT Assigned(FrmPedido) then
         Application.CreateForm(TFrmPedido, FrmPedido);
 
+    FrmPedido.id_pedido := 0;
+    FrmPedido.lbl_titulo.Text := 'Novo Pedido';
     FrmPedido.Show;
 end;
 

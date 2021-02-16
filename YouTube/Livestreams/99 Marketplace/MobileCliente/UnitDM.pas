@@ -20,6 +20,9 @@ type
     RequestPedido: TRESTRequest;
     RequestAceito: TRESTRequest;
     RequestRealizado: TRESTRequest;
+    RequestNotif: TRESTRequest;
+    RequestNotifDelete: TRESTRequest;
+    RequestPedidoCad: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
