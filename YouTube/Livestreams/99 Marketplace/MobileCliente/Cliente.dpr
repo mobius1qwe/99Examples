@@ -10,7 +10,9 @@ uses
   UnitChat in 'UnitChat.pas' {FrmChat},
   UnitDM in 'UnitDM.pas' {dm: TDataModule},
   uFunctions in '..\Units\uFunctions.pas',
-  u99Permissions in '..\Units\u99Permissions.pas';
+  u99Permissions in '..\Units\u99Permissions.pas',
+  UnitCategoria in 'UnitCategoria.pas' {FrmCategoria},
+  uLoading in '..\Units\uLoading.pas';
 
 {$R *.res}
 

@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
   Encoding = esUtf8
-  Height = 586
+  Height = 407
   Width = 372
   object conn: TFDConnection
     Params.Strings = (
@@ -13,8 +13,8 @@ object dm: Tdm
       'DriverID=FB')
     ConnectedStoredUsage = []
     LoginPrompt = False
-    Left = 56
-    Top = 32
+    Left = 64
+    Top = 24
   end
   object DWEventsUsuario: TDWServerEvents
     IgnoreInvalidParams = False
@@ -54,8 +54,8 @@ object dm: Tdm
         OnReplyEventByType = DWEventsEventsusuarioReplyEventByType
       end>
     ContextName = 'usuarios'
-    Left = 160
-    Top = 32
+    Left = 64
+    Top = 88
   end
   object DWEventsPedido: TDWServerEvents
     IgnoreInvalidParams = False
@@ -69,20 +69,10 @@ object dm: Tdm
         EventName = 'pedido'
         OnlyPreDefinedParams = False
         OnReplyEventByType = DWEventsPedidoEventspedidoReplyEventByType
-      end
-      item
-        Routes = [crAll]
-        NeedAuthorization = True
-        DWParams = <>
-        JsonMode = jmPureJSON
-        Name = 'orcamento'
-        EventName = 'orcamento'
-        OnlyPreDefinedParams = False
-        OnReplyEventByType = DWEventsPedidoEventsorcamentoReplyEventByType
       end>
     ContextName = 'pedidos'
-    Left = 160
-    Top = 96
+    Left = 64
+    Top = 152
   end
   object DWEventsNotificacao: TDWServerEvents
     IgnoreInvalidParams = False
@@ -98,7 +88,51 @@ object dm: Tdm
         OnReplyEventByType = DWEventsNotificacaoEventsnotificacaoReplyEventByType
       end>
     ContextName = 'notificacoes'
-    Left = 160
-    Top = 160
+    Left = 192
+    Top = 88
+  end
+  object DWEventsCategoria: TDWServerEvents
+    IgnoreInvalidParams = False
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'categoria'
+        EventName = 'categoria'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsCategoriaEventscategoriaReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'grupo'
+        EventName = 'grupo'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsCategoriaEventsgrupoReplyEventByType
+      end>
+    ContextName = 'categorias'
+    Left = 192
+    Top = 152
+  end
+  object DWEventsOrcamento: TDWServerEvents
+    IgnoreInvalidParams = False
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'orcamento'
+        EventName = 'orcamento'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWServerEvents1EventsorcamentoReplyEventByType
+      end>
+    ContextName = 'orcamentos'
+    Left = 64
+    Top = 216
   end
 end

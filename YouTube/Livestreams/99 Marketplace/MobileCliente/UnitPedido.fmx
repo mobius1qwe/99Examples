@@ -2,8 +2,8 @@ object FrmPedido: TFrmPedido
   Left = 0
   Top = 0
   Caption = 'Pedido'
-  ClientHeight = 548
-  ClientWidth = 360
+  ClientHeight = 550
+  ClientWidth = 350
   Fill.Kind = Solid
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -14,14 +14,14 @@ object FrmPedido: TFrmPedido
   DesignerMasterStyle = 3
   object layout_toolbar: TLayout
     Align = Top
-    Size.Width = 360.000000000000000000
+    Size.Width = 350.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object lbl_titulo: TLabel
       Align = Contents
       StyledSettings = [Family]
-      Size.Width = 360.000000000000000000
+      Size.Width = 350.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 18.000000000000000000
@@ -40,24 +40,24 @@ object FrmPedido: TFrmPedido
           PNG = {
             89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
             DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-            022249444154785EEDDABD4E1B411885E1D95D930A2381A204F1D7D0213769D3
-            E66A02520081102505258B308814516AAE22DC05287760422A0B842C99F50C7B
-            ECAFC336C5CECF59314FE31DBB3A2FAB05012A8AA2287AC71279A5B776D89D2F
-            FA8DA3F2F2A31EE8E37FEDB9BFA34FAAA9458095DDEEC2739AFCC954F645DEBA
-            EDE4B32DB9AE2495575A63C6ABBE518B725919758071E36146A943B9AC8C36C0
-            A4F1C6981F77A7B3BFE55819E53360FAF8E6851CADA00BE0733C5005F03D1E68
-            0284180F140FC189E395D976391E82DF0153C7E7CD73393A133440E8F1102C00
-            C378081280653C780FC0341E3279F562E2786376CAA7BDF7F1E0ED0E78637C5B
-            8EDE7909C03A1E9C07601E0F4E03B08F07673F0A4F1C9F985D96F1E0E40E983A
-            FEA47926470AD603D4693C580D50B7F160F519A0D346BB4EE3C1EE43D0E80DB9
-            1AD283A2A38DBA922325AB014C9AE4723994668DA54C27D79FF71E3FC95B74AC
-            06286FF5F2ABADB7E43892AA16730427DF0697F61E36CBE597721CD1EA66909A
-            6FF779F3BFBC43C1D94F827589E02C00D42182D300C01EC17900608EE02500B0
-            46F016001823780D006C11BC0700A6084102004B846001802142D000103A42F0
-            001032024500081581260084884015007C47A00B003E235006005F116803808F
-            08CEFE346643279FFB592E7EF53BC6C4286BFF2A4B1D00C6452854F2552E2BA3
-            0F00A308C977D5EB15387F50E6D7F083F766F9E0696575BFBB2EC7288AA2288A
-            AA50EA05FE0E9E434EB25B6B0000000049454E44AE426082}
+            022349444154785EEDDABD4E1B411885E1D95D87CAB6048A42640C0D1DA2A1A5
+            CDD52491209611724991328B30881411355741EE2251EEC049A8AC041AB067D8
+            637F1DB629767ECECAF334DEB1ABF3B25A10A0A2288AA22596C82BBDADDE7075
+            F4503B292E5FEBB1FEFCA7DFFC35FDA49C4A046877866B8F697293A96C4FDEFA
+            39C8EBBB725D4A2AAFB4668C570F46BD95CBD2A803CC1A0FAF94EAC96569B401
+            E68D37C61CFC3EAD5FC9B134CA67C0E2F18D0B395A4117C0E778A00AE07B3CD0
+            0408311E281E8273C72B73E8723C04BF03168ECF1BE77274266880D0E3215800
+            86F1102400CB78F01E80693C64F2EAC5DCF1C67C2A9EF6DEC783B73BE085F17D
+            397AE72500EB78701E80793C380DC03E1E9CFD283C777C623A2CE3C1C91DB070
+            FC97C6991C29580F50A5F1603540D5C683D567804E6BFD2A8D07BB0F41A377E4
+            6A428F47036DD4B51C29590D60D22497CB8934ABB5329D7C5FEFFE7F236FD1B1
+            1AA0B8D58BAFB6FE28C7A954ED324770F26DB0D5FDF7A1587E29C729AD7E8C53
+            F3EE6FDEB895772838FB49B02A119C05802A44701A00D823380F00CC11BC0400
+            D608DE02006304AF01802D82F700C0142148006089102C003044081A00424708
+            1E004246A00800A122D004801011A80280EF087401C06704CA00E02B026D00F0
+            11C1D99FC66C18E4CDAFC5E267BF634C8CB2F6AFB2D401605684914AF6E5B234
+            FA00308D90BC577777239C5794F936F960D96C1CDFB7378F86DB728CA2288AA2
+            A80CA59E00CBEF9E3D70D94AD40000000049454E44AE426082}
           FileName = 
             'D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Images\back.pn' +
             'g'
@@ -77,7 +77,7 @@ object FrmPedido: TFrmPedido
       Align = Bottom
       LineType = Diagonal
       Position.Y = 49.000000000000000000
-      Size.Width = 360.000000000000000000
+      Size.Width = 350.000000000000000000
       Size.Height = 1.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFFDEDEDE
@@ -88,16 +88,16 @@ object FrmPedido: TFrmPedido
     Fill.Color = claWhite
     Position.Y = 50.000000000000000000
     Sides = [Bottom]
-    Size.Width = 360.000000000000000000
+    Size.Width = 350.000000000000000000
     Size.Height = 68.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFDEDEDE
     object rect_aba1: TRectangle
       Align = Scale
       Fill.Color = xFF1878F3
-      Position.X = 23.736288070678710000
+      Position.X = 23.076946258544920000
       Position.Y = 10.149253845214840000
-      Size.Width = 146.373703002929700000
+      Size.Width = 142.307769775390600000
       Size.Height = 46.686565399169920000
       Size.PlatformDefault = False
       Stroke.Color = xFFDEDEDE
@@ -108,7 +108,7 @@ object FrmPedido: TFrmPedido
         Align = Client
         StyledSettings = [Family]
         Locked = True
-        Size.Width = 146.373703002929700000
+        Size.Width = 142.307769775390600000
         Size.Height = 46.686565399169920000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000
@@ -122,9 +122,9 @@ object FrmPedido: TFrmPedido
       Tag = 1
       Align = Scale
       Fill.Color = claWhite
-      Position.X = 189.890304565429700000
+      Position.X = 184.615570068359400000
       Position.Y = 10.000000000000000000
-      Size.Width = 146.373458862304700000
+      Size.Width = 142.307525634765600000
       Size.Height = 46.000000000000000000
       Size.PlatformDefault = False
       Stroke.Color = xFFDEDEDE
@@ -135,7 +135,7 @@ object FrmPedido: TFrmPedido
         Align = Client
         StyledSettings = [Family]
         Locked = True
-        Size.Width = 146.373458862304700000
+        Size.Width = 142.307525634765600000
         Size.Height = 46.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 14.000000000000000000
@@ -146,20 +146,20 @@ object FrmPedido: TFrmPedido
       end
     end
   end
-  object TabControl1: TTabControl
+  object TabControl: TTabControl
     Align = Client
-    Size.Width = 360.000000000000000000
-    Size.Height = 430.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 432.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
     TabIndex = 1
     TabOrder = 2
     TabPosition = None
     Sizes = (
-      360s
-      430s
-      360s
-      430s)
+      350s
+      432s
+      350s
+      432s)
     object TabPedido: TTabItem
       CustomIcon = <
         item
@@ -175,8 +175,8 @@ object FrmPedido: TFrmPedido
       ExplicitSize.cy = 8.000000000000000000
       object ListBox1: TListBox
         Align = Client
-        Size.Width = 360.000000000000000000
-        Size.Height = 430.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 347.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'transparentlistboxstyle'
         TabOrder = 1
@@ -185,11 +185,11 @@ object FrmPedido: TFrmPedido
         DefaultItemStyles.ItemStyle = ''
         DefaultItemStyles.GroupHeaderStyle = ''
         DefaultItemStyles.GroupFooterStyle = ''
-        Viewport.Width = 360.000000000000000000
-        Viewport.Height = 430.000000000000000000
+        Viewport.Width = 350.000000000000000000
+        Viewport.Height = 347.000000000000000000
         object lbi_endereco: TListBoxItem
           Selectable = False
-          Size.Width = 360.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 4
@@ -234,7 +234,7 @@ object FrmPedido: TFrmPedido
             HitTest = False
             Margins.Top = 20.000000000000000000
             Margins.Bottom = 20.000000000000000000
-            Position.X = 310.000000000000000000
+            Position.X = 300.000000000000000000
             Position.Y = 20.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 24.000000000000000000
@@ -242,7 +242,7 @@ object FrmPedido: TFrmPedido
           end
           object Layout2: TLayout
             Align = Client
-            Size.Width = 310.000000000000000000
+            Size.Width = 300.000000000000000000
             Size.Height = 64.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -250,7 +250,7 @@ object FrmPedido: TFrmPedido
               Align = Client
               StyledSettings = [Family, Style]
               Margins.Left = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 29.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -266,7 +266,7 @@ object FrmPedido: TFrmPedido
               Margins.Top = 10.000000000000000000
               Position.X = 10.000000000000000000
               Position.Y = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 25.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -280,7 +280,7 @@ object FrmPedido: TFrmPedido
             Align = Bottom
             LineType = Diagonal
             Position.Y = 64.000000000000000000
-            Size.Width = 360.000000000000000000
+            Size.Width = 350.000000000000000000
             Size.Height = 1.000000000000000000
             Size.PlatformDefault = False
             Stroke.Color = xFFDEDEDE
@@ -289,7 +289,7 @@ object FrmPedido: TFrmPedido
         object lbi_servico: TListBoxItem
           Selectable = False
           Position.Y = 65.000000000000000000
-          Size.Width = 360.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
@@ -333,7 +333,7 @@ object FrmPedido: TFrmPedido
             Align = Right
             Margins.Top = 20.000000000000000000
             Margins.Bottom = 20.000000000000000000
-            Position.X = 310.000000000000000000
+            Position.X = 300.000000000000000000
             Position.Y = 20.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 24.000000000000000000
@@ -341,7 +341,7 @@ object FrmPedido: TFrmPedido
           end
           object Layout4: TLayout
             Align = Client
-            Size.Width = 310.000000000000000000
+            Size.Width = 300.000000000000000000
             Size.Height = 64.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -352,7 +352,7 @@ object FrmPedido: TFrmPedido
               Margins.Top = 10.000000000000000000
               Position.X = 10.000000000000000000
               Position.Y = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 25.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -365,7 +365,7 @@ object FrmPedido: TFrmPedido
               Align = Client
               StyledSettings = [Family, Style]
               Margins.Left = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 29.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -379,7 +379,7 @@ object FrmPedido: TFrmPedido
             Align = Bottom
             LineType = Diagonal
             Position.Y = 64.000000000000000000
-            Size.Width = 360.000000000000000000
+            Size.Width = 350.000000000000000000
             Size.Height = 1.000000000000000000
             Size.PlatformDefault = False
             Stroke.Color = xFFDEDEDE
@@ -388,7 +388,7 @@ object FrmPedido: TFrmPedido
         object lbi_data: TListBoxItem
           Selectable = False
           Position.Y = 130.000000000000000000
-          Size.Width = 360.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
@@ -432,7 +432,7 @@ object FrmPedido: TFrmPedido
             Align = Right
             Margins.Top = 20.000000000000000000
             Margins.Bottom = 20.000000000000000000
-            Position.X = 310.000000000000000000
+            Position.X = 300.000000000000000000
             Position.Y = 20.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 24.000000000000000000
@@ -440,7 +440,7 @@ object FrmPedido: TFrmPedido
           end
           object Layout5: TLayout
             Align = Client
-            Size.Width = 310.000000000000000000
+            Size.Width = 300.000000000000000000
             Size.Height = 64.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -451,7 +451,7 @@ object FrmPedido: TFrmPedido
               Margins.Top = 10.000000000000000000
               Position.X = 10.000000000000000000
               Position.Y = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 25.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -464,7 +464,7 @@ object FrmPedido: TFrmPedido
               Align = Client
               StyledSettings = [Family, Style]
               Margins.Left = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 29.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -478,7 +478,7 @@ object FrmPedido: TFrmPedido
             Align = Bottom
             LineType = Diagonal
             Position.Y = 64.000000000000000000
-            Size.Width = 360.000000000000000000
+            Size.Width = 350.000000000000000000
             Size.Height = 1.000000000000000000
             Size.PlatformDefault = False
             Stroke.Color = xFFDEDEDE
@@ -487,7 +487,7 @@ object FrmPedido: TFrmPedido
         object lbi_detalhe: TListBoxItem
           Selectable = False
           Position.Y = 195.000000000000000000
-          Size.Width = 360.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 126.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
@@ -531,7 +531,7 @@ object FrmPedido: TFrmPedido
             Align = Right
             Margins.Top = 48.000000000000000000
             Margins.Bottom = 48.000000000000000000
-            Position.X = 310.000000000000000000
+            Position.X = 300.000000000000000000
             Position.Y = 48.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 29.000000000000000000
@@ -539,7 +539,7 @@ object FrmPedido: TFrmPedido
           end
           object Layout6: TLayout
             Align = Client
-            Size.Width = 310.000000000000000000
+            Size.Width = 300.000000000000000000
             Size.Height = 125.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -550,7 +550,7 @@ object FrmPedido: TFrmPedido
               Margins.Top = 10.000000000000000000
               Position.X = 10.000000000000000000
               Position.Y = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 25.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -563,7 +563,7 @@ object FrmPedido: TFrmPedido
               Align = Client
               StyledSettings = [Family, Style]
               Margins.Left = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 90.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -580,7 +580,7 @@ object FrmPedido: TFrmPedido
             Align = Bottom
             LineType = Diagonal
             Position.Y = 125.000000000000000000
-            Size.Width = 360.000000000000000000
+            Size.Width = 350.000000000000000000
             Size.Height = 1.000000000000000000
             Size.PlatformDefault = False
             Stroke.Color = xFFDEDEDE
@@ -589,12 +589,12 @@ object FrmPedido: TFrmPedido
         object lbi_qtd: TListBoxItem
           Selectable = False
           Position.Y = 321.000000000000000000
-          Size.Width = 360.000000000000000000
+          Size.Width = 350.000000000000000000
           Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           OnClick = lbi_qtdClick
-          object Image10: TImage
+          object img_detalhe_qtd: TImage
             MultiResBitmap.Height = 64
             MultiResBitmap.Width = 64
             MultiResBitmap = <
@@ -633,7 +633,7 @@ object FrmPedido: TFrmPedido
             Align = Right
             Margins.Top = 20.000000000000000000
             Margins.Bottom = 20.000000000000000000
-            Position.X = 310.000000000000000000
+            Position.X = 300.000000000000000000
             Position.Y = 20.000000000000000000
             Size.Width = 50.000000000000000000
             Size.Height = 25.000000000000000000
@@ -641,7 +641,7 @@ object FrmPedido: TFrmPedido
           end
           object Layout3: TLayout
             Align = Client
-            Size.Width = 310.000000000000000000
+            Size.Width = 300.000000000000000000
             Size.Height = 65.000000000000000000
             Size.PlatformDefault = False
             TabOrder = 2
@@ -652,7 +652,7 @@ object FrmPedido: TFrmPedido
               Margins.Top = 10.000000000000000000
               Position.X = 10.000000000000000000
               Position.Y = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 25.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -665,7 +665,7 @@ object FrmPedido: TFrmPedido
               Align = Client
               StyledSettings = [Family, Style]
               Margins.Left = 10.000000000000000000
-              Size.Width = 300.000000000000000000
+              Size.Width = 290.000000000000000000
               Size.Height = 30.000000000000000000
               Size.PlatformDefault = False
               TextSettings.Font.Size = 14.000000000000000000
@@ -676,76 +676,71 @@ object FrmPedido: TFrmPedido
             end
           end
         end
-        object lbi_cancelar: TListBoxItem
-          Position.Y = 386.000000000000000000
-          Size.Width = 360.000000000000000000
-          Size.Height = 86.000000000000000000
+      end
+      object rect_bottom: TRectangle
+        Align = Bottom
+        Fill.Color = claWhite
+        Position.Y = 347.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 85.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object rect_salvar: TRectangle
+          Align = Client
+          Fill.Color = xFF24BC61
+          Margins.Left = 15.000000000000000000
+          Margins.Top = 15.000000000000000000
+          Margins.Right = 15.000000000000000000
+          Margins.Bottom = 15.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 55.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 5
-          Visible = False
-          object rect_cancelar: TRectangle
+          Stroke.Kind = None
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          OnClick = rect_salvarClick
+          object Label1: TLabel
             Align = Client
-            Fill.Color = xFFD14C4C
-            Margins.Left = 15.000000000000000000
-            Margins.Top = 15.000000000000000000
-            Margins.Right = 15.000000000000000000
-            Margins.Bottom = 15.000000000000000000
-            Size.Width = 330.000000000000000000
-            Size.Height = 56.000000000000000000
+            StyledSettings = [Family]
+            Locked = True
+            Size.Width = 320.000000000000000000
+            Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
-            Stroke.Kind = None
-            XRadius = 4.000000000000000000
-            YRadius = 4.000000000000000000
-            object Label2: TLabel
-              Align = Client
-              StyledSettings = [Family]
-              Locked = True
-              Size.Width = 330.000000000000000000
-              Size.Height = 56.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Size = 16.000000000000000000
-              TextSettings.Font.StyleExt = {00060000000000000004000000}
-              TextSettings.FontColor = claWhite
-              TextSettings.HorzAlign = Center
-              Text = 'Cancelar Pedido'
-              TabOrder = 0
-            end
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Salvar Pedido'
+            TabOrder = 0
           end
         end
-        object lbi_salvar: TListBoxItem
-          Position.Y = 386.000000000000000000
-          Size.Width = 360.000000000000000000
-          Size.Height = 86.000000000000000000
+        object rect_cancelar: TRectangle
+          Align = Client
+          Fill.Color = xFFD14C4C
+          Margins.Left = 15.000000000000000000
+          Margins.Top = 15.000000000000000000
+          Margins.Right = 15.000000000000000000
+          Margins.Bottom = 15.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 55.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 6
-          object rect_salvar: TRectangle
+          Stroke.Kind = None
+          Visible = False
+          XRadius = 4.000000000000000000
+          YRadius = 4.000000000000000000
+          object Label2: TLabel
             Align = Client
-            Fill.Color = xFF24BC61
-            Margins.Left = 15.000000000000000000
-            Margins.Top = 15.000000000000000000
-            Margins.Right = 15.000000000000000000
-            Margins.Bottom = 15.000000000000000000
-            Size.Width = 330.000000000000000000
-            Size.Height = 56.000000000000000000
+            StyledSettings = [Family]
+            Locked = True
+            Size.Width = 320.000000000000000000
+            Size.Height = 55.000000000000000000
             Size.PlatformDefault = False
-            Stroke.Kind = None
-            XRadius = 4.000000000000000000
-            YRadius = 4.000000000000000000
-            OnClick = rect_salvarClick
-            object Label1: TLabel
-              Align = Client
-              StyledSettings = [Family]
-              Locked = True
-              Size.Width = 330.000000000000000000
-              Size.Height = 56.000000000000000000
-              Size.PlatformDefault = False
-              TextSettings.Font.Size = 16.000000000000000000
-              TextSettings.Font.StyleExt = {00060000000000000004000000}
-              TextSettings.FontColor = claWhite
-              TextSettings.HorzAlign = Center
-              Text = 'Salvar Pedido'
-              TabOrder = 0
-            end
+            TextSettings.Font.Size = 16.000000000000000000
+            TextSettings.Font.StyleExt = {00060000000000000004000000}
+            TextSettings.FontColor = claWhite
+            TextSettings.HorzAlign = Center
+            Text = 'Cancelar Pedido'
+            TabOrder = 0
           end
         end
       end
@@ -772,8 +767,8 @@ object FrmPedido: TFrmPedido
         ItemSpaces.Left = 0.000000000000000000
         ItemSpaces.Right = 0.000000000000000000
         Align = Client
-        Size.Width = 360.000000000000000000
-        Size.Height = 430.000000000000000000
+        Size.Width = 350.000000000000000000
+        Size.Height = 432.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         ItemAppearance.ItemHeight = 80
@@ -915,40 +910,40 @@ object FrmPedido: TFrmPedido
         PNG = {
           89504E470D0A1A0A0000000D49484452000000430000002D0806000000F534D6
           59000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-          0427494441546843ED9A5B68135918C7BF994C63126FA9AE65238A99B2B5D456
-          69ED9315D7167D70515110F545116FFBB2AC2B288A0FBBB2BEECCBBE2C8B2F95
-          DA5D5858A88A8A2E2C6CA1F50E4A2F0FAB452A49442150719BD6B549A693C4F9
-          9F99986312B19093D234F383A173BE3319E6FCFA9D4B2647A23C0483C1D66432
-          79C0385A1D0E87DF0A973C467B0625491A34FE5EAFA9A9B96685DFF3810C4382
-          DFB8B07320EC6CBD1D72D29DE72E0ABF91ADDAD2A766B1CE8EC3CD1354E5D142
-          8AA2B4A9AA1AB2AA33320C118DE331ADA7A3AFD2DBF5AFDB8ACE5EF6AE8ED2C1
-          A6D188DB416DB5B5B583883119C80843C4C03737AABCCFFE53102A0B9025BF6E
-          1D892C743B9B9021AC0FE8BACE32A29C4480E1D70A750E547A3134A02C0D0F0F
-          EF1C99705EDDF5E722764139727E7B84D654C5DA64831D1D7D1E2B5C9EDC0A3A
-          C9F070404EA5528D489772E6CEF33998765B9119652F23FCC641584FCD9E4584
-          006C191CB60C0E5B06872D83C396C161CBE028AA8C052E899657E6BE3269582A
-          D3D1F5155669E6501419CB2B65BA72D44D4FCFCEA587A77078E8E466A7554B54
-          EF7314240382EB7DE21FBD28322002D4FEF8967C67FEA71F6E6AACF1A2B2E1C4
-          A63945C92CE132F6365718DD83E8F8E5188DC7522CF6F7139DDAEF4EE6340019
-          84D8894DCE9CEEC4D76D5995F9BA80FBE35AD4E35C24C265AC531DF4389CA417
-          A3A688345DFD3A7D77296E95CCF1E4E23E172DF3CAF455BD42FF7CEB613180C6
-          771F73B33AC47ED99DC98475AACC444008CE45225C061EF2C568D22A6540EC41
-          3061954C0EFD11A5B37FC569D785284986872DAB1C2C8E7B7C7F23CEEA70FCDC
-          6D763370FC729CEE0712ECC0B94884CB188B7E98111F035D289D3DF8CC58949D
-          322EDC9B64E2D2DDA4A5DA94546C84CB188F995D209B8F4DB3F9C0CCD37DCCC3
-          BA0984F1A28A8970198FC309F69FCC16820676EE9FDA5B778C19E81AE8225DFD
-          66964C07C26560A044769CDB96992120070D6CBFABB1F2A730B3C87C349C1F69
-          C99D35F2655FA11465CCC08088C660C1858557E77E97310E684CD454C0B40C79
-          E19FE6D1A3D31E363BE17E6901C816CC40A81789140804522DED4BACA258F0F0
-          5873BC8C4C6D50CD6699576259965EAFF0147AEF6CEE7FFD4A7C66F0A011853C
-          2C3E9B4F0428F4DEF928AA8C52C396C161CBE0B06570D832386C191CB60C0E5B
-          06879C482442BEF9D3F34568A6B2F2339D6D7EC3AFF0BD1B564CED0BD46CE58B
-          453A61172064FCFEA55FEC1BA352E370F35BC8B826ABAADADBE4D37AF7344CD3
-          1B9419C69E066C839C0C5557575F6703A8A669070FAD1D8D60F75B3961EE098D
-          44745D6F43F9FD1B12EC031D8B6A3D17FBCB631F283202225C72D63ED0344343
-          437E45517A46262AFC1D7D73D9D6C0D9B4C509B3E6861571DAA86AD4F8B9D68B
-          1E51575797BB4398271008EC48A5523BB1F90D7BBEAC70C9836504664F63B0FC
-          CD18236E59610BA277855796465F228AC70000000049454E44AE426082}
+          0429494441546843ED9A5B68135918C7BF994C631277355A15B328668AB5D456
+          69ED935DDC6D711F5C761705515F14F1B62FE20514C507157DF1C517115F2AB5
+          BB20085D97555C41D842EBEA2AECD2CB835AA4924414222ED5B46A934C2789F3
+          3F3331C724622127A569E60743E77C6732CCF9F53B974C8E44790806832DC964
+          72BB71B4381C0EBF152E798CF60C48923460FCBD5E5D5D7DCD0A7FE023198604
+          BF7161477FD8D9F277C849779EBA28FC46B66A4B9FEA4A9D1DBB9AC66881470B
+          298AD2AAAA6AC8AACEC83044348CC662DDEDBD95DECE076E2B3A7DD9B2224A3B
+          1A87236E87DC5A535333801893818C3044F4EFBDB1D0FBE495825059802C39FF
+          C38BC86CB7AB1119C2FA80AEEB2C23CA4904181A56A8A3BFD28BA10165696868
+          68C3CB31E71F1BAFCC65179423177E8AD0CA05B156D9607D7BAFC70A9727B783
+          4E323C6C9753A95403D2A59CB9F37406A6DD166446D9CB08BF7110D653D36711
+          21005B06872D83C396C161CBE0B06570D832388A2A63964BA2C573725F99D47F
+          25D39EAF2BACD2D4A1283216CF91E9F73D6E7A7C7226FD7B0487870E7FE7B46A
+          89EA7C8E826440709D4FFCA317450644809A53EFC877EC2D9DF853638D17950D
+          87D6CE284A660997B1A5A9C2E81E4407AFC668349662B15B8F746ABB3B9ED300
+          64106287D63A73BA135FB76E79E6EB02EE8F6B518F73910897B15A75D0C37092
+          9EBD3645A4E9ECD3E9C06F71AB648E2797B6BA689157A6EFEB14FA6B9F87C500
+          1ADFB5DFCDEA103BB7299309AB55998980109C8B44B80C3CE4B3D749AB9401B1
+          FBC1845532D979394A276FC669E3C52849868775CB1D2C8E7B1CBF11677538CE
+          7699DD0C1CBC1AA77B81043B702E12E13246A21F67C4A740174A670F3E331265
+          A78C8BFF8C3371E96ED25C654A2A36C2658CC6CC2E90CDA7A6D97C60E6E9DAEF
+          61DD04C27851C544B88C87E104FB4F660B41033BB64DECAD3BC60C740D7491CE
+          3E334B2603E1323050223B4EFF98992120070D6CBBABB1F2E730B3C87C349CEF
+          6ECE9D35F2655FA11465CCC08088C660C1858557C73697310E684CD444C0B40C
+          79E1335FD07F473D6C76C2FDD202902D9881502F12291008A49ADBE65B45B1E0
+          E1B1E6781E99D8A09ACD22AFC4B22CBD5EE129F4DED9DCFBF97FF199C1834614
+          F2B0F86C3E11A0D07BE7A3A8324A0D5B06872D83C396C161CBE0B06570D83238
+          6C191C72229108F9BE9C9C2F42539565F374B6F90DBFC2F7AC5932B12F50D395
+          A57375C22E40C8F8F51BBFD83746A5C6AEA67790714D5655B5A7D1A7F56CAE9F
+          A43728538CCDF5D806391EAAAAAABACE06504DD376EC5C351CC1EEB772C2DC13
+          FA2AA2EB7A2BCA1FDE90601FE84834D67DA9AF3CF681222320C22567ED034D33
+          3838E85714A5FBE55885BFBD7726DB1A389DB63861D65CB3244EDFAA1A352CD4
+          7AD0236A6B6B737708F3040281F5A9546A0336BF61CF97152E79B08CC0EC690C
+          96BF1863C46D2B6C41F41E20BA9646537240A50000000049454E44AE426082}
         FileName = 
           'D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Images\chat.pn' +
           'g'
@@ -1050,24 +1045,24 @@ object FrmPedido: TFrmPedido
             PNG = {
               89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
               DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
-              022249444154785EEDDABD4E1B411885E1D95D930A2381A204F1D7D0213769D3
-              E66A02520081102505258B308814516AAE22DC05287760422A0B840BB39E618F
-              FD75D8A6D8F9392BE669BC6357E765B5204045511445EF5822AFF4D60EBBF345
-              BF71545E7ED4037DFCAF3DF777F44935B508B0B2DB5D784E933F99CABEC85BB7
-              9D7CB625D795A4F24A6BCC78D5376A512E2BA30E306E3CCC2875289795D10698
-              34DE18F3E3EE74F6B71C2BA37C064C1FDFBC90A31574017C8E07AA00BEC7034D
-              8010E381E2213871BC32DB2EC743F03B60EAF8BC792E47678206083D1E820560
-              180F4102B08C07EF0198C64326AF5E4C1C6FCC4EF9B4F73E1EBCDD016F8C6FCB
-              D13B2F0158C783F300CCE3C16900F6F1E0EC47E189E313B3CB321E9CDC0153C7
-              9F34CFE448C17A803A8D07AB01EA361EAC3E0374DA68D7693CD87D081ABD2157
-              437A5074B4515772A464358049935C2E87D2ACB194E9E4FAF3DEE327798B8ED5
-              00E5AD5E7EB5F5961C4752D5628EE0E4DBE0D2DEC366B9FC528E235ADD0C52F3
-              ED3E6FFE97772838FB49B02E119C05803A44701A00D823380F00CC11BC0400D6
-              08DE02006304AF01802D82F700C0142148006089102C003044081A004247081E
-              004246A00800A122D004801011A80280EF087401C06704CA00E02B026D00F011
-              C1D99FC66CE8E4733FCBC5AF7EC7981865ED5F65A903C0B808854ABECA6565F4
-              01601421F9AE7ABD02E70FCAFC1A7EF0DE2C1F3CADACEE77D7E5184551144551
-              154ABD00ED599E41C7A2960E0000000049454E44AE426082}
+              022349444154785EEDDABD4EDB5018C6F1633BED144702556D9506966E888595
+              B557D3562A8D525519193A62D4B48201317315F42E5AF50ED28F292262A1C939
+              F513BF1B49187C3E1E2BE7B7C427999E3F9641808AA2288A365822AFF4768793
+              ADD95DEBB8BC7CA2E7FAD3EF51E767F5493D8D08D0EB4FB6FFA5C975A6B20379
+              EBC7B868EFCB752DA9BCD25A325EDD19F55C2E6BA30EB06C3C3C526A2897B5D1
+              065835DE18F3EED769FB528EB5513E03D68FCFBFCAD10ABA003EC7035500DFE3
+              81264088F140F1105C395E992397E321F81DB0767C917F91A3334103841E0FC1
+              02308C87200158C683F7004CE32193572F568E37E67DF9B4F73E1EBCDD010F8C
+              1FC9D13B2F0158C783F300CCE3C16900F6F1E0EC47E195E313D367190F4EEE80
+              B5E34FF2CF72A4603D4093C683D5004D1B0F569F013A6D8D9A341EEC3E048DDE
+              93AB053D9F8DB5515772A46435804993422E17D2ACD5CD74F2EDD960FA54DEA2
+              63354079AB975F6DFD568E9554ED334770F26DB03BB879532E3F936345ABEFF3
+              D4BCFA53E47FE51D0ACE7E126C4A046701A009119C0600F608CE030073042F01
+              803582B700C018C16B00608BE03D0030450812005822040B000C11820680D011
+              8207809011280240A8083401204404AA00E03B025D00F019813200F88A401B00
+              7C4470F6A7311BC645E7BC5C7CEF778C8951D6FE55963A002C8B3053C9A15CD6
+              461F00AA08C96B359DCE707EACCCC5E2834DF3E2E36D6FE7C3E4A51CA3288AA2
+              28AA43A9FFBB3A9E3B9C8386CC0000000049454E44AE426082}
             FileName = 
               'D:\99Coders\CursoMarketplace\Fontes\MobileCliente\Images\back.pn' +
               'g'

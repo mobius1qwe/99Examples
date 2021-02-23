@@ -23,6 +23,10 @@ type
     RequestNotif: TRESTRequest;
     RequestNotifDelete: TRESTRequest;
     RequestPedidoCad: TRESTRequest;
+    RequestCategoria: TRESTRequest;
+    RequestGrupo: TRESTRequest;
+    RequestPedidoDados: TRESTRequest;
+    RequestOrcamento: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -537,6 +537,7 @@ begin
 
     FrmPedido.id_pedido := AItem.Tag;
     FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
+    FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
     FrmPedido.Show;
 end;
 
@@ -637,6 +638,7 @@ begin
 
     FrmPedido.id_pedido := 0;
     FrmPedido.lbl_titulo.Text := 'Novo Pedido';
+    FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
     FrmPedido.Show;
 end;
 

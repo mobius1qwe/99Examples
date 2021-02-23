@@ -16,6 +16,8 @@ type
     DWEventsUsuario: TDWServerEvents;
     DWEventsPedido: TDWServerEvents;
     DWEventsNotificacao: TDWServerEvents;
+    DWEventsCategoria: TDWServerEvents;
+    DWEventsOrcamento: TDWServerEvents;
     procedure DWEventsEventshoraReplyEvent(var Params: TDWParams;
       var Result: string);
     procedure DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
@@ -28,7 +30,15 @@ type
       var Params: TDWParams; var Result: string;
       const RequestType: TRequestType; var StatusCode: Integer;
       RequestHeader: TStringList);
-    procedure DWEventsPedidoEventsorcamentoReplyEventByType(
+    procedure DWEventsCategoriaEventscategoriaReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
+    procedure DWEventsCategoriaEventsgrupoReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
+    procedure DWServerEvents1EventsorcamentoReplyEventByType(
       var Params: TDWParams; var Result: string;
       const RequestType: TRequestType; var StatusCode: Integer;
       RequestHeader: TStringList);
@@ -54,6 +64,9 @@ type
       out status_code: integer): string;
     function CriarOrcamento(id_pedido, id_usuario, obs: string;
       valor_total: double; out status: integer): string;
+    function DadosPedido(id_pedido: string; out status: integer): string;
+    function ListaCategorias(out status_code: integer): string;
+    function ListaGrupos(categoria: string; out status_code: integer): string;
 
     { Private declarations }
   public
@@ -70,7 +83,8 @@ implementation
 
 {$R *.dfm}
 
-uses System.IniFiles, cUsuario, cPedido, cNotificacao, cPedidoOrcamento;
+uses System.IniFiles, cUsuario, cPedido, cNotificacao, cPedidoOrcamento,
+     cCategoria;
 
 function TDm.CarregarConfig(): string;
 var
@@ -553,6 +567,151 @@ begin
     end;
 end;
 
+function TDm.ListaCategorias(out status_code: integer): string;
+var
+    c : TCategoria;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        try
+            c := TCategoria.Create(dm.conn);
+            qry := c.ListarCategoria('', erro);
+
+            json := uDWJSONObject.TJSONValue.Create;
+            json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yy hh:nn');
+
+            Result := json.ToJSON;
+            status_code := 200;
+        except on ex:exception do
+            begin
+                status_code := 400;
+                Result := '[{"retorno": "' + ex.Message + '"}]';
+            end;
+        end;
+
+    finally
+        json.DisposeOf;
+        c.DisposeOf;
+    end;
+end;
+
+function TDm.ListaGrupos(categoria : string;
+                         out status_code: integer): string;
+var
+    c : TCategoria;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        try
+            c := TCategoria.Create(dm.conn);
+            c.CATEGORIA := categoria;
+            qry := c.ListarGrupo('', erro);
+
+            json := uDWJSONObject.TJSONValue.Create;
+            json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yy hh:nn');
+
+            Result := json.ToJSON;
+            status_code := 200;
+        except on ex:exception do
+            begin
+                status_code := 400;
+                Result := '[{"retorno": "' + ex.Message + '"}]';
+            end;
+        end;
+
+    finally
+        json.DisposeOf;
+        c.DisposeOf;
+    end;
+end;
+
+function TDm.ListaPedidos(sts, id_usuario: string;
+                          out status_code: integer): string;
+var
+    p : TPedido;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        p := TPedido.Create(dm.conn);
+        p.STATUS := sts;
+        p.ID_USUARIO := id_usuario.ToInteger;
+
+        qry := p.ListarPedido('', erro);
+
+        json := uDWJSONObject.TJSONValue.Create;
+        json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
+
+        Result := json.ToJSON;
+        status_code := 200;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+
+function TDm.DadosPedido(id_pedido: string;
+                         out status: integer): string;
+var
+    p : TPedido;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        sleep(2000);
+        json := TJSONObject.Create;
+        p := TPedido.Create(dm.conn);
+
+
+        try
+            id_pedido.ToInteger;
+        except
+            json.AddPair('retorno', 'Id. pedido inválido');
+            Status := 401;
+            exit;
+        end;
+
+
+        p.ID_PEDIDO := id_pedido.ToInteger;
+
+        if NOT p.DadosPedido(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 401;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_pedido', p.ID_PEDIDO.ToString);
+            json.AddPair('id_usuario', p.ID_USUARIO.ToString);
+            json.AddPair('status', p.STATUS);
+            json.AddPair('categoria', p.CATEGORIA);
+            json.AddPair('grupo', p.GRUPO);
+            json.AddPair('endereco', p.ENDERECO);
+            json.AddPair('dt_geracao', FormatDateTime('DD/MM/YYYY HH:NN:SS', p.DT_GERACAO));
+            json.AddPair('dt_servico', FormatDateTime('DD/MM/YYYY HH:NN:SS', p.DT_SERVICO));
+            json.AddPair('detalhe', p.DETALHE);
+            json.AddPair('qtd_max_orc', TJSONNumber.Create(p.QTD_MAX_ORC));
+            json.AddPair('valor_total', TJSONNumber.Create(p.VALOR_TOTAL));
+            Status := 200;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+
 function TDm.ListaNotificacoes(id_usuario: string;
                           out status_code: integer): string;
 var
@@ -586,32 +745,25 @@ begin
     end;
 end;
 
-function TDm.ListaPedidos(sts, id_usuario: string;
-                          out status_code: integer): string;
-var
-    p : TPedido;
-    json : uDWJSONObject.TJSONValue;
-    qry : TFDQuery;
-    erro: string;
+procedure Tdm.DWEventsCategoriaEventscategoriaReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
 begin
-    try
-        p := TPedido.Create(dm.conn);
-        p.STATUS := sts;
-        p.ID_USUARIO := id_usuario.ToInteger;
-
-        qry := p.ListarPedido('', erro);
-
-        json := uDWJSONObject.TJSONValue.Create;
-        json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
-
-        Result := json.ToJSON;
-        status_code := 200;
-
-    finally
-        json.DisposeOf;
-        p.DisposeOf;
-    end;
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+        Result := ListaCategorias(StatusCode);
 end;
+
+procedure Tdm.DWEventsCategoriaEventsgrupoReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
+begin
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+        Result := ListaGrupos(Params.ItemsString['categoria'].AsString,
+                              StatusCode);
+end;
+
 
 procedure Tdm.DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
@@ -671,7 +823,65 @@ begin
     end;
 end;
 
-procedure Tdm.DWEventsPedidoEventsorcamentoReplyEventByType(
+procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+var
+    uri_param : string;
+begin
+    try
+        uri_param := Params.ItemsString['0'].AsString;
+    except
+        uri_param := '';
+    end;
+
+    // GET (LISTAGEM).......
+    if (RequestType = TRequestType.rtGet) and (uri_param = '')  then
+        Result := ListaPedidos(Params.ItemsString['status'].AsString,
+                               Params.ItemsString['id_usuario'].AsString,
+                               StatusCode)
+
+    else
+    // GET (DETALHES PEDIDO).......
+    if (RequestType = TRequestType.rtGet) and (uri_param <> '')  then
+        Result := DadosPedido(uri_param, StatusCode)
+    else
+    // POST.......
+    if RequestType = TRequestType.rtPost then
+        Result := CriarPedido(Params.ItemsString['id_usuario'].AsString,
+                              Params.ItemsString['categoria'].AsString,
+                              Params.ItemsString['grupo'].AsString,
+                              Params.ItemsString['endereco'].AsString,
+                              Params.ItemsString['dt_servico'].AsString, // yyyy-mm-dd hh:nn:ss
+                              Params.ItemsString['detalhe'].AsString,
+                              Params.ItemsString['qtd_max_orc'].AsString,
+                              StatusCode)
+
+    else
+    // PATCH.......
+    if RequestType = TRequestType.rtPatch then
+        Result := EditarPedido(Params.ItemsString['id_pedido'].AsString,
+                              Params.ItemsString['categoria'].AsString,
+                              Params.ItemsString['grupo'].AsString,
+                              Params.ItemsString['endereco'].AsString,
+                              Params.ItemsString['dt_servico'].AsString,
+                              Params.ItemsString['detalhe'].AsString,
+                              StatusCode)
+
+    else
+    // DELETE.......
+    if RequestType = TRequestType.rtDelete then
+        Result := ExcluirPedido(Params.ItemsString['id_usuario'].AsString,
+                                Params.ItemsString['id_pedido'].AsString,
+                                StatusCode)
+    else
+    begin
+        StatusCode := 403;
+        Result := '{"retorno":"Verbo HTTP não é válido.", "id_pedido": 0}';
+    end;
+end;
+
+procedure Tdm.DWServerEvents1EventsorcamentoReplyEventByType(
   var Params: TDWParams; var Result: string; const RequestType: TRequestType;
   var StatusCode: Integer; RequestHeader: TStringList);
 begin
@@ -706,52 +916,6 @@ begin
                                 Params.ItemsString['id_pedido'].AsString,
                                 StatusCode)
     }
-    else
-    begin
-        StatusCode := 403;
-        Result := '{"retorno":"Verbo HTTP não é válido.", "id_pedido": 0}';
-    end;
-end;
-
-procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;
-  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
-  RequestHeader: TStringList);
-begin
-    // GET.......
-    if RequestType = TRequestType.rtGet then
-        Result := ListaPedidos(Params.ItemsString['status'].AsString,
-                               Params.ItemsString['id_usuario'].AsString,
-                               StatusCode)
-
-    else
-    // POST.......
-    if RequestType = TRequestType.rtPost then
-        Result := CriarPedido(Params.ItemsString['id_usuario'].AsString,
-                              Params.ItemsString['categoria'].AsString,
-                              Params.ItemsString['grupo'].AsString,
-                              Params.ItemsString['endereco'].AsString,
-                              Params.ItemsString['dt_servico'].AsString, // yyyy-mm-dd hh:nn:ss
-                              Params.ItemsString['detalhe'].AsString,
-                              Params.ItemsString['qtd_max_orc'].AsString,
-                              StatusCode)
-
-    else
-    // PATCH.......
-    if RequestType = TRequestType.rtPatch then
-        Result := EditarPedido(Params.ItemsString['id_pedido'].AsString,
-                              Params.ItemsString['categoria'].AsString,
-                              Params.ItemsString['grupo'].AsString,
-                              Params.ItemsString['endereco'].AsString,
-                              Params.ItemsString['dt_servico'].AsString,
-                              Params.ItemsString['detalhe'].AsString,
-                              StatusCode)
-
-    else
-    // DELETE.......
-    if RequestType = TRequestType.rtDelete then
-        Result := ExcluirPedido(Params.ItemsString['id_usuario'].AsString,
-                                Params.ItemsString['id_pedido'].AsString,
-                                StatusCode)
     else
     begin
         StatusCode := 403;

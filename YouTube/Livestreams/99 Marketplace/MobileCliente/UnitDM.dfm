@@ -163,4 +163,68 @@ object dm: Tdm
     Left = 168
     Top = 352
   end
+  object RequestCategoria: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'categorias/categoria'
+    SynchronizedEvents = False
+    Left = 272
+    Top = 352
+  end
+  object RequestGrupo: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'categorias/grupo'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 416
+  end
+  object RequestPedidoDados: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/pedido'
+    SynchronizedEvents = False
+    Left = 168
+    Top = 416
+  end
+  object RequestOrcamento: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'orcamentos/orcamento'
+    SynchronizedEvents = False
+    Left = 272
+    Top = 416
+  end
 end

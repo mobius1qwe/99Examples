@@ -13,12 +13,12 @@
     <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/07/20 13:59:26.000.824,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/12/14 20:30:47.000.974,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2020/12/14 20:31:20.000.031,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitPrincipal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/12/14 20:31:20.000.031,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitPrincipal.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2020/12/14 20:31:20.000.031,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitPrincipal.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2020/12/14 20:31:28.000.110,D:\99Coders\CursoMarketplace\Fontes\Servidor\Servidor.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2020/12/14 20:33:53.000.965,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
-    <Transaction>2020/12/14 20:34:10.000.541,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitDM.dfm=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.dfm</Transaction>
     <Transaction>2020/12/14 20:34:10.000.541,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitDM.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2020/12/14 20:34:10.000.541,D:\99Coders\CursoMarketplace\Fontes\Servidor\UnitDM.dfm=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.dfm</Transaction>
     <Transaction>2020/12/21 20:48:36.000.241,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
     <Transaction>2020/12/21 20:50:03.000.368,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cUsuario.pas</Transaction>
     <Transaction>2021/01/04 20:59:51.000.387,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
@@ -28,8 +28,10 @@
     <Transaction>2021/01/11 16:28:02.000.354,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
     <Transaction>2021/01/11 16:29:45.000.413,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cChat.pas</Transaction>
     <Transaction>2021/01/18 20:14:09.000.671,=D:\99Coders\CursoMarketplace\Fontes\Units\uFunctions.pas</Transaction>
-    <Transaction>2021/02/15 17:25:51.641,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
-    <Transaction>2021/02/15 17:26:40.378,D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cPedidoOrcamento.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2021/02/15 17:25:51.000.641,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2021/02/15 17:26:40.000.378,D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cPedidoOrcamento.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2021/02/22 08:35:42.000.044,=D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas</Transaction>
+    <Transaction>2021/02/22 08:36:38.000.692,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cCategoria.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
