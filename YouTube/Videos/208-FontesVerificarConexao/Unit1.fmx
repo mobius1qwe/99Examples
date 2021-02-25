@@ -1,0 +1,55 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Conexao'
+  ClientHeight = 551
+  ClientWidth = 365
+  Fill.Color = xFF232326
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object rect_button: TRectangle
+    Align = Bottom
+    Fill.Color = xFF3897F0
+    Margins.Left = 25.000000000000000000
+    Margins.Right = 25.000000000000000000
+    Margins.Bottom = 25.000000000000000000
+    Position.X = 25.000000000000000000
+    Position.Y = 471.000000000000000000
+    Size.Width = 315.000000000000000000
+    Size.Height = 55.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 6.000000000000000000
+    YRadius = 6.000000000000000000
+    OnClick = rect_buttonClick
+    object Label1: TLabel
+      Align = Center
+      StyledSettings = [Family]
+      Size.Width = 175.000000000000000000
+      Size.Height = 31.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Verificar Conex'#227'o'
+      TabOrder = 0
+    end
+  end
+  object lblConexao: TLabel
+    Align = Center
+    StyledSettings = [Family]
+    Size.Width = 232.000000000000000000
+    Size.Height = 193.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 26.000000000000000000
+    TextSettings.Font.StyleExt = {00060000000000000004000000}
+    TextSettings.FontColor = claWhite
+    TextSettings.HorzAlign = Center
+    Text = 'Aguardando...'
+    TabOrder = 0
+  end
+end

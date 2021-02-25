@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/05/10 18:28:07.000.409,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/08/16 13:51:06.000.870,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/12 00:17:31.000.142,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 13:54:42.000.810,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/20 13:59:26.000.824,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/01/31 08:03:49.000.304,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/23 11:14:42.000.155,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/23 11:15:01.000.915,D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Unit1.pas=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/02/23 11:15:01.000.915,D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Unit1.fmx=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2021/02/23 11:15:07.000.196,D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Conexao.dproj=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/02/23 11:26:47.000.346,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\NetworkState.pas</Transaction>
+    <Transaction>2021/02/23 11:36:06.000.830,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\NetworkState.iOS.pas</Transaction>
+    <Transaction>2021/02/23 11:36:06.000.799,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\NetworkState.Android.pas</Transaction>
+    <Transaction>2021/02/23 12:54:41.000.141,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\SCNetworkReachability.pas</Transaction>
+    <Transaction>2021/02/23 12:55:56.000.882,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\CaptiveNetwork.pas</Transaction>
+    <Transaction>2021/02/23 13:00:19.000.712,=D:\99Coders\Posts\208 - Verificar se o app tem conxao com a internet ----\FontesFull\Units\libReachability.a</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="5200711f02614531" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+		<PMacBook iOSSimulator="iPhone5"/>
+		<PMacVirtual iOSSimulator="iPhone5"/>
+		<PMacMini iOSSimulator="iPhone" iOSDevice64="" iOSDevice32=""/>
+	</ActiveMobileDevice>
+</BorlandProject>
