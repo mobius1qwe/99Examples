@@ -130,6 +130,26 @@ object dm: Tdm
         EventName = 'orcamento'
         OnlyPreDefinedParams = False
         OnReplyEventByType = DWServerEvents1EventsorcamentoReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'aprovacao'
+        EventName = 'aprovacao'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsOrcamentoEventsaprovacaoReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'chat'
+        EventName = 'chat'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsOrcamentoEventschatReplyEventByType
       end>
     ContextName = 'orcamentos'
     Left = 64

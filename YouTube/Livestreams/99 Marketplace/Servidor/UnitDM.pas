@@ -42,6 +42,13 @@ type
       var Params: TDWParams; var Result: string;
       const RequestType: TRequestType; var StatusCode: Integer;
       RequestHeader: TStringList);
+    procedure DWEventsOrcamentoEventsaprovacaoReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
+    procedure DWEventsOrcamentoEventschatReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
@@ -67,6 +74,12 @@ type
     function DadosPedido(id_pedido: string; out status: integer): string;
     function ListaCategorias(out status_code: integer): string;
     function ListaGrupos(categoria: string; out status_code: integer): string;
+    function AprovarOrcamento(id_orcamento, id_pedido: string;
+      out status: integer): string;
+    function ListaChat(id_orcamento, id_usuario: string;
+      out status_code: integer): string;
+    function CriarChat(id_usuario_de, id_usuario_para, texto,
+      id_orcamento: string; out status: integer): string;
 
     { Private declarations }
   public
@@ -84,7 +97,7 @@ implementation
 {$R *.dfm}
 
 uses System.IniFiles, cUsuario, cPedido, cNotificacao, cPedidoOrcamento,
-     cCategoria;
+     cCategoria, cChat;
 
 function TDm.CarregarConfig(): string;
 var
@@ -388,6 +401,57 @@ begin
             json.AddPair('retorno', 'OK');
             json.AddPair('id_orcamento', o.ID_ORCAMENTO.ToString);
             Status := 201;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        o.DisposeOf;
+    end;
+end;
+
+function TDm.AprovarOrcamento(id_orcamento, id_pedido: string;
+                            out status: integer): string;
+var
+    o : TPedidoOrcamento;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        json := TJSONObject.Create;
+        o := TPedidoOrcamento.Create(dm.conn);
+
+        try
+            StrToInt(id_orcamento);
+        except
+            json.AddPair('retorno', 'Id. orçamento inválido');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_pedido);
+        except
+            json.AddPair('retorno', 'Id. pedido inválido');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        o.ID_ORCAMENTO := id_orcamento.ToInteger;
+        o.ID_PEDIDO := id_pedido.ToInteger;
+
+        if NOT o.AprovarOrcamento(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            Status := 200;
         end;
 
         Result := json.ToString;
@@ -745,6 +809,40 @@ begin
     end;
 end;
 
+function TDm.ListaChat(id_orcamento, id_usuario: string;
+                       out status_code: integer): string;
+var
+    c : TChat;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        try
+            c := TChat.Create(dm.conn);
+            c.ID_ORCAMENTO := id_orcamento.ToInteger;
+            c.ID_USUARIO_PARA := id_usuario.ToInteger;
+
+            qry := c.ListarChat('', erro);
+
+            json := uDWJSONObject.TJSONValue.Create;
+            json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm - hh:nn');
+
+            Result := json.ToJSON;
+            status_code := 200;
+        except on ex:exception do
+            begin
+                status_code := 400;
+                Result := '[{"retorno": "' + ex.Message + '"}]';
+            end;
+        end;
+
+    finally
+        json.DisposeOf;
+        c.DisposeOf;
+    end;
+end;
+
 procedure Tdm.DWEventsCategoriaEventscategoriaReplyEventByType(
   var Params: TDWParams; var Result: string; const RequestType: TRequestType;
   var StatusCode: Integer; RequestHeader: TStringList);
@@ -821,6 +919,115 @@ begin
         StatusCode := 403;
         Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
     end;
+end;
+
+procedure Tdm.DWEventsOrcamentoEventsaprovacaoReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
+begin
+    Result := AprovarOrcamento(Params.ItemsString['id_orcamento'].AsString,
+                              Params.ItemsString['id_pedido'].AsString,
+                              StatusCode);
+end;
+
+function TDm.CriarChat(id_usuario_de, id_usuario_para, texto, id_orcamento: string;
+                       out status: integer): string;
+var
+    c : TChat;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        json := TJSONObject.Create;
+        c := TChat.Create(dm.conn);
+
+
+        // Validações dos parametros...
+        if (texto = '') then
+        begin
+            json.AddPair('retorno', 'Informe o texto');
+            json.AddPair('id_chat', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+
+        try
+            StrToInt(id_usuario_de);
+        except
+            json.AddPair('retorno', 'Id. usuario origem inválido');
+            json.AddPair('id_chat', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_usuario_para);
+        except
+            json.AddPair('retorno', 'Id. usuario destino inválido');
+            json.AddPair('id_chat', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_orcamento);
+        except
+            json.AddPair('retorno', 'Id. orcamento inválido');
+            json.AddPair('id_chat', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+
+        c.ID_USUARIO_DE := id_usuario_de.ToInteger;
+        c.ID_USUARIO_PARA := id_usuario_para.ToInteger;
+        c.TEXTO := texto;
+        c.ID_ORCAMENTO := id_orcamento.ToInteger;
+
+        if NOT c.Inserir(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            json.AddPair('id_chat', '0');
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_chat', c.ID_CHAT.ToString);
+            Status := 201;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        c.DisposeOf;
+    end;
+end;
+
+procedure Tdm.DWEventsOrcamentoEventschatReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+begin
+    // GET (LISTAGEM DAS MENSAGENS).......
+    if (RequestType = TRequestType.rtGet) then
+        Result := ListaChat(Params.ItemsString['id_orcamento'].AsString,
+                            Params.ItemsString['id_usuario'].AsString,
+                            StatusCode)
+
+    else
+    // POST (NOVA MENSAGEM).......
+    if RequestType = TRequestType.rtPost then
+        Result := CriarChat(Params.ItemsString['id_usuario_de'].AsString,
+                            Params.ItemsString['id_usuario_para'].AsString,
+                            Params.ItemsString['texto'].AsString,
+                            Params.ItemsString['id_orcamento'].AsString,
+                            StatusCode)
 end;
 
 procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;

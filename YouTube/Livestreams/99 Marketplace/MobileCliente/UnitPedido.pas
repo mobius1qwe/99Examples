@@ -85,6 +85,9 @@ type
     procedure lbi_detalheClick(Sender: TObject);
     procedure lbi_qtdClick(Sender: TObject);
     procedure lbi_servicoClick(Sender: TObject);
+    procedure lv_orcamentosItemClickEx(const Sender: TObject;
+      ItemIndex: Integer; const LocalClickPos: TPointF;
+      const ItemObject: TListItemDrawable);
   private
     lbl : TLabel;
     procedure AddOrcamento(seq_orcamento, seq_usuario: integer; foto64, nome,
@@ -95,6 +98,7 @@ type
     procedure ProcessarPedido;
     procedure ProcessarPedidoErro(Sender: TObject);
     procedure ProcessarOrcamento;
+    procedure ProcessarAprovacaoOrc;
     { Private declarations }
   public
     { Public declarations }
@@ -108,7 +112,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria;
+uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria, UnitChat;
 
 procedure TFrmPedido.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel);
 begin
@@ -174,6 +178,65 @@ begin
     end;
 end;
 
+procedure TFrmPedido.ProcessarAprovacaoOrc;
+var
+    jsonObj : TJsonObject;
+    json, retorno: string;
+begin
+    try
+        json := dm.RequestOrcamentoAprov.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+
+
+        // Se deu erro...
+        if dm.RequestOrcamentoAprov.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    finally
+        jsonObj.DisposeOf;
+    end;
+
+    // Atualizar a lista dos orcamentos...
+    dm.RequestOrcamento.Params.Clear;
+    dm.RequestOrcamento.AddParameter('id_pedido', id_pedido.ToString);
+    dm.RequestOrcamento.ExecuteAsync(ProcessarOrcamento, true, true, ProcessarPedidoErro);
+
+end;
+
+procedure TFrmPedido.lv_orcamentosItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+begin
+    if ItemObject is TListItemImage then
+    begin
+        if ItemObject.Name = 'ImgAprovar' then
+        begin
+            dm.RequestOrcamentoAprov.Params.Clear;
+            dm.RequestOrcamentoAprov.AddParameter('id', '');
+            dm.RequestOrcamentoAprov.AddParameter('id_orcamento', TListView(Sender).Items[ItemIndex].Tag.ToString);
+            dm.RequestOrcamentoAprov.AddParameter('id_pedido', id_pedido.ToString);
+            dm.RequestOrcamentoAprov.Execute;
+
+            ProcessarAprovacaoOrc;
+        end;
+
+        if ItemObject.Name = 'ImgChat' then
+        begin
+            if NOT Assigned(FrmChat) then
+                Application.CreateForm(TFrmChat, FrmChat);
+
+            FrmChat.id_usuario_destino := TListView(Sender).Items[ItemIndex].TagString.ToInteger;
+            FrmChat.id_orcamento := TListView(Sender).Items[ItemIndex].Tag;
+            FrmChat.Show;
+        end
+    end;
+end;
+
 procedure TFrmPedido.lv_orcamentosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
@@ -212,7 +275,6 @@ begin
     img := TListItemImage(AItem.Objects.FindDrawable('ImgChat'));
     img.PlaceOffset.Y := Aitem.Height - 55;
 end;
-
 
 procedure TFrmPedido.MudarAba(indice: integer);
 begin
@@ -408,7 +470,6 @@ begin
     if Assigned(Sender) and (Sender is Exception) then
         ShowMessage(Exception(Sender).Message);
 end;
-
 
 procedure TFrmPedido.FormShow(Sender: TObject);
 begin

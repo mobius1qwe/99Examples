@@ -27,6 +27,9 @@ type
     RequestGrupo: TRESTRequest;
     RequestPedidoDados: TRESTRequest;
     RequestOrcamento: TRESTRequest;
+    RequestOrcamentoAprov: TRESTRequest;
+    RequestOrcamentoChat: TRESTRequest;
+    RequestOrcamentoChatEnv: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

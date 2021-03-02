@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView, FMX.Edit,
-  FMX.ScrollBox, FMX.Memo;
+  FMX.ScrollBox, FMX.Memo, System.JSON;
 
 type
   TFrmChat = class(TForm)
@@ -28,12 +28,15 @@ type
       const AItem: TListViewItem);
     procedure img_enviarClick(Sender: TObject);
   private
-    procedure AddChat(seq_pedido, seq_usuario: integer;
+    procedure AddChat(id_usuario_de, id_usuario_para: integer;
                       msg, dt, ind_msg_minha: string);
     procedure ListarChat;
+    procedure ProcessarChatErro(Sender: TObject);
+    procedure ProcessarEnvioChat;
     { Private declarations }
   public
     { Public declarations }
+    id_orcamento, id_usuario_destino : integer;
   end;
 
 var
@@ -43,15 +46,15 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal;
+uses UnitPrincipal, UnitDM;
 
-procedure TFrmChat.AddChat(seq_pedido, seq_usuario: integer;
+procedure TFrmChat.AddChat(id_usuario_de, id_usuario_para: integer;
                            msg, dt, ind_msg_minha: string);
 begin
     with lv_chat.Items.Add do
     begin
-        Tag := seq_pedido;
-        TagString := seq_usuario.ToString;
+        Tag := id_usuario_de;
+        TagString := id_usuario_para.ToString;
 
         TListItemText(Objects.FindDrawable('TxtMensagem')).Text := msg;
         TListItemText(Objects.FindDrawable('TxtMensagem')).TagString := ind_msg_minha;
@@ -66,10 +69,84 @@ begin
     ListarChat;
 end;
 
+procedure TFrmChat.ProcessarEnvioChat;
+var
+    jsonArray : TJsonArray;
+    json, retorno, id_usuario, ind_msg_minha: string;
+    i : integer;
+begin
+    try
+        json := dm.RequestOrcamentoChat.Response.JSONValue.ToString;
+        jsonArray := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONArray;
+
+        // Se deu erro...
+        if dm.RequestOrcamentoChat.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    except on ex:exception do
+        begin
+            showmessage(ex.Message);
+            exit;
+        end;
+    end;
+
+    try
+        // Popular listview das mensagens...
+        lv_chat.Items.Clear;
+        lv_chat.BeginUpdate;
+
+        for i := 0 to jsonArray.Size - 1 do
+        begin
+            // Verifica se eu enviei a mensagem...
+            if jsonArray.Get(i).GetValue<integer>('ID_USUARIO_DE', 0) = FrmPrincipal.id_usuario_logado then
+                ind_msg_minha := 'S'
+            else
+                ind_msg_minha := 'N';
+
+            AddChat(jsonArray.Get(i).GetValue<integer>('ID_USUARIO_DE', 0),
+                    jsonArray.Get(i).GetValue<integer>('ID_USUARIO_PARA', 0),
+                    jsonArray.Get(i).GetValue<string>('TEXTO', ''),
+                    jsonArray.Get(i).GetValue<string>('DT_GERACAO', ''),
+                    ind_msg_minha);
+        end;
+
+        jsonArray.DisposeOf;
+
+    finally
+        lv_chat.EndUpdate;
+        lv_chat.RecalcSize;
+    end;
+end;
+
+procedure TFrmChat.ProcessarChatErro(Sender: TObject);
+begin
+    if Assigned(Sender) and (Sender is Exception) then
+        ShowMessage(Exception(Sender).Message);
+end;
+
 procedure TFrmChat.img_enviarClick(Sender: TObject);
 begin
-    AddChat(0, 0, m_msg.Text, '15/10 - 09:30hs', 'S');
-    m_msg.Lines.Clear;
+    try
+        dm.RequestOrcamentoChatEnv.Params.Clear;
+        dm.RequestOrcamentoChatEnv.AddParameter('id', '');
+        dm.RequestOrcamentoChatEnv.AddParameter('id_usuario_de', FrmPrincipal.id_usuario_logado.ToString);
+        dm.RequestOrcamentoChatEnv.AddParameter('id_usuario_para', id_usuario_destino.ToString);
+        dm.RequestOrcamentoChatEnv.AddParameter('texto', m_msg.Text);
+        dm.RequestOrcamentoChatEnv.AddParameter('id_orcamento', id_orcamento.ToString);
+        dm.RequestOrcamentoChatEnv.Execute;
+
+        AddChat(FrmPrincipal.id_usuario_logado,
+                id_usuario_destino,
+                m_msg.Text,
+                FormatDateTime('dd/mm - hh:nn', now) + 'h',
+                'S');
+        m_msg.Lines.Clear;
+    except
+
+    end;
 end;
 
 procedure TFrmChat.ListarChat;
@@ -77,17 +154,15 @@ var
     x : integer;
 begin
     // Buscar pedidos no servidor...
+    dm.RequestOrcamentoChat.Params.Clear;
+    dm.RequestOrcamentoChat.AddParameter('id', '');
+    dm.RequestOrcamentoChat.AddParameter('id_orcamento', id_orcamento.ToString);
+    dm.RequestOrcamentoChat.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestOrcamentoChat.ExecuteAsync(ProcessarEnvioChat, true, true, ProcessarChatErro);
 
-    lv_chat.Items.Clear;
 
-    lv_chat.BeginUpdate;
-    for x := 1 to 10 do
-        if Odd(x) then
-            AddChat(x, 0, 'Mensagem de texto para testar a quebra de linha dos nossos itens... ' + x.ToString, '15/10 - 09:30hs', 'S')
-        else
-            AddChat(x, 0, 'Mensagem do prestador ' + x.ToString, '15/10 - 09:30hs', 'N');
 
-    lv_chat.EndUpdate;
+
 end;
 
 procedure TFrmChat.lv_chatUpdateObjects(const Sender: TObject;

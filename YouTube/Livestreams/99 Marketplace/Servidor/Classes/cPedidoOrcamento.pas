@@ -31,6 +31,7 @@ type
         function Editar(out erro: string): Boolean;
         function Excluir(out erro: string): Boolean;
         function ListarOrcamento(order_by: string; out erro: string): TFDQuery;
+        function AprovarOrcamento(out erro: string): Boolean;
 end;
 
 implementation
@@ -316,5 +317,64 @@ begin
         end;
     end;
 end;
+
+function TPedidoOrcamento.AprovarOrcamento(out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (ID_ORCAMENTO <= 0)  then
+    begin
+        Result := false;
+        erro := 'Número do orçamento não informado';
+        exit;
+    end;
+
+    if (ID_PEDIDO <= 0)  then
+    begin
+        Result := false;
+        erro := 'Número do pedido não informado';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            // Reprovar todos os orcamentos...
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO_ORCAMENTO SET STATUS = ''R'' ');
+            SQL.Add('WHERE ID_PEDIDO = :ID_PEDIDO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ExecSQL;
+
+            // Aprovar orcamento especifico...
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO_ORCAMENTO SET STATUS = ''A'' ');
+            SQL.Add('WHERE ID_ORCAMENTO = :ID_ORCAMENTO');
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
+            ExecSQL;
+
+
+            // Notificar prestadores sobre seus orcamentos...
+
+
+            DisposeOf;
+        end;
+
+        Result := true;
+        erro := '';
+
+    except on ex:exception do
+        begin
+            Result := false;
+            erro := 'Erro ao aprovar orçamento: ' + ex.Message;
+        end;
+    end;
+end;
+
 
 end.

@@ -9,7 +9,7 @@ type
     private
         FConn : TFDConnection;
         FID_USUARIO_PARA: integer;
-        FID_PEDIDO: integer;
+        FID_ORCAMENTO: integer;
         FID_USUARIO_DE: integer;
         FDT_GERACAO: TDateTime;
         FID_CHAT: integer;
@@ -20,7 +20,7 @@ type
         property ID_CHAT : integer read FID_CHAT write FID_CHAT;
         property ID_USUARIO_DE : integer read FID_USUARIO_DE write FID_USUARIO_DE;
         property ID_USUARIO_PARA : integer read FID_USUARIO_PARA write FID_USUARIO_PARA;
-        property ID_PEDIDO : integer read FID_PEDIDO write FID_PEDIDO;
+        property ID_ORCAMENTO : integer read FID_ORCAMENTO write FID_ORCAMENTO;
         property DT_GERACAO : TDateTime read FDT_GERACAO write FDT_GERACAO;
         property TEXTO : string read FTEXTO write FTEXTO;
 
@@ -44,10 +44,10 @@ function TChat.ListarChat(order_by: string; out erro: string): TFDQuery;
 var
     qry : TFDQuery;
 begin
-    if (ID_PEDIDO <= 0)  then
+    if (ID_ORCAMENTO <= 0)  then
     begin
         Result := nil;
-        erro := 'Pedido não informado';
+        erro := 'Orçamento não informado';
         exit;
     end;
 
@@ -60,14 +60,14 @@ begin
             Active := false;
             sql.Clear;
             SQL.Add('SELECT * FROM TAB_CHAT');
-            SQL.Add('WHERE ID_PEDIDO = :ID_PEDIDO');
+            SQL.Add('WHERE ID_ORCAMENTO = :ID_ORCAMENTO');
 
             if order_by = '' then
                 SQL.Add('ORDER BY ID_CHAT DESC')
             else
                 SQL.Add('ORDER BY ' + order_by);
 
-            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
             Active := true;
         end;
 
@@ -100,10 +100,10 @@ begin
         exit;
     end;
 
-    if (ID_PEDIDO <= 0)  then
+    if (ID_ORCAMENTO <= 0)  then
     begin
         Result := false;
-        erro := 'Pedido não informado';
+        erro := 'Orçamento não informado';
         exit;
     end;
 
@@ -123,12 +123,12 @@ begin
             Active := false;
             sql.Clear;
             SQL.Add('INSERT INTO TAB_CHAT(ID_USUARIO_DE, ID_USUARIO_PARA,');
-            SQL.Add('ID_PEDIDO, DT_GERACAO, TEXTO)');
-            SQL.Add('VALUES(:ID_USUARIO_DE, :ID_USUARIO_PARA, :ID_PEDIDO, current_timestamp, :TEXTO)');
+            SQL.Add('ID_ORCAMENTO, DT_GERACAO, TEXTO)');
+            SQL.Add('VALUES(:ID_USUARIO_DE, :ID_USUARIO_PARA, :ID_ORCAMENTO, current_timestamp, :TEXTO)');
 
             ParamByName('ID_USUARIO_DE').Value := ID_USUARIO_DE;
             ParamByName('ID_USUARIO_PARA').Value := ID_USUARIO_PARA;
-            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
             ParamByName('TEXTO').Value := TEXTO;
             ExecSQL;
 
@@ -137,8 +137,8 @@ begin
             Active := false;
             sql.Clear;
             SQL.Add('SELECT MAX(ID_CHAT) AS ID_CHAT FROM TAB_CHAT');
-            SQL.Add('WHERE ID_PEDIDO=:ID_PEDIDO');
-            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            SQL.Add('WHERE ID_ORCAMENTO=:ID_ORCAMENTO');
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
             Active := true;
 
             ID_CHAT := FieldByName('ID_CHAT').AsInteger;

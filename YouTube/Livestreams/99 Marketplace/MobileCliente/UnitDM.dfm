@@ -2,7 +2,7 @@ object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 566
-  Width = 360
+  Width = 457
   object conn: TFDConnection
     Params.Strings = (
       
@@ -62,7 +62,7 @@ object dm: Tdm
       end>
     Resource = 'usuarios/usuario'
     SynchronizedEvents = False
-    Left = 168
+    Left = 200
     Top = 224
   end
   object RequestPedido: TRESTRequest
@@ -94,7 +94,7 @@ object dm: Tdm
       end>
     Resource = 'pedidos/pedido'
     SynchronizedEvents = False
-    Left = 168
+    Left = 200
     Top = 288
   end
   object RequestRealizado: TRESTRequest
@@ -126,7 +126,7 @@ object dm: Tdm
       end>
     Resource = 'notificacoes/notificacao'
     SynchronizedEvents = False
-    Left = 272
+    Left = 344
     Top = 288
   end
   object RequestNotifDelete: TRESTRequest
@@ -143,7 +143,7 @@ object dm: Tdm
       end>
     Resource = 'notificacoes/notificacao'
     SynchronizedEvents = False
-    Left = 272
+    Left = 344
     Top = 224
   end
   object RequestPedidoCad: TRESTRequest
@@ -160,7 +160,7 @@ object dm: Tdm
       end>
     Resource = 'pedidos/pedido'
     SynchronizedEvents = False
-    Left = 168
+    Left = 200
     Top = 352
   end
   object RequestCategoria: TRESTRequest
@@ -176,7 +176,7 @@ object dm: Tdm
       end>
     Resource = 'categorias/categoria'
     SynchronizedEvents = False
-    Left = 272
+    Left = 344
     Top = 352
   end
   object RequestGrupo: TRESTRequest
@@ -208,7 +208,7 @@ object dm: Tdm
       end>
     Resource = 'pedidos/pedido'
     SynchronizedEvents = False
-    Left = 168
+    Left = 200
     Top = 416
   end
   object RequestOrcamento: TRESTRequest
@@ -224,7 +224,56 @@ object dm: Tdm
       end>
     Resource = 'orcamentos/orcamento'
     SynchronizedEvents = False
-    Left = 272
+    Left = 344
     Top = 416
+  end
+  object RequestOrcamentoAprov: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'orcamentos/aprovacao'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 472
+  end
+  object RequestOrcamentoChat: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'orcamentos/chat'
+    SynchronizedEvents = False
+    Left = 200
+    Top = 472
+  end
+  object RequestOrcamentoChatEnv: TRESTRequest
+    Client = RESTClient
+    Method = rmPOST
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'orcamentos/chat'
+    SynchronizedEvents = False
+    Left = 344
+    Top = 472
   end
 end
