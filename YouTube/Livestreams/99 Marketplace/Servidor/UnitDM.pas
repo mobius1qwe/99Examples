@@ -74,7 +74,7 @@ type
     function DadosPedido(id_pedido: string; out status: integer): string;
     function ListaCategorias(out status_code: integer): string;
     function ListaGrupos(categoria: string; out status_code: integer): string;
-    function AprovarOrcamento(id_orcamento, id_pedido: string;
+    function AprovarOrcamento(id_orcamento, id_pedido, id_usuario_prestador: string;
       out status: integer): string;
     function ListaChat(id_orcamento, id_usuario: string;
       out status_code: integer): string;
@@ -139,6 +139,9 @@ end;
 procedure Tdm.DWEventsEventshoraReplyEvent(var Params: TDWParams;
   var Result: string);
 begin
+    if Params.ItemsString['espera'].AsInteger = 1 then
+        sleep(20000);
+
     Result := '{"data":"' + FormatDateTime('dd/mm/yyyy hh:nn', now) +  '"}';
 end;
 
@@ -411,7 +414,7 @@ begin
     end;
 end;
 
-function TDm.AprovarOrcamento(id_orcamento, id_pedido: string;
+function TDm.AprovarOrcamento(id_orcamento, id_pedido, id_usuario_prestador : string;
                             out status: integer): string;
 var
     o : TPedidoOrcamento;
@@ -440,8 +443,19 @@ begin
             exit;
         end;
 
+        try
+            StrToInt(id_usuario_prestador);
+        except
+            json.AddPair('retorno', 'Id. usuario prestador inválido');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+
         o.ID_ORCAMENTO := id_orcamento.ToInteger;
         o.ID_PEDIDO := id_pedido.ToInteger;
+        O.ID_USUARIO_PRESTADOR := StrToInt(id_usuario_prestador);
 
         if NOT o.AprovarOrcamento(erro) then
         begin
@@ -927,6 +941,7 @@ procedure Tdm.DWEventsOrcamentoEventsaprovacaoReplyEventByType(
 begin
     Result := AprovarOrcamento(Params.ItemsString['id_orcamento'].AsString,
                               Params.ItemsString['id_pedido'].AsString,
+                              Params.ItemsString['id_usuario_prestador'].AsString,
                               StatusCode);
 end;
 

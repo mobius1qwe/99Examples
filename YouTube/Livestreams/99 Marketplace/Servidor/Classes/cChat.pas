@@ -63,7 +63,7 @@ begin
             SQL.Add('WHERE ID_ORCAMENTO = :ID_ORCAMENTO');
 
             if order_by = '' then
-                SQL.Add('ORDER BY ID_CHAT DESC')
+                SQL.Add('ORDER BY ID_CHAT')
             else
                 SQL.Add('ORDER BY ' + order_by);
 

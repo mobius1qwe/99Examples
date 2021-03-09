@@ -97,7 +97,6 @@ type
     procedure AddAceito(seq_pedido, seq_usuario : integer;
                         nome, categoria, dt, pedido, descricao: string;
                         valor: double);
-    procedure ListarAceito;
     procedure AddRealizado(seq_pedido, seq_usuario: integer; nome, categoria,
       dt, pedido, descricao: string; valor: double);
     procedure ListarRealizados;
@@ -109,6 +108,7 @@ type
   public
     id_usuario_logado : Integer;
     procedure ListarPendente;
+    procedure ListarAceito;
     function Base64FromBitmap(Bitmap: TBitmap): string;
     function BitmapFromBase64(const base64: string): TBitmap;
     function GetTextHeight(const D: TListItemText; const Width: single;

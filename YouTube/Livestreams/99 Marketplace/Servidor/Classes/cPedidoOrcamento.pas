@@ -15,6 +15,7 @@ type
         FDT_GERACAO: TDateTime;
         FSTATUS: string;
         FID_USUARIO: integer;
+        FID_USUARIO_PRESTADOR: integer;
 
     public
         constructor Create(conn : TFDConnection);
@@ -24,6 +25,7 @@ type
         property STATUS : string read FSTATUS write FSTATUS;
         property DT_GERACAO : TDateTime read FDT_GERACAO write FDT_GERACAO;
         property VALOR_TOTAL : Double read FVALOR_TOTAL write FVALOR_TOTAL;
+        property ID_USUARIO_PRESTADOR : integer read FID_USUARIO_PRESTADOR write FID_USUARIO_PRESTADOR;
         property OBS : string read FOBS write FOBS;
 
         function DadosOrcamento(out erro: string): Boolean;
@@ -356,6 +358,17 @@ begin
             SQL.Add('UPDATE TAB_PEDIDO_ORCAMENTO SET STATUS = ''A'' ');
             SQL.Add('WHERE ID_ORCAMENTO = :ID_ORCAMENTO');
             ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
+            ExecSQL;
+
+            // Atualiza informacoes do orcamento vencedor...
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO SET STATUS=''A'', ID_USUARIO_PRESTADOR=:ID_USUARIO_PRESTADOR,');
+            SQL.Add('VALOR_TOTAL=(SELECT VALOR_TOTAL FROM TAB_PEDIDO_ORCAMENTO WHERE ID_ORCAMENTO=:ID_ORCAMENTO)');
+            SQL.Add('WHERE ID_PEDIDO = :ID_PEDIDO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
+            ParamByName('ID_USUARIO_PRESTADOR').Value := ID_USUARIO_PRESTADOR;
             ExecSQL;
 
 

@@ -13,11 +13,11 @@ type
   TFrmChat = class(TForm)
     layout_toolbar: TLayout;
     lbl_titulo: TLabel;
-    img_notificacao: TImage;
+    img_fechar: TImage;
     Line1: TLine;
     rect_prestador: TRectangle;
     c_foto: TCircle;
-    Label2: TLabel;
+    lbl_nome: TLabel;
     lv_chat: TListView;
     rect_msg: TRectangle;
     img_enviar: TImage;
@@ -27,6 +27,7 @@ type
     procedure lv_chatUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
     procedure img_enviarClick(Sender: TObject);
+    procedure img_fecharClick(Sender: TObject);
   private
     procedure AddChat(id_usuario_de, id_usuario_para: integer;
                       msg, dt, ind_msg_minha: string);
@@ -147,6 +148,11 @@ begin
     except
 
     end;
+end;
+
+procedure TFrmChat.img_fecharClick(Sender: TObject);
+begin
+    close;
 end;
 
 procedure TFrmChat.ListarChat;

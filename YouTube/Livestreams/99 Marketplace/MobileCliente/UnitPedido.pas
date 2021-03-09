@@ -70,6 +70,7 @@ type
     Label3: TLabel;
     img_cad_fechar: TImage;
     rect_bottom: TRectangle;
+    img_aprovado: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure rect_aba1Click(Sender: TObject);
@@ -89,9 +90,10 @@ type
       ItemIndex: Integer; const LocalClickPos: TPointF;
       const ItemObject: TListItemDrawable);
   private
+    ind_refresh_pedido : Boolean;
     lbl : TLabel;
     procedure AddOrcamento(seq_orcamento, seq_usuario: integer; foto64, nome,
-      dt: string; valor: double);
+      dt, status: string; valor: double);
     procedure MudarAba(indice: integer);
     procedure AbrirEdicaoItem(titulo: string; lbl_edicao: TLabel);
     procedure FecharEdicaoItem(ind_cancelar: Boolean);
@@ -112,7 +114,8 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria, UnitChat;
+uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria, UnitChat,
+  FMX.DialogService;
 
 procedure TFrmPedido.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel);
 begin
@@ -152,7 +155,7 @@ end;
 
 
 procedure TFrmPedido.AddOrcamento(seq_orcamento, seq_usuario : integer;
-                                  foto64, nome, dt: string;
+                                  foto64, nome, dt, status: string;
                                   valor: double);
 begin
     with lv_orcamentos.Items.Add do
@@ -174,7 +177,11 @@ begin
         TListItemText(Objects.FindDrawable('TxtData')).Text := dt;
 
         TListItemImage(Objects.FindDrawable('ImgAprovar')).Bitmap := img_aprovar.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgAprovar')).TagString := status;
+
         TListItemImage(Objects.FindDrawable('ImgChat')).Bitmap := img_chat.Bitmap;
+
+        TListItemImage(Objects.FindDrawable('ImgAprovado')).Bitmap := img_aprovado.Bitmap;
     end;
 end;
 
@@ -184,6 +191,8 @@ var
     json, retorno: string;
 begin
     try
+        ind_refresh_pedido := true;
+
         json := dm.RequestOrcamentoAprov.Response.JSONValue.ToString;
         jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
 
@@ -216,13 +225,27 @@ begin
     begin
         if ItemObject.Name = 'ImgAprovar' then
         begin
-            dm.RequestOrcamentoAprov.Params.Clear;
-            dm.RequestOrcamentoAprov.AddParameter('id', '');
-            dm.RequestOrcamentoAprov.AddParameter('id_orcamento', TListView(Sender).Items[ItemIndex].Tag.ToString);
-            dm.RequestOrcamentoAprov.AddParameter('id_pedido', id_pedido.ToString);
-            dm.RequestOrcamentoAprov.Execute;
+            TDialogService.MessageDialog('Confirma aprovação do orçamento?',
+                     TMsgDlgType.mtConfirmation,
+                     [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+                     TMsgDlgBtn.mbNo,
+                     0,
+            procedure(const AResult: TModalResult)
+            var
+                erro: string;
+            begin
+                if AResult = mrYes then
+                begin
+                    dm.RequestOrcamentoAprov.Params.Clear;
+                    dm.RequestOrcamentoAprov.AddParameter('id', '');
+                    dm.RequestOrcamentoAprov.AddParameter('id_orcamento', TListView(Sender).Items[ItemIndex].Tag.ToString);
+                    dm.RequestOrcamentoAprov.AddParameter('id_pedido', id_pedido.ToString);
+                    dm.RequestOrcamentoAprov.AddParameter('id_usuario_prestador', TListView(Sender).Items[ItemIndex].TagString);
+                    dm.RequestOrcamentoAprov.Execute;
 
-            ProcessarAprovacaoOrc;
+                    ProcessarAprovacaoOrc;
+                end;
+            end);
         end;
 
         if ItemObject.Name = 'ImgChat' then
@@ -232,6 +255,8 @@ begin
 
             FrmChat.id_usuario_destino := TListView(Sender).Items[ItemIndex].TagString.ToInteger;
             FrmChat.id_orcamento := TListView(Sender).Items[ItemIndex].Tag;
+            FrmChat.lbl_nome.Text := TListItemText(TListView(Sender).Items[ItemIndex].Objects.FindDrawable('TxtNome')).Text;
+            FrmChat.c_foto.Fill.Bitmap.Bitmap := TListItemImage(TListView(Sender).Items[ItemIndex].Objects.FindDrawable('ImgIcone')).Bitmap;
             FrmChat.Show;
         end
     end;
@@ -241,7 +266,8 @@ procedure TFrmPedido.lv_orcamentosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
     txt, txt2: TListItemText;
-    img: TListItemImage;
+    img_aprovar, img_chat: TListItemImage;
+    status : string;
 begin
     // Calcula tamanho do nome...
     txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
@@ -269,11 +295,27 @@ begin
 
 
     // Botoes...
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgAprovar'));
-    img.PlaceOffset.Y := Aitem.Height - 55;
+    img_aprovar := TListItemImage(AItem.Objects.FindDrawable('ImgAprovar'));
+    img_aprovar.PlaceOffset.Y := Aitem.Height - 55;
+    img_aprovar.Visible := false;
+    status := img_aprovar.TagString;
 
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgChat'));
-    img.PlaceOffset.Y := Aitem.Height - 55;
+    img_chat := TListItemImage(AItem.Objects.FindDrawable('ImgChat'));
+    img_chat.PlaceOffset.Y := Aitem.Height - 55;
+    img_chat.Visible := false;
+
+
+    if status = 'P' then
+    begin
+        img_aprovar.Visible := true;
+        img_chat.Visible := true;
+    end;
+
+    if status = 'A' then
+    begin
+        img_chat.Visible := true;
+        TListItemImage(AItem.Objects.FindDrawable('ImgAprovado')).Visible := true;
+    end;
 end;
 
 procedure TFrmPedido.MudarAba(indice: integer);
@@ -365,12 +407,18 @@ begin
         jsonObj.DisposeOf;
     end;
 
-    FrmPrincipal.ListarPendente;
+    ind_refresh_pedido := true;
     close;
 end;
 
 procedure TFrmPedido.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+    if ind_refresh_pedido then
+    begin
+        FrmPrincipal.ListarPendente;
+        FrmPrincipal.ListarAceito;
+    end;
+
     Action := TCloseAction.caFree;
     FrmPedido := nil;
 end;
@@ -451,6 +499,7 @@ begin
                         jsonArray.Get(i).GetValue<string>('FOTO', ''),
                         jsonArray.Get(i).GetValue<string>('NOME', ''),
                         jsonArray.Get(i).GetValue<string>('DT_GERACAO', '01/01/2000 00:00:00'),
+                        jsonArray.Get(i).GetValue<string>('STATUS', ''),
                         jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
                         );
         end;
@@ -473,6 +522,7 @@ end;
 
 procedure TFrmPedido.FormShow(Sender: TObject);
 begin
+    ind_refresh_pedido := false;
     lbl_endereco.Text := '';
     lbl_grupo.Text := '';
     lbl_data.Text := '';

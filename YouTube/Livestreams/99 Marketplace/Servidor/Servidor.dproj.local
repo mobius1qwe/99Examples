@@ -34,7 +34,7 @@
     <Transaction>2021/02/22 08:36:38.000.692,D:\99Coders\CursoMarketplace\Fontes\Servidor\Unit1.pas=D:\99Coders\CursoMarketplace\Fontes\Servidor\Classes\cCategoria.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>
