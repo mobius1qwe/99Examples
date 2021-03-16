@@ -47,7 +47,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, UnitDM;
+uses UnitPrincipal, UnitDM, uDWJsonObject;
 
 procedure TFrmChat.AddChat(id_usuario_de, id_usuario_para: integer;
                            msg, dt, ind_msg_minha: string);
@@ -136,6 +136,7 @@ begin
         dm.RequestOrcamentoChatEnv.AddParameter('id_usuario_de', FrmPrincipal.id_usuario_logado.ToString);
         dm.RequestOrcamentoChatEnv.AddParameter('id_usuario_para', id_usuario_destino.ToString);
         dm.RequestOrcamentoChatEnv.AddParameter('texto', m_msg.Text);
+        dm.RequestOrcamentoChatEnv.AddParameter('texto', escape_chars(m_msg.Text));
         dm.RequestOrcamentoChatEnv.AddParameter('id_orcamento', id_orcamento.ToString);
         dm.RequestOrcamentoChatEnv.Execute;
 
@@ -145,6 +146,7 @@ begin
                 FormatDateTime('dd/mm - hh:nn', now) + 'h',
                 'S');
         m_msg.Lines.Clear;
+        lv_chat.ScrollTo(lv_chat.ItemCount - 1);
     except
 
     end;

@@ -12,7 +12,8 @@ uses
   uFunctions in '..\Units\uFunctions.pas',
   u99Permissions in '..\Units\u99Permissions.pas',
   UnitCategoria in 'UnitCategoria.pas' {FrmCategoria},
-  uLoading in '..\Units\uLoading.pas';
+  uLoading in '..\Units\uLoading.pas',
+  UnitClassificacao in 'UnitClassificacao.pas' {FrmClassificar};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmClassificar, FrmClassificar);
   Application.Run;
 end.

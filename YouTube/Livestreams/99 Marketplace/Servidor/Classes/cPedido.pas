@@ -19,7 +19,6 @@ type
         FENDERECO: string;
         FGRUPO: string;
         FVALOR_TOTAL: Double;
-
     public
         constructor Create(conn : TFDConnection);
         property ID_PEDIDO : integer read FID_PEDIDO write FID_PEDIDO;
@@ -39,6 +38,7 @@ type
         function Editar(out erro: string): Boolean;
         function Excluir(out erro: string): Boolean;
         function ListarPedido(order_by: string; out erro: string): TFDQuery;
+        function Aprovar(out erro: string): Boolean;
 end;
 
 implementation
@@ -382,6 +382,45 @@ begin
         begin
             Result := false;
             erro := 'Erro ao excluir pedido: ' + ex.Message;
+        end;
+    end;
+end;
+
+function TPedido.Aprovar(out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (ID_PEDIDO <= 0)  then
+    begin
+        Result := false;
+        erro := 'Número do pedido não informado';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            // Atualiza o pedido...
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO SET STATUS = ''R'' WHERE ID_PEDIDO=:ID_PEDIDO AND ID_USUARIO=:ID_USUARIO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_USUARIO').Value := ID_USUARIO;
+            ExecSQL;
+
+            DisposeOf;
+        end;
+
+        Result := true;
+        erro := '';
+
+    except on ex:exception do
+        begin
+            Result := false;
+            erro := 'Erro ao atualizar pedido: ' + ex.Message;
         end;
     end;
 end;

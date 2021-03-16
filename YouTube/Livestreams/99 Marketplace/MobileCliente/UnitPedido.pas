@@ -167,7 +167,10 @@ begin
 
         // Foto base64...
         if foto64 <> '' then
+        begin
             TListItemImage(Objects.FindDrawable('ImgIcone')).Bitmap := FrmPrincipal.BitmapFromBase64(foto64);
+            TListItemImage(Objects.FindDrawable('ImgIcone')).OwnsBitmap := true;
+        end;
         //
 
         TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;

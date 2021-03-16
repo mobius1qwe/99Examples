@@ -30,6 +30,7 @@ type
     RequestOrcamentoAprov: TRESTRequest;
     RequestOrcamentoChat: TRESTRequest;
     RequestOrcamentoChatEnv: TRESTRequest;
+    RequestPedidoAprovar: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

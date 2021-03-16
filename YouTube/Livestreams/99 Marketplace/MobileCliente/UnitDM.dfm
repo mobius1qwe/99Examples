@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 566
+  Height = 643
   Width = 457
   object conn: TFDConnection
     Params.Strings = (
@@ -275,5 +275,22 @@ object dm: Tdm
     SynchronizedEvents = False
     Left = 344
     Top = 472
+  end
+  object RequestPedidoAprovar: TRESTRequest
+    Client = RESTClient
+    Method = rmPOST
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/aprovar'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 528
   end
 end

@@ -69,6 +69,16 @@ object dm: Tdm
         EventName = 'pedido'
         OnlyPreDefinedParams = False
         OnReplyEventByType = DWEventsPedidoEventspedidoReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'aprovar'
+        EventName = 'aprovar'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsPedidoEventsaprovarReplyEventByType
       end>
     ContextName = 'pedidos'
     Left = 64

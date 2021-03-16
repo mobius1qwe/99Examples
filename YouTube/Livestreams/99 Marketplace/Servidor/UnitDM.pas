@@ -49,6 +49,9 @@ type
     procedure DWEventsOrcamentoEventschatReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
+    procedure DWEventsPedidoEventsaprovarReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
@@ -80,6 +83,8 @@ type
       out status_code: integer): string;
     function CriarChat(id_usuario_de, id_usuario_para, texto,
       id_orcamento: string; out status: integer): string;
+    function AprovarPedido(id_usuario, id_pedido: string;
+      out status: integer): string;
 
     { Private declarations }
   public
@@ -139,9 +144,6 @@ end;
 procedure Tdm.DWEventsEventshoraReplyEvent(var Params: TDWParams;
   var Result: string);
 begin
-    if Params.ItemsString['espera'].AsInteger = 1 then
-        sleep(20000);
-
     Result := '{"data":"' + FormatDateTime('dd/mm/yyyy hh:nn', now) +  '"}';
 end;
 
@@ -333,6 +335,60 @@ begin
             json.AddPair('retorno', 'OK');
             json.AddPair('id_pedido', p.ID_PEDIDO.ToString);
             Status := 201;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+function TDm.AprovarPedido(id_usuario, id_pedido: string;
+                           out status: integer): string;
+var
+    p : TPedido;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        json := TJSONObject.Create;
+        p := TPedido.Create(dm.conn);
+
+        try
+            StrToInt(id_usuario);
+        except
+            json.AddPair('retorno', 'Id. usuário inválido');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_pedido);
+        except
+            json.AddPair('retorno', 'Id. pedido inválido');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        p.ID_USUARIO := id_usuario.ToInteger;
+        p.ID_PEDIDO := id_pedido.ToInteger;
+
+
+        if NOT p.Aprovar(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            Status := 200;
         end;
 
         Result := json.ToString;
@@ -743,7 +799,6 @@ var
     erro: string;
 begin
     try
-        sleep(2000);
         json := TJSONObject.Create;
         p := TPedido.Create(dm.conn);
 
@@ -1001,7 +1056,7 @@ begin
 
         c.ID_USUARIO_DE := id_usuario_de.ToInteger;
         c.ID_USUARIO_PARA := id_usuario_para.ToInteger;
-        c.TEXTO := texto;
+        c.TEXTO := unescape_chars(texto);
         c.ID_ORCAMENTO := id_orcamento.ToInteger;
 
         if NOT c.Inserir(erro) then
@@ -1043,6 +1098,16 @@ begin
                             Params.ItemsString['texto'].AsString,
                             Params.ItemsString['id_orcamento'].AsString,
                             StatusCode)
+end;
+
+procedure Tdm.DWEventsPedidoEventsaprovarReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+begin
+    if RequestType = TRequestType.rtPost then
+        Result := AprovarPedido(Params.ItemsString['id_usuario'].AsString,
+                              Params.ItemsString['id_pedido'].AsString,
+                              StatusCode)
 end;
 
 procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;

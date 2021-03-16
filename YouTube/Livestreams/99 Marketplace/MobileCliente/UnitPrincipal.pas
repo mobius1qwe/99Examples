@@ -76,6 +76,7 @@ type
     img_money: TImage;
     lv_realizados: TListView;
     StyleBook: TStyleBook;
+    img_realizar: TImage;
     procedure img_notificacaoClick(Sender: TObject);
     procedure img_add_pedidoClick(Sender: TObject);
     procedure img_aba1Click(Sender: TObject);
@@ -90,6 +91,8 @@ type
       const AItem: TListViewItem);
     procedure lv_pedidosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
+    procedure lv_aceitosItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
   private
     procedure MudarAba(img: TImage);
     procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
@@ -122,7 +125,8 @@ implementation
 
 {$R *.fmx}
 
-uses UnitNotificacao, UnitPedido, UnitChat, System.JSON, UnitDM;
+uses UnitNotificacao, UnitPedido, UnitChat, System.JSON, UnitDM,
+  FMX.DialogService, UnitClassificacao;
 
 function TFrmPrincipal.Base64FromBitmap(Bitmap: TBitmap): string;
 var
@@ -280,6 +284,7 @@ begin
 
         TListItemImage(Objects.FindDrawable('ImgNome')).Bitmap := img_user.Bitmap;
         TListItemImage(Objects.FindDrawable('ImgValor')).Bitmap := img_money.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgRealizar')).Bitmap := img_realizar.Bitmap;
     end;
 end;
 
@@ -497,6 +502,65 @@ begin
     dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
 
+procedure TFrmPrincipal.lv_aceitosItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+var
+    json, retorno : string;
+    jsonObj : TJSONObject;
+begin
+    if ItemObject is TListItemImage then
+    begin
+        if ItemObject.Name = 'ImgRealizar' then
+        begin
+            TDialogService.MessageDialog('Confirma realização do serviço?',
+                     TMsgDlgType.mtConfirmation,
+                     [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+                     TMsgDlgBtn.mbNo,
+                     0,
+            procedure(const AResult: TModalResult)
+            var
+                erro: string;
+            begin
+                if AResult = mrYes then
+                begin
+                    dm.RequestPedidoAprovar.Params.Clear;
+                    dm.RequestPedidoAprovar.AddParameter('id', '');
+                    dm.RequestPedidoAprovar.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+                    dm.RequestPedidoAprovar.AddParameter('id_pedido', TListView(Sender).Items[ItemIndex].Tag.ToString);
+                    dm.RequestPedidoAprovar.Execute;
+
+                     try
+                        json := dm.RequestPedidoAprovar.Response.JSONValue.ToString;
+                        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+                        retorno := jsonObj.GetValue('retorno').Value;
+
+                        // Se deu erro...
+                        if dm.RequestPedidoAprovar.Response.StatusCode <> 200 then
+                        begin
+                            showmessage(retorno);
+                            exit;
+                        end;
+
+                    finally
+                        jsonObj.DisposeOf;
+                    end;
+
+                    if NOT Assigned(FrmClassificar) then
+                        Application.CreateForm(TFrmClassificar, FrmClassificar);
+
+                    FrmClassificar.ShowModal(procedure (ModalResult: TModalResult)
+                    begin
+                        ListarAceito;
+                        ListarRealizados;
+                    end);
+                end;
+            end);
+        end;
+    end;
+end;
+
 procedure TFrmPrincipal.lv_aceitosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
@@ -616,6 +680,15 @@ end;
 
 procedure TFrmPrincipal.MudarAba(img: TImage);
 begin
+    if img.Tag = 0 then
+        lbl_titulo.Text := 'Pedidos em Aberto'
+    else if img.Tag = 1 then
+        lbl_titulo.Text := 'Pedidos Aceitos'
+    else if img.Tag = 2 then
+        lbl_titulo.Text := 'Pedidos Realizados'
+    else
+        lbl_titulo.Text := 'Meu Perfil';
+
     img_aba1.Opacity := 0.3;
     img_aba2.Opacity := 0.3;
     img_aba3.Opacity := 0.3;
@@ -623,7 +696,6 @@ begin
 
     img.Opacity := 1;
     TabControl1.GotoVisibleTab(img.Tag, TTabTransition.Slide);
-
 end;
 
 procedure TFrmPrincipal.img_aba1Click(Sender: TObject);
