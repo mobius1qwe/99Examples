@@ -1,0 +1,271 @@
+object FrmCatalogoPreview: TFrmCatalogoPreview
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 563
+  ClientWidth = 368
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object rect_toolbar: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Sides = []
+    Size.Width = 368.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFE9E9E9
+    object Label1: TLabel
+      Align = Contents
+      StyledSettings = [Family, FontColor]
+      Size.Width = 368.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Perfume Lab'
+      TabOrder = 2
+    end
+    object img_menu: TImage
+      MultiResBitmap.Height = 39
+      MultiResBitmap.Width = 39
+      MultiResBitmap = <
+        item
+          Width = 39
+          Height = 39
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000270000002708060000008CA351
+            35000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            0127494441545847EDD7DF89C24010C7F119150EC107AF033BF0AC205A51ECE0
+            B483B303AF12CF0A6CC10E140CF860606E7FB81C7A3171239B5D91F9BE6CFE80
+            7C18962492A6699A565E924A3F490F637BEABD965D6B97A4C70173B661E65592
+            661FF6B2D71EC29D61F98A880744B2253AEDED2DAFB15D9DFB0F13C927EBC5BB
+            01FAAF162E240C39E342C390132E060CDDC5C582A14A5C4C182AC5C586A19BB8
+            6B1892A5396E0C26D2FE5E2FBA85DFBF891B4FB34FB3CCCE67419AFD7CF5E6F6
+            F8AF92C9EDCCE43A1793633339BC099A49E4642657DC32157BEE12883DD7317B
+            AE38FA262BC5A1D8C04A1C8A09BC8B43B1804E381403E88C43A181B5702824B0
+            360E1581F9C83CA7BC7F0D3FF4998E0726DEB58001C8ADB7A1BDF53C61824DFD
+            B9D1344D7BFD887E011AFFCD88404422EC0000000049454E44AE426082}
+          FileName = 'D:\Catalogo\Fontes\Mobile\Imagens\back.png'
+        end>
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 7.000000000000000000
+      Margins.Bottom = 7.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 36.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Margins.Left = 20.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Position.X = 20.000000000000000000
+    Position.Y = 55.000000000000000000
+    Size.Width = 328.000000000000000000
+    Size.Height = 45.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFDADADA
+    XRadius = 22.500000000000000000
+    YRadius = 22.500000000000000000
+    object edt_nome: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Client
+      StyleLookup = 'transparentedit'
+      TabOrder = 0
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = xFF494949
+      Margins.Left = 8.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Right = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Size.Width = 269.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'Pesquisar...'
+      StyledSettings = [Family, Style]
+    end
+    object Image1: TImage
+      MultiResBitmap.Height = 32
+      MultiResBitmap.Width = 32
+      MultiResBitmap = <
+        item
+          Width = 32
+          Height = 32
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+            F4000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            0262494441545847ED964D52C24010851360C1D22D1420DC006E8027D01BC80D
+            F406EA0DF404EA0DB8017802F10444A060CB9A5FDFEBF45499C024231175E157
+            959A9FA4276F7AA67BC6FBE7B7F1B54C64381C9E140A854B54DB789A78EAEC07
+            C166B309F2F9FCD372B97C69341A81F63B9328407F7C8DEA159E13E94CE6AE5A
+            ADDE6ADD09AB80D96C565FAD563D5465B698699F33CDE572FD72B9FCCE3E086C
+            A2CDE71CCD0BF66DB7DB60BD5E9FB97A63AF80CF3FE780283BB55AED455E5A88
+            DBB88AC86919C10C84590F30502BEDE7A4542A05B06BD1C6F7FD3ABCD5E312EA
+            6B2B3B02C6E331D7506681C1388B79F8261D7E4B1B540315C1BD93486409D48D
+            43D65162BCAFEF6A8249305AE8C5B98E639D44C4038BC58286A47BE8CF0922A1
+            CF4D8BAA095F2BF125908FE1BEAEB4B2F1ACA599D45E2202104E1272482A6FD2
+            9101F500C39289CB4ADC032200EE1F482B036609B919A5C3C24E14FC347101A2
+            7A3A9D9E4A2B0393C9445CAF89CC4A5C80B81EEB97B8715C40023B48806C1C18
+            77A495013D1F3C9E1FD2612122004983A13387715B93C94130A1A190C389C734
+            4B1B1101CC5870D93DEB281F5D72791CDA6022CC821CE3362DA1C59780EE7F40
+            21B91C9E703A500CFC9636A8CA598243EC2E7C63674700BD80F429070A066B62
+            0D5F3170622C132E19EC5E69A35D14946AE77C21015D4DD16F954A45A2853FE0
+            7E41F5524BD9F5F88E55A77B81558061341ADD6040976B96EC1F2E61B15834FB
+            205544AA00426FE849C999D223C62B1C94DEE83382B87CD20B5C6F484E020EC5
+            45C451059034113B51F0DDF0AE68A28AA1CDBB62F826E4E802C8671161CF3F7F
+            06CFFB0030F16DB6EBC95D670000000049454E44AE426082}
+          FileName = 'D:\Catalogo\Fontes\Mobile\Imagens\search.png'
+        end>
+      Align = Right
+      Margins.Top = 3.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 3.000000000000000000
+      Position.X = 285.000000000000000000
+      Position.Y = 3.000000000000000000
+      Size.Width = 33.000000000000000000
+      Size.Height = 39.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object Layout1: TLayout
+    Align = Top
+    Margins.Left = 20.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Position.X = 20.000000000000000000
+    Position.Y = 110.000000000000000000
+    Size.Width = 328.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object Label2: TLabel
+      StyledSettings = [Family, FontColor]
+      Size.Width = 177.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      Text = 'Destaques'
+      TabOrder = 2
+    end
+  end
+  object ListBox1: TListBox
+    Align = Top
+    Position.Y = 146.000000000000000000
+    Size.Width = 368.000000000000000000
+    Size.Height = 127.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'transparentlistboxstyle'
+    TabOrder = 4
+    ShowScrollBars = False
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    ListStyle = Horizontal
+    Viewport.Width = 368.000000000000000000
+    Viewport.Height = 127.000000000000000000
+  end
+  object Layout2: TLayout
+    Align = Top
+    Margins.Left = 20.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 20.000000000000000000
+    Position.X = 20.000000000000000000
+    Position.Y = 283.000000000000000000
+    Size.Width = 328.000000000000000000
+    Size.Height = 36.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object Label3: TLabel
+      StyledSettings = [Family, FontColor]
+      Size.Width = 177.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      Text = 'Produtos'
+      TabOrder = 2
+    end
+  end
+  object lv_produto: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 368.000000000000000000
+    Size.Height = 244.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    ItemAppearance.ItemHeight = 90
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'TxtProduto'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.Width = 201.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 96.000000000000000000
+        Appearance.PlaceOffset.Y = 21.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'TxtPreco'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF9A9A9A
+        Appearance.Width = 84.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 96.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'ImgFoto'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 73.000000000000000000
+        Appearance.Height = 65.000000000000000000
+        Appearance.PlaceOffset.X = 12.000000000000000000
+        Appearance.PlaceOffset.Y = 12.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'ImgExcluir'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 40.000000000000000000
+        Appearance.Height = 40.000000000000000000
+        Appearance.Align = Trailing
+        Appearance.PlaceOffset.X = -11.000000000000000000
+        Appearance.PlaceOffset.Y = 26.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'TxtPromocao'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF9A9A9A
+        Appearance.Width = 110.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 187.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    ShowSelection = False
+  end
+end
