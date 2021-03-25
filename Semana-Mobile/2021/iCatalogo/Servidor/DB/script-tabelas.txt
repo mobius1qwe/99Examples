@@ -1,0 +1,77 @@
+CREATE TABLE TAB_USUARIO (
+    ID_USUARIO INT NOT NULL PRIMARY KEY,
+    NOME       VARCHAR(100),
+    EMAIL      VARCHAR(100),
+    SENHA      VARCHAR(100),
+    DT_GERACAO TIMESTAMP
+);
+
+ 
+create generator gen_usuario_id;
+
+CREATE TRIGGER TR_USUARIO FOR TAB_USUARIO
+ACTIVE BEFORE INSERT POSITION 0
+AS
+BEGIN
+    new.ID_USUARIO =gen_id(gen_usuario_id, 1);
+END
+
+
+
+CREATE TABLE TAB_CATALOGO (
+    ID_CATALOGO  INT NOT NULL PRIMARY KEY,
+    ID_USUARIO INT,
+    NOME       VARCHAR(100),
+    FOTO       BLOB,
+    QTD_PRODUTO INT,
+    DT_GERACAO TIMESTAMP    
+);
+
+ 
+create generator gen_catalogo_id;
+
+CREATE TRIGGER TR_CATALOGO FOR TAB_CATALOGO
+ACTIVE BEFORE INSERT POSITION 0
+AS
+BEGIN
+    new.ID_CATALOGO =gen_id(gen_catalogo_id, 1);
+END
+
+
+
+INSERT INTO TAB_USUARIO (NOME, EMAIL, SENHA, DT_GERACAO)
+VALUES ('Heber Stein Mazutti', 'heber@99coders.com.br', '', current_timestamp);
+
+ 
+
+
+
+
+
+
+
+CREATE TABLE TAB_CATALOGO_PRODUTO (
+    ID_PRODUTO   INT NOT NULL PRIMARY KEY,
+    ID_CATALOGO  INT,
+    NOME       	VARCHAR(100),
+    PRECO	DECIMAL(12, 2),
+    PRECO_PROMOCAO DECIMAL(12, 2),
+    IND_DESTAQUE CHAR(1),
+    FOTO       BLOB,
+    DT_GERACAO TIMESTAMP    
+);
+
+ 
+create generator gen_produto_id;
+
+CREATE TRIGGER TR_PRODUTO FOR TAB_CATALOGO_PRODUTO
+ACTIVE BEFORE INSERT POSITION 0
+AS
+BEGIN
+    new.ID_PRODUTO =gen_id(gen_produto_id, 1);
+END
+
+
+
+
+
