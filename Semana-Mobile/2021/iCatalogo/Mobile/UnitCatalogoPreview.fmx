@@ -1,13 +1,14 @@
 object FrmCatalogoPreview: TFrmCatalogoPreview
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'iCat'#225'logo'
   ClientHeight = 563
   ClientWidth = 368
   Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object rect_toolbar: TRectangle
     Align = Top
@@ -17,7 +18,7 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
-    object Label1: TLabel
+    object lbl_titulo: TLabel
       Align = Contents
       StyledSettings = [Family, FontColor]
       Size.Width = 368.000000000000000000
@@ -29,7 +30,7 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
       Text = 'Perfume Lab'
       TabOrder = 2
     end
-    object img_menu: TImage
+    object img_fechar: TImage
       MultiResBitmap.Height = 39
       MultiResBitmap.Width = 39
       MultiResBitmap = <
@@ -60,6 +61,7 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
       Size.Width = 50.000000000000000000
       Size.Height = 36.000000000000000000
       Size.PlatformDefault = False
+      OnClick = img_fecharClick
     end
   end
   object Rectangle1: TRectangle
@@ -76,22 +78,25 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
     Stroke.Color = xFFDADADA
     XRadius = 22.500000000000000000
     YRadius = 22.500000000000000000
-    object edt_nome: TEdit
+    object edt_busca: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Client
       StyleLookup = 'transparentedit'
       TabOrder = 0
+      ReturnKeyType = Search
       TextSettings.Font.Size = 14.000000000000000000
       TextSettings.FontColor = xFF494949
-      Margins.Left = 8.000000000000000000
+      Margins.Left = 20.000000000000000000
       Margins.Top = 8.000000000000000000
       Margins.Right = 8.000000000000000000
       Margins.Bottom = 8.000000000000000000
-      Size.Width = 269.000000000000000000
+      Size.Width = 257.000000000000000000
       Size.Height = 29.000000000000000000
       Size.PlatformDefault = False
       TextPrompt = 'Pesquisar...'
       StyledSettings = [Family, Style]
+      KillFocusByReturn = True
+      OnExit = edt_buscaExit
     end
     object Image1: TImage
       MultiResBitmap.Height = 32
@@ -158,34 +163,17 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
       TabOrder = 2
     end
   end
-  object ListBox1: TListBox
-    Align = Top
-    Position.Y = 146.000000000000000000
-    Size.Width = 368.000000000000000000
-    Size.Height = 127.000000000000000000
-    Size.PlatformDefault = False
-    StyleLookup = 'transparentlistboxstyle'
-    TabOrder = 4
-    ShowScrollBars = False
-    DisableFocusEffect = True
-    DefaultItemStyles.ItemStyle = ''
-    DefaultItemStyles.GroupHeaderStyle = ''
-    DefaultItemStyles.GroupFooterStyle = ''
-    ListStyle = Horizontal
-    Viewport.Width = 368.000000000000000000
-    Viewport.Height = 127.000000000000000000
-  end
   object Layout2: TLayout
     Align = Top
     Margins.Left = 20.000000000000000000
     Margins.Top = 10.000000000000000000
     Margins.Right = 20.000000000000000000
     Position.X = 20.000000000000000000
-    Position.Y = 283.000000000000000000
+    Position.Y = 307.000000000000000000
     Size.Width = 328.000000000000000000
     Size.Height = 36.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 5
+    TabOrder = 4
     object Label3: TLabel
       StyledSettings = [Family, FontColor]
       Size.Width = 177.000000000000000000
@@ -206,7 +194,7 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
     ItemSpaces.Right = 0.000000000000000000
     Align = Client
     Size.Width = 368.000000000000000000
-    Size.Height = 244.000000000000000000
+    Size.Height = 220.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     ItemAppearance.ItemHeight = 90
@@ -241,20 +229,11 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
         Appearance.PlaceOffset.Y = 12.000000000000000000
       end
       item
-        AppearanceObjectName = 'ImgExcluir'
-        AppearanceClassName = 'TImageObjectAppearance'
-        Appearance.Width = 40.000000000000000000
-        Appearance.Height = 40.000000000000000000
-        Appearance.Align = Trailing
-        Appearance.PlaceOffset.X = -11.000000000000000000
-        Appearance.PlaceOffset.Y = 26.000000000000000000
-      end
-      item
         AppearanceObjectName = 'TxtPromocao'
         AppearanceClassName = 'TTextObjectAppearance'
         Appearance.Font.Size = 14.000000000000000000
         Appearance.TextAlign = Leading
-        Appearance.TextColor = xFF9A9A9A
+        Appearance.TextColor = xFFEA4141
         Appearance.Width = 110.000000000000000000
         Appearance.Height = 25.000000000000000000
         Appearance.PlaceOffset.X = 187.000000000000000000
@@ -266,6 +245,197 @@ object FrmCatalogoPreview: TFrmCatalogoPreview
         AppearanceClassName = 'TTextObjectAppearance'
       end>
     CanSwipeDelete = False
+    OnItemClick = lv_produtoItemClick
     ShowSelection = False
+  end
+  object lv_destaque: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Top
+    Position.Y = 146.000000000000000000
+    Size.Width = 368.000000000000000000
+    Size.Height = 151.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    ItemAppearance.ItemHeight = 90
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'TxtProduto'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.Width = 201.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 96.000000000000000000
+        Appearance.PlaceOffset.Y = 21.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'TxtPreco'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF9A9A9A
+        Appearance.Width = 84.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 96.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'ImgFoto'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 73.000000000000000000
+        Appearance.Height = 65.000000000000000000
+        Appearance.PlaceOffset.X = 12.000000000000000000
+        Appearance.PlaceOffset.Y = 12.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'TxtPromocao'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 14.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFFEA4141
+        Appearance.Width = 110.000000000000000000
+        Appearance.Height = 25.000000000000000000
+        Appearance.PlaceOffset.X = 187.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    OnItemClick = lv_produtoItemClick
+    ShowSelection = False
+  end
+  object layout_detalhe: TLayout
+    Align = Contents
+    Size.Width = 368.000000000000000000
+    Size.Height = 563.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 6
+    object rect_fundo: TRectangle
+      Align = Contents
+      Fill.Color = claBlack
+      Opacity = 0.699999988079071000
+      Size.Width = 368.000000000000000000
+      Size.Height = 563.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+    end
+    object Rectangle2: TRectangle
+      Align = Center
+      Fill.Color = claWhite
+      Size.Width = 250.000000000000000000
+      Size.Height = 276.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 6.000000000000000000
+      YRadius = 6.000000000000000000
+      object img_foto: TImage
+        MultiResBitmap = <
+          item
+          end>
+        Align = Top
+        Margins.Top = 20.000000000000000000
+        Position.Y = 20.000000000000000000
+        Size.Width = 250.000000000000000000
+        Size.Height = 140.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object lbl_nome: TLabel
+        Align = Top
+        StyledSettings = [Family, FontColor]
+        Position.Y = 160.000000000000000000
+        Size.Width = 250.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'Nome do produto'
+        TabOrder = 1
+      end
+      object lbl_preco: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Position.Y = 200.000000000000000000
+        Size.Width = 250.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFF747474
+        TextSettings.HorzAlign = Center
+        Text = 'R$ 100,00'
+        TabOrder = 2
+      end
+      object img_fechar_detalhe: TImage
+        MultiResBitmap.Height = 39
+        MultiResBitmap.Width = 39
+        MultiResBitmap = <
+          item
+            Width = 39
+            Height = 39
+            PNG = {
+              89504E470D0A1A0A0000000D49484452000000270000002708060000008CA351
+              35000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              03C6494441545847ED98FD71E23010C5F9682025E42A08A920D04152011F0DE4
+              AE024805070D40A8804905900AC255104AA002B8F7965D8F64594606F35FDE8C
+              47B62CAF7E5AAD57B21B3FBA504D2D2B6BB158DCA1E8349BCD079638EE59AFDA
+              F1381E8F9F28B7C3E1702FB51555190E505D008D0F8703C1087856807C47DB25
+              20375A95A464388342475DAD62A79B56ABB545FD1697F48E79E81EF73A3A00B7
+              FD0ED73D40D2B367950407B0298A579EA303024CD1C92C65BAF02CA7BB8BE7C6
+              78C6A6FE0DCF4EF43CAA5238C6158CAE61943145B0492A5491E6F33901050AB6
+              E8F197322F46E138620563C9E9A0214EDF552AB0FB181B6C4BCB407870E51860
+              9C5C0D46D153B4A77605546F052A84C3E8387D1D072C2980539503EC60BAFFEA
+              2D4FC1B46A007F9FAE1ABFEA067385BE18CB5FA7AB069DE0A59AC073E6669493
+              5B8251B0CF97C25E90B1543AF2E03012E63289B3D168F4A6D53715FA9AE1D8A3
+              DF2EFBD76A910787067D96ED76FB6C0E82A181864054B87F87E3592F0B05EFED
+              91C8994703EF657034849B039E23B3734D8C4A3B5CA0FD3A06C87ADC673CAD96
+              CBA50C3A26B49BE969871C7AEE79CE12ED2621D6366897A5823CA08265B9ECDC
+              60E93DF68BF6B29938D53A70B8F1C4926BA5549488C6D0DECB5506980763BB84
+              C166FDA23D773922D773621C3793922D3B64C73940AEA195C128B4FFC7929B05
+              A980023828397DE401517511982ADBD168E9C15D24051CEAA588D715C1A8607D
+              2D824BDA409A34C6167A29E2B5C5E03572E16CA4C970F9E0475033E6648A595F
+              1130082B174E5E0418CD02B24C793094BD7EBFFFC9F21240B497B714030CE160
+              28785B622A02B318D318CC03A6CC86F48B67B2C5DFF31C0CD91A77CE58B60613
+              241FFC7940784372684C3A585957E11C711295C1C120DF164B84F2BD1013DABE
+              A3C367B4E32ED603331920DA0D30DD1F5A1D938001F05D3944DE7E0E2360A3B5
+              7A907BB9C2ED73DDC266F35B3DDC65DC6AB537AD1C2DD74C59E370947AAF2EC1
+              21DC754B88B860940747A1A1ECE3D078820793DEDC4BC5584321DB24F4DB63E9
+              2A8053EFD9FE6AA5066A17EDC27EE9AE3BFA698838F8C2686EF29163603A9D5B
+              ECBA1FF596A7C0732602299818AACB83B0C301BB39F2456F053AF7C54F03FC7E
+              B5D84BFA8D5024D862EEFC8D43620C76F971C319896684523853EE37C28EDF18
+              DCDDA64CB541E1B957D890E48EF329A6F20FCFCB940447A917653AB4CA961AAE
+              2CCCEA064A00A622F96F877BEE5FA60D07964F193125C399F0B1F2844E063CB4
+              AA5468272B4F152853653813A70B19FD819EC114D39BEE0BC3ED93FCB7E35A59
+              16573FAA5F8DC67F9FA1AF7B30F756540000000049454E44AE426082}
+            FileName = 'D:\Catalogo\Fontes\Mobile\Imagens\close.png'
+          end>
+        Position.X = 10.000000000000000000
+        Position.Y = 9.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = img_fechar_detalheClick
+      end
+      object lbl_promocao: TLabel
+        Align = Top
+        StyledSettings = [Family]
+        Position.Y = 225.000000000000000000
+        Size.Width = 250.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        TextSettings.FontColor = xFFF16363
+        TextSettings.HorzAlign = Center
+        Text = 'R$ 100,00'
+        TabOrder = 4
+      end
+    end
   end
 end

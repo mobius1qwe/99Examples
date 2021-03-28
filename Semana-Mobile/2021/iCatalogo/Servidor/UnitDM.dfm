@@ -26,8 +26,18 @@ object dm: Tdm
         EventName = 'catalogos'
         OnlyPreDefinedParams = False
         OnReplyEventByType = ServerEventsEventscatalogosReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'produtos'
+        EventName = 'produtos'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = ServerEventsEventsprodutosReplyEventByType
       end>
-    Left = 88
-    Top = 104
+    Left = 112
+    Top = 64
   end
 end

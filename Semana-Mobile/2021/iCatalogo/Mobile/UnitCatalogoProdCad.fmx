@@ -1,13 +1,14 @@
 object FrmCatalogoProdCad: TFrmCatalogoProdCad
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Produto'
   ClientHeight = 551
   ClientWidth = 364
   Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object rect_toolbar: TRectangle
     Align = Top
@@ -17,7 +18,7 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
-    object img_menu: TImage
+    object img_voltar: TImage
       MultiResBitmap.Height = 39
       MultiResBitmap.Width = 39
       MultiResBitmap = <
@@ -48,8 +49,9 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Size.Width = 50.000000000000000000
       Size.Height = 36.000000000000000000
       Size.PlatformDefault = False
+      OnClick = img_voltarClick
     end
-    object img_add: TImage
+    object img_excluir: TImage
       MultiResBitmap.Height = 39
       MultiResBitmap.Width = 39
       MultiResBitmap = <
@@ -67,14 +69,14 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
             7D662F03EA84C34624DC85E0C738F831186936C1E8F5845B0A2A4605B2281019
             612951D00AF911BF4F050D71A72337AD98853738058519C8A708AF60EC367348
             2077CFC5240AAED275BCE38F38DB8DDB0097B1304F0E63AB4E1474B0FC707291
-            C3053F42F7767D60140946718319497737D5C4B6148935C9A6FBE5A6345BB799
+            C3053F42F7767D6014094631C18CB47637D5C4B6148935C9A6FBE5A6345BB799
             0956A33B7EA65FC27D34B6BBEC0224F8ECF20CFED70961C4E972DEE26CF7704D
             2CF2AB709438C75B8C0016312FDCBFF06C5CC498ED6FC2A5C5919163593D044A
             AF3373C75AD4C9B27FBD6A4C42E862C4E962C4E962C4E972BEE218DB0438F8F9
             4E6C9DF6B23EF60C4A7DEA3EE64F5817234E970A719035B92C59DE67666D24A2
             2DE4CF2FA234216CF7BB0F60611F4BB067A51E63491D49916EECB838A6FF7AFD
             D06F16EEDD958A4B71BCF910078F5BB552B92556292E85479056EC62CA825309
-            F022BB4B655087901FE0FB9BDC907957900000000049454E44AE426082}
+            F022BB4B655087901FE0F79BDC8D6466160000000049454E44AE426082}
           FileName = 'D:\Catalogo\Fontes\Mobile\Imagens\delete.png'
         end>
       Align = Right
@@ -86,8 +88,9 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Size.Width = 50.000000000000000000
       Size.Height = 36.000000000000000000
       Size.PlatformDefault = False
+      OnClick = img_excluirClick
     end
-    object Label1: TLabel
+    object lbl_titulo: TLabel
       Align = Client
       StyledSettings = [Family, FontColor]
       Size.Width = 254.000000000000000000
@@ -127,7 +130,7 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       TabOrder = 3
       Position.Y = 29.000000000000000000
       Size.Width = 324.000000000000000000
-      Size.Height = 30.000000000000000000
+      Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
     end
   end
@@ -152,13 +155,13 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Text = 'Pre'#231'o'
       TabOrder = 1
     end
-    object Edit1: TEdit
+    object edt_preco: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
       TabOrder = 2
       Position.Y = 29.000000000000000000
       Size.Width = 324.000000000000000000
-      Size.Height = 30.000000000000000000
+      Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
     end
   end
@@ -183,13 +186,13 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Text = 'Pre'#231'o promocional'
       TabOrder = 2
     end
-    object Edit2: TEdit
+    object edt_promocao: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
       TabOrder = 3
       Position.Y = 29.000000000000000000
       Size.Width = 324.000000000000000000
-      Size.Height = 30.000000000000000000
+      Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
     end
   end
@@ -214,11 +217,11 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Text = 'Produto em destaque'
       TabOrder = 2
     end
-    object Switch1: TSwitch
+    object Switch: TSwitch
       Align = Right
       IsChecked = False
-      Position.X = 240.000000000000000000
-      Size.Width = 84.000000000000000000
+      Position.X = 280.000000000000000000
+      Size.Width = 44.000000000000000000
       Size.Height = 37.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
@@ -242,9 +245,10 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       TextSettings.Font.Size = 16.000000000000000000
       TextSettings.Font.StyleExt = {00060000000000000004000000}
       TextSettings.FontColor = claWhite
+      OnClick = btn_salvarClick
     end
   end
-  object Circle1: TCircle
+  object c_foto: TCircle
     Align = Center
     Fill.Bitmap.Bitmap.PNG = {
       89504E470D0A1A0A0000000D49484452000000C8000000C80806000000AD58AE
@@ -368,6 +372,7 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
     Size.Height = 120.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE3E3E3
+    OnClick = c_fotoClick
     object Label6: TLabel
       Align = Bottom
       StyledSettings = [Family]
@@ -382,5 +387,9 @@ object FrmCatalogoProdCad: TFrmCatalogoProdCad
       Text = 'Editar Logotipo'
       TabOrder = 0
     end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 48
+    Top = 368
   end
 end
