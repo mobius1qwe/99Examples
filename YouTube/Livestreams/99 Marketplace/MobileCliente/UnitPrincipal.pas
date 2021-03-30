@@ -550,6 +550,7 @@ begin
                     if NOT Assigned(FrmClassificar) then
                         Application.CreateForm(TFrmClassificar, FrmClassificar);
 
+                    FrmClassificar.id_pedido := TListView(Sender).Items[ItemIndex].Tag;
                     FrmClassificar.ShowModal(procedure (ModalResult: TModalResult)
                     begin
                         ListarAceito;

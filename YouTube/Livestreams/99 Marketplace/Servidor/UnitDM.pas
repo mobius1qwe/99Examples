@@ -52,6 +52,9 @@ type
     procedure DWEventsPedidoEventsaprovarReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
+    procedure DWEventsPedidoEventsavaliarReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
@@ -84,6 +87,9 @@ type
     function CriarChat(id_usuario_de, id_usuario_para, texto,
       id_orcamento: string; out status: integer): string;
     function AprovarPedido(id_usuario, id_pedido: string;
+      out status: integer): string;
+    function AvaliarPedido(id_usuario, id_pedido, tipo_avaliacao: string;
+      avaliacao: integer;
       out status: integer): string;
 
     { Private declarations }
@@ -398,6 +404,9 @@ begin
         p.DisposeOf;
     end;
 end;
+
+
+
 
 function TDm.CriarOrcamento(id_pedido, id_usuario, obs: string;
                             valor_total : double;
@@ -1080,6 +1089,80 @@ begin
     end;
 end;
 
+
+function TDm.AvaliarPedido(id_usuario, id_pedido, tipo_avaliacao: string;
+                           avaliacao: integer;
+                           out status: integer): string;
+var
+    p : TPedido;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        json := TJSONObject.Create;
+        p := TPedido.Create(dm.conn);
+
+        try
+            StrToInt(id_usuario);
+        except
+            json.AddPair('retorno', 'Id. usuário inválido');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_pedido);
+        except
+            json.AddPair('retorno', 'Id. pedido inválido');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        if (tipo_avaliacao <> 'C') and (tipo_avaliacao <> 'P') then
+        begin
+            json.AddPair('retorno', 'Tipo de avaliacao inválida');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        if avaliacao < 1 then
+        begin
+            json.AddPair('retorno', 'Avaliação deve ser maior que zero');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        p.ID_USUARIO := id_usuario.ToInteger;
+        p.ID_PEDIDO := id_pedido.ToInteger;
+
+
+        if NOT p.Avaliar(tipo_avaliacao, avaliacao, erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            Status := 200;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
 procedure Tdm.DWEventsOrcamentoEventschatReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
   RequestHeader: TStringList);
@@ -1108,6 +1191,19 @@ begin
         Result := AprovarPedido(Params.ItemsString['id_usuario'].AsString,
                               Params.ItemsString['id_pedido'].AsString,
                               StatusCode)
+end;
+
+procedure Tdm.DWEventsPedidoEventsavaliarReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+begin
+    // tipo_avaliacao: C=Enviada pelo cliente | P=Enviada pelo prestador
+
+    Result := AvaliarPedido(Params.ItemsString['id_usuario'].AsString,
+                            Params.ItemsString['id_pedido'].AsString,
+                            Params.ItemsString['tipo_avaliacao'].AsString,
+                            Params.ItemsString['avaliacao'].AsInteger,
+                            StatusCode);
 end;
 
 procedure Tdm.DWEventsPedidoEventspedidoReplyEventByType(var Params: TDWParams;

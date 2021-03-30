@@ -19,6 +19,8 @@ type
         FENDERECO: string;
         FGRUPO: string;
         FVALOR_TOTAL: Double;
+        FAVALIACAO_PARA_PRESTADOR: Double;
+        FAVALIACAO_PARA_CLIENTE: Double;
     public
         constructor Create(conn : TFDConnection);
         property ID_PEDIDO : integer read FID_PEDIDO write FID_PEDIDO;
@@ -32,6 +34,8 @@ type
         property DETALHE : string read FDETALHE write FDETALHE;
         property QTD_MAX_ORC : integer read FQTD_MAX_ORC write FQTD_MAX_ORC;
         property VALOR_TOTAL : Double read FVALOR_TOTAL write FVALOR_TOTAL;
+        property AVALIACAO_PARA_PRESTADOR : Double read FAVALIACAO_PARA_PRESTADOR write FAVALIACAO_PARA_PRESTADOR;
+        property AVALIACAO_PARA_CLIENTE : Double read FAVALIACAO_PARA_CLIENTE write FAVALIACAO_PARA_CLIENTE;
 
         function DadosPedido(out erro: string): Boolean;
         function Inserir(out erro: string): Boolean;
@@ -39,6 +43,7 @@ type
         function Excluir(out erro: string): Boolean;
         function ListarPedido(order_by: string; out erro: string): TFDQuery;
         function Aprovar(out erro: string): Boolean;
+        function Avaliar(tipo_avaliacao: string; avaliacao: double; out erro: string): Boolean;
 end;
 
 implementation
@@ -421,6 +426,57 @@ begin
         begin
             Result := false;
             erro := 'Erro ao atualizar pedido: ' + ex.Message;
+        end;
+    end;
+end;
+
+
+// tipo_avaliacao: C=Enviada pelo cliente | P=Enviada pelo prestador
+function TPedido.Avaliar(tipo_avaliacao: string;
+                         avaliacao: double;
+                         out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (ID_PEDIDO <= 0)  then
+    begin
+        Result := false;
+        erro := 'Número do pedido não informado';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            // Atualiza o pedido...
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO ');
+
+            if tipo_avaliacao = 'C' then
+                SQL.Add('SET AVALIACAO_PARA_PRESTADOR = :AVALIACAO ')
+            else
+                SQL.Add('SET AVALIACAO_PARA_CLIENTE = :AVALIACAO ');
+
+            SQL.Add('WHERE ID_PEDIDO=:ID_PEDIDO AND ID_USUARIO=:ID_USUARIO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_USUARIO').Value := ID_USUARIO;
+            ParamByName('AVALIACAO').Value := avaliacao;
+            ExecSQL;
+
+            DisposeOf;
+        end;
+
+        Result := true;
+        erro := '';
+
+    except on ex:exception do
+        begin
+            Result := false;
+            erro := 'Erro ao avaliar pedido: ' + ex.Message;
         end;
     end;
 end;

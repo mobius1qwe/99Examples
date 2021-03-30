@@ -293,4 +293,21 @@ object dm: Tdm
     Left = 56
     Top = 528
   end
+  object RequestPedidoAvaliar: TRESTRequest
+    Client = RESTClient
+    Method = rmPOST
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'pedidos/avaliar'
+    SynchronizedEvents = False
+    Left = 200
+    Top = 528
+  end
 end
