@@ -310,4 +310,21 @@ object dm: Tdm
     Left = 200
     Top = 528
   end
+  object RequestPerfilCad: TRESTRequest
+    Client = RESTClient
+    Method = rmPATCH
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'usuarios/usuario'
+    SynchronizedEvents = False
+    Left = 344
+    Top = 528
+  end
 end

@@ -24,6 +24,7 @@ end;
 
 implementation
 
+
 class function TFunctions.OccurrencesOfChar(const S: string; const C: char): integer;
 var
   i: Integer;

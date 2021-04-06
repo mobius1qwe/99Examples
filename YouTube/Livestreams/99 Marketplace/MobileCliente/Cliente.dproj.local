@@ -49,5 +49,5 @@
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>
 		<PMacMini iOSSimulator="iPhone"/>
-	</ActiveMobileDevice>
+	</ActiveMobileDevice>  <BT_BuildType>Debug</BT_BuildType>
 </BorlandProject>

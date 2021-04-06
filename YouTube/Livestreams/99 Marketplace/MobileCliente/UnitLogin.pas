@@ -220,6 +220,9 @@ procedure TFrmLogin.ProcessarLogin;
 var
     jsonObj : TJsonObject;
     json, retorno, id_usuario, nome: string;
+
+    endereco, email, fone : string;
+    avaliacao_cliente, avaliacao_prestador : double;
 begin
     try
         json := dm.RequestLogin.Response.JSONValue.ToString;
@@ -228,6 +231,12 @@ begin
         retorno := jsonObj.GetValue('retorno').Value;
         id_usuario := jsonObj.GetValue('id_usuario').Value;
         nome := jsonObj.GetValue('nome').Value;
+
+        endereco := jsonObj.GetValue('endereco').Value;
+        email := jsonObj.GetValue('email').Value;
+        fone := jsonObj.GetValue('fone').Value;
+        avaliacao_cliente := jsonObj.GetValue('avaliacao_cliente').Value.ToDouble;
+        avaliacao_prestador := jsonObj.GetValue('avaliacao_prestador').Value.ToDouble;
 
         // Se deu erro...
         if dm.RequestLogin.Response.StatusCode <> 200 then
@@ -247,6 +256,11 @@ begin
     Application.MainForm := FrmPrincipal;
 
     FrmPrincipal.id_usuario_logado := id_usuario.ToInteger;
+    FrmPrincipal.lbl_endereco.Text := endereco;
+    FrmPrincipal.lbl_nome.Text := nome;
+    FrmPrincipal.lbl_email.Text := email;
+    FrmPrincipal.lbl_fone.Text := fone;
+    FrmPrincipal.Avaliar(Round(avaliacao_cliente));
     FrmPrincipal.Show;
     FrmLogin.Close;
 end;
@@ -282,6 +296,12 @@ begin
     Application.MainForm := FrmPrincipal;
 
     FrmPrincipal.id_usuario_logado := id_usuario.ToInteger;
+    FrmPrincipal.lbl_endereco.Text := edt_cad_endereco.Text;
+    FrmPrincipal.lbl_nome.Text := edt_cad_nome.Text;
+    FrmPrincipal.lbl_email.Text := edt_cad_email.Text;
+    FrmPrincipal.lbl_fone.Text := edt_cad_fone.Text;
+    FrmPrincipal.Avaliar(0);
+    FrmPrincipal.c_foto.Fill.Bitmap.Bitmap := FrmLogin.c_foto.Fill.Bitmap.Bitmap;
     FrmPrincipal.Show;
     FrmLogin.Close;
 end;

@@ -91,6 +91,8 @@ type
     function AvaliarPedido(id_usuario, id_pedido, tipo_avaliacao: string;
       avaliacao: integer;
       out status: integer): string;
+    function EditarUsuario(id_usuario, campo, valor: string;
+      out status: integer): string;
 
     { Private declarations }
   public
@@ -182,6 +184,11 @@ begin
             json.AddPair('retorno', 'OK');
             json.AddPair('id_usuario', u.ID_USUARIO.ToString);
             json.AddPair('nome', u.NOME);
+            json.AddPair('endereco', u.ENDERECO);
+            json.AddPair('email', u.EMAIL);
+            json.AddPair('fone', u.FONE);
+            json.AddPair('avaliacao_cliente', TJSONNumber.Create(u.AVALIACAO_CLIENTE));
+            json.AddPair('avaliacao_prestador', TJSONNumber.Create(u.AVALIACAO_PRESTADOR));
             Status := 200;
         end;
 
@@ -262,6 +269,86 @@ begin
             json.AddPair('id_usuario', u.ID_USUARIO.ToString);
             json.AddPair('nome', u.NOME);
             Status := 201;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        foto_bmp.DisposeOf;
+        json.DisposeOf;
+        u.DisposeOf;
+    end;
+end;
+
+
+function TDm.EditarUsuario(id_usuario, campo, valor : string;
+                          out status: integer): string;
+var
+    u : TUsuario;
+    json : TJSONObject;
+    erro: string;
+    foto_bmp : TBitmap;
+begin
+    try
+        json := TJSONObject.Create;
+        u := TUsuario.Create(dm.conn);
+
+
+        if id_usuario = '' then
+        begin
+            json.AddPair('retorno', 'Foto do usuário não enviada');
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        if (campo <> 'email') and (campo <> 'nome') and (campo <> 'fone') and
+           (campo <> 'endereco') and (campo <> 'senha') and (campo <> 'foto') then
+        begin
+            json.AddPair('retorno', 'Campo inválido');
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        // Criar foto bitmap...
+        if campo = 'foto' then
+        begin
+            try
+                foto_bmp := TFunctions.BitmapFromBase64(valor);
+            except on ex:exception do
+                begin
+                    json.AddPair('retorno', 'Erro ao criar imagem no servidor: ' + ex.Message);
+                    json.AddPair('id_usuario', '0');
+                    json.AddPair('nome', '');
+                    Status := 400;
+                    Result := json.ToString;
+                    exit;
+                end;
+            end;
+        end;
+
+
+        u.ID_USUARIO := id_usuario.ToInteger;
+        u.FOTO := foto_bmp;
+
+        if NOT u.Editar(campo, valor, erro) then
+        begin
+            json.AddPair('retorno', erro);
+            json.AddPair('id_usuario', '0');
+            json.AddPair('nome', '');
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_usuario', u.ID_USUARIO.ToString);
+            json.AddPair('nome', u.NOME);
+            Status := 200;
         end;
 
         Result := json.ToString;
@@ -960,9 +1047,16 @@ begin
                                Params.ItemsString['foto'].AsString,
                                StatusCode)
     else
+    // PATCH.......
+    if RequestType = TRequestType.rtPatch then
+        Result := EditarUsuario(Params.ItemsString['id_usuario'].AsString,
+                                Params.ItemsString['campo'].AsString,
+                                Params.ItemsString['valor'].AsString,
+                                StatusCode)
+    else
     begin
         StatusCode := 403;
-        Result := '{"retorno":"Verbo HTTP não é válido. Utilize o GET", "id_usuario": 0, "nome": ""}';
+        Result := '{"retorno":"Verbo HTTP não é válido"}';
     end;
 
 end;

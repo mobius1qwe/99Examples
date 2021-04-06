@@ -34,6 +34,7 @@ type
         function DadosUsuario(out erro: string): Boolean;
         function ValidarLogin(out erro: string): Boolean;
         function Inserir(out erro: string): Boolean;
+        function Editar(campo, valor: string; out erro: string): Boolean;
 end;
 
 implementation
@@ -116,6 +117,57 @@ begin
     end;
 end;
 
+function TUsuario.Editar(campo, valor: string; out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (campo = '')  then
+    begin
+        Result := false;
+        erro := 'Informe o campo';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            Active := false;
+            sql.Clear;
+            SQL.Add('UPDATE TAB_USUARIO SET ' + campo + ' = :VALOR');
+            SQL.Add('WHERE ID_USUARIO=:ID_USUARIO');
+
+            if campo = 'foto' then
+                ParamByName('VALOR').Assign(FOTO)
+            else
+                ParamByName('VALOR').Value := valor;
+
+            ParamByName('ID_USUARIO').Value := ID_USUARIO;
+
+            {
+            if FOTO <> nil then
+                ParamByName('FOTO').Assign(FOTO)
+            else
+                ParamByName('FOTO').Clear;
+            }
+
+            ExecSQL;
+
+            DisposeOf;
+        end;
+
+        Result := true;
+        erro := '';
+
+    except on ex:exception do
+        begin
+            Result := false;
+            erro := 'Erro ao alterar usuário: ' + ex.Message;
+        end;
+    end;
+end;
 function TUsuario.ValidarLogin(out erro: string): Boolean;
 var
     qry : TFDQuery;
@@ -158,9 +210,10 @@ begin
                 ENDERECO := FieldByName('ENDERECO').AsString;
                 AVALIACAO_CLIENTE := FieldByName('AVALIACAO_CLIENTE').AsFloat;
                 AVALIACAO_PRESTADOR := FieldByName('AVALIACAO_PRESTADOR').AsFloat;
-
-                //FOTO
                 DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
+
+                // Foto do usuario
+                //FOTO := ????
 
                 erro := '';
                 Result := true;

@@ -7,7 +7,9 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.TabControl,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, FMX.ListBox, System.NetEncoding, FMX.TextLayout;
+  FMX.ListView, FMX.ListBox, System.NetEncoding, FMX.TextLayout, u99Permissions,
+  System.Actions, FMX.ActnList, FMX.StdActns, FMX.MediaLibrary.Actions, FMX.Edit,
+  uFunctions;
 
 type
   TFrmPrincipal = class(TForm)
@@ -28,42 +30,42 @@ type
     lv_pedidos: TListView;
     Line1: TLine;
     Rectangle1: TRectangle;
-    Circle1: TCircle;
+    c_foto: TCircle;
     Label1: TLabel;
     Layout1: TLayout;
     Label2: TLabel;
     Label3: TLabel;
-    Image4: TImage;
-    Image5: TImage;
-    Image6: TImage;
-    Image7: TImage;
-    Image8: TImage;
+    img1: TImage;
+    img4: TImage;
+    img3: TImage;
+    img2: TImage;
+    img5: TImage;
     ListBox1: TListBox;
     lbi_endereco: TListBoxItem;
     Label4: TLabel;
-    Label5: TLabel;
+    lbl_endereco: TLabel;
     Image9: TImage;
     Layout2: TLayout;
-    ListBoxItem2: TListBoxItem;
+    lbi_nome: TListBoxItem;
     Image11: TImage;
     Layout4: TLayout;
     Label8: TLabel;
-    Label9: TLabel;
-    ListBoxItem3: TListBoxItem;
+    lbl_nome: TLabel;
+    lbi_email: TListBoxItem;
     Image12: TImage;
     Layout5: TLayout;
     Label10: TLabel;
-    Label11: TLabel;
-    ListBoxItem4: TListBoxItem;
+    lbl_email: TLabel;
+    lbi_fone: TListBoxItem;
     Image13: TImage;
     Layout6: TLayout;
     Label12: TLabel;
-    Label13: TLabel;
-    ListBoxItem1: TListBoxItem;
+    lbl_fone: TLabel;
+    lbi_senha: TListBoxItem;
     Image10: TImage;
     Layout3: TLayout;
     Label6: TLabel;
-    Label7: TLabel;
+    lbl_senha: TLabel;
     Line2: TLine;
     Line3: TLine;
     Line4: TLine;
@@ -77,6 +79,19 @@ type
     lv_realizados: TListView;
     StyleBook: TStyleBook;
     img_realizar: TImage;
+    img_cheia: TImage;
+    img_vazia: TImage;
+    OpenDialog: TOpenDialog;
+    ActionList1: TActionList;
+    ActLibrary: TTakePhotoFromLibraryAction;
+    layout_cad: TLayout;
+    rect_cad: TRectangle;
+    lbl_cad_titulo: TLabel;
+    rect_cad_salvar: TRectangle;
+    Label25: TLabel;
+    edt_cad_texto: TEdit;
+    img_cad_fechar: TImage;
+    rect_cad_fundo: TRectangle;
     procedure img_notificacaoClick(Sender: TObject);
     procedure img_add_pedidoClick(Sender: TObject);
     procedure img_aba1Click(Sender: TObject);
@@ -84,7 +99,6 @@ type
     procedure lv_pedidosUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
     procedure FormCreate(Sender: TObject);
-    procedure Circle1Click(Sender: TObject);
     procedure lv_aceitosUpdateObjects(const Sender: TObject;
       const AItem: TListViewItem);
     procedure lv_realizadosUpdateObjects(const Sender: TObject;
@@ -93,7 +107,20 @@ type
       const AItem: TListViewItem);
     procedure lv_aceitosItemClickEx(const Sender: TObject; ItemIndex: Integer;
       const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure c_fotoClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure ActLibraryDidFinishTaking(Image: TBitmap);
+    procedure lbi_enderecoClick(Sender: TObject);
+    procedure img_cad_fecharClick(Sender: TObject);
+    procedure rect_cad_fundoClick(Sender: TObject);
+    procedure rect_cad_salvarClick(Sender: TObject);
+    procedure lbi_nomeClick(Sender: TObject);
+    procedure lbi_emailClick(Sender: TObject);
+    procedure lbi_foneClick(Sender: TObject);
+    procedure lbi_senhaClick(Sender: TObject);
   private
+    permissao : T99Permissions;
+    lbl : TLabel;
     procedure MudarAba(img: TImage);
     procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
       qtd_orc_enviada: integer; categoria, dt, pedido, descricao: string);
@@ -107,6 +134,11 @@ type
     procedure ProcessarPedidoErro(Sender: TObject);
     procedure ProcessarPedidoAceito;
     procedure ProcessarPedidoRealizado;
+    function DesenharEstrela(indCheia: boolean): TBitmap;
+    procedure AbrirEdicaoItem(titulo: string; lbl_edicao: TLabel;
+                              ind_senha : Boolean = false);
+    procedure FecharEdicaoItem(ind_cancelar: Boolean);
+    procedure EditarFotoUsuario(foto: TBitmap);
     { Private declarations }
   public
     id_usuario_logado : Integer;
@@ -116,6 +148,7 @@ type
     function BitmapFromBase64(const base64: string): TBitmap;
     function GetTextHeight(const D: TListItemText; const Width: single;
       const Text: string): Integer;
+    procedure Avaliar(nota: integer);
   end;
 
 var
@@ -126,7 +159,65 @@ implementation
 {$R *.fmx}
 
 uses UnitNotificacao, UnitPedido, UnitChat, System.JSON, UnitDM,
-  FMX.DialogService, UnitClassificacao;
+  FMX.DialogService, UnitClassificacao, REST.Types;
+
+procedure TFrmPrincipal.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel;
+                                        ind_senha : Boolean = false);
+begin
+    lbl_cad_titulo.Text := titulo;
+
+    if ind_senha then
+        edt_cad_texto.Text := ''
+    else
+        edt_cad_texto.Text := trim(lbl_edicao.Text);
+
+    edt_cad_texto.Password := ind_senha;
+    lbl := lbl_edicao;
+
+    rect_cad.Margins.Top := -rect_cad.Height;
+    layout_cad.Visible := true;
+
+    rect_cad.AnimateFloat('Margins.Top', 0, 0.3, TAnimationType.InOut,
+                           TInterpolationType.Circular);
+end;
+
+procedure TFrmPrincipal.FecharEdicaoItem(ind_cancelar : Boolean);
+begin
+    if NOT ind_cancelar then
+        lbl.Text := edt_cad_texto.Text;
+
+    rect_cad.AnimateFloat('Margins.Top', -rect_cad.Height, 0.3,
+                          TAnimationType.InOut,
+                          TInterpolationType.Circular);
+
+    TThread.CreateAnonymousThread(procedure
+    begin
+        Sleep(320);
+
+        TThread.Synchronize(nil, procedure
+        begin
+            layout_cad.Visible := false;
+        end);
+    end).Start;
+
+end;
+
+function TFrmPrincipal.DesenharEstrela(indCheia : boolean): TBitmap;
+begin
+    if indCheia then
+        Result := img_cheia.Bitmap
+    else
+        Result := img_vazia.Bitmap;
+end;
+
+procedure TFrmPrincipal.Avaliar(nota: integer);
+begin
+    img1.Bitmap := DesenharEstrela(nota >= 1);
+    img2.Bitmap := DesenharEstrela(nota >= 2);
+    img3.Bitmap := DesenharEstrela(nota >= 3);
+    img4.Bitmap := DesenharEstrela(nota >= 4);
+    img5.Bitmap := DesenharEstrela(nota >= 5);
+end;
 
 function TFrmPrincipal.Base64FromBitmap(Bitmap: TBitmap): string;
 var
@@ -184,12 +275,17 @@ begin
   end;
 end;
 
-procedure TFrmPrincipal.Circle1Click(Sender: TObject);
+procedure TFrmPrincipal.c_fotoClick(Sender: TObject);
 begin
-    if NOT Assigned(FrmChat) then
-        Application.CreateForm(TFrmChat, FrmChat);
-
-    FrmChat.Show;
+    {$IFDEF MSWINDOWS}
+    if OpenDialog.Execute then
+    begin
+        c_foto.Fill.Bitmap.Bitmap.LoadFromFile(OpenDialog.FileName);
+        EditarFotoUsuario(c_foto.Fill.Bitmap.Bitmap);
+    end;
+    {$ELSE}
+        permissao.PhotoLibrary(ActLibrary);
+    {$ENDIF}
 end;
 
 function TFrmPrincipal.GetTextHeight(const D: TListItemText; const Width: single; const Text: string): Integer;
@@ -224,7 +320,13 @@ end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
 begin
+    permissao := T99Permissions.Create;
     MudarAba(img_aba1);
+end;
+
+procedure TFrmPrincipal.FormDestroy(Sender: TObject);
+begin
+    permissao.DisposeOf;
 end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
@@ -263,6 +365,44 @@ begin
         TListItemImage(Objects.FindDrawable('ImgProgresso')).PlaceOffset.Y := TListItemImage(Objects.FindDrawable('ImgFundo')).PlaceOffset.Y;
 
     end;
+end;
+
+procedure TFrmPrincipal.EditarFotoUsuario(foto: TBitmap);
+var
+    json, retorno : string;
+    jsonObj : TJSONObject;
+begin
+    // Salvar item...
+    dm.RequestPerfilCad.Params.Clear;
+    dm.RequestPerfilCad.AddParameter('id', '');
+    dm.RequestPerfilCad.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestPerfilCad.AddParameter('campo', 'foto');
+    dm.RequestPerfilCad.AddParameter('valor', TFunctions.Base64FromBitmap(foto), pkREQUESTBODY);
+    dm.RequestPerfilCad.Execute;
+
+    try
+        json := dm.RequestPerfilCad.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+
+
+        // Se deu erro...
+        if dm.RequestPerfilCad.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    finally
+        jsonObj.DisposeOf;
+    end;
+end;
+
+procedure TFrmPrincipal.ActLibraryDidFinishTaking(Image: TBitmap);
+begin
+    c_foto.Fill.Bitmap.Bitmap := Image;
+    EditarFotoUsuario(Image);
 end;
 
 procedure TFrmPrincipal.AddAceito(seq_pedido, seq_usuario : integer;
@@ -466,6 +606,48 @@ begin
     end;
 end;
 
+procedure TFrmPrincipal.rect_cad_fundoClick(Sender: TObject);
+begin
+    FecharEdicaoItem(true);
+end;
+
+procedure TFrmPrincipal.rect_cad_salvarClick(Sender: TObject);
+var
+    json, retorno : string;
+    jsonObj : TJSONObject;
+begin
+    // Salvar item...
+    dm.RequestPerfilCad.Params.Clear;
+    dm.RequestPerfilCad.AddParameter('id', '');
+    dm.RequestPerfilCad.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestPerfilCad.AddParameter('campo', lbl.TagString);
+    dm.RequestPerfilCad.AddParameter('valor', edt_cad_texto.Text);
+    dm.RequestPerfilCad.Execute;
+
+    try
+        json := dm.RequestPerfilCad.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+
+
+        // Se deu erro...
+        if dm.RequestPerfilCad.Response.StatusCode <> 200 then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+    finally
+        jsonObj.DisposeOf;
+    end;
+
+    if NOT edt_cad_texto.Password then
+        lbl.Text := edt_cad_texto.Text;
+
+    FecharEdicaoItem(true);
+end;
+
 procedure TFrmPrincipal.ProcessarPedidoErro(Sender: TObject);
 begin
     if Assigned(Sender) and (Sender is Exception) then
@@ -592,6 +774,10 @@ begin
     img.PlaceOffset.Y := txt.PlaceOffset.Y - 5;
 
     Aitem.Height := Trunc(img.PlaceOffset.Y + img.Height + 20);
+
+    // Botao realizar...
+    img := TListItemImage(AItem.Objects.FindDrawable('ImgRealizar'));
+    img.PlaceOffset.Y := AItem.Height - 55;
 end;
 
 procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
@@ -715,12 +901,47 @@ begin
     FrmPedido.Show;
 end;
 
+procedure TFrmPrincipal.img_cad_fecharClick(Sender: TObject);
+begin
+    FecharEdicaoItem(true);
+end;
+
 procedure TFrmPrincipal.img_notificacaoClick(Sender: TObject);
 begin
     if NOT Assigned(FrmNotificacao) then
         Application.CreateForm(TFrmNotificacao, FrmNotificacao);
 
     FrmNotificacao.Show;
+end;
+
+procedure TFrmPrincipal.lbi_emailClick(Sender: TObject);
+begin
+    lbl_email.TagString := 'email';
+    AbrirEdicaoItem('E-mail', lbl_email);
+end;
+
+procedure TFrmPrincipal.lbi_enderecoClick(Sender: TObject);
+begin
+    lbl_endereco.TagString := 'endereco';
+    AbrirEdicaoItem('Endereço', lbl_endereco);
+end;
+
+procedure TFrmPrincipal.lbi_foneClick(Sender: TObject);
+begin
+    lbl_fone.TagString := 'fone';
+    AbrirEdicaoItem('Telefone', lbl_fone);
+end;
+
+procedure TFrmPrincipal.lbi_nomeClick(Sender: TObject);
+begin
+    lbl_nome.TagString := 'nome';
+    AbrirEdicaoItem('Nome', lbl_nome);
+end;
+
+procedure TFrmPrincipal.lbi_senhaClick(Sender: TObject);
+begin
+    lbl_senha.TagString := 'senha';
+    AbrirEdicaoItem('Senha', lbl_senha, true);
 end;
 
 end.
