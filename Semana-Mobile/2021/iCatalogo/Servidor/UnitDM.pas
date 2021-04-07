@@ -21,6 +21,9 @@ type
     procedure ServerEventsEventsprodutosReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
+    procedure ServerEventsEventsfotoReplyEventByType(var Params: TDWParams;
+      var Result: string; const RequestType: TRequestType;
+      var StatusCode: Integer; RequestHeader: TStringList);
   private
     function ListarCatalogo(id_usuario, id_catalogo: integer; out status: integer): string;
     function CriarCatalogo(id_usuario: integer; nome, foto64: string;
@@ -39,6 +42,8 @@ type
       out status: integer): string;
     function ListarProduto(id_catalogo, pagina, id_usuario, id_produto: integer;
       ind_destaque, busca: string;
+      out status: integer): string;
+    function GetFotoProduto(id_produto, id_usuario: integer;
       out status: integer): string;
     { Private declarations }
   public
@@ -333,11 +338,26 @@ var
     json : uDWJSONObject.TJSONValue;
     erro : string;
     qry : TFDQuery;
+    qtd_reg_pagina, skip : integer;
 begin
     try
+        // Configura paginacao...
+        qtd_reg_pagina := 15;
+        skip := (pagina * qtd_reg_pagina) - qtd_reg_pagina;
+        //------------------------
+
         qry := TFDQuery.Create(nil);
         qry.Connection := dm.conn;
-        qry.SQL.Add('SELECT * FROM TAB_CATALOGO_PRODUTO WHERE ID_CATALOGO=:ID_CATALOGO');
+
+        if (pagina > 0) and (id_produto = 0) then
+        begin
+            qry.SQL.Add('SELECT FIRST ' + qtd_reg_pagina.ToString + ' SKIP ' + skip.ToString + ' ');
+            qry.SQL.Add('ID_PRODUTO, ID_CATALOGO, NOME, PRECO, PRECO_PROMOCAO, IND_DESTAQUE, DT_GERACAO');
+        end
+        else
+            qry.SQL.Add('SELECT *');
+
+        qry.SQL.Add('FROM TAB_CATALOGO_PRODUTO WHERE ID_CATALOGO=:ID_CATALOGO');
 
         if id_produto > 0 then
         begin
@@ -358,6 +378,8 @@ begin
         end;
 
         qry.ParamByName('ID_CATALOGO').Value := id_catalogo;
+
+        qry.SQL.Add('ORDER BY ID_PRODUTO');
         qry.Active := true;
 
         json := uDWJSONObject.TJSONValue.Create;
@@ -588,6 +610,68 @@ begin
     end;
 end;
 
+function TDm.GetFotoProduto(id_produto, id_usuario : integer;
+                            out status: integer): string;
+var
+    json : TJSONObject;
+    qry : TFDQuery;
+    foto : TBitmap;
+    foto64: string;
+begin
+    try
+        sleep(Random(500) * 10);
+        json := TJSONObject.Create;
+
+        qry := TFDQuery.Create(nil);
+        qry.Connection := dm.conn;
+
+
+        // Validações dos parametros...
+        if (id_produto <= 0) then
+        begin
+            json.AddPair('retorno', 'Informe todos os parâmetros');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+
+        try
+            qry.SQL.Clear;
+            qry.SQL.Add('SELECT FOTO FROM TAB_CATALOGO_PRODUTO');
+            qry.SQL.Add('WHERE ID_PRODUTO = :ID_PRODUTO');
+            qry.ParamByName('ID_PRODUTO').Value := id_produto;
+            qry.Active := true;
+
+            if qry.FieldByName('FOTO').AsString <> '' then
+            begin
+                foto := TBitmap.Create;
+                TFunctions.LoadBitmapFromBlob(foto, TBlobField(qry.FieldByName('FOTO')));
+                foto64 := TFunctions.Base64FromBitmap(foto);
+                foto.DisposeOf;
+            end
+            else
+                foto64 := '';
+
+            json.AddPair('retorno', 'OK');
+            json.AddPair('foto', foto64);
+            Status := 200;
+
+        except on ex:exception do
+            begin
+                json.AddPair('retorno', ex.Message);
+                Status := 500;
+            end;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        qry.DisposeOf;
+    end;
+end;
+
 
 procedure Tdm.ServerEventsEventscatalogosReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
@@ -652,6 +736,16 @@ begin
         Result := ExcluirProduto(Params.ItemsString['id_produto'].AsInteger,
                                  Params.ItemsString['id_catalogo'].AsInteger,
                                  StatusCode);
+end;
+
+
+procedure Tdm.ServerEventsEventsfotoReplyEventByType(var Params: TDWParams;
+  var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
+  RequestHeader: TStringList);
+begin
+    Result := GetFotoProduto(Params.ItemsString['id_produto'].AsInteger,
+                             Params.ItemsString['id_usuario'].AsInteger,
+                             StatusCode);
 end;
 
 end.

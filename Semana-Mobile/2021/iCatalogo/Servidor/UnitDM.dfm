@@ -36,6 +36,16 @@ object dm: Tdm
         EventName = 'produtos'
         OnlyPreDefinedParams = False
         OnReplyEventByType = ServerEventsEventsprodutosReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'foto'
+        EventName = 'foto'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = ServerEventsEventsfotoReplyEventByType
       end>
     Left = 112
     Top = 64

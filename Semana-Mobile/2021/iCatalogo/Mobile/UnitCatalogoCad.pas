@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Objects, FMX.Edit, FMX.Layouts,
-  uFunctions, System.JSON, FMX.DialogService;
+  uFunctions, System.JSON, FMX.DialogService, u99Permissions, System.Actions,
+  FMX.ActnList, FMX.StdActns, FMX.MediaLibrary.Actions;
 
 type
   TFrmCatalogoCad = class(TForm)
@@ -22,12 +23,17 @@ type
     c_foto: TCircle;
     Label3: TLabel;
     OpenDialog: TOpenDialog;
+    ActionList1: TActionList;
+    ActCamera: TTakePhotoFromCameraAction;
     procedure btn_salvarClick(Sender: TObject);
     procedure img_closeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure img_excluirClick(Sender: TObject);
     procedure c_fotoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ActCameraDidFinishTaking(Image: TBitmap);
   private
+    permissao : T99Permissions;
     procedure ProcessarCatalogo;
     procedure ProcessarCatalogoErro(Sender: TObject);
     function ExcluirCatalogo(id_catalogo: integer): boolean;
@@ -47,9 +53,15 @@ implementation
 
 uses UnitDM, UnitPrincipal, REST.Types;
 
+procedure TFrmCatalogoCad.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    permissao.DisposeOf;
+end;
+
 procedure TFrmCatalogoCad.FormShow(Sender: TObject);
 begin
     img_excluir.Visible := modo = 'A';
+    permissao := T99Permissions.Create;
 end;
 
 procedure TFrmCatalogoCad.img_closeClick(Sender: TObject);
@@ -63,7 +75,7 @@ begin
     if OpenDialog.Execute then
         c_foto.Fill.Bitmap.Bitmap.LoadFromFile(OpenDialog.FileName);
     {$ELSE}
-
+        permissao.Camera(ActCamera);
     {$ENDIF}
 end;
 
@@ -161,6 +173,11 @@ procedure TFrmCatalogoCad.ProcessarCatalogoErro(Sender: TObject);
 begin
     if Assigned(Sender) and (Sender is Exception) then
         ShowMessage(Exception(Sender).Message);
+end;
+
+procedure TFrmCatalogoCad.ActCameraDidFinishTaking(Image: TBitmap);
+begin
+    c_foto.Fill.Bitmap.Bitmap := Image;
 end;
 
 procedure TFrmCatalogoCad.btn_salvarClick(Sender: TObject);

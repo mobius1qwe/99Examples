@@ -9,7 +9,9 @@ uses
   UnitCatalogoProdCad in 'UnitCatalogoProdCad.pas' {FrmCatalogoProdCad},
   UnitCatalogoPreview in 'UnitCatalogoPreview.pas' {FrmCatalogoPreview},
   uFunctions in 'Units\uFunctions.pas',
-  UnitDM in 'UnitDM.pas' {dm: TDataModule};
+  UnitDM in 'UnitDM.pas' {dm: TDataModule},
+  UnitFrameProduto in 'UnitFrameProduto.pas' {FrameProduto: TFrame},
+  u99Permissions in 'Units\u99Permissions.pas';
 
 {$R *.res}
 

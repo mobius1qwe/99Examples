@@ -9,6 +9,7 @@ object FrmCatalogoCad: TFrmCatalogoCad
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   OnShow = FormShow
   DesignerMasterStyle = 0
   object rect_toolbar: TRectangle
@@ -298,5 +299,13 @@ object FrmCatalogoCad: TFrmCatalogoCad
   object OpenDialog: TOpenDialog
     Left = 64
     Top = 152
+  end
+  object ActionList1: TActionList
+    Left = 264
+    Top = 152
+    object ActCamera: TTakePhotoFromCameraAction
+      Category = 'Media Library'
+      OnDidFinishTaking = ActCameraDidFinishTaking
+    end
   end
 end

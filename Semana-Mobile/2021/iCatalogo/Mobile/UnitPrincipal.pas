@@ -239,7 +239,7 @@ begin
         begin
             if TListItemImage(ItemObject).Name = 'ImgEditar' then
             begin
-                OpenCadCatalogo(0);
+                OpenCadCatalogo(TListView(Sender).Items[ItemIndex].Tag);
                 exit;
             end;
 

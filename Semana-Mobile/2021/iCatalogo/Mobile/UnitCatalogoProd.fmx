@@ -198,6 +198,7 @@ object FrmCatalogoProd: TFrmCatalogoProd
     Size.Height = 418.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
+    OnPaint = lv_produtoPaint
     ItemAppearance.ItemHeight = 90
     ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
       item
@@ -205,7 +206,7 @@ object FrmCatalogoProd: TFrmCatalogoProd
         AppearanceClassName = 'TTextObjectAppearance'
         Appearance.Font.Size = 14.000000000000000000
         Appearance.TextAlign = Leading
-        Appearance.Width = 201.000000000000000000
+        Appearance.Width = 265.000000000000000000
         Appearance.Height = 25.000000000000000000
         Appearance.PlaceOffset.X = 96.000000000000000000
         Appearance.PlaceOffset.Y = 21.000000000000000000

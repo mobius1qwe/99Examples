@@ -5,7 +5,7 @@
     </ProjectExtensions>
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'">5200711f02614531</DeviceId>
-        <DeviceId Condition="'$(Platform)'=='Android64'">5200711f02614531</DeviceId>
+        <DeviceId Condition="'$(Platform)'=='Android64'">Emulador_Nexus_7</DeviceId>
         <DeviceId Condition="'$(Platform)'=='iOSDevice32'"/>
         <DeviceId Condition="'$(Platform)'=='iOSDevice64'"/>
         <DeviceId Condition="'$(Platform)'=='iOSSimulator'">iPhone</DeviceId>
@@ -229,6 +229,15 @@
             <RemoteDir>iCatalogo\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon48</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="Android\Debug\provider_paths.xml" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>iCatalogo\res\xml\</RemoteDir>
+            <RemoteName>provider_paths.xml</RemoteName>
+            <DeployClass>AndroidFileProvider</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

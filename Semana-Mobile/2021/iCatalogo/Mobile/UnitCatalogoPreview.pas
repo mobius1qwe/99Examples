@@ -22,7 +22,6 @@ type
     Layout2: TLayout;
     Label3: TLabel;
     lv_produto: TListView;
-    lv_destaque: TListView;
     rect_fundo: TRectangle;
     layout_detalhe: TLayout;
     Rectangle2: TRectangle;
@@ -31,12 +30,15 @@ type
     lbl_preco: TLabel;
     img_fechar_detalhe: TImage;
     lbl_promocao: TLabel;
+    lb_destaque: TListBox;
     procedure FormShow(Sender: TObject);
     procedure edt_buscaExit(Sender: TObject);
     procedure img_fecharClick(Sender: TObject);
     procedure lv_produtoItemClick(const Sender: TObject;
       const AItem: TListViewItem);
     procedure img_fechar_detalheClick(Sender: TObject);
+    procedure lb_destaqueItemClick(const Sender: TCustomListBox;
+      const Item: TListBoxItem);
   private
     procedure ListarProdutos(busca: string; ind_clear: Boolean);
     procedure ProcessarProdutos;
@@ -46,6 +48,7 @@ type
     procedure AddDestaque(id_produto: integer; preco, preco_promocao: double;
       nome, foto64: string);
     procedure AbrirDetalheProduto(AItem: TListViewItem);
+
     { Private declarations }
   public
     { Public declarations }
@@ -59,7 +62,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitDM, UnitPrincipal;
+uses UnitDM, UnitPrincipal, UnitFrameProduto;
 
 procedure TFrmCatalogoPreview.AddProduto(id_produto: integer;
                                       preco, preco_promocao : double;
@@ -91,6 +94,51 @@ begin
 end;
 
 procedure TFrmCatalogoPreview.AddDestaque(id_produto: integer;
+                    preco, preco_promocao : double;
+                    nome, foto64: string);
+var
+    item : TListBoxItem;
+    porc : double;
+    f : TFrameProduto;
+    foto : TBitmap;
+begin
+    item := TListBoxItem.Create(nil);
+    item.Text := '';
+    item.Height := 200;
+    item.Width := 160;
+    item.Align := TAlignLayout.Client;
+    item.TagString := id_produto.ToString;
+    item.Selectable := false;
+
+
+    f := TFrameProduto.Create(item);
+    f.Parent := item;
+    f.Align := TAlignLayout.Client;
+
+    f.lbl_nome.Text := nome;
+    f.lbl_preco.Text := FormatFloat('#,##0.00', preco);
+
+    if preco_promocao > 0 then
+    begin
+        f.lbl_promocao.Text := FormatFloat('#,##0.00', preco_promocao);
+        f.lbl_promocao.Font.Style := [TFontStyle.fsStrikeOut];
+    end
+    else
+        f.lbl_promocao.Text := '';
+
+    if foto64 <> '' then
+    begin
+        foto := TFunctions.BitmapFromBase64(foto64);
+        f.img_foto.Bitmap := foto;
+        foto.DisposeOf;
+    end;
+
+
+    lb_destaque.AddObject(item);
+end;
+
+{
+procedure TFrmCatalogoPreview.AddDestaque(id_produto: integer;
                                       preco, preco_promocao : double;
                                       nome, foto64: string);
 begin
@@ -118,6 +166,7 @@ begin
 
     end;
 end;
+}
 
 procedure TFrmCatalogoPreview.ProcessarProdutos;
 var
@@ -148,8 +197,7 @@ begin
         lv_produto.Items.Clear;
         lv_produto.BeginUpdate;
 
-        lv_destaque.Items.Clear;
-        lv_destaque.BeginUpdate;
+        lb_destaque.Items.Clear;
 
         for i := 0 to jsonArray.Size - 1 do
         begin
@@ -173,9 +221,6 @@ begin
     finally
         lv_produto.EndUpdate;
         lv_produto.RecalcSize;
-
-        lv_destaque.EndUpdate;
-        lv_destaque.RecalcSize;
     end;
 end;
 
@@ -203,6 +248,12 @@ end;
 procedure TFrmCatalogoPreview.img_fechar_detalheClick(Sender: TObject);
 begin
     layout_detalhe.Visible := false;
+end;
+
+procedure TFrmCatalogoPreview.lb_destaqueItemClick(const Sender: TCustomListBox;
+  const Item: TListBoxItem);
+begin
+    showmessage('Clicou no perfume: ' + Item.TagString);
 end;
 
 procedure TFrmCatalogoPreview.ListarProdutos(busca: string; ind_clear: Boolean);

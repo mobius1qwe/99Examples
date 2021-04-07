@@ -193,4 +193,24 @@ object dm: Tdm
     Left = 176
     Top = 128
   end
+  object ReqProdutoFoto: TRESTRequest
+    Client = RESTClient
+    Params = <
+      item
+        Name = 'id'
+        Value = '0'
+      end
+      item
+        Name = 'id_usuario'
+        Value = '0'
+      end
+      item
+        Name = 'id_produto'
+        Value = '0'
+      end>
+    Resource = 'foto'
+    SynchronizedEvents = False
+    Left = 56
+    Top = 256
+  end
 end

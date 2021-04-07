@@ -16,6 +16,7 @@ type
     ReqCatalogoCons: TRESTRequest;
     ReqCatalogoCad: TRESTRequest;
     ReqCatalogoDetalhe: TRESTRequest;
+    ReqProdutoFoto: TRESTRequest;
   private
     { Private declarations }
   public

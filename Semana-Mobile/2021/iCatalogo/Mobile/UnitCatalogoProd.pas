@@ -11,6 +11,17 @@ uses
   Data.Bind.Components, Data.Bind.ObjectScope, System.JSON, uFunctions;
 
 type
+  TMyThread = class(TThread)
+  private
+    delay: Integer;
+    id_produto : integer;
+    img : TListItemImage;
+  protected
+    procedure Execute; override;
+    constructor Create;
+  end;
+
+type
   TFrmCatalogoProd = class(TForm)
     rect_toolbar: TRectangle;
     img_voltar: TImage;
@@ -28,7 +39,11 @@ type
       const AItem: TListViewItem);
     procedure edt_buscaExit(Sender: TObject);
     procedure img_voltarClick(Sender: TObject);
+    procedure lv_produtoPaint(Sender: TObject; Canvas: TCanvas;
+      const ARect: TRectF);
   private
+    MyThread : TMyThread;
+    contador : integer;
     procedure ListarProdutos(busca: string; ind_clear: Boolean);
     procedure ProcessarProdutos;
     procedure ProcessarProdutosErro(Sender: TObject);
@@ -39,6 +54,8 @@ type
     function BuscaDadosProduto(id_produto: integer;
                                  out nome, ind_destaque, foto, dt_geracao: string;
                                  out preco, preco_promocao : double): boolean;
+    procedure CarregaFoto(id_produto: integer; img: TListItemImage);
+    procedure CarregaFotoTerminate(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -54,16 +71,68 @@ implementation
 
 uses UnitCatalogoProdCad, UnitDM, UnitPrincipal;
 
+procedure TFrmCatalogoProd.CarregaFotoTerminate(Sender: TObject);
+begin
+    //if Assigned(TThread(Sender).FatalException) then
+    //    showmessage('Erro na thread: ' + Exception(TThread(Sender).FatalException).Message);
+end;
+
+procedure TFrmCatalogoProd.CarregaFoto(id_produto: integer; img: TListItemImage);
+var
+    json, foto64 : string;
+    jsonObj : TJSONObject;
+    t : TThread;
+begin
+    // Criar Thread para busca da foto...
+    t := TThread.CreateAnonymousThread(procedure
+    begin
+        dm.ReqProdutoFoto.Params.ParameterByName('id_usuario').Value := FrmPrincipal.id_usuario.ToString;
+        dm.ReqProdutoFoto.Params.ParameterByName('id_produto').Value := id_produto.ToString;
+        dm.ReqProdutoFoto.Execute;
+
+        // Se deu erro...
+        if (dm.ReqProdutoFoto.Response.StatusCode <> 200) then
+            exit;
+
+        try
+            json := dm.ReqProdutoFoto.Response.JSONValue.ToString;
+            jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+            foto64 := jsonObj.GetValue('foto').Value;
+
+            if foto64 <> '' then
+            begin
+                TThread.Queue(TThread.CurrentThread, procedure
+                begin
+                    img.OwnsBitmap := true; // Quando o bitmap é criado em runtime...
+                    img.Bitmap := TFunctions.BitmapFromBase64(foto64);
+                end);
+            end;
+
+
+        finally
+            jsonObj.DisposeOf;
+        end;
+
+    end);
+
+    t.OnTerminate := CarregaFotoTerminate;
+    t.Start;
+end;
+
 procedure TFrmCatalogoProd.AddProduto(id_produto: integer;
                                       preco, preco_promocao : double;
                                       nome, foto64: string);
+var
+    ThreadFoto : TThread;
 begin
     with lv_produto.Items.Add do
     begin
         Height := 90;
+        Inc(contador);
         Tag := id_produto;
 
-        TListItemText(Objects.FindDrawable('TxtProduto')).Text := nome;
+        TListItemText(Objects.FindDrawable('TxtProduto')).Text := index.ToString + ' - ' + nome + ' - ' + id_produto.ToString;
         TListItemText(Objects.FindDrawable('TxtPreco')).Text := FormatFloat('#,##0.00', preco);
 
         if preco_promocao > 0 then        
@@ -71,13 +140,29 @@ begin
         else
             TListItemText(Objects.FindDrawable('TxtPromocao')).Text := '';
 
-        if foto64 <> '' then
-        begin
-            TListItemImage(Objects.FindDrawable('ImgFoto')).OwnsBitmap := true; // Quando o bitmap é criado em runtime...
-            TListItemImage(Objects.FindDrawable('ImgFoto')).Bitmap := TFunctions.BitmapFromBase64(foto64);
-        end;
+        //if foto64 <> '' then
+        //begin
+        //    TListItemImage(Objects.FindDrawable('ImgFoto')).OwnsBitmap := true; // Quando o bitmap é criado em runtime...
+        //    TListItemImage(Objects.FindDrawable('ImgFoto')).Bitmap := TFunctions.BitmapFromBase64(foto64);
+        //end;
+
+
+        // Foto padrao...
+        TListItemImage(Objects.FindDrawable('ImgFoto')).Bitmap := img_foto.Bitmap;
+
+        //CarregaFoto(id_produto, TListItemImage(Objects.FindDrawable('ImgFoto')));
+
+        // Criar Thread para busca da foto...
+        MyThread := TMyThread.Create;
+        MyThread.id_produto := id_produto;
+        MyThread.delay := contador * 200;
+        MyThread.img := TListItemImage(Objects.FindDrawable('ImgFoto'));
+        MyThread.OnTerminate := CarregaFotoTerminate;
+        MyThread.FreeOnTerminate := true;
+        MyThread.Start;
 
     end;
+
 end;
 
 procedure TFrmCatalogoProd.ProcessarProdutos;
@@ -105,8 +190,11 @@ begin
     end;
 
     try
+        // Aumenta pagina...
+        lv_produto.Tag := lv_produto.Tag + 1;
+
+
         // Popular listview dos produtos...
-        lv_produto.Items.Clear;
         lv_produto.BeginUpdate;
 
         for i := 0 to jsonArray.Size - 1 do
@@ -117,6 +205,14 @@ begin
                        jsonArray.Get(i).GetValue<string>('NOME', ''),
                        jsonArray.Get(i).GetValue<string>('FOTO', ''));
         end;
+
+
+        // Nao carregar mais dados...
+        if jsonArray.Size = 0 then
+            lv_produto.Tag := -1;
+
+        lv_produto.TagString := ''; // Processamento terminou...
+
 
         jsonArray.DisposeOf;
 
@@ -134,12 +230,34 @@ end;
 
 procedure TFrmCatalogoProd.ListarProdutos(busca: string; ind_clear: Boolean);
 begin
+    // Evitar processamento concorrente...
+    if lv_produto.TagString = '1' then
+        exit;
+
+    // Em processamento...
+    lv_produto.TagString := '1';
+
+
+    contador := 0; // Usado na Thread
+
+    {
+    Tag: contem a pagina a ser exibida na proxima chamada ao WS...
+    >= 1 : faz o request para buscar mais dados
+    -1   : indica que não tem mais dados
+    }
+
+
     if ind_clear then
+    begin
+        lv_produto.ScrollTo(0);
         lv_produto.Items.Clear;
+        lv_produto.Tag := 1; // Pagina a ser exibida atual...
+    end;
+
 
     // Buscar produtos no servidor...
     dm.ReqProdutoCons.Params.ParameterByName('id_usuario').Value := FrmPrincipal.id_usuario.ToString;
-    dm.ReqProdutoCons.Params.ParameterByName('pagina').Value := '0';
+    dm.ReqProdutoCons.Params.ParameterByName('pagina').Value := lv_produto.Tag.ToString;
     dm.ReqProdutoCons.Params.ParameterByName('id_catalogo').Value := id_catalogo.ToString;
     dm.ReqProdutoCons.Params.ParameterByName('busca').Value := busca;
     dm.ReqProdutoCons.Params.ParameterByName('id_produto').Value := '0'; // nao filtra pelo codigo...
@@ -262,6 +380,17 @@ begin
     OpenCadProduto(Aitem.Tag); // A tag do item contem o id_produto...
 end;
 
+procedure TFrmCatalogoProd.lv_produtoPaint(Sender: TObject; Canvas: TCanvas;
+  const ARect: TRectF);
+begin
+    if (lv_produto.Items.Count >= 0) and (lv_produto.Tag >= 0) then
+    begin
+        if lv_produto.GetItemRect(lv_produto.Items.Count - 3).Bottom <=
+                                  lv_produto.Height then
+            ListarProdutos(edt_busca.Text, false);
+    end;
+end;
+
 procedure TFrmCatalogoProd.FormShow(Sender: TObject);
 begin
     ListarProdutos(edt_busca.Text, true);
@@ -275,6 +404,53 @@ end;
 procedure TFrmCatalogoProd.img_voltarClick(Sender: TObject);
 begin
     close;
+end;
+
+
+{ TMyThread }
+
+constructor TMyThread.Create;
+begin
+    inherited Create(True);
+end;
+
+procedure TMyThread.Execute;
+var
+    json, foto64 : string;
+    jsonObj : TJSONObject;
+begin
+    Sleep(self.delay);
+
+    dm.ReqProdutoFoto.Params.ParameterByName('id_usuario').Value := FrmPrincipal.id_usuario.ToString;
+    dm.ReqProdutoFoto.Params.ParameterByName('id_produto').Value := self.id_produto.ToString;
+    dm.ReqProdutoFoto.Execute;
+
+    // Se deu erro...
+    if (dm.ReqProdutoFoto.Response.StatusCode <> 200) then
+        exit;
+
+    try
+        json := dm.ReqProdutoFoto.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        foto64 := jsonObj.GetValue('foto').Value;
+
+        if foto64 <> '' then
+        begin
+            Synchronize(procedure
+            begin
+                self.img.OwnsBitmap := true; // Quando o bitmap é criado em runtime...
+                self.img.Bitmap := TFunctions.BitmapFromBase64(foto64);
+            end);
+        end;
+
+
+    finally
+        jsonObj.DisposeOf;
+    end;
+
+
+
 end;
 
 end.
