@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2016/09/15 14:31:27.000.266,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/20 19:34:45.000.065,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/06/23 00:14:20.000.496,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/25 21:27:09.000.193,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/01/29 19:10:21.000.582,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/05/10 18:28:07.000.409,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/08/16 13:51:06.000.870,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/12/12 00:17:31.000.142,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/05/21 13:54:42.000.810,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/06/29 19:30:08.000.814,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/07/20 13:59:26.000.824,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/01/31 08:03:49.000.304,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/04/09 15:29:08.000.941,=C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/04/09 15:29:31.000.164,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitPrincipal.fmx</Transaction>
+    <Transaction>2021/04/09 15:29:31.000.164,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitPrincipal.pas</Transaction>
+    <Transaction>2021/04/09 15:29:38.000.510,C:\Users\Heber\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Clubhouse.dproj</Transaction>
+    <Transaction>2021/04/10 19:34:08.397,=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 19:34:32.173,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameSugestao.fmx=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2021/04/10 19:34:32.173,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameSugestao.pas=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 19:58:42.192,=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 19:58:52.823,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameSala.fmx=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2021/04/10 19:58:52.823,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameSala.pas=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 20:02:55.484,=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 20:03:10.961,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameExplorar.pas=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2021/04/10 20:03:10.961,D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\UnitFrameExplorar.fmx=D:\99Coders\Posts\220 - Criando o layout do club house ------\Fontes\Unit1.fmx</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<PMACANDREA iOSSimulator="iPhone5"/>
+		<PMacBook iOSSimulator="iPhone5"/>
+		<PMacVirtual iOSSimulator="iPhone5"/>
+		<PMacMini iOSSimulator="iPhone"/>
+	</ActiveMobileDevice>
+</BorlandProject>

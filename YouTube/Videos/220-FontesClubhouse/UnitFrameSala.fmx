@@ -1,0 +1,19 @@
+object FrameSala: TFrameSala
+  Size.Width = 320.000000000000000000
+  Size.Height = 220.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Align = Client
+    Fill.Color = claWhite
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Size.Width = 310.000000000000000000
+    Size.Height = 204.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    XRadius = 15.000000000000000000
+    YRadius = 15.000000000000000000
+  end
+end
