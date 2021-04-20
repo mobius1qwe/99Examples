@@ -8,7 +8,7 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.TabControl,
   FMX.ListBox, FMX.ListView.Types, FMX.ListView.Appearances,
   FMX.ListView.Adapters.Base, FMX.ListView, FMX.Edit, System.JSON,
-  uLoading;
+  uLoading, REST.Client;
 
 type
   TFrmPedido = class(TForm)
@@ -417,10 +417,7 @@ end;
 procedure TFrmPedido.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     if ind_refresh_pedido then
-    begin
         FrmPrincipal.ListarPendente;
-        FrmPrincipal.ListarAceito;
-    end;
 
     Action := TCloseAction.caFree;
     FrmPedido := nil;
@@ -463,6 +460,21 @@ begin
     layout_cad.Visible := false;
     rect_fundo.Visible := false;
     MudarAba(0);
+
+
+    try
+        // Busca orcamentos do pedido...
+        dm.RequestOrcamento.Params.Clear;
+        dm.RequestOrcamento.AddParameter('id_pedido', id_pedido.ToString);
+        dm.RequestOrcamento.ExecuteAsync(ProcessarOrcamento, true, true, ProcessarPedidoErro);
+
+    except on ex:exception do
+        begin
+            TLoading.Hide;
+            showmessage('Erro ao acessar o servidor: ' + ex.Message);
+            exit;
+        end;
+    end;
 end;
 
 procedure TFrmPedido.ProcessarOrcamento;
@@ -550,9 +562,9 @@ begin
             dm.RequestPedidoDados.ExecuteAsync(ProcessarPedido, true, true, ProcessarPedidoErro);
 
             // Busca orcamentos do pedido...
-            dm.RequestOrcamento.Params.Clear;
-            dm.RequestOrcamento.AddParameter('id_pedido', id_pedido.ToString);
-            dm.RequestOrcamento.ExecuteAsync(ProcessarOrcamento, true, true, ProcessarPedidoErro);
+            //dm.RequestOrcamento.Params.Clear;
+            //dm.RequestOrcamento.AddParameter('id_pedido', id_pedido.ToString);
+            //dm.RequestOrcamento.ExecuteAsync(ProcessarOrcamento, true, true, ProcessarPedidoErro);
 
         except on ex:exception do
             begin
@@ -614,6 +626,9 @@ procedure TFrmPedido.lbi_servicoClick(Sender: TObject);
 begin
     if NOT Assigned(FrmCategoria) then
         Application.CreateForm(TFrmCategoria, FrmCategoria);
+
+    FrmCategoria.request_categoria := dm.RequestCategoria;
+    FrmCategoria.request_grupo := dm.RequestGrupo;
 
     FrmCategoria.ShowModal(procedure(ModalResult: TModalResult)
     begin

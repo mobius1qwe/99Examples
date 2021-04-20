@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 643
+  Height = 623
   Width = 457
   object conn: TFDConnection
     Params.Strings = (
@@ -13,8 +13,8 @@ object dm: Tdm
       'DriverID=SQLite')
     ConnectedStoredUsage = []
     LoginPrompt = False
-    Left = 72
-    Top = 40
+    Left = 56
+    Top = 48
   end
   object RESTClient: TRESTClient
     Authenticator = HTTPBasicAuthenticator
@@ -45,7 +45,7 @@ object dm: Tdm
   object HTTPBasicAuthenticator: THTTPBasicAuthenticator
     Username = 'admin'
     Password = 'admin'
-    Left = 176
+    Left = 200
     Top = 128
   end
   object RequestLoginCad: TRESTRequest

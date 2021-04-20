@@ -11,6 +11,7 @@ object dm: Tdm
       'User_Name=SYSDBA'
       'Password=masterkey'
       'DriverID=FB')
+    TxOptions.AutoStop = False
     ConnectedStoredUsage = []
     LoginPrompt = False
     Left = 64
@@ -45,6 +46,27 @@ object dm: Tdm
             ObjectDirection = odIN
             ObjectValue = ovString
             ParamName = 'senha'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'nome'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'fone'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'foto'
             Encoded = False
           end>
         JsonMode = jmPureJSON

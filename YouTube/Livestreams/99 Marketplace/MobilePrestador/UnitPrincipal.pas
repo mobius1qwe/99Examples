@@ -21,7 +21,6 @@ type
     layout_toolbar: TLayout;
     lbl_titulo: TLabel;
     img_notificacao: TImage;
-    img_add_pedido: TImage;
     TabControl1: TTabControl;
     TabPedidos: TTabItem;
     TabAceitos: TTabItem;
@@ -93,7 +92,6 @@ type
     img_cad_fechar: TImage;
     rect_cad_fundo: TRectangle;
     procedure img_notificacaoClick(Sender: TObject);
-    procedure img_add_pedidoClick(Sender: TObject);
     procedure img_aba1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lv_pedidosUpdateObjects(const Sender: TObject;
@@ -105,8 +103,6 @@ type
       const AItem: TListViewItem);
     procedure lv_pedidosItemClick(const Sender: TObject;
       const AItem: TListViewItem);
-    procedure lv_aceitosItemClickEx(const Sender: TObject; ItemIndex: Integer;
-      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
     procedure c_fotoClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ActLibraryDidFinishTaking(Image: TBitmap);
@@ -144,10 +140,6 @@ type
     id_usuario_logado : Integer;
     procedure ListarPendente;
     procedure ListarAceito;
-    function Base64FromBitmap(Bitmap: TBitmap): string;
-    function BitmapFromBase64(const base64: string): TBitmap;
-    function GetTextHeight(const D: TListItemText; const Width: single;
-      const Text: string): Integer;
     procedure Avaliar(nota: integer);
   end;
 
@@ -158,8 +150,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitNotificacao, UnitPedido, UnitChat, System.JSON, UnitDM,
-  FMX.DialogService, UnitClassificacao, REST.Types;
+uses System.JSON, UnitDM, FMX.DialogService, REST.Types;
 
 procedure TFrmPrincipal.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel;
                                         ind_senha : Boolean = false);
@@ -219,62 +210,6 @@ begin
     img5.Bitmap := DesenharEstrela(nota >= 5);
 end;
 
-function TFrmPrincipal.Base64FromBitmap(Bitmap: TBitmap): string;
-var
-  Input: TBytesStream;
-  Output: TStringStream;
-  Encoding: TBase64Encoding;
-begin
-        Input := TBytesStream.Create;
-        try
-                Bitmap.SaveToStream(Input);
-                Input.Position := 0;
-                Output := TStringStream.Create('', TEncoding.ASCII);
-
-                try
-                    Encoding := TBase64Encoding.Create(0);
-                    Encoding.Encode(Input, Output);
-                    Result := Output.DataString;
-                finally
-                        Encoding.Free;
-                        Output.Free;
-                end;
-
-        finally
-                Input.Free;
-        end;
-end;
-
-function TFrmPrincipal.BitmapFromBase64(const base64: string): TBitmap;
-var
-  Input: TStringStream;
-  Output: TBytesStream;
-  Encoding: TBase64Encoding;
-begin
-  Input := TStringStream.Create(base64, TEncoding.ASCII);
-  try
-    Output := TBytesStream.Create;
-    try
-      Encoding := TBase64Encoding.Create(0);
-      Encoding.Decode(Input, Output);
-
-      Output.Position := 0;
-      Result := TBitmap.Create;
-      try
-        Result.LoadFromStream(Output);
-      except
-        Result.Free;
-        raise;
-      end;
-    finally
-      Encoding.DisposeOf;
-      Output.Free;
-    end;
-  finally
-    Input.Free;
-  end;
-end;
-
 procedure TFrmPrincipal.c_fotoClick(Sender: TObject);
 begin
     {$IFDEF MSWINDOWS}
@@ -286,36 +221,6 @@ begin
     {$ELSE}
         permissao.PhotoLibrary(ActLibrary);
     {$ENDIF}
-end;
-
-function TFrmPrincipal.GetTextHeight(const D: TListItemText; const Width: single; const Text: string): Integer;
-var
-  Layout: TTextLayout;
-begin
-  // Create a TTextLayout to measure text dimensions
-  Layout := TTextLayoutManager.DefaultTextLayout.Create;
-  try
-    Layout.BeginUpdate;
-    try
-      // Initialize layout parameters with those of the drawable
-      Layout.Font.Assign(D.Font);
-      Layout.VerticalAlign := D.TextVertAlign;
-      Layout.HorizontalAlign := D.TextAlign;
-      Layout.WordWrap := D.WordWrap;
-      Layout.Trimming := D.Trimming;
-      Layout.MaxSize := TPointF.Create(Width, TTextLayout.MaxLayoutSize.Y);
-      Layout.Text := Text;
-    finally
-      Layout.EndUpdate;
-    end;
-    // Get layout height
-    Result := Round(Layout.Height);
-    // Add one em to the height
-    Layout.Text := 'm';
-    Result := Result + Round(Layout.Height);
-  finally
-    Layout.Free;
-  end;
 end;
 
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
@@ -331,9 +236,7 @@ end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
-    ListarPendente;
-    //ListarAceito;
-    //ListarRealizados;
+    //ListarPendente;
 end;
 
 procedure TFrmPrincipal.AddPedido(seq_pedido, seq_usuario, max_orcamentos, qtd_orc_enviada : integer;
@@ -694,65 +597,6 @@ begin
     dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
 
-procedure TFrmPrincipal.lv_aceitosItemClickEx(const Sender: TObject;
-  ItemIndex: Integer; const LocalClickPos: TPointF;
-  const ItemObject: TListItemDrawable);
-var
-    json, retorno : string;
-    jsonObj : TJSONObject;
-begin
-    if ItemObject is TListItemImage then
-    begin
-        if ItemObject.Name = 'ImgRealizar' then
-        begin
-            TDialogService.MessageDialog('Confirma realização do serviço?',
-                     TMsgDlgType.mtConfirmation,
-                     [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
-                     TMsgDlgBtn.mbNo,
-                     0,
-            procedure(const AResult: TModalResult)
-            var
-                erro: string;
-            begin
-                if AResult = mrYes then
-                begin
-                    dm.RequestPedidoAprovar.Params.Clear;
-                    dm.RequestPedidoAprovar.AddParameter('id', '');
-                    dm.RequestPedidoAprovar.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
-                    dm.RequestPedidoAprovar.AddParameter('id_pedido', TListView(Sender).Items[ItemIndex].Tag.ToString);
-                    dm.RequestPedidoAprovar.Execute;
-
-                     try
-                        json := dm.RequestPedidoAprovar.Response.JSONValue.ToString;
-                        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
-
-                        retorno := jsonObj.GetValue('retorno').Value;
-
-                        // Se deu erro...
-                        if dm.RequestPedidoAprovar.Response.StatusCode <> 200 then
-                        begin
-                            showmessage(retorno);
-                            exit;
-                        end;
-
-                    finally
-                        jsonObj.DisposeOf;
-                    end;
-
-                    if NOT Assigned(FrmClassificar) then
-                        Application.CreateForm(TFrmClassificar, FrmClassificar);
-
-                    FrmClassificar.id_pedido := TListView(Sender).Items[ItemIndex].Tag;
-                    FrmClassificar.ShowModal(procedure (ModalResult: TModalResult)
-                    begin
-                        ListarPendente;
-                    end);
-                end;
-            end);
-        end;
-    end;
-end;
-
 procedure TFrmPrincipal.lv_aceitosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
@@ -766,7 +610,7 @@ begin
     // Calcula tamanho da descricao...
     txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
     txt.Width := lv_pedidos.Width - 30;
-    txt.Height := GetTextHeight(txt, txt.Width, txt.Text);
+    txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
 
     // Calcula obejto texto do nome...
     txt_nome := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
@@ -792,6 +636,7 @@ end;
 procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
+    {
     if NOT Assigned(FrmPedido) then
         Application.CreateForm(TFrmPedido, FrmPedido);
 
@@ -799,6 +644,7 @@ begin
     FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
     FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
     FrmPedido.Show;
+    }
 end;
 
 procedure TFrmPrincipal.lv_pedidosUpdateObjects(const Sender: TObject;
@@ -817,7 +663,7 @@ begin
     // Calcula tamanho da descricao...
     txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
     txt.Width := lv_pedidos.Width - 30;
-    txt.Height := GetTextHeight(txt, txt.Width, txt.Text);
+    txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
 
     // Calcula objeto texto do orcamento...
     txt_orc := TListItemText(AItem.Objects.FindDrawable('TxtOrcamentos'));
@@ -855,7 +701,7 @@ begin
     // Calcula tamanho da descricao...
     txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
     txt.Width := lv_pedidos.Width - 30;
-    txt.Height := GetTextHeight(txt, txt.Width, txt.Text);
+    txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
 
     // Calcula obejto texto do nome...
     txt_nome := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
@@ -899,17 +745,6 @@ begin
     MudarAba(TImage(Sender));
 end;
 
-procedure TFrmPrincipal.img_add_pedidoClick(Sender: TObject);
-begin
-    if NOT Assigned(FrmPedido) then
-        Application.CreateForm(TFrmPedido, FrmPedido);
-
-    FrmPedido.id_pedido := 0;
-    FrmPedido.lbl_titulo.Text := 'Novo Pedido';
-    FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
-    FrmPedido.Show;
-end;
-
 procedure TFrmPrincipal.img_cad_fecharClick(Sender: TObject);
 begin
     FecharEdicaoItem(true);
@@ -917,10 +752,12 @@ end;
 
 procedure TFrmPrincipal.img_notificacaoClick(Sender: TObject);
 begin
+    {
     if NOT Assigned(FrmNotificacao) then
         Application.CreateForm(TFrmNotificacao, FrmNotificacao);
 
     FrmNotificacao.Show;
+    }
 end;
 
 procedure TFrmPrincipal.lbi_emailClick(Sender: TObject);

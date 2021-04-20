@@ -187,8 +187,12 @@ begin
             json.AddPair('endereco', u.ENDERECO);
             json.AddPair('email', u.EMAIL);
             json.AddPair('fone', u.FONE);
+            json.AddPair('foto', u.FOTO64);
+
             json.AddPair('avaliacao_cliente', TJSONNumber.Create(u.AVALIACAO_CLIENTE));
             json.AddPair('avaliacao_prestador', TJSONNumber.Create(u.AVALIACAO_PRESTADOR));
+            json.AddPair('qtd_avaliacao_cliente', TJSONNumber.Create(u.QTD_AVALIACAO_CLIENTE));
+            json.AddPair('qtd_avaliacao_prestador', TJSONNumber.Create(u.QTD_AVALIACAO_PRESTADOR));
             Status := 200;
         end;
 
@@ -208,10 +212,10 @@ var
     erro: string;
     foto_bmp : TBitmap;
 begin
+    
     try
         json := TJSONObject.Create;
         u := TUsuario.Create(dm.conn);
-
 
         if foto64 = '' then
         begin
@@ -245,6 +249,7 @@ begin
         u.FONE := fone;
         u.FOTO := foto_bmp;
 
+
         // Validar se usuario existe...
         if u.DadosUsuario(erro) then
         begin
@@ -255,6 +260,7 @@ begin
             Result := json.ToString;
             exit;
         end;
+
 
         if NOT u.Inserir(erro) then
         begin
@@ -271,10 +277,11 @@ begin
             Status := 201;
         end;
 
+
+        foto_bmp.DisposeOf;
         Result := json.ToString;
 
     finally
-        foto_bmp.DisposeOf;
         json.DisposeOf;
         u.DisposeOf;
     end;
@@ -792,6 +799,7 @@ begin
         status_code := 200;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         o.DisposeOf;
     end;
@@ -822,6 +830,7 @@ begin
         end;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         c.DisposeOf;
     end;
@@ -854,6 +863,7 @@ begin
         end;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         c.DisposeOf;
     end;
@@ -881,6 +891,7 @@ begin
         status_code := 200;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         p.DisposeOf;
     end;
@@ -969,6 +980,7 @@ begin
         end;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         n.DisposeOf;
     end;
@@ -1003,6 +1015,7 @@ begin
         end;
 
     finally
+        qry.DisposeOf;
         json.DisposeOf;
         c.DisposeOf;
     end;

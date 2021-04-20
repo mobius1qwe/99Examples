@@ -11,9 +11,9 @@ uses
   UnitDM in 'UnitDM.pas' {dm: TDataModule},
   uFunctions in '..\Units\uFunctions.pas',
   u99Permissions in '..\Units\u99Permissions.pas',
-  UnitCategoria in 'UnitCategoria.pas' {FrmCategoria},
   uLoading in '..\Units\uLoading.pas',
-  UnitClassificacao in 'UnitClassificacao.pas' {FrmClassificar};
+  UnitClassificacao in 'UnitClassificacao.pas' {FrmClassificar},
+  UnitCategoria in '..\FormsCompartilhados\UnitCategoria.pas' {FrmCategoria};
 
 {$R *.res}
 
@@ -22,5 +22,6 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TFrmLogin, FrmLogin);
   Application.CreateForm(TFrmClassificar, FrmClassificar);
+  Application.CreateForm(TFrmCategoria, FrmCategoria);
   Application.Run;
 end.

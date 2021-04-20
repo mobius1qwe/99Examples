@@ -189,6 +189,7 @@ begin
         txt.Align := TListItemAlign.Trailing;
         txt.PlaceOffset.X := -10;
         txt.TextColor := $FF343434;
+        txt.TextAlign := TTextAlign.Trailing;
     end
     else
         txt.TextColor := $FF1A72E2;
@@ -208,6 +209,7 @@ begin
     end
     else
         txt_data.TextAlign := TTextAlign.Leading;
+
 
     // Calcula altura do item da listview...
     Aitem.Height := Trunc(txt_data.PlaceOffset.Y + txt_data.Height + 25);
