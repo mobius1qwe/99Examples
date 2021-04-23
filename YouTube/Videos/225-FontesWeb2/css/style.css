@@ -1,0 +1,58 @@
+body {
+    background-color: #F7F7F7;
+   } 
+
+h1 {
+    color: gray;
+    font-size: 50px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/*
+img {
+    width: 100px;
+    border-radius: 50px;
+}
+*/
+
+.btn{
+    border-radius: 5px;
+    height: 30px;
+    min-width: 130px;    
+    border: 0px;    
+}
+
+.btn-white{
+    color: grey;
+    background-color:white;
+}
+
+.btn-green{
+    color:white;
+    background-color:rgb(79, 199, 79);
+}
+
+.btn-green:hover{
+    color:white;
+    background-color:rgb(39, 133, 39);
+    cursor: pointer;
+}
+
+.btn-blue{
+    color:white;
+    background-color:blue;
+}
+
+.logotipo {
+    width: 50px;
+}
+
+.icone-header {
+    width: 100px;
+    border-radius: 50px;
+}
+
+#imagem-header {
+    width: 100px;
+    border-radius: 50px;
+}
