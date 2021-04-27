@@ -97,6 +97,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ActFotoDidFinishTaking(Image: TBitmap);
+    procedure Label17Click(Sender: TObject);
+    procedure Label22Click(Sender: TObject);
   private
     permissao : T99Permissions;
     procedure NavegarAbas(pag: integer);
@@ -116,7 +118,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal, UnitDM, REST.Types;
+uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria;
 
 
 
@@ -211,6 +213,16 @@ begin
     NavegarAbas(-1);
 end;
 
+procedure TFrmLogin.Label17Click(Sender: TObject);
+begin
+    NavegarAbas(-2);
+end;
+
+procedure TFrmLogin.Label22Click(Sender: TObject);
+begin
+    NavegarAbas(-3);
+end;
+
 procedure TFrmLogin.rect_btn_cadastrarClick(Sender: TObject);
 begin
     NavegarAbas(2);
@@ -221,7 +233,7 @@ var
     jsonObj : TJsonObject;
     json, retorno, id_usuario, nome: string;
 
-    endereco, email, fone, foto64 : string;
+    endereco, email, fone, foto64, grupo, categoria : string;
     avaliacao_cliente, avaliacao_prestador : double;
     qtd_avaliacao_cliente, qtd_avaliacao_prestador : Integer;
 begin
@@ -248,6 +260,8 @@ begin
         foto64 := jsonObj.GetValue('foto').Value;
         qtd_avaliacao_cliente := jsonObj.GetValue('qtd_avaliacao_cliente').Value.ToInteger;
         qtd_avaliacao_prestador := jsonObj.GetValue('qtd_avaliacao_prestador').Value.ToInteger;
+        grupo := jsonObj.GetValue('grupo').Value;
+        categoria := jsonObj.GetValue('categoria').Value;
 
     finally
         jsonObj.DisposeOf;
@@ -262,13 +276,16 @@ begin
     if foto64 <> '' then
         FrmPrincipal.c_foto.Fill.Bitmap.Bitmap := TFunctions.BitmapFromBase64(foto64);
 
-    FrmPrincipal.lbl_avaliacoes.Text := qtd_avaliacao_cliente.ToString + ' Avaliações';
+    FrmPrincipal.lbl_avaliacoes.Text := qtd_avaliacao_prestador.ToString + ' Avaliações';
     FrmPrincipal.id_usuario_logado := id_usuario.ToInteger;
     FrmPrincipal.lbl_endereco.Text := endereco;
     FrmPrincipal.lbl_nome.Text := nome;
     FrmPrincipal.lbl_email.Text := email;
     FrmPrincipal.lbl_fone.Text := fone;
-    FrmPrincipal.Avaliar(Round(avaliacao_cliente));
+    FrmPrincipal.lbl_grupo.TagString := grupo;
+    FrmPrincipal.lbl_categoria.TagString := categoria;
+    FrmPrincipal.lbl_grupo.Text := categoria + ' / ' + grupo;
+    FrmPrincipal.Avaliar(Round(avaliacao_prestador));
     FrmPrincipal.Show;
     FrmLogin.Close;
 end;
@@ -322,17 +339,31 @@ end;
 
 procedure TFrmLogin.rect_conta_finalizarClick(Sender: TObject);
 begin
-    // Criar a conta no server...
-    dm.RequestLoginCad.Params.Clear;
-    dm.RequestLoginCad.AddParameter('id', '');
-    dm.RequestLoginCad.AddParameter('email', edt_cad_email.Text);
-    dm.RequestLoginCad.AddParameter('senha', edt_cad_senha.Text);
-    dm.RequestLoginCad.AddParameter('nome', edt_cad_nome.Text);
-    dm.RequestLoginCad.AddParameter('fone', edt_cad_fone.Text);
-    dm.RequestLoginCad.AddParameter('endereco', edt_cad_endereco.Text);
-    dm.RequestLoginCad.AddParameter('foto', TFunctions.Base64FromBitmap(c_foto.Fill.Bitmap.Bitmap),
-                                            TRESTRequestParameterKind.pkREQUESTBODY);
-    dm.RequestLoginCad.ExecuteAsync(ProcessarLoginCad, true, true, ProcessarLoginErro);
+    if NOT Assigned(FrmCategoria) then
+        Application.CreateForm(TFrmCategoria, FrmCategoria);
+
+    FrmCategoria.request_categoria := dm.RequestCategoria;
+    FrmCategoria.request_grupo := dm.RequestGrupo;
+
+    FrmCategoria.ShowModal(procedure(ModalResult: TModalResult)
+    begin
+        if FrmCategoria.categoria <> '' then
+        begin
+            // Criar a conta no server...
+            dm.RequestLoginCad.Params.Clear;
+            dm.RequestLoginCad.AddParameter('id', '');
+            dm.RequestLoginCad.AddParameter('email', edt_cad_email.Text);
+            dm.RequestLoginCad.AddParameter('senha', edt_cad_senha.Text);
+            dm.RequestLoginCad.AddParameter('nome', edt_cad_nome.Text);
+            dm.RequestLoginCad.AddParameter('fone', edt_cad_fone.Text);
+            dm.RequestLoginCad.AddParameter('endereco', edt_cad_endereco.Text);
+            dm.RequestLoginCad.AddParameter('foto', TFunctions.Base64FromBitmap(c_foto.Fill.Bitmap.Bitmap),
+                                                    TRESTRequestParameterKind.pkREQUESTBODY);
+            dm.RequestLoginCad.AddParameter('categoria', FrmCategoria.categoria);
+            dm.RequestLoginCad.AddParameter('grupo', FrmCategoria.grupo);
+            dm.RequestLoginCad.ExecuteAsync(ProcessarLoginCad, true, true, ProcessarLoginErro);
+        end;
+    end);
 end;
 
 procedure TFrmLogin.rect_loginClick(Sender: TObject);

@@ -18,6 +18,7 @@ type
     DWEventsNotificacao: TDWServerEvents;
     DWEventsCategoria: TDWServerEvents;
     DWEventsOrcamento: TDWServerEvents;
+    DWEventsPrestador: TDWServerEvents;
     procedure DWEventsEventshoraReplyEvent(var Params: TDWParams;
       var Result: string);
     procedure DWEventsEventsusuarioReplyEventByType(var Params: TDWParams;
@@ -55,10 +56,14 @@ type
     procedure DWEventsPedidoEventsavaliarReplyEventByType(var Params: TDWParams;
       var Result: string; const RequestType: TRequestType;
       var StatusCode: Integer; RequestHeader: TStringList);
+    procedure DWEventsPrestadorEventsprestadorReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
-    function CriarUsuario(email, senha, nome, fone, foto64: string;
+    function CriarUsuario(email, senha, nome, fone, foto64, categoria, grupo: string;
       out status: integer): string;
     function ListaPedidos(sts, id_usuario: string;
       out status_code: integer): string;
@@ -188,6 +193,8 @@ begin
             json.AddPair('email', u.EMAIL);
             json.AddPair('fone', u.FONE);
             json.AddPair('foto', u.FOTO64);
+            json.AddPair('categoria', u.CATEGORIA);
+            json.AddPair('grupo', u.GRUPO);
 
             json.AddPair('avaliacao_cliente', TJSONNumber.Create(u.AVALIACAO_CLIENTE));
             json.AddPair('avaliacao_prestador', TJSONNumber.Create(u.AVALIACAO_PRESTADOR));
@@ -204,7 +211,7 @@ begin
     end;
 end;
 
-function TDm.CriarUsuario(email, senha, nome, fone, foto64 : string;
+function TDm.CriarUsuario(email, senha, nome, fone, foto64, categoria, grupo : string;
                           out status: integer): string;
 var
     u : TUsuario;
@@ -248,6 +255,8 @@ begin
         u.NOME := nome;
         u.FONE := fone;
         u.FOTO := foto_bmp;
+        u.CATEGORIA := categoria;
+        u.GRUPO := grupo;
 
 
         // Validar se usuario existe...
@@ -312,7 +321,8 @@ begin
         end;
 
         if (campo <> 'email') and (campo <> 'nome') and (campo <> 'fone') and
-           (campo <> 'endereco') and (campo <> 'senha') and (campo <> 'foto') then
+           (campo <> 'endereco') and (campo <> 'senha') and (campo <> 'foto') and
+           (campo <> 'categoria') and (campo <> 'grupo') then
         begin
             json.AddPair('retorno', 'Campo inválido');
             json.AddPair('id_usuario', '0');
@@ -1058,6 +1068,8 @@ begin
                                Params.ItemsString['nome'].AsString,
                                Params.ItemsString['fone'].AsString,
                                Params.ItemsString['foto'].AsString,
+                               '', // Categoria
+                               '', // Grupo
                                StatusCode)
     else
     // PATCH.......
@@ -1368,6 +1380,40 @@ begin
     begin
         StatusCode := 403;
         Result := '{"retorno":"Verbo HTTP não é válido.", "id_pedido": 0}';
+    end;
+end;
+
+procedure Tdm.DWEventsPrestadorEventsprestadorReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
+begin
+    // GET.......
+    if RequestType = TRequestType.rtGet then
+        Result := ValidarLogin(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               StatusCode)
+    else
+    // POST.......
+    if RequestType = TRequestType.rtPost then
+        Result := CriarUsuario(Params.ItemsString['email'].AsString,
+                               Params.ItemsString['senha'].AsString,
+                               Params.ItemsString['nome'].AsString,
+                               Params.ItemsString['fone'].AsString,
+                               Params.ItemsString['foto'].AsString,
+                               Params.ItemsString['categoria'].AsString,
+                               Params.ItemsString['grupo'].AsString,
+                               StatusCode)
+    else
+    // PATCH.......
+    if RequestType = TRequestType.rtPatch then
+        Result := EditarUsuario(Params.ItemsString['id_usuario'].AsString,
+                                Params.ItemsString['campo'].AsString,
+                                Params.ItemsString['valor'].AsString,
+                                StatusCode)
+    else
+    begin
+        StatusCode := 403;
+        Result := '{"retorno":"Verbo HTTP não é válido"}';
     end;
 end;
 

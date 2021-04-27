@@ -91,6 +91,11 @@ type
     edt_cad_texto: TEdit;
     img_cad_fechar: TImage;
     rect_cad_fundo: TRectangle;
+    lbi_categoria: TListBoxItem;
+    Image1: TImage;
+    lbl_categoria: TLabel;
+    lbl_grupo: TLabel;
+    Layout8: TLayout;
     procedure img_notificacaoClick(Sender: TObject);
     procedure img_aba1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -114,6 +119,7 @@ type
     procedure lbi_emailClick(Sender: TObject);
     procedure lbi_foneClick(Sender: TObject);
     procedure lbi_senhaClick(Sender: TObject);
+    procedure lbi_categoriaClick(Sender: TObject);
   private
     permissao : T99Permissions;
     lbl : TLabel;
@@ -135,6 +141,7 @@ type
                               ind_senha : Boolean = false);
     procedure FecharEdicaoItem(ind_cancelar: Boolean);
     procedure EditarFotoUsuario(foto: TBitmap);
+    procedure SalvarCampoPerfil(campo, valor: string);
     { Private declarations }
   public
     id_usuario_logado : Integer;
@@ -150,7 +157,7 @@ implementation
 
 {$R *.fmx}
 
-uses System.JSON, UnitDM, FMX.DialogService, REST.Types;
+uses System.JSON, UnitDM, FMX.DialogService, REST.Types, UnitCategoria;
 
 procedure TFrmPrincipal.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel;
                                         ind_senha : Boolean = false);
@@ -524,7 +531,7 @@ begin
     FecharEdicaoItem(true);
 end;
 
-procedure TFrmPrincipal.rect_cad_salvarClick(Sender: TObject);
+procedure TFrmPrincipal.SalvarCampoPerfil(campo, valor: string);
 var
     json, retorno : string;
     jsonObj : TJSONObject;
@@ -533,8 +540,8 @@ begin
     dm.RequestPerfilCad.Params.Clear;
     dm.RequestPerfilCad.AddParameter('id', '');
     dm.RequestPerfilCad.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
-    dm.RequestPerfilCad.AddParameter('campo', lbl.TagString);
-    dm.RequestPerfilCad.AddParameter('valor', edt_cad_texto.Text);
+    dm.RequestPerfilCad.AddParameter('campo', campo);
+    dm.RequestPerfilCad.AddParameter('valor', valor);
     dm.RequestPerfilCad.Execute;
 
     try
@@ -559,6 +566,11 @@ begin
         lbl.Text := edt_cad_texto.Text;
 
     FecharEdicaoItem(true);
+end;
+
+procedure TFrmPrincipal.rect_cad_salvarClick(Sender: TObject);
+begin
+    SalvarCampoPerfil(lbl.TagString, edt_cad_texto.Text);
 end;
 
 procedure TFrmPrincipal.ProcessarPedidoErro(Sender: TObject);
@@ -758,6 +770,30 @@ begin
 
     FrmNotificacao.Show;
     }
+end;
+
+procedure TFrmPrincipal.lbi_categoriaClick(Sender: TObject);
+begin
+    if NOT Assigned(FrmCategoria) then
+        Application.CreateForm(TFrmCategoria, FrmCategoria);
+
+    FrmCategoria.request_categoria := dm.RequestCategoria;
+    FrmCategoria.request_grupo := dm.RequestGrupo;
+
+    FrmCategoria.ShowModal(procedure(ModalResult: TModalResult)
+    begin
+        if FrmCategoria.categoria <> '' then
+        begin
+            lbl := lbl_categoria;
+            SalvarCampoPerfil('categoria', FrmCategoria.categoria);
+            SalvarCampoPerfil('grupo', FrmCategoria.grupo);
+
+            lbl_categoria.TagString := FrmCategoria.categoria;
+            lbl_grupo.TagString := FrmCategoria.grupo;
+
+            lbl_grupo.Text := FrmCategoria.categoria + ' / ' + FrmCategoria.grupo;
+        end;
+    end);
 end;
 
 procedure TFrmPrincipal.lbi_emailClick(Sender: TObject);

@@ -21,6 +21,8 @@ type
         FFOTO64: string;
         FQTD_AVALIACAO_PRESTADOR: Integer;
         FQTD_AVALIACAO_CLIENTE: Integer;
+        FCATEGORIA: string;
+        FGRUPO: string;
     public
         constructor Create(conn : TFDConnection);
         property ID_USUARIO : integer read FID_USUARIO write FID_USUARIO;
@@ -36,6 +38,8 @@ type
         property FOTO : TBitmap read FFOTO write FFOTO;
         property FOTO64 : string read FFOTO64 write FFOTO64;
         property DT_GERACAO : TDateTime read FDT_GERACAO write FDT_GERACAO;
+        property CATEGORIA : string read FCATEGORIA write FCATEGORIA;
+        property GRUPO : string read FGRUPO write FGRUPO;
 
         function DadosUsuario(out erro: string): Boolean;
         function ValidarLogin(out erro: string): Boolean;
@@ -100,6 +104,8 @@ begin
                 ENDERECO := FieldByName('ENDERECO').AsString;
                 AVALIACAO_CLIENTE := FieldByName('AVALIACAO_CLIENTE').AsFloat;
                 AVALIACAO_PRESTADOR := FieldByName('AVALIACAO_PRESTADOR').AsFloat;
+                CATEGORIA := FieldByName('CATEGORIA').AsString;
+                GRUPO := FieldByName('GRUPO').AsString;
 
                 //FOTO
                 DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
@@ -221,6 +227,8 @@ begin
                 DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
                 QTD_AVALIACAO_CLIENTE := FieldByName('QTD_AVALIACAO_CLIENTE').AsInteger;
                 QTD_AVALIACAO_PRESTADOR := FieldByName('QTD_AVALIACAO_PRESTADOR').AsInteger;
+                CATEGORIA := FieldByName('CATEGORIA').AsString;
+                GRUPO := FieldByName('GRUPO').AsString;
 
                 // Foto do usuario...
                 foto_bmp := TBitmap.Create;
@@ -291,9 +299,10 @@ begin
             sql.Clear;
             SQL.Add('INSERT INTO TAB_USUARIO(EMAIL, SENHA, NOME, FONE, FOTO,');
             SQL.Add('DT_GERACAO, ENDERECO, AVALIACAO_CLIENTE, AVALIACAO_PRESTADOR,');
-            SQL.Add('QTD_AVALIACAO_CLIENTE, QTD_AVALIACAO_PRESTADOR)');
+            SQL.Add('QTD_AVALIACAO_CLIENTE, QTD_AVALIACAO_PRESTADOR, CATEGORIA, GRUPO)');
             SQL.Add('VALUES(:EMAIL, :SENHA, :NOME, :FONE, :FOTO, ');
-            SQL.Add('current_timestamp, :ENDERECO, :AVALIACAO_CLIENTE, :AVALIACAO_PRESTADOR, 0, 0)');
+            SQL.Add('current_timestamp, :ENDERECO, :AVALIACAO_CLIENTE, :AVALIACAO_PRESTADOR, 0, 0,');
+            SQL.Add(':CATEGORIA, :GRUPO)');
             ParamByName('EMAIL').Value := EMAIL;
             ParamByName('SENHA').Value := SENHA;
             ParamByName('NOME').Value := NOME;
@@ -301,6 +310,8 @@ begin
             ParamByName('ENDERECO').Value := ENDERECO;
             ParamByName('AVALIACAO_CLIENTE').Value := AVALIACAO_CLIENTE;
             ParamByName('AVALIACAO_PRESTADOR').Value := AVALIACAO_PRESTADOR;
+            ParamByName('CATEGORIA').Value := CATEGORIA;
+            ParamByName('GRUPO').Value := GRUPO;
 
             if FOTO <> nil then
                 ParamByName('FOTO').Assign(FOTO)

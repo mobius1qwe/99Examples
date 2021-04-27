@@ -197,4 +197,56 @@ object dm: Tdm
     Left = 64
     Top = 216
   end
+  object DWEventsPrestador: TDWServerEvents
+    IgnoreInvalidParams = False
+    Events = <
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'email'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'senha'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'nome'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'fone'
+            Encoded = False
+          end
+          item
+            TypeObject = toParam
+            ObjectDirection = odIN
+            ObjectValue = ovString
+            ParamName = 'foto'
+            Encoded = False
+          end>
+        JsonMode = jmPureJSON
+        Name = 'prestador'
+        EventName = 'prestador'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsPrestadorEventsprestadorReplyEventByType
+      end>
+    ContextName = 'prestadores'
+    Left = 192
+    Top = 216
+  end
 end
