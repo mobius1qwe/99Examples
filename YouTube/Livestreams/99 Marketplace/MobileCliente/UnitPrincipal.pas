@@ -671,6 +671,8 @@ begin
     dm.RequestPedido.AddParameter('id', '');
     dm.RequestPedido.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
     dm.RequestPedido.AddParameter('status', 'P');
+    dm.RequestPedido.AddParameter('categoria', '');
+    dm.RequestPedido.AddParameter('grupo', '');
     dm.RequestPedido.ExecuteAsync(ProcessarPedidoAberto, true, true, ProcessarPedidoErro);
 end;
 
@@ -681,6 +683,8 @@ begin
     dm.RequestAceito.AddParameter('id', '');
     dm.RequestAceito.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
     dm.RequestAceito.AddParameter('status', 'A');
+    dm.RequestAceito.AddParameter('categoria', '');
+    dm.RequestAceito.AddParameter('grupo', '');
     dm.RequestAceito.ExecuteAsync(ProcessarPedidoAceito, true, true, ProcessarPedidoErro);
 end;
 
@@ -691,6 +695,8 @@ begin
     dm.RequestRealizado.AddParameter('id', '');
     dm.RequestRealizado.AddParameter('id_usuario', '1');
     dm.RequestRealizado.AddParameter('status', 'R');
+    dm.RequestRealizado.AddParameter('categoria', '');
+    dm.RequestRealizado.AddParameter('grupo', '');
     dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
 

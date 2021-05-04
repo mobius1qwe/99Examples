@@ -131,16 +131,30 @@ begin
             SQL.Add('SELECT P.ID_PEDIDO, P.ID_USUARIO, P.STATUS, P.CATEGORIA, P.GRUPO,');
             SQL.Add('P.ENDERECO, P.DT_GERACAO, P.DT_SERVICO, P.DETALHE, P.QTD_MAX_ORC,');
             SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE,');
-            SQL.Add('COUNT(O.ID_ORCAMENTO) AS QTD_ORCAMENTO');
+            SQL.Add('COUNT(O.ID_ORCAMENTO) AS QTD_ORCAMENTO, UU.NOME AS CLIENTE,');
+            SQL.Add('''S'' AS IND_ORCADO ');
             SQL.Add('FROM TAB_PEDIDO P');
             SQL.Add('LEFT JOIN TAB_PEDIDO_ORCAMENTO O ON (O.ID_PEDIDO = P.ID_PEDIDO)');
             SQL.Add('LEFT JOIN TAB_USUARIO U ON (U.ID_USUARIO = P.ID_USUARIO_PRESTADOR)');
+            SQL.Add('LEFT JOIN TAB_USUARIO UU ON (UU.ID_USUARIO = P.ID_USUARIO)');
             SQL.Add('WHERE P.ID_PEDIDO > 0');
 
             if STATUS <> '' then
             begin
                 SQL.Add('AND P.STATUS = :STATUS');
                 ParamByName('STATUS').Value := STATUS;
+            end;
+
+            if CATEGORIA <> '' then
+            begin
+                SQL.Add('AND P.CATEGORIA = :CATEGORIA');
+                ParamByName('CATEGORIA').Value := CATEGORIA;
+            end;
+
+            if GRUPO <> '' then
+            begin
+                SQL.Add('AND P.GRUPO = :GRUPO');
+                ParamByName('GRUPO').Value := GRUPO;
             end;
 
             if ID_USUARIO > 0 then
@@ -151,7 +165,7 @@ begin
 
             SQL.Add('GROUP BY P.ID_PEDIDO, P.ID_USUARIO, P.STATUS, P.CATEGORIA, P.GRUPO,');
             SQL.Add('P.ENDERECO, P.DT_GERACAO, P.DT_SERVICO, P.DETALHE, P.QTD_MAX_ORC,');
-            SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE');
+            SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE, UU.NOME');
 
             if order_by = '' then
                 SQL.Add('ORDER BY P.ID_PEDIDO DESC')

@@ -65,7 +65,7 @@ type
                           out status: integer): string;
     function CriarUsuario(email, senha, nome, fone, foto64, categoria, grupo: string;
       out status: integer): string;
-    function ListaPedidos(sts, id_usuario: string;
+    function ListaPedidos(sts, id_usuario, categoria, grupo: string;
       out status_code: integer): string;
     function ListaNotificacoes(id_usuario: string;
       out status_code: integer): string;
@@ -879,7 +879,7 @@ begin
     end;
 end;
 
-function TDm.ListaPedidos(sts, id_usuario: string;
+function TDm.ListaPedidos(sts, id_usuario, categoria, grupo: string;
                           out status_code: integer): string;
 var
     p : TPedido;
@@ -891,6 +891,8 @@ begin
         p := TPedido.Create(dm.conn);
         p.STATUS := sts;
         p.ID_USUARIO := id_usuario.ToInteger;
+        p.CATEGORIA := categoria;
+        p.GRUPO := grupo;
 
         qry := p.ListarPedido('', erro);
 
@@ -1341,6 +1343,8 @@ begin
     if (RequestType = TRequestType.rtGet) and (uri_param = '')  then
         Result := ListaPedidos(Params.ItemsString['status'].AsString,
                                Params.ItemsString['id_usuario'].AsString,
+                               Params.ItemsString['categoria'].AsString,
+                               Params.ItemsString['grupo'].AsString,
                                StatusCode)
 
     else

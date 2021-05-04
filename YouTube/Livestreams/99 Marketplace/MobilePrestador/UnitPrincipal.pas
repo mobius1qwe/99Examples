@@ -72,10 +72,8 @@ type
     Layout7: TLayout;
     img_barra_fundo: TImage;
     img_barra_progresso: TImage;
-    lv_aceitos: TListView;
     img_user: TImage;
-    img_money: TImage;
-    lv_realizados: TListView;
+    img_endereco: TImage;
     StyleBook: TStyleBook;
     img_realizar: TImage;
     img_cheia: TImage;
@@ -96,6 +94,9 @@ type
     lbl_categoria: TLabel;
     lbl_grupo: TLabel;
     Layout8: TLayout;
+    img_orcado: TImage;
+    lv_aceitos: TListView;
+    lv_realizados: TListView;
     procedure img_notificacaoClick(Sender: TObject);
     procedure img_aba1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -125,12 +126,14 @@ type
     lbl : TLabel;
     procedure MudarAba(img: TImage);
     procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
-      qtd_orc_enviada: integer; categoria, dt, pedido, descricao: string);
+      qtd_orc_enviada: integer; categoria, dt, pedido, cliente,
+      endereco, ind_orcado: string);
     procedure AddAceito(seq_pedido, seq_usuario : integer;
-                        nome, categoria, dt, pedido, descricao: string;
+                        nome, categoria, dt, pedido,
+                        cliente, endereco, ind_orcado: string;
                         valor: double);
     procedure AddRealizado(seq_pedido, seq_usuario: integer; nome, categoria,
-      dt, pedido, descricao: string; valor: double);
+      dt, pedido, cliente, endereco, ind_orcado: string; valor: double);
     procedure ListarRealizados;
     procedure ProcessarPedidoAberto;
     procedure ProcessarPedidoErro(Sender: TObject);
@@ -243,23 +246,31 @@ end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
-    //ListarPendente;
+    ListarPendente;
 end;
 
 procedure TFrmPrincipal.AddPedido(seq_pedido, seq_usuario, max_orcamentos, qtd_orc_enviada : integer;
-                                  categoria, dt, pedido, descricao: string);
+                                  categoria, dt, pedido, cliente, endereco, ind_orcado : string);
 begin
     with lv_pedidos.Items.Add do
     begin
         Tag := seq_pedido;
         TagString := seq_usuario.ToString;
-        Height := 180;
+        Height := 200;
 
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
         TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
-        TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
+        TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
+        TListItemText(Objects.FindDrawable('TxtEndereco')).Text := endereco;
+
+        TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
+
+        if ind_orcado = 'S' then
+            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
+
         TListItemText(Objects.FindDrawable('TxtOrcamentos')).Text := 'Orçamentos Recebidos (' +
                                                                      qtd_orc_enviada.ToString + ' / ' +
                                                                      max_orcamentos.ToString + ')';
@@ -316,7 +327,8 @@ begin
 end;
 
 procedure TFrmPrincipal.AddAceito(seq_pedido, seq_usuario : integer;
-                                  nome, categoria, dt, pedido, descricao: string;
+                                  nome, categoria, dt, pedido, cliente,
+                                  endereco, ind_orcado: string;
                                   valor: double);
 begin
     with lv_aceitos.Items.Add do
@@ -325,21 +337,25 @@ begin
         TagString := seq_usuario.ToString;
         Height := 200;
 
+
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
-        TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
-        TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
-        TListItemText(Objects.FindDrawable('TxtValor')).Text := Format('%.2m', [valor]);
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
+        TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
+        TListItemText(Objects.FindDrawable('TxtEndereco')).Text := endereco;
 
-        TListItemImage(Objects.FindDrawable('ImgNome')).Bitmap := img_user.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgValor')).Bitmap := img_money.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgRealizar')).Bitmap := img_realizar.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
+
+        if ind_orcado = 'S' then
+            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
+
     end;
 end;
 
 procedure TFrmPrincipal.AddRealizado(seq_pedido, seq_usuario : integer;
-                                     nome, categoria, dt, pedido, descricao: string;
+                                     nome, categoria, dt, pedido,
+                                     cliente, endereco, ind_orcado: string;
                                      valor: double);
 begin
     with lv_realizados.Items.Add do
@@ -348,15 +364,17 @@ begin
         TagString := seq_usuario.ToString;
         Height := 200;
 
-        TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
+TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5);
-        TListItemText(Objects.FindDrawable('TxtDescricao')).Text := descricao;
-        TListItemText(Objects.FindDrawable('TxtNome')).Text := nome;
-        TListItemText(Objects.FindDrawable('TxtValor')).Text := Format('%.2m', [valor]);
+        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
+        TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
+        TListItemText(Objects.FindDrawable('TxtEndereco')).Text := endereco;
 
-        TListItemImage(Objects.FindDrawable('ImgNome')).Bitmap := img_user.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgValor')).Bitmap := img_money.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
+        TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
+
+        if ind_orcado = 'S' then
+            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
     end;
 end;
 
@@ -397,10 +415,12 @@ begin
                           jsonArray.Get(i).GetValue<integer>('QTD_MAX_ORC', 0),
                           jsonArray.Get(i).GetValue<integer>('QTD_ORCAMENTO', 0),
                           jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
-                          jsonArray.Get(i).GetValue<string>('GRUPO', ''),
+                                     jsonArray.Get(i).GetValue<string>('GRUPO', ''),
                           jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                           jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
-                          jsonArray.Get(i).GetValue<string>('DETALHE', '')
+                          jsonArray.Get(i).GetValue<string>('CLIENTE', ''),
+                          jsonArray.Get(i).GetValue<string>('ENDERECO', ''),
+                          jsonArray.Get(i).GetValue<string>('IND_ORCADO', '')
                           );
             end;
 
@@ -457,7 +477,9 @@ begin
                                  jsonArray.Get(i).GetValue<string>('GRUPO', ''),
                           jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                           jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
-                          jsonArray.Get(i).GetValue<string>('DETALHE', ''),
+                          jsonArray.Get(i).GetValue<string>('CLIENTE', ''),
+                          jsonArray.Get(i).GetValue<string>('ENDERECO', ''),
+                          jsonArray.Get(i).GetValue<string>('IND_ORCADO', ''),
                           jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
                           );
             end;
@@ -513,7 +535,9 @@ begin
                              jsonArray.Get(i).GetValue<string>('GRUPO', ''),
                       jsonArray.Get(i).GetValue<string>('DT_SERVICO', '01/01/2000 00:00:00'),
                       jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
-                      jsonArray.Get(i).GetValue<string>('DETALHE', ''),
+                      jsonArray.Get(i).GetValue<string>('CLIENTE', ''),
+                      jsonArray.Get(i).GetValue<string>('ENDERECO', ''),
+                      jsonArray.Get(i).GetValue<string>('IND_ORCADO', ''),
                       jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
                       );
         end;
@@ -584,8 +608,10 @@ begin
     // Buscar pedidos no servidor...
     dm.RequestPedido.Params.Clear;
     dm.RequestPedido.AddParameter('id', '');
-    dm.RequestPedido.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestPedido.AddParameter('id_usuario', '0');
     dm.RequestPedido.AddParameter('status', 'P');
+    dm.RequestPedido.AddParameter('categoria', lbl_categoria.TagString);
+    dm.RequestPedido.AddParameter('grupo', lbl_grupo.TagString);
     dm.RequestPedido.ExecuteAsync(ProcessarPedidoAberto, true, true, ProcessarPedidoErro);
 end;
 
@@ -594,8 +620,10 @@ begin
     // Buscar pedidos no servidor...
     dm.RequestAceito.Params.Clear;
     dm.RequestAceito.AddParameter('id', '');
-    dm.RequestAceito.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestAceito.AddParameter('id_usuario', '0');
     dm.RequestAceito.AddParameter('status', 'A');
+    dm.RequestAceito.AddParameter('categoria', lbl_categoria.TagString);
+    dm.RequestAceito.AddParameter('grupo', lbl_grupo.TagString);
     dm.RequestAceito.ExecuteAsync(ProcessarPedidoAceito, true, true, ProcessarPedidoErro);
 end;
 
@@ -604,8 +632,10 @@ begin
     // Buscar pedidos no servidor...
     dm.RequestRealizado.Params.Clear;
     dm.RequestRealizado.AddParameter('id', '');
-    dm.RequestRealizado.AddParameter('id_usuario', '1');
+    dm.RequestRealizado.AddParameter('id_usuario', '0');
     dm.RequestRealizado.AddParameter('status', 'R');
+    dm.RequestRealizado.AddParameter('categoria', lbl_categoria.TagString);
+    dm.RequestRealizado.AddParameter('grupo', lbl_grupo.TagString);
     dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
 
@@ -620,29 +650,10 @@ begin
     txt.Width := lv_pedidos.Width - 90;
 
     // Calcula tamanho da descricao...
-    txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
     txt.Width := lv_pedidos.Width - 30;
     txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
 
-    // Calcula obejto texto do nome...
-    txt_nome := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
-    txt_nome.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height + 10;
-
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgNome'));
-    img.PlaceOffset.Y := txt_nome.PlaceOffset.Y - 5;
-
-    // Calcula obejto texto do valor...
-    txt := TListItemText(AItem.Objects.FindDrawable('TxtValor'));
-    txt.PlaceOffset.Y := txt_nome.PlaceOffset.Y + txt_nome.Height + 15;
-
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgValor'));
-    img.PlaceOffset.Y := txt.PlaceOffset.Y - 5;
-
-    Aitem.Height := Trunc(img.PlaceOffset.Y + img.Height + 30);
-
-    // Botao realizar...
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgRealizar'));
-    img.PlaceOffset.Y := AItem.Height - 55;
 end;
 
 procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
@@ -672,14 +683,12 @@ begin
     txt := TListItemText(AItem.Objects.FindDrawable('TxtCategoria'));
     txt.Width := lv_pedidos.Width - 90;
 
-    // Calcula tamanho da descricao...
-    txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
+    // Calcula tamanho da nome...
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
     txt.Width := lv_pedidos.Width - 30;
-    txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
 
     // Calcula objeto texto do orcamento...
     txt_orc := TListItemText(AItem.Objects.FindDrawable('TxtOrcamentos'));
-    txt_orc.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height + 10;
 
     if lv_pedidos.Width < 250 then
         txt_orc.Text := 'Orç. Receb ('
@@ -696,8 +705,6 @@ begin
     TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).Width := progresso;
     TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).PlaceOffset.Y := TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).PlaceOffset.Y;
     TListItemImage(AItem.Objects.FindDrawable('ImgProgresso')).Visible := progresso > 0;
-
-    Aitem.Height := Trunc(TListItemImage(AItem.Objects.FindDrawable('ImgFundo')).PlaceOffset.Y + 35);
 end;
 
 procedure TFrmPrincipal.lv_realizadosUpdateObjects(const Sender: TObject;
@@ -711,25 +718,9 @@ begin
     txt.Width := lv_pedidos.Width - 90;
 
     // Calcula tamanho da descricao...
-    txt := TListItemText(AItem.Objects.FindDrawable('TxtDescricao'));
+    txt := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
     txt.Width := lv_pedidos.Width - 30;
     txt.Height := TFunctions.GetTextHeight(txt, txt.Width, txt.Text);
-
-    // Calcula obejto texto do nome...
-    txt_nome := TListItemText(AItem.Objects.FindDrawable('TxtNome'));
-    txt_nome.PlaceOffset.Y := txt.PlaceOffset.Y + txt.Height + 10;
-
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgNome'));
-    img.PlaceOffset.Y := txt_nome.PlaceOffset.Y - 5;
-
-    // Calcula obejto texto do valor...
-    txt := TListItemText(AItem.Objects.FindDrawable('TxtValor'));
-    txt.PlaceOffset.Y := txt_nome.PlaceOffset.Y + txt_nome.Height + 15;
-
-    img := TListItemImage(AItem.Objects.FindDrawable('ImgValor'));
-    img.PlaceOffset.Y := txt.PlaceOffset.Y - 5;
-
-    Aitem.Height := Trunc(img.PlaceOffset.Y + img.Height + 20);
 end;
 
 procedure TFrmPrincipal.MudarAba(img: TImage);
