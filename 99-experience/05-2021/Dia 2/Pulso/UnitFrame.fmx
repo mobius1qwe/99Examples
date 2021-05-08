@@ -1,0 +1,64 @@
+object FrameItem: TFrameItem
+  Size.Width = 320.000000000000000000
+  Size.Height = 95.000000000000000000
+  Size.PlatformDefault = False
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 320.000000000000000000
+    Size.Height = 95.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label15: TLabel
+      StyledSettings = [Family]
+      Position.X = 11.000000000000000000
+      Position.Y = 11.000000000000000000
+      Size.Width = 184.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF3E4351
+      Text = 'Drogaria S'#227'o Paulo'
+      TabOrder = 4
+    end
+    object Label16: TLabel
+      StyledSettings = [Family]
+      Position.X = 11.000000000000000000
+      Position.Y = 35.000000000000000000
+      Size.Width = 192.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = xFF3E4351
+      Text = 'Compra de medicamentos'
+      TabOrder = 2
+    end
+    object Label17: TLabel
+      StyledSettings = [Family]
+      Position.X = 11.000000000000000000
+      Position.Y = 58.000000000000000000
+      Size.Width = 192.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.FontColor = xFFABAEB5
+      Text = 'Sa'#250'de'
+      TabOrder = 1
+    end
+    object Label18: TLabel
+      Anchors = [akTop, akRight]
+      StyledSettings = [Family]
+      Position.X = 187.000000000000000000
+      Position.Y = 11.000000000000000000
+      Size.Width = 122.000000000000000000
+      Size.Height = 21.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.FontColor = xFF3E4351
+      TextSettings.HorzAlign = Trailing
+      Text = 'R$ 11,18'
+      TabOrder = 3
+    end
+  end
+end

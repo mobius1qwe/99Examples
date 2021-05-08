@@ -1,0 +1,231 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Menu'
+  ClientHeight = 571
+  ClientWidth = 384
+  Fill.Color = xFF30558B
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object rect_toolbar: TRectangle
+    Align = Top
+    Fill.Color = xFF385E98
+    Size.Width = 384.000000000000000000
+    Size.Height = 75.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object img_menu: TImage
+      MultiResBitmap.Height = 42
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 42
+          PNG = {
+            89504E470D0A1A0A0000000D49484452000000400000002A080600000003065D
+            E2000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            0054494441546843EDD8B10DC330100441CA95AB73C902AE8B9D4996F12504FE
+            7AFE4ED86FCD32C09A6580352B3F00000055DF41E4DE3BC94568CD32C09A6580
+            352BFF0D020050E520B2661960CD32C09A151FE09C17EB8013166997BD9E0000
+            000049454E44AE426082}
+          FileName = 
+            'D:\99Coders\Lancamento 13\CPL3 - Menus profissionais\FontesFull\' +
+            'Menu1\Images\menu2.png'
+        end>
+      Position.X = 20.000000000000000000
+      Position.Y = 14.000000000000000000
+      Size.Width = 32.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      OnClick = img_menuClick
+      object AnimationRotacao: TFloatAnimation
+        Duration = 0.400000005960464500
+        Interpolation = Circular
+        OnFinish = AnimationBallFinish
+        PropertyName = 'RotationAngle'
+        StartValue = 0.000000000000000000
+        StopValue = 45.000000000000000000
+      end
+    end
+  end
+  object lyt_menu: TLayout
+    Align = Contents
+    Size.Width = 384.000000000000000000
+    Size.Height = 571.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 1
+    object Layout1: TLayout
+      Position.X = 11.000000000000000000
+      Position.Y = 11.000000000000000000
+      Size.Width = 52.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object c_menu: TCircle
+        Align = Center
+        Fill.Color = claWhite
+        Size.Width = 20.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        object AnimationBall: TFloatAnimation
+          Duration = 0.300000011920929000
+          Interpolation = Circular
+          OnProcess = AnimationBallProcess
+          OnFinish = AnimationBallFinish
+          PropertyName = 'Width'
+          StartValue = 0.000000000000000000
+          StopValue = 1500.000000000000000000
+        end
+      end
+      object img_fechar: TImage
+        MultiResBitmap.Height = 64
+        MultiResBitmap.Width = 64
+        MultiResBitmap = <
+          item
+            Width = 64
+            Height = 64
+            PNG = {
+              89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+              DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+              035B49444154785EED9B4D6E133118866DE78703504E00420889F60E990D0816
+              ACE01A482016B08605223D07EC5820D14DE60EB4124208B840DA03A44DC6F835
+              F34D133249E6E7B33D56793693F16CF23CF5CC54752D45090FC7BF0FF4428F87
+              F3D9D34FAFEE9EE5C35172FFCD8F1B6AD0FBA07BFAD997E7B74EF2E102951F0B
+              209F657A22A44866FDE1E4F1DB6FD7F34BD1F1575EC1652416327D30FE792FBF
+              54B0320348DE0C16D25AEBAFD7E6E7496C33E1525E16D25A8B53D1D3A3E59950
+              04289327628B50264F20821622397A79F318E736C03679229608DBE489E508B2
+              8A3CD1F50855E40913E0CC841829F3B43FAC220FA494075D7D30D6910770366F
+              8043655E754F4C0F7B3F540111CE07C3B44B11EACA03CC66BCE6ED3300329032
+              7AFBF66A25F4F1F0E27C14FA76682A4FB7B20D00628CD0561EE745001053040E
+              79B01200C410814B1EAC05004D2328394F3EBFB8739A0F3881531E9406008FDE
+              7FDFCB747FD2A508DCF2606300D0A5082EE4C1D600A00B115CC9839D0140C808
+              2EE541A500204404D7F2A07200E033820F79502B00F011C1973CA81D00D80859
+              3FADF305CD373C516A3EDA15C1A73C681400B888E05B1E340E003823849007AD
+              02008E08A1E441EB00A04D84F94CC950F2802500681AC11E03C903B600A0C954
+              AE03B73C600D005C4570210FD80300EE08AEE4819300802B824B79E02C00681B
+              C1B53C701A00348DE0431EAC2D8F5F35FEDF02F9919D2BFD10E492275C46600F
+              C02D4FB88AC01AC0953CE122025B8026F210C2114BEE76A002DC115802349587
+              083E875C8B6C1DA08D3C09845C906D1580439E0815A171004E7922448446015C
+              C813BE23D40EE0529EF0F9FF09B502F89027ECDF183D2CC3550EE0539EF011A1
+              528010F284EB083B038494275C46D81AA00BF284AB081B0374499E7011A13440
+              17E509EE086B01BA2C4FD8084CABD22B01629027B82214016292273822D80031
+              CA136D23C898E5893611143615C62C0FF093840CA4F2A1DD18E72C1B7C54D851
+              69F7D355A08BF204226417595223C214EEF6196077542E642AA5D8B3974AE8B2
+              FC32156FE9A9563AC1064ABB36880FD847B76926C4220F8E5EDF9EEE9809853C
+              4E567F0F78F76BDFCC82D40C163BC262925F66C34C5891072B01C0728458E589
+              7F22ACC983B5E5716C27554A9A29242631CB83CBDB41A465F24208F1070AFDA3
+              56D5E2D6470000000049454E44AE426082}
+            FileName = 
+              'D:\99Coders\Lancamento 13\CPL3 - Menus profissionais\Fontes\Imag' +
+              'es\close3.png'
+          end>
+        Opacity = 0.000000000000000000
+        Position.X = 12.000000000000000000
+        Position.Y = 3.000000000000000000
+        Size.Width = 25.000000000000000000
+        Size.Height = 46.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = img_menuClick
+        object AnimationOpacidadeFechar: TFloatAnimation
+          Duration = 0.300000011920929000
+          Interpolation = Circular
+          OnProcess = AnimationOpacidadeFecharProcess
+          OnFinish = AnimationBallFinish
+          PropertyName = 'Opacity'
+          StartValue = 0.000000000000000000
+          StopValue = 1.000000000000000000
+        end
+      end
+    end
+    object lb_menu: TListBox
+      Align = Center
+      Opacity = 0.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 371.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'transparentlistboxstyle'
+      TabOrder = 1
+      ShowScrollBars = False
+      DisableFocusEffect = True
+      DefaultItemStyles.ItemStyle = ''
+      DefaultItemStyles.GroupHeaderStyle = ''
+      DefaultItemStyles.GroupFooterStyle = ''
+      Viewport.Width = 241.000000000000000000
+      Viewport.Height = 371.000000000000000000
+      object ListBoxItem11: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF214272
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family]
+        Size.Width = 241.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Clientes'
+      end
+      object ListBoxItem12: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF214272
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family]
+        Position.Y = 73.000000000000000000
+        Size.Width = 241.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Fornecedores'
+      end
+      object ListBoxItem13: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF214272
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family]
+        Position.Y = 146.000000000000000000
+        Size.Width = 241.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Pedidos'
+      end
+      object ListBoxItem14: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF214272
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family]
+        Position.Y = 219.000000000000000000
+        Size.Width = 241.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Configura'#231#245'es'
+      end
+      object ListBoxItem15: TListBoxItem
+        Selectable = False
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = xFF214272
+        TextSettings.HorzAlign = Center
+        StyledSettings = [Family]
+        Position.Y = 292.000000000000000000
+        Size.Width = 241.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Logout'
+      end
+    end
+  end
+end
