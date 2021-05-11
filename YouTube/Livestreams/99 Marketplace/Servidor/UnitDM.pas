@@ -60,12 +60,16 @@ type
       var Params: TDWParams; var Result: string;
       const RequestType: TRequestType; var StatusCode: Integer;
       RequestHeader: TStringList);
+    procedure DWEventsPrestadorEventspedidoReplyEventByType(
+      var Params: TDWParams; var Result: string;
+      const RequestType: TRequestType; var StatusCode: Integer;
+      RequestHeader: TStringList);
   private
     function ValidarLogin(email, senha: string;
                           out status: integer): string;
     function CriarUsuario(email, senha, nome, fone, foto64, categoria, grupo: string;
       out status: integer): string;
-    function ListaPedidos(sts, id_usuario, categoria, grupo: string;
+    function ListaPedidosCliente(sts, id_usuario, categoria, grupo: string;
       out status_code: integer): string;
     function ListaNotificacoes(id_usuario: string;
       out status_code: integer): string;
@@ -98,6 +102,9 @@ type
       out status: integer): string;
     function EditarUsuario(id_usuario, campo, valor: string;
       out status: integer): string;
+    function ListaPedidosPrestador(sts, id_usuario, id_usuario_prestador,
+       categoria, grupo: string;
+      out status_code: integer): string;
 
     { Private declarations }
   public
@@ -879,7 +886,7 @@ begin
     end;
 end;
 
-function TDm.ListaPedidos(sts, id_usuario, categoria, grupo: string;
+function TDm.ListaPedidosCliente(sts, id_usuario, categoria, grupo: string;
                           out status_code: integer): string;
 var
     p : TPedido;
@@ -894,7 +901,39 @@ begin
         p.CATEGORIA := categoria;
         p.GRUPO := grupo;
 
-        qry := p.ListarPedido('', erro);
+        qry := p.ListarPedidoCliente('', erro);
+
+        json := uDWJSONObject.TJSONValue.Create;
+        json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
+
+        Result := json.ToJSON;
+        status_code := 200;
+
+    finally
+        qry.DisposeOf;
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+function TDm.ListaPedidosPrestador(sts, id_usuario, id_usuario_prestador,
+                          categoria, grupo: string;
+                          out status_code: integer): string;
+var
+    p : TPedido;
+    json : uDWJSONObject.TJSONValue;
+    qry : TFDQuery;
+    erro: string;
+begin
+    try
+        p := TPedido.Create(dm.conn);
+        p.STATUS := sts;
+        p.ID_USUARIO := id_usuario.ToInteger; // Pedidos que esse prestador ganhou o orcamento...
+        p.CATEGORIA := categoria;
+        p.GRUPO := grupo;
+        p.ID_USUARIO_PRESTADOR := id_usuario_prestador.ToInteger; // Pedidos possuem ou nao orcamento desse prestador...
+
+        qry := p.ListarPedidoPrestador('', erro);
 
         json := uDWJSONObject.TJSONValue.Create;
         json.LoadFromDataset('', qry, false, jmPureJSON, 'dd/mm/yyyy hh:nn:ss');
@@ -952,6 +991,7 @@ begin
             json.AddPair('detalhe', p.DETALHE);
             json.AddPair('qtd_max_orc', TJSONNumber.Create(p.QTD_MAX_ORC));
             json.AddPair('valor_total', TJSONNumber.Create(p.VALOR_TOTAL));
+            json.AddPair('qtd_orcamento', TJSONNumber.Create(p.QTD_ORCAMENTO));
             Status := 200;
         end;
 
@@ -1341,7 +1381,7 @@ begin
 
     // GET (LISTAGEM).......
     if (RequestType = TRequestType.rtGet) and (uri_param = '')  then
-        Result := ListaPedidos(Params.ItemsString['status'].AsString,
+        Result := ListaPedidosCliente(Params.ItemsString['status'].AsString,
                                Params.ItemsString['id_usuario'].AsString,
                                Params.ItemsString['categoria'].AsString,
                                Params.ItemsString['grupo'].AsString,
@@ -1385,6 +1425,28 @@ begin
         StatusCode := 403;
         Result := '{"retorno":"Verbo HTTP não é válido.", "id_pedido": 0}';
     end;
+end;
+
+procedure Tdm.DWEventsPrestadorEventspedidoReplyEventByType(
+  var Params: TDWParams; var Result: string; const RequestType: TRequestType;
+  var StatusCode: Integer; RequestHeader: TStringList);
+var
+    uri_param : string;
+begin
+    try
+        uri_param := Params.ItemsString['0'].AsString;
+    except
+        uri_param := '';
+    end;
+
+    // GET (LISTAGEM).......
+    if (RequestType = TRequestType.rtGet) and (uri_param = '')  then
+        Result := ListaPedidosPrestador(Params.ItemsString['status'].AsString,
+                               Params.ItemsString['id_usuario'].AsString,
+                               Params.ItemsString['id_usuario_prestador'].AsString,
+                               Params.ItemsString['categoria'].AsString,
+                               Params.ItemsString['grupo'].AsString,
+                               StatusCode)
 end;
 
 procedure Tdm.DWEventsPrestadorEventsprestadorReplyEventByType(

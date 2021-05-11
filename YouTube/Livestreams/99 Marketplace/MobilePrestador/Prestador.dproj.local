@@ -22,9 +22,11 @@
     <Transaction>2021/04/19 20:20:37.000.034,=D:\99Coders\CursoMarketplace\Fontes\Units\uFunctions.pas</Transaction>
     <Transaction>2021/04/19 20:21:37.000.894,=D:\99Coders\CursoMarketplace\Fontes\MobilePrestador\UnitPrincipal.pas</Transaction>
     <Transaction>2021/04/19 21:14:42.000.001,=D:\99Coders\CursoMarketplace\Fontes\FormsCompartilhados\UnitCategoria.pas</Transaction>
+    <Transaction>2021/05/10 21:22:17.905,=D:\99Coders\CursoMarketplace\Fontes\MobilePrestador\UnitPedido.pas</Transaction>
+    <Transaction>2021/05/10 21:30:36.697,=D:\99Coders\CursoMarketplace\Fontes\Units\uLoading.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
-		<NoProfile Android="Emulador_Nexus_7" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
+		<NoProfile Android="" iOSSimulator="iPhone5" Android64="Emulador_Nexus_7"/>
 		<PMACANDREA iOSSimulator="iPhone5"/>
 		<PMacBook iOSSimulator="iPhone5"/>
 		<PMacVirtual iOSSimulator="iPhone5"/>

@@ -76,7 +76,7 @@ object dm: Tdm
         Name = 'senha'
         Value = '12345'
       end>
-    Resource = 'pedidos/pedido'
+    Resource = 'prestadores/pedido'
     SynchronizedEvents = False
     Left = 56
     Top = 288
@@ -92,7 +92,7 @@ object dm: Tdm
         Name = 'senha'
         Value = '12345'
       end>
-    Resource = 'pedidos/pedido'
+    Resource = 'prestadores/pedido'
     SynchronizedEvents = False
     Left = 200
     Top = 288
@@ -108,7 +108,7 @@ object dm: Tdm
         Name = 'senha'
         Value = '12345'
       end>
-    Resource = 'pedidos/pedido'
+    Resource = 'prestadores/pedido'
     SynchronizedEvents = False
     Left = 56
     Top = 352

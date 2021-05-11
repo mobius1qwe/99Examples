@@ -244,6 +244,16 @@ object dm: Tdm
         EventName = 'prestador'
         OnlyPreDefinedParams = False
         OnReplyEventByType = DWEventsPrestadorEventsprestadorReplyEventByType
+      end
+      item
+        Routes = [crAll]
+        NeedAuthorization = True
+        DWParams = <>
+        JsonMode = jmPureJSON
+        Name = 'pedido'
+        EventName = 'pedido'
+        OnlyPreDefinedParams = False
+        OnReplyEventByType = DWEventsPrestadorEventspedidoReplyEventByType
       end>
     ContextName = 'prestadores'
     Left = 192

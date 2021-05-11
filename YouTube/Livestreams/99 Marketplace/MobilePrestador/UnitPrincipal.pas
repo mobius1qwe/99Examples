@@ -130,10 +130,10 @@ type
       endereco, ind_orcado: string);
     procedure AddAceito(seq_pedido, seq_usuario : integer;
                         nome, categoria, dt, pedido,
-                        cliente, endereco, ind_orcado: string;
+                        cliente, endereco: string;
                         valor: double);
     procedure AddRealizado(seq_pedido, seq_usuario: integer; nome, categoria,
-      dt, pedido, cliente, endereco, ind_orcado: string; valor: double);
+      dt, pedido, cliente, endereco: string; valor: double);
     procedure ListarRealizados;
     procedure ProcessarPedidoAberto;
     procedure ProcessarPedidoErro(Sender: TObject);
@@ -160,7 +160,8 @@ implementation
 
 {$R *.fmx}
 
-uses System.JSON, UnitDM, FMX.DialogService, REST.Types, UnitCategoria;
+uses System.JSON, UnitDM, FMX.DialogService, REST.Types, UnitCategoria,
+  UnitPedido;
 
 procedure TFrmPrincipal.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel;
                                         ind_senha : Boolean = false);
@@ -328,14 +329,14 @@ end;
 
 procedure TFrmPrincipal.AddAceito(seq_pedido, seq_usuario : integer;
                                   nome, categoria, dt, pedido, cliente,
-                                  endereco, ind_orcado: string;
+                                  endereco: string;
                                   valor: double);
 begin
     with lv_aceitos.Items.Add do
     begin
         Tag := seq_pedido;
         TagString := seq_usuario.ToString;
-        Height := 200;
+        Height := 140;
 
 
         TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
@@ -346,25 +347,21 @@ begin
 
         TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
         TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
-
-        if ind_orcado = 'S' then
-            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
-
     end;
 end;
 
 procedure TFrmPrincipal.AddRealizado(seq_pedido, seq_usuario : integer;
                                      nome, categoria, dt, pedido,
-                                     cliente, endereco, ind_orcado: string;
+                                     cliente, endereco: string;
                                      valor: double);
 begin
     with lv_realizados.Items.Add do
     begin
         Tag := seq_pedido;
         TagString := seq_usuario.ToString;
-        Height := 200;
+        Height := 145;
 
-TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
+        TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
         TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
         TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
@@ -372,9 +369,6 @@ TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
 
         TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
         TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
-
-        if ind_orcado = 'S' then
-            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
     end;
 end;
 
@@ -479,7 +473,6 @@ begin
                           jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
                           jsonArray.Get(i).GetValue<string>('CLIENTE', ''),
                           jsonArray.Get(i).GetValue<string>('ENDERECO', ''),
-                          jsonArray.Get(i).GetValue<string>('IND_ORCADO', ''),
                           jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
                           );
             end;
@@ -537,7 +530,6 @@ begin
                       jsonArray.Get(i).GetValue<string>('ID_PEDIDO', ''),
                       jsonArray.Get(i).GetValue<string>('CLIENTE', ''),
                       jsonArray.Get(i).GetValue<string>('ENDERECO', ''),
-                      jsonArray.Get(i).GetValue<string>('IND_ORCADO', ''),
                       jsonArray.Get(i).GetValue<double>('VALOR_TOTAL', 0)
                       );
         end;
@@ -609,6 +601,7 @@ begin
     dm.RequestPedido.Params.Clear;
     dm.RequestPedido.AddParameter('id', '');
     dm.RequestPedido.AddParameter('id_usuario', '0');
+    dm.RequestPedido.AddParameter('id_usuario_prestador', FrmPrincipal.id_usuario_logado.ToString);
     dm.RequestPedido.AddParameter('status', 'P');
     dm.RequestPedido.AddParameter('categoria', lbl_categoria.TagString);
     dm.RequestPedido.AddParameter('grupo', lbl_grupo.TagString);
@@ -620,7 +613,8 @@ begin
     // Buscar pedidos no servidor...
     dm.RequestAceito.Params.Clear;
     dm.RequestAceito.AddParameter('id', '');
-    dm.RequestAceito.AddParameter('id_usuario', '0');
+    dm.RequestAceito.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestAceito.AddParameter('id_usuario_prestador', '0');
     dm.RequestAceito.AddParameter('status', 'A');
     dm.RequestAceito.AddParameter('categoria', lbl_categoria.TagString);
     dm.RequestAceito.AddParameter('grupo', lbl_grupo.TagString);
@@ -632,7 +626,8 @@ begin
     // Buscar pedidos no servidor...
     dm.RequestRealizado.Params.Clear;
     dm.RequestRealizado.AddParameter('id', '');
-    dm.RequestRealizado.AddParameter('id_usuario', '0');
+    dm.RequestRealizado.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+    dm.RequestRealizado.AddParameter('id_usuario_prestador', '0');
     dm.RequestRealizado.AddParameter('status', 'R');
     dm.RequestRealizado.AddParameter('categoria', lbl_categoria.TagString);
     dm.RequestRealizado.AddParameter('grupo', lbl_grupo.TagString);
@@ -659,7 +654,6 @@ end;
 procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
 begin
-    {
     if NOT Assigned(FrmPedido) then
         Application.CreateForm(TFrmPedido, FrmPedido);
 
@@ -667,7 +661,7 @@ begin
     FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
     FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
     FrmPedido.Show;
-    }
+
 end;
 
 procedure TFrmPrincipal.lv_pedidosUpdateObjects(const Sender: TObject;
