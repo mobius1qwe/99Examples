@@ -105,6 +105,11 @@ type
     function ListaPedidosPrestador(sts, id_usuario, id_usuario_prestador,
        categoria, grupo: string;
       out status_code: integer): string;
+    function DadosPedidoPrestador(id_pedido, id_prestador: string;
+      out status: integer): string;
+    function EditarOrcamento(id_usuario, id_orcamento,  obs: string;
+      valor_total: Double;
+      out status: integer): string;
 
     { Private declarations }
   public
@@ -1004,6 +1009,66 @@ begin
 end;
 
 
+function TDm.DadosPedidoPrestador(id_pedido, id_prestador: string;
+                                  out status: integer): string;
+var
+    p : TPedido;
+    json : TJSONObject;
+    erro: string;
+begin
+    Sleep(4000);
+
+    try
+        json := TJSONObject.Create;
+        p := TPedido.Create(dm.conn);
+
+
+        try
+            id_pedido.ToInteger;
+        except
+            json.AddPair('retorno', 'Id. pedido inválido');
+            Status := 401;
+            exit;
+        end;
+
+
+        p.ID_PEDIDO := id_pedido.ToInteger;
+        p.ID_USUARIO_PRESTADOR := id_prestador.ToInteger;
+
+        if NOT p.DadosPedidoPrestador(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            Status := 401;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_pedido', p.ID_PEDIDO.ToString);
+            json.AddPair('id_usuario', p.ID_USUARIO.ToString);
+            json.AddPair('status', p.STATUS);
+            json.AddPair('categoria', p.CATEGORIA);
+            json.AddPair('grupo', p.GRUPO);
+            json.AddPair('endereco', p.ENDERECO);
+            json.AddPair('dt_geracao', FormatDateTime('DD/MM/YYYY HH:NN:SS', p.DT_GERACAO));
+            json.AddPair('dt_servico', FormatDateTime('DD/MM/YYYY HH:NN:SS', p.DT_SERVICO));
+            json.AddPair('detalhe', p.DETALHE);
+            json.AddPair('qtd_max_orc', TJSONNumber.Create(p.QTD_MAX_ORC));
+            json.AddPair('valor_total', TJSONNumber.Create(p.VALOR_TOTAL));
+            json.AddPair('qtd_orcamento', TJSONNumber.Create(p.QTD_ORCAMENTO));
+            json.AddPair('valor_orcado', TJSONNumber.Create(p.VALOR_ORCADO));
+            json.AddPair('obs_orcado', p.OBS_ORCADO);
+
+            Status := 200;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
 function TDm.ListaNotificacoes(id_usuario: string;
                           out status_code: integer): string;
 var
@@ -1324,6 +1389,66 @@ begin
     end;
 end;
 
+
+function TDm.EditarOrcamento(id_usuario, id_orcamento,
+                             obs : string;
+                             valor_total: Double;
+                          out status: integer): string;
+var
+    p : TPedidoOrcamento;
+    json : TJSONObject;
+    erro: string;
+begin
+    try
+        json := TJSONObject.Create;
+        p := TPedidoOrcamento.Create(dm.conn);
+
+        // Validações dos parametros...
+        if (id_orcamento = '') and (valor_total > 0) then
+        begin
+            json.AddPair('retorno', 'Informe todos os parâmetros');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        try
+            StrToInt(id_orcamento);
+        except
+            json.AddPair('retorno', 'Id. orçamento inválido');
+            json.AddPair('id_pedido', '0');
+            Status := 400;
+            Result := json.ToString;
+            exit;
+        end;
+
+        p.ID_ORCAMENTO := id_orcamento.ToInteger;
+        p.VALOR_TOTAL := valor_total;
+        p.OBS := obs;
+
+        if NOT p.Editar(erro) then
+        begin
+            json.AddPair('retorno', erro);
+            json.AddPair('id_orcamento', p.ID_ORCAMENTO.ToString);
+            Status := 400;
+        end
+        else
+        begin
+            json.AddPair('retorno', 'OK');
+            json.AddPair('id_orcamento', p.ID_ORCAMENTO.ToString);
+            Status := 200;
+        end;
+
+        Result := json.ToString;
+
+    finally
+        json.DisposeOf;
+        p.DisposeOf;
+    end;
+end;
+
+
 procedure Tdm.DWEventsOrcamentoEventschatReplyEventByType(var Params: TDWParams;
   var Result: string; const RequestType: TRequestType; var StatusCode: Integer;
   RequestHeader: TStringList);
@@ -1434,6 +1559,7 @@ var
     uri_param : string;
 begin
     try
+        // prestadores/pedido/5000
         uri_param := Params.ItemsString['0'].AsString;
     except
         uri_param := '';
@@ -1447,6 +1573,12 @@ begin
                                Params.ItemsString['categoria'].AsString,
                                Params.ItemsString['grupo'].AsString,
                                StatusCode)
+
+    else // GET (PEDIDO ESPECIFICO).......
+    if (RequestType = TRequestType.rtGet) and (uri_param <> '')  then
+        Result := DadosPedidoPrestador(uri_param,
+                                       Params.ItemsString['id_usuario_prestador'].AsString,
+                                       StatusCode)
 end;
 
 procedure Tdm.DWEventsPrestadorEventsprestadorReplyEventByType(
@@ -1499,19 +1631,17 @@ begin
                               Params.ItemsString['obs'].AsString,
                               Params.ItemsString['valor_total'].AsFloat / 100,
                               StatusCode)
-    {
+
     else
     // PATCH.......
     if RequestType = TRequestType.rtPatch then
-        Result := EditarPedido(Params.ItemsString['id_pedido'].AsString,
-                              Params.ItemsString['categoria'].AsString,
-                              Params.ItemsString['grupo'].AsString,
-                              Params.ItemsString['endereco'].AsString,
-                              Params.ItemsString['dt_servico'].AsString,
-                              Params.ItemsString['detalhe'].AsString,
+        Result := EditarOrcamento(Params.ItemsString['id_usuario'].AsString,
+                              Params.ItemsString['id_orcamento'].AsString,
+                              Params.ItemsString['obs'].AsString,
+                              Params.ItemsString['valor_total'].AsFloat / 100,
                               StatusCode)
 
-    else
+    {else
     // DELETE.......
     if RequestType = TRequestType.rtDelete then
         Result := ExcluirPedido(Params.ItemsString['id_usuario'].AsString,

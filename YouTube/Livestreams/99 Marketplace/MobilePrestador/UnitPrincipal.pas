@@ -657,6 +657,7 @@ begin
     if NOT Assigned(FrmPedido) then
         Application.CreateForm(TFrmPedido, FrmPedido);
 
+    FrmPedido.id_orcamento := 0; //??????
     FrmPedido.id_pedido := AItem.Tag;
     FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
     FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;

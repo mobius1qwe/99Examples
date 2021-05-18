@@ -33,6 +33,7 @@ type
     RequestPedidoAprovar: TRESTRequest;
     RequestPedidoAvaliar: TRESTRequest;
     RequestPerfilCad: TRESTRequest;
+    RequestOrcamentoCad: TRESTRequest;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

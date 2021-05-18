@@ -1,8 +1,8 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 623
-  Width = 457
+  Height = 613
+  Width = 564
   object conn: TFDConnection
     Params.Strings = (
       
@@ -326,5 +326,22 @@ object dm: Tdm
     SynchronizedEvents = False
     Left = 344
     Top = 528
+  end
+  object RequestOrcamentoCad: TRESTRequest
+    Client = RESTClient
+    Method = rmPATCH
+    Params = <
+      item
+        Name = 'email'
+        Value = 'joao3@99coders.com.br'
+      end
+      item
+        Name = 'senha'
+        Value = '12345'
+      end>
+    Resource = 'orcamentos/orcamento'
+    SynchronizedEvents = False
+    Left = 464
+    Top = 416
   end
 end

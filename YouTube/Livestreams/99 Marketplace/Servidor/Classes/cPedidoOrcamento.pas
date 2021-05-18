@@ -211,39 +211,10 @@ function TPedidoOrcamento.Editar(out erro: string): Boolean;
 var
     qry : TFDQuery;
 begin
-    {
-    if (ID_PEDIDO <= 0)  then
+    if (ID_ORCAMENTO <= 0)  then
     begin
         Result := false;
-        erro := 'Pedido não informado';
-        exit;
-    end;
-
-    if (CATEGORIA = '')  then
-    begin
-        Result := false;
-        erro := 'Categoria do pedido não informada';
-        exit;
-    end;
-
-    if (GRUPO = '')  then
-    begin
-        Result := false;
-        erro := 'Grupo do pedido não informado';
-        exit;
-    end;
-
-    if (ENDERECO = '')  then
-    begin
-        Result := false;
-        erro := 'Endereço do pedido não informado';
-        exit;
-    end;
-
-    if (DETALHE = '')  then
-    begin
-        Result := false;
-        erro := 'Detalhes do pedido não informado';
+        erro := 'Orçamento não informado';
         exit;
     end;
 
@@ -256,16 +227,12 @@ begin
         begin
             Active := false;
             sql.Clear;
-            SQL.Add('UPDATE TAB_PEDIDO SET CATEGORIA=:CATEGORIA, GRUPO=:GRUPO,');
-            SQL.Add('ENDERECO=:ENDERECO, DT_SERVICO=:DT_SERVICO, DETALHE=:DETALHE');
-            SQL.Add('WHERE ID_PEDIDO=:ID_PEDIDO');
+            SQL.Add('UPDATE TAB_PEDIDO_ORCAMENTO SET VALOR_TOTAL=:VALOR_TOTAL, OBS=:OBS');
+            SQL.Add('WHERE ID_ORCAMENTO=:ID_ORCAMENTO');
 
-            ParamByName('CATEGORIA').Value := CATEGORIA;
-            ParamByName('GRUPO').Value := GRUPO;
-            ParamByName('ENDERECO').Value := ENDERECO;
-            ParamByName('DT_SERVICO').Value := DT_SERVICO;
-            ParamByName('DETALHE').Value := DETALHE;
-            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('VALOR_TOTAL').Value := VALOR_TOTAL;
+            ParamByName('OBS').Value := OBS;
+            ParamByName('ID_ORCAMENTO').Value := ID_ORCAMENTO;
             ExecSQL;
 
             DisposeOf;
@@ -277,10 +244,9 @@ begin
     except on ex:exception do
         begin
             Result := false;
-            erro := 'Erro ao editar pedido: ' + ex.Message;
+            erro := 'Erro ao editar orçamento: ' + ex.Message;
         end;
     end;
-    }
 end;
 
 function TPedidoOrcamento.Excluir(out erro: string): Boolean;

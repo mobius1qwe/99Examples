@@ -43,14 +43,14 @@ type
     img_detalhe_qtd: TImage;
     Layout3: TLayout;
     Label6: TLabel;
-    lbl_qtd_orc: TLabel;
+    lbl_valor: TLabel;
     rect_cancelar: TRectangle;
     Label2: TLabel;
     lv_orcamentos: TListView;
     img_aprovar: TImage;
     img_chat: TImage;
     rect_salvar: TRectangle;
-    Label1: TLabel;
+    lbl_salvar: TLabel;
     rect_fundo: TRectangle;
     rect_cad: TRectangle;
     layout_cad: TLayout;
@@ -71,23 +71,22 @@ type
     procedure FormShow(Sender: TObject);
     procedure img_notificacaoClick(Sender: TObject);
     procedure rect_salvarClick(Sender: TObject);
-    procedure lbi_enderecoClick(Sender: TObject);
     procedure rect_cad_salvarClick(Sender: TObject);
     procedure layout_cadClick(Sender: TObject);
     procedure img_cad_fecharClick(Sender: TObject);
-    procedure lbi_dataClick(Sender: TObject);
-    procedure lbi_detalheClick(Sender: TObject);
     procedure lbi_valorClick(Sender: TObject);
-    procedure lbi_servicoClick(Sender: TObject);
+    procedure lbi_obsClick(Sender: TObject);
   private
     ind_refresh_pedido : Boolean;
     lbl : TLabel;
     procedure AbrirEdicaoItem(titulo: string; lbl_edicao: TLabel);
     procedure FecharEdicaoItem(ind_cancelar: Boolean);
+    procedure ProcessarPedido;
+    procedure ProcessarPedidoErro(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
-    id_pedido : Integer;
+    id_pedido, id_orcamento : Integer;
   end;
 
 var
@@ -146,32 +145,29 @@ var
     jsonObj : TJsonObject;
     json, retorno: string;
 begin
-    {
-    // Criar novo pedido no server...
+    // Criar ou editar um orcamento no server...
     try
-        dm.RequestPedidoCad.Params.Clear;
-        dm.RequestPedidoCad.AddParameter('id', '');
+        dm.RequestOrcamentoCad.Params.Clear;
+        dm.RequestOrcamentoCad.AddParameter('id', '');
 
-        if id_pedido > 0 then
+        if id_orcamento > 0 then
         begin
-            // edicao
-            dm.RequestPedidoCad.Method := rmPATCH;
-            dm.RequestPedidoCad.AddParameter('id_pedido', id_pedido.tostring);
+            // edicao do orcamento
+            dm.RequestOrcamentoCad.Method := rmPATCH;
+            dm.RequestOrcamentoCad.AddParameter('id_orcamento', id_orcamento.ToString);
         end
         else
         begin
-            // inclusao
-            dm.RequestPedidoCad.Method := rmPOST;
-            dm.RequestPedidoCad.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
-            dm.RequestPedidoCad.AddParameter('qtd_max_orc', lbl_qtd_orc.Text);
+            // inclusao do orcamento
+            dm.RequestOrcamentoCad.Method := rmPOST;
+            dm.RequestOrcamentoCad.AddParameter('id_pedido', id_pedido.ToString);
         end;
 
-        dm.RequestPedidoCad.AddParameter('categoria', lbl_categoria.TagString);
-        dm.RequestPedidoCad.AddParameter('grupo', lbl_grupo.TagString);
-        dm.RequestPedidoCad.AddParameter('endereco', lbl_endereco.Text);
-        dm.RequestPedidoCad.AddParameter('dt_servico', lbl_data.Text + ':00');
-        dm.RequestPedidoCad.AddParameter('detalhe', lbl_detalhe.Text);
-        dm.RequestPedidoCad.Execute;
+        dm.RequestOrcamentoCad.AddParameter('id_usuario', FrmPrincipal.id_usuario_logado.ToString);
+        dm.RequestOrcamentoCad.AddParameter('valor_total', FormatFloat('0', lbl_valor.Text.ToDouble * 100));
+        dm.RequestOrcamentoCad.AddParameter('obs', lbl_obs.Text);
+        dm.RequestOrcamentoCad.Execute;
+
     except on ex:exception do
         begin
             showmessage('Erro ao acessar o servidor: ' + ex.Message);
@@ -181,15 +177,15 @@ begin
 
 
     try
-        json := dm.RequestPedidoCad.Response.JSONValue.ToString;
+        json := dm.RequestOrcamentoCad.Response.JSONValue.ToString;
         jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
 
         retorno := jsonObj.GetValue('retorno').Value;
 
 
         // Se deu erro...
-        if ((dm.RequestPedidoCad.Response.StatusCode < 200) and
-           (dm.RequestPedidoCad.Response.StatusCode > 201)) or (retorno <> 'OK') then
+        if ((dm.RequestOrcamentoCad.Response.StatusCode < 200) and
+           (dm.RequestOrcamentoCad.Response.StatusCode > 201)) or (retorno <> 'OK') then
         begin
             showmessage(retorno);
             exit;
@@ -201,7 +197,7 @@ begin
 
     ind_refresh_pedido := true;
     close;
-    }
+
 end;
 
 procedure TFrmPedido.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -213,6 +209,51 @@ begin
     FrmPedido := nil;
 end;
 
+procedure TFrmPedido.ProcessarPedido;
+var
+    json, retorno : string;
+    jsonObj : TJSONObject;
+begin
+    try
+        TLoading.Hide;
+
+        json := dm.RequestPedidoDados.Response.JSONValue.ToString;
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        retorno := jsonObj.GetValue('retorno').Value;
+
+
+        // Se deu erro...
+        if (dm.RequestPedidoDados.Response.StatusCode <> 200) then
+        begin
+            showmessage(retorno);
+            exit;
+        end;
+
+        lbl_endereco.Text := jsonObj.GetValue('endereco').Value;
+        lbl_grupo.Text := jsonObj.GetValue('categoria').Value + ' / ' + jsonObj.GetValue('grupo').Value;
+        lbl_data.Text := Copy(jsonObj.GetValue('dt_servico').Value, 1, 16);
+        lbl_detalhe.Text := jsonObj.GetValue('detalhe').Value;
+        lbl_valor.Text := jsonObj.GetValue('valor_orcado').Value;
+        lbl_obs.Text := jsonObj.GetValue('obs_orcado').Value;
+
+
+    finally
+        jsonObj.DisposeOf;
+    end;
+
+    layout_cad.Visible := false;
+    rect_fundo.Visible := false;
+end;
+
+procedure TFrmPedido.ProcessarPedidoErro(Sender: TObject);
+begin
+    TLoading.Hide;
+
+    if Assigned(Sender) and (Sender is Exception) then
+        ShowMessage(Exception(Sender).Message);
+end;
+
 procedure TFrmPedido.FormShow(Sender: TObject);
 begin
     ind_refresh_pedido := false;
@@ -220,36 +261,36 @@ begin
     lbl_grupo.Text := '';
     lbl_data.Text := '';
     lbl_detalhe.Text := '';
-    lbl_qtd_orc.Text := '03';
     img_detalhe_qtd.Visible := true;
     lbl_categoria.TagString := '';
     lbl_grupo.TagString := '';
 
-    // Edicao...
-    if id_pedido > 0 then
-    begin
-        //TLoading.Show(FrmPedido, 'Carregando...');
+    lbl_valor.Text := '0,00';
+    lbl_obs.Text := '';
 
-        img_detalhe_qtd.Visible := false;
+    if id_orcamento > 0 then
+        lbl_salvar.Text := 'Alterar Orçamento'
+    else
+        lbl_salvar.Text := 'Enviar Orçamento';
 
-        try
-            // Busca dados do pedido...
-            {
-            dm.RequestPedidoDados.Params.Clear;
-            dm.RequestPedidoDados.Resource := 'pedidos/pedido/' + id_pedido.ToString;
-            dm.RequestPedidoDados.Method := rmGET;
-            dm.RequestPedidoDados.ExecuteAsync(ProcessarPedido, true, true, ProcessarPedidoErro);
-            }
-        except on ex:exception do
-            begin
-                //TLoading.Hide;
-                showmessage('Erro ao acessar o servidor: ' + ex.Message);
-                exit;
-            end;
+    TLoading.Show(FrmPedido, 'Carregando...');
+
+    try
+        // Busca dados do pedido...
+        dm.RequestPedidoDados.Params.Clear;
+        dm.RequestPedidoDados.AddParameter('id', '');
+        dm.RequestPedidoDados.AddParameter('id_usuario_prestador', FrmPrincipal.id_usuario_logado.ToString);
+        dm.RequestPedidoDados.Resource := 'prestadores/pedido/' + id_pedido.ToString;
+        dm.RequestPedidoDados.Method := rmGET;
+        dm.RequestPedidoDados.ExecuteAsync(ProcessarPedido, true, true, ProcessarPedidoErro);
+
+    except on ex:exception do
+        begin
+            //TLoading.Hide;
+            showmessage('Erro ao acessar o servidor: ' + ex.Message);
+            exit;
         end;
-
     end;
-
 
 end;
 
@@ -268,52 +309,14 @@ begin
     FecharEdicaoItem(true);
 end;
 
-procedure TFrmPedido.lbi_dataClick(Sender: TObject);
+procedure TFrmPedido.lbi_obsClick(Sender: TObject);
 begin
-    AbrirEdicaoItem('Data a ser prestado o serviço',
-                    lbl_data);
-end;
-
-procedure TFrmPedido.lbi_detalheClick(Sender: TObject);
-begin
-    AbrirEdicaoItem('Detalhes do serviço',
-                    lbl_detalhe);
-end;
-
-procedure TFrmPedido.lbi_enderecoClick(Sender: TObject);
-begin
-    AbrirEdicaoItem('Endereço a ser prestado o serviço',
-                    lbl_endereco);
+     AbrirEdicaoItem('Obs do Orçamento', lbl_obs);
 end;
 
 procedure TFrmPedido.lbi_valorClick(Sender: TObject);
 begin
-    // Nao é possivel editar a qtd...
-    if id_pedido > 0 then
-        exit;
-
-    AbrirEdicaoItem('Qtd . máxima de orçamentos',
-                    lbl_qtd_orc);
-end;
-
-procedure TFrmPedido.lbi_servicoClick(Sender: TObject);
-begin
-    if NOT Assigned(FrmCategoria) then
-        Application.CreateForm(TFrmCategoria, FrmCategoria);
-
-    FrmCategoria.request_categoria := dm.RequestCategoria;
-    FrmCategoria.request_grupo := dm.RequestGrupo;
-
-    FrmCategoria.ShowModal(procedure(ModalResult: TModalResult)
-    begin
-        if FrmCategoria.categoria <> '' then
-        begin
-            lbl_categoria.TagString := FrmCategoria.categoria;
-            lbl_grupo.TagString := FrmCategoria.grupo;
-
-            lbl_grupo.Text := FrmCategoria.categoria + ' / ' + FrmCategoria.grupo;
-        end;
-    end);
+    AbrirEdicaoItem('Valor do Orçamento', lbl_valor);
 end;
 
 end.

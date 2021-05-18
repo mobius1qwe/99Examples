@@ -1,0 +1,27 @@
+/*
+Verifica se um prestador ja enviou orcamento
+para um determinado pedido...
+*/
+
+create or alter function PEDIDO_ORCAMENTO(
+ID_PEDIDO integer,
+ID_USUARIO_PRESTADOR integer)
+returns CHAR(1)
+AS
+
+declare variable contador integer;
+declare variable retorno char(1);
+
+begin
+    retorno = 'N';
+
+    select count(*) from tab_pedido_orcamento
+    where id_pedido = :id_pedido
+    and   id_usuario = :id_usuario_prestador
+    into :contador;
+
+    if (contador > 0) then
+        retorno = 'S';
+
+    return :retorno;
+end

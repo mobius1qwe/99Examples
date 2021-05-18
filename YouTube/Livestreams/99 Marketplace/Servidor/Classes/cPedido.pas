@@ -23,6 +23,8 @@ type
         FAVALIACAO_PARA_CLIENTE: Double;
         FQTD_ORCAMENTO: integer;
         FID_USUARIO_PRESTADOR: integer;
+        FOBS_ORCADO: String;
+        FVALOR_ORCADO: Double;
     public
         constructor Create(conn : TFDConnection);
         property ID_PEDIDO : integer read FID_PEDIDO write FID_PEDIDO;
@@ -41,7 +43,11 @@ type
         property AVALIACAO_PARA_PRESTADOR : Double read FAVALIACAO_PARA_PRESTADOR write FAVALIACAO_PARA_PRESTADOR;
         property AVALIACAO_PARA_CLIENTE : Double read FAVALIACAO_PARA_CLIENTE write FAVALIACAO_PARA_CLIENTE;
 
+        property VALOR_ORCADO : Double read FVALOR_ORCADO write FVALOR_ORCADO;
+        property OBS_ORCADO : String read FOBS_ORCADO write FOBS_ORCADO;
+
         function DadosPedido(out erro: string): Boolean;
+        function DadosPedidoPrestador(out erro: string): Boolean;
         function Inserir(out erro: string): Boolean;
         function Editar(out erro: string): Boolean;
         function Excluir(out erro: string): Boolean;
@@ -117,6 +123,71 @@ begin
     except on ex:exception do
         begin
             erro := 'Erro ao validar login: ' + ex.Message;
+            Result := false;
+        end;
+    end;
+end;
+
+function TPedido.DadosPedidoPrestador(out erro: string): Boolean;
+var
+    qry : TFDQuery;
+begin
+    if (ID_PEDIDO = 0) then
+    begin
+        Result := false;
+        erro := 'Informe o id. do pedido';
+        exit;
+    end;
+
+    try
+        qry := TFDQuery.Create(nil);
+        qry.Connection := FConn;
+
+        with qry do
+        begin
+            Active := false;
+            sql.Clear;
+            SQL.Add('SELECT P.*, O.VALOR_TOTAL AS VALOR_ORCADO, O.OBS AS OBS_ORCADO');
+            SQL.Add('FROM TAB_PEDIDO P');
+            SQL.Add('LEFT JOIN TAB_PEDIDO_ORCAMENTO O ON (O.ID_PEDIDO = P.ID_PEDIDO');
+            SQL.Add('                                AND O.ID_USUARIO = :ID_USUARIO_PRESTADOR)');
+            SQL.Add('WHERE P.ID_PEDIDO=:ID_PEDIDO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ParamByName('ID_USUARIO_PRESTADOR').Value := ID_USUARIO_PRESTADOR;
+            Active := true;
+
+            if RecordCount > 0 then
+            begin
+                ID_PEDIDO := FieldByName('ID_PEDIDO').AsInteger;
+                ID_USUARIO := FieldByName('ID_USUARIO').AsInteger;
+                STATUS := FieldByName('STATUS').AsString;
+                CATEGORIA := FieldByName('CATEGORIA').AsString;
+                GRUPO := FieldByName('GRUPO').AsString;
+                ENDERECO := FieldByName('ENDERECO').AsString;
+                DT_GERACAO := FieldByName('DT_GERACAO').AsDateTime;
+                DT_SERVICO := FieldByName('DT_SERVICO').AsDateTime;
+                DETALHE := FieldByName('DETALHE').AsString;
+                QTD_MAX_ORC := FieldByName('QTD_MAX_ORC').AsInteger;
+                VALOR_TOTAL := FieldByName('VALOR_TOTAL').AsFloat;
+                QTD_ORCAMENTO := FieldByName('QTD_ORCAMENTO').AsInteger;
+
+                VALOR_ORCADO := FieldByName('VALOR_ORCADO').AsFloat;
+                OBS_ORCADO := FieldByName('OBS_ORCADO').AsString;
+
+                erro := '';
+                Result := true;
+            end
+            else
+            begin
+                erro := 'Pedido não encontrado';
+                Result := false;
+            end;
+
+            DisposeOf;
+        end;
+    except on ex:exception do
+        begin
+            erro := 'Erro ao buscar dados do pedido: ' + ex.Message;
             Result := false;
         end;
     end;
@@ -204,11 +275,13 @@ begin
             SQL.Add('P.ENDERECO, P.DT_GERACAO, P.DT_SERVICO, P.DETALHE, P.QTD_MAX_ORC,');
             SQL.Add('P.ID_USUARIO_PRESTADOR, P.VALOR_TOTAL, U.NOME, U.FONE,');
             SQL.Add('P.QTD_ORCAMENTO, UU.NOME AS CLIENTE,');
-            SQL.Add('''S'' AS IND_ORCADO ');
+            SQL.Add('PEDIDO_ORCAMENTO(P.ID_PEDIDO, :ID_USUARIO_LOGADO) AS IND_ORCADO ');
             SQL.Add('FROM TAB_PEDIDO P');
             SQL.Add('LEFT JOIN TAB_USUARIO U ON (U.ID_USUARIO = P.ID_USUARIO_PRESTADOR)');
             SQL.Add('LEFT JOIN TAB_USUARIO UU ON (UU.ID_USUARIO = P.ID_USUARIO)');
             SQL.Add('WHERE P.ID_PEDIDO > 0');
+
+            ParamByName('ID_USUARIO_LOGADO').Value := ID_USUARIO_PRESTADOR;
 
             {
             if ID_USUARIO_PRESTADOR > 0 then
