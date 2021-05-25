@@ -25,3 +25,54 @@ begin
 
     return :retorno;
 end
+
+
+/*-----------------------------------------------------------------------*/
+
+
+/*
+Busca o orçamento de um prestador
+para um determinado pedido...
+*/
+
+create or alter function BUSCA_ORCAMENTO(
+ID_PEDIDO integer,
+ID_USUARIO_PRESTADOR integer)
+returns integer
+AS
+
+declare variable retorno integer;
+
+begin
+    select id_orcamento from tab_pedido_orcamento
+    where id_pedido = :id_pedido
+    and   id_usuario = :id_usuario_prestador
+    into :retorno;
+
+    return COALESCE(:retorno, 0);
+end
+
+/*-----------------------------------------------------------------------*/
+
+
+/*
+Busca a qtd de orçamentos para um determinado pedido...
+*/
+
+create or alter function QTD_ORCAMENTO(ID_PEDIDO integer)
+returns integer
+AS
+
+declare variable retorno integer;
+
+begin
+    select count(*) from tab_pedido_orcamento
+    where id_pedido = :id_pedido
+    into :retorno;
+
+    return COALESCE(:retorno, 0);
+end
+
+
+
+

@@ -1115,7 +1115,7 @@ begin
         try
             c := TChat.Create(dm.conn);
             c.ID_ORCAMENTO := id_orcamento.ToInteger;
-            c.ID_USUARIO_PARA := id_usuario.ToInteger;
+            //c.ID_USUARIO_PARA := id_usuario.ToInteger;
 
             qry := c.ListarChat('', erro);
 

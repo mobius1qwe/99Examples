@@ -125,8 +125,8 @@ type
     permissao : T99Permissions;
     lbl : TLabel;
     procedure MudarAba(img: TImage);
-    procedure AddPedido(seq_pedido, seq_usuario, max_orcamentos,
-      qtd_orc_enviada: integer; categoria, dt, pedido, cliente,
+    procedure AddPedido(seq_pedido, seq_usuario_cliente, id_orcamento,
+      max_orcamentos, qtd_orc_enviada: integer; categoria, dt, pedido, cliente,
       endereco, ind_orcado: string);
     procedure AddAceito(seq_pedido, seq_usuario : integer;
                         nome, categoria, dt, pedido,
@@ -250,42 +250,53 @@ begin
     ListarPendente;
 end;
 
-procedure TFrmPrincipal.AddPedido(seq_pedido, seq_usuario, max_orcamentos, qtd_orc_enviada : integer;
+procedure TFrmPrincipal.AddPedido(seq_pedido, seq_usuario_cliente, id_orcamento, max_orcamentos, qtd_orc_enviada : integer;
                                   categoria, dt, pedido, cliente, endereco, ind_orcado : string);
+var
+    json : TJSONObject;
 begin
-    with lv_pedidos.Items.Add do
-    begin
-        Tag := seq_pedido;
-        TagString := seq_usuario.ToString;
-        Height := 200;
+    try
+        json := TJSONObject.Create;
+
+        with lv_pedidos.Items.Add do
+        begin
+            json.AddPair('id_pedido', seq_pedido.ToString);
+            json.AddPair('id_orcamento', id_orcamento.ToString);
+            json.AddPair('id_usuario_cliente', seq_usuario_cliente.ToString);
+
+            TagString := json.ToString;
+            Height := 200;
 
 
-        TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
-        TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
-        TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
-        TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
-        TListItemText(Objects.FindDrawable('TxtEndereco')).Text := endereco;
+            TListItemText(Objects.FindDrawable('TxtCategoria')).Text := categoria;
+            TListItemText(Objects.FindDrawable('TxtPedido')).Text := 'Pedido #' + pedido;
+            TListItemText(Objects.FindDrawable('TxtData')).Text := Copy(dt, 1, 5) + ' - ' + Copy(dt, 12, 5) + 'h'; // DD/MM/YYYY HH:NN:SS
+            TListItemText(Objects.FindDrawable('TxtNome')).Text := cliente;
+            TListItemText(Objects.FindDrawable('TxtEndereco')).Text := endereco;
 
-        TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
+            TListItemImage(Objects.FindDrawable('ImgCliente')).Bitmap := img_user.Bitmap;
+            TListItemImage(Objects.FindDrawable('ImgEndereco')).Bitmap := img_endereco.Bitmap;
 
-        if ind_orcado = 'S' then
-            TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
+            if ind_orcado = 'S' then
+                TListItemImage(Objects.FindDrawable('ImgOrcado')).Bitmap := img_orcado.Bitmap;
 
-        TListItemText(Objects.FindDrawable('TxtOrcamentos')).Text := 'Orçamentos Recebidos (' +
-                                                                     qtd_orc_enviada.ToString + ' / ' +
-                                                                     max_orcamentos.ToString + ')';
+            TListItemText(Objects.FindDrawable('TxtOrcamentos')).Text := 'Orçamentos Recebidos (' +
+                                                                         qtd_orc_enviada.ToString + ' / ' +
+                                                                         max_orcamentos.ToString + ')';
 
-        TListItemImage(Objects.FindDrawable('ImgFundo')).Width := lv_pedidos.Width - 30;
-        TListItemImage(Objects.FindDrawable('ImgFundo')).Bitmap := img_barra_fundo.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgFundo')).TagFloat := max_orcamentos;
+            TListItemImage(Objects.FindDrawable('ImgFundo')).Width := lv_pedidos.Width - 30;
+            TListItemImage(Objects.FindDrawable('ImgFundo')).Bitmap := img_barra_fundo.Bitmap;
+            TListItemImage(Objects.FindDrawable('ImgFundo')).TagFloat := max_orcamentos;
 
-        TListItemImage(Objects.FindDrawable('ImgProgresso')).TagFloat := qtd_orc_enviada;
-        TListItemImage(Objects.FindDrawable('ImgProgresso')).Bitmap := img_barra_progresso.Bitmap;
-        TListItemImage(Objects.FindDrawable('ImgProgresso')).Width := (qtd_orc_enviada / max_orcamentos) *
-                                                              TListItemImage(Objects.FindDrawable('ImgFundo')).Width;
-        TListItemImage(Objects.FindDrawable('ImgProgresso')).PlaceOffset.Y := TListItemImage(Objects.FindDrawable('ImgFundo')).PlaceOffset.Y;
+            TListItemImage(Objects.FindDrawable('ImgProgresso')).TagFloat := qtd_orc_enviada;
+            TListItemImage(Objects.FindDrawable('ImgProgresso')).Bitmap := img_barra_progresso.Bitmap;
+            TListItemImage(Objects.FindDrawable('ImgProgresso')).Width := (qtd_orc_enviada / max_orcamentos) *
+                                                                  TListItemImage(Objects.FindDrawable('ImgFundo')).Width;
+            TListItemImage(Objects.FindDrawable('ImgProgresso')).PlaceOffset.Y := TListItemImage(Objects.FindDrawable('ImgFundo')).PlaceOffset.Y;
 
+        end;
+    finally
+        json.DisposeOf;
     end;
 end;
 
@@ -406,6 +417,7 @@ begin
             begin
                 AddPedido(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
                           jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                          jsonArray.Get(i).GetValue<integer>('ID_ORCAMENTO', 0),
                           jsonArray.Get(i).GetValue<integer>('QTD_MAX_ORC', 0),
                           jsonArray.Get(i).GetValue<integer>('QTD_ORCAMENTO', 0),
                           jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
@@ -464,7 +476,7 @@ begin
             for i := 0 to jsonArray.Size - 1 do
             begin
                 AddAceito(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
-                          jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                          jsonArray.Get(i).GetValue<integer>('ID_ORCAMENTO', 0),
                           jsonArray.Get(i).GetValue<string>('NOME', '') + ' - ' +
                                  jsonArray.Get(i).GetValue<string>('FONE', ''),
                           jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
@@ -521,7 +533,7 @@ begin
         for i := 0 to jsonArray.Size - 1 do
         begin
             AddRealizado(jsonArray.Get(i).GetValue<integer>('ID_PEDIDO', 0),
-                      jsonArray.Get(i).GetValue<integer>('ID_USUARIO', 0),
+                      jsonArray.Get(i).GetValue<integer>('ID_ORCAMENTO', 0),
                       jsonArray.Get(i).GetValue<string>('NOME', '') + ' - ' +
                              jsonArray.Get(i).GetValue<string>('FONE', ''),
                       jsonArray.Get(i).GetValue<string>('CATEGORIA', '') + ' - ' +
@@ -653,15 +665,26 @@ end;
 
 procedure TFrmPrincipal.lv_pedidosItemClick(const Sender: TObject;
   const AItem: TListViewItem);
+var
+    json : string;
+    jsonObj : TJSONObject;
 begin
     if NOT Assigned(FrmPedido) then
         Application.CreateForm(TFrmPedido, FrmPedido);
 
-    FrmPedido.id_orcamento := 0; //??????
-    FrmPedido.id_pedido := AItem.Tag;
-    FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
-    FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
-    FrmPedido.Show;
+    try
+        json := AItem.TagString; // Contem o json com todos os campos salvos...
+        jsonObj := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(json), 0) as TJSONObject;
+
+        FrmPedido.id_orcamento := jsonObj.GetValue('id_orcamento').Value.ToInteger;
+        FrmPedido.id_pedido := jsonObj.GetValue('id_pedido').Value.ToInteger;
+        FrmPedido.id_usuario_cliente := jsonObj.GetValue('id_usuario_cliente').Value.ToInteger;
+        FrmPedido.lbl_titulo.Text := 'Detalhes Pedido #' + AItem.Tag.ToString;
+        FrmPedido.TabControl.ActiveTab := FrmPedido.TabPedido;
+        FrmPedido.Show;
+    finally
+        jsonObj.DisposeOf;
+    end;
 
 end;
 

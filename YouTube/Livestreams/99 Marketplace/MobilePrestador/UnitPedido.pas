@@ -48,7 +48,6 @@ type
     Label2: TLabel;
     lv_orcamentos: TListView;
     img_aprovar: TImage;
-    img_chat: TImage;
     rect_salvar: TRectangle;
     lbl_salvar: TLabel;
     rect_fundo: TRectangle;
@@ -67,6 +66,12 @@ type
     Layout1: TLayout;
     Label4: TLabel;
     lbl_obs: TLabel;
+    Line6: TLine;
+    Line7: TLine;
+    img_chat: TImage;
+    lbi_cliente: TListBoxItem;
+    c_foto: TCircle;
+    lbl_nome: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure img_notificacaoClick(Sender: TObject);
@@ -76,6 +81,7 @@ type
     procedure img_cad_fecharClick(Sender: TObject);
     procedure lbi_valorClick(Sender: TObject);
     procedure lbi_obsClick(Sender: TObject);
+    procedure img_chatClick(Sender: TObject);
   private
     ind_refresh_pedido : Boolean;
     lbl : TLabel;
@@ -86,7 +92,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    id_pedido, id_orcamento : Integer;
+    id_pedido, id_orcamento, id_usuario_cliente : Integer;
   end;
 
 var
@@ -97,7 +103,7 @@ implementation
 {$R *.fmx}
 
 uses UnitPrincipal, UnitDM, REST.Types, UnitCategoria,
-  FMX.DialogService;
+  FMX.DialogService, UnitChat;
 
 procedure TFrmPedido.AbrirEdicaoItem(titulo : string; lbl_edicao : TLabel);
 begin
@@ -268,8 +274,10 @@ begin
     lbl_valor.Text := '0,00';
     lbl_obs.Text := '';
 
+    img_chat.Visible := id_orcamento > 0;
+
     if id_orcamento > 0 then
-        lbl_salvar.Text := 'Alterar Orçamento'
+        lbl_salvar.Text := 'Salvar Alterações'
     else
         lbl_salvar.Text := 'Enviar Orçamento';
 
@@ -297,6 +305,21 @@ end;
 procedure TFrmPedido.img_cad_fecharClick(Sender: TObject);
 begin
     FecharEdicaoItem(true);
+end;
+
+procedure TFrmPedido.img_chatClick(Sender: TObject);
+begin
+    if NOT Assigned(FrmChat) then
+        Application.CreateForm(TFrmChat, FrmChat);
+
+    FrmChat.id_usuario_logado := FrmPrincipal.id_usuario_logado;
+    FrmChat.ReqOrcamentoChat := dm.RequestOrcamentoChat;
+    FrmChat.ReqOrcamentoChatEnv := dm.RequestOrcamentoChatEnv;
+    FrmChat.id_usuario_destino := id_usuario_cliente;
+    FrmChat.id_orcamento := FrmPedido.id_orcamento;
+    FrmChat.lbl_nome.Text := FrmPedido.lbl_nome.Text;
+    FrmChat.c_foto.Fill.Bitmap.Bitmap := FrmPedido.c_foto.Fill.Bitmap.Bitmap;
+    FrmChat.Show;
 end;
 
 procedure TFrmPedido.img_notificacaoClick(Sender: TObject);

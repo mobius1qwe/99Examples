@@ -256,6 +256,9 @@ begin
             if NOT Assigned(FrmChat) then
                 Application.CreateForm(TFrmChat, FrmChat);
 
+            FrmChat.id_usuario_logado := FrmPrincipal.id_usuario_logado;
+            FrmChat.ReqOrcamentoChat := dm.RequestOrcamentoChat;
+            FrmChat.ReqOrcamentoChatEnv := dm.RequestOrcamentoChatEnv;
             FrmChat.id_usuario_destino := TListView(Sender).Items[ItemIndex].TagString.ToInteger;
             FrmChat.id_orcamento := TListView(Sender).Items[ItemIndex].Tag;
             FrmChat.lbl_nome.Text := TListItemText(TListView(Sender).Items[ItemIndex].Objects.FindDrawable('TxtNome')).Text;

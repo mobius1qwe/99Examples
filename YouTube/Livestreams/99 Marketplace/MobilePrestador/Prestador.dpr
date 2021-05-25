@@ -10,7 +10,8 @@ uses
   UnitPrincipal in 'UnitPrincipal.pas' {FrmPrincipal},
   UnitCategoria in '..\FormsCompartilhados\UnitCategoria.pas' {FrmCategoria},
   UnitPedido in 'UnitPedido.pas' {FrmPedido},
-  uLoading in '..\Units\uLoading.pas';
+  uLoading in '..\Units\uLoading.pas',
+  UnitChat in '..\FormsCompartilhados\UnitChat.pas' {FrmChat};
 
 {$R *.res}
 
@@ -21,5 +22,6 @@ begin
   Application.CreateForm(TFrmPrincipal, FrmPrincipal);
   Application.CreateForm(TFrmCategoria, FrmCategoria);
   Application.CreateForm(TFrmPedido, FrmPedido);
+  Application.CreateForm(TFrmChat, FrmChat);
   Application.Run;
 end.

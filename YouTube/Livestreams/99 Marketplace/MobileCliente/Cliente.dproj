@@ -407,10 +407,6 @@
             <Form>FrmPedido</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="UnitChat.pas">
-            <Form>FrmChat</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="UnitDM.pas">
             <Form>dm</Form>
             <FormType>dfm</FormType>
@@ -425,6 +421,10 @@
         </DCCReference>
         <DCCReference Include="..\FormsCompartilhados\UnitCategoria.pas">
             <Form>FrmCategoria</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="..\FormsCompartilhados\UnitChat.pas">
+            <Form>FrmChat</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

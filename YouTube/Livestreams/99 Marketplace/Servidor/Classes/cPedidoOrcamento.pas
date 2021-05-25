@@ -16,7 +16,6 @@ type
         FSTATUS: string;
         FID_USUARIO: integer;
         FID_USUARIO_PRESTADOR: integer;
-
     public
         constructor Create(conn : TFDConnection);
         property ID_ORCAMENTO : integer read FID_ORCAMENTO write FID_ORCAMENTO;
@@ -169,6 +168,8 @@ begin
 
         with qry do
         begin
+            FConn.StartTransaction;
+
             Active := false;
             sql.Clear;
             SQL.Add('INSERT INTO TAB_PEDIDO_ORCAMENTO(ID_PEDIDO, ID_USUARIO, STATUS, DT_GERACAO, VALOR_TOTAL, OBS)');
@@ -176,10 +177,21 @@ begin
 
             ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
             ParamByName('ID_USUARIO').Value := ID_USUARIO;
-            ParamByName('STATUS').Value := 'A';
+            ParamByName('STATUS').Value := 'P';
             ParamByName('VALOR_TOTAL').Value := VALOR_TOTAL;
             ParamByName('OBS').Value := OBS;
             ExecSQL;
+
+
+            Active := false;
+            SQL.Clear;
+            SQL.Add('UPDATE TAB_PEDIDO ');
+            SQL.Add('SET QTD_ORCAMENTO = QTD_ORCAMENTO(ID_PEDIDO)');
+            SQL.Add('WHERE ID_PEDIDO = :ID_PEDIDO');
+            ParamByName('ID_PEDIDO').Value := ID_PEDIDO;
+            ExecSQL;
+
+            FConn.Commit;
 
 
             // Busca o ID gerado...
@@ -200,6 +212,7 @@ begin
 
     except on ex:exception do
         begin
+            FConn.Rollback;
             Result := false;
             erro := 'Erro ao inserir orçamento: ' + ex.Message;
         end;
