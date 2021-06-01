@@ -121,6 +121,8 @@ type
     procedure lbi_foneClick(Sender: TObject);
     procedure lbi_senhaClick(Sender: TObject);
     procedure lbi_categoriaClick(Sender: TObject);
+    procedure lv_pedidosPullRefresh(Sender: TObject);
+    procedure lv_aceitosPullRefresh(Sender: TObject);
   private
     permissao : T99Permissions;
     lbl : TLabel;
@@ -646,6 +648,11 @@ begin
     dm.RequestRealizado.ExecuteAsync(ProcessarPedidoRealizado, true, true, ProcessarPedidoErro);
 end;
 
+procedure TFrmPrincipal.lv_aceitosPullRefresh(Sender: TObject);
+begin
+    ListarAceito;
+end;
+
 procedure TFrmPrincipal.lv_aceitosUpdateObjects(const Sender: TObject;
   const AItem: TListViewItem);
 var
@@ -686,6 +693,11 @@ begin
         jsonObj.DisposeOf;
     end;
 
+end;
+
+procedure TFrmPrincipal.lv_pedidosPullRefresh(Sender: TObject);
+begin
+    ListarPendente;
 end;
 
 procedure TFrmPrincipal.lv_pedidosUpdateObjects(const Sender: TObject;

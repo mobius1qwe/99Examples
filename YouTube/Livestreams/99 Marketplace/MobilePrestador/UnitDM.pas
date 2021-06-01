@@ -53,9 +53,9 @@ implementation
 procedure Tdm.DataModuleCreate(Sender: TObject);
 begin
     {$IFDEF MSWINDOWS}
-    //dm.RESTClient.BaseURL := 'http://localhost:8082';
+    dm.RESTClient.BaseURL := 'http://localhost:8082';
     {$ELSE}
-    //dm.RESTClient.BaseURL := 'http://192.168.0.103:8082'; // COLOCA O IP DO SEU SERVIDOR AQUI...
+    dm.RESTClient.BaseURL := 'http://192.168.0.103:8082'; // COLOCA O IP DO SEU SERVIDOR AQUI...
     {$ENDIF}
 
 

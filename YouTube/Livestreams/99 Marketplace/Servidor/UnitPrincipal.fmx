@@ -59,7 +59,7 @@ object FrmPrincipal: TFrmPrincipal
     ForceWelcomeAccess = False
     CriptOptions.Use = False
     CriptOptions.Key = 'RDWBASEKEY256'
-    MultiCORE = False
+    MultiCORE = True
     Left = 40
     Top = 8
   end
