@@ -1,0 +1,174 @@
+object Frm_Principal: TFrm_Principal
+  Left = 0
+  Top = 0
+  Caption = 'Listas'
+  ClientHeight = 543
+  ClientWidth = 319
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object ToolBar1: TToolBar
+    Margins.Left = -10.000000000000000000
+    Margins.Right = -10.000000000000000000
+    Position.X = -10.000000000000000000
+    Size.Width = 339.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object btn_refresh: TSpeedButton
+      Align = Right
+      Margins.Right = 10.000000000000000000
+      Position.X = 281.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'refreshtoolbutton'
+      OnClick = btn_refreshClick
+    end
+    object AniIndicator1: TAniIndicator
+      Position.X = 20.000000000000000000
+      Position.Y = 7.000000000000000000
+      Size.Width = 36.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object ListView: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 319.000000000000000000
+    Size.Height = 495.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    ItemAppearance.ItemHeight = 62
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.StyleExt = {00060000000000000004000000}
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF2C2C2C
+        Appearance.Width = 221.000000000000000000
+        Appearance.Height = 21.000000000000000000
+        Appearance.PlaceOffset.X = 50.000000000000000000
+        Appearance.PlaceOffset.Y = 12.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Text2'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF7E7E7E
+        Appearance.Width = 196.000000000000000000
+        Appearance.Height = 17.000000000000000000
+        Appearance.PlaceOffset.X = 50.000000000000000000
+        Appearance.PlaceOffset.Y = 33.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Image3'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 42.000000000000000000
+        Appearance.Height = 31.000000000000000000
+        Appearance.PlaceOffset.X = 3.000000000000000000
+        Appearance.PlaceOffset.Y = 16.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'Image5'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 18.000000000000000000
+        Appearance.Height = 18.000000000000000000
+        Appearance.Align = Trailing
+        Appearance.PlaceOffset.X = -3.000000000000000000
+        Appearance.PlaceOffset.Y = 23.000000000000000000
+        Appearance.Opacity = 0.200000002980232200
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    ShowSelection = False
+    PullToRefresh = True
+    PullRefreshWait = True
+  end
+  object img_detalhe: TImage
+    MultiResBitmap.Height = 64
+    MultiResBitmap.Width = 64
+    MultiResBitmap = <
+      item
+        Width = 64
+        Height = 64
+        PNG = {
+          89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+          DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          042C49444154785EED5BCB4A5B5114D5186342278E9C3834098208A210D16AA2
+          21691E6ABC89D6574A4C7D55899A36496BB59582503A68415444517450108AA3
+          FE81BFE01F08429DF46D7DC43E92AED36AD1B0073942A177DB058BBDA293AC7D
+          CED97B9F1B6ECEDFC0F6F6F6359FCFD775FAF16A61737333CF6AB5BE864C5754
+          544CFEFEEB15413A9DD6389DCE97420AE6E6E6A62B2B2B13BFFEC91D5B5B5BFA
+          A6A6A63FE6CF28925055553501CD173B3B3BFA8686864DC80BE6CF13497884C8
+          0FBBBBBB0687C3F10A92347E9ED5D5D571445E5014E50502693893E238582C16
+          5E851145CEAED3E9DE4292A62962273C44E483F2F272C7FF245C220975757563
+          887C505656569B9F9FBF07491AA688243C40E40324E13A92F01192344CB1BEBE
+          FE3E221F98CD663B92F00E92344C915D124C2693453609369B8DD7D86C341A6D
+          5AADF60B246998A2DD6EE7352C151717372248ED048CD5BCEE0EADADADB50683
+          E133246998227602AFEEB0B1B1614312F62149C31471B5BE87C8072B2B2BCD05
+          05058790A4618A1E8F278AC807EBEBEB2E24E13D246998226E9BBC6AC2DADA9A
+          0349F800491AA6E876BBEF22F2C1EAEAAA53B62678BDDE71443E404D70E9F5FA
+          4F90A4618AD809BC8EC36592E072B978B5C8E5E565B76C12FC7E7F04910FE6E7
+          E73D322D523C5E531465149A0F9696969CB27302921043E483C5C5C51B3A9DEE
+          0892349C49EC84547B7BFB08341F2C2C2C481546711C90045EC7616E6E4E6A27
+          080602015E63F3ECECAC546114ECEAEA62D71DC4E3B51348D230451C87AC7782
+          E634FEB3D8DBDB33A652A9ACBF2776CC416161E19BD38FEAC6F8F8B8286CE42A
+          531435636868A8055AFD989C9CBC83401AA528CC0F0C0CB442AB1FB1586C0CAD
+          ED0724693693307F80957743AB1F894442FC5C461AA508F3878383831E68F523
+          1E8F4B9D79D122C3E170005AFD989898905E7998F742AB1F301FC9CBCBFB0649
+          9ACD24E682646F6F6F13B4FA816A1FD16834DF2149B39914E683C1603BB4FA81
+          958FCAACBCA8F69D9D9D37A1D58FE9E9E92104D2284561BEA7A787479F8F4422
+          B711B2EEF35AADF66B7777B702AD7E886D8F339F8224CD665254FB8E8E8E3668
+          F5637878585C5549A3148579DCECFCD0EAC7CCCC4C1F026994A230DFD6D6C663
+          C88111A99517AD4E51141E056F6A6A4AFC9C451AA5888297F4F97C3CB67D341A
+          1D44208D5214E65B5A5A786CFB91919110AA7DD6430ECC1FB3315F545424565E
+          A6CF27BD5E2F0FF346A3F196CC6C0FF3271E8F87479F37994C61CCF6593FCB17
+          E3ADDBEDE671B129292919905CF963AC7C33B4FA61369BFB250B5ED26EB7F378
+          ADAEB4B43424F30093957981D1D151F1E20369369338F3FB30CFE33E7F1EFDFD
+          FD4F1148D367142BDFD8D8C8A3D551088542CF1048F3E80C2756ABB5079A3770
+          DD7D8C70C13C2E364730CF63B6CF067D7D7D4F10CECC1F5E29F367080683CFC5
+          7DBEA6A6E66ABE41AE1EE4E4FC0479E954BF34228CC30000000049454E44AE42
+          6082}
+        FileName = 
+          'D:\99Coders\Master Listas\04 - Acrescentando novos objetos na li' +
+          'sta\Fontes\Imagens\detalhes.png'
+      end>
+    Position.X = 56.000000000000000000
+    Position.Y = 328.000000000000000000
+    Size.Width = 30.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+  end
+  object conn: TFDConnection
+    Params.Strings = (
+      
+        'Database=D:\99Coders\Master Listas\02 - Preparando o app\DB\banc' +
+        'o.db'
+      'OpenMode=ReadWrite'
+      'LockingMode=Normal'
+      'DriverID=SQLite')
+    Left = 80
+    Top = 408
+  end
+  object qry_geral: TFDQuery
+    Connection = conn
+    Left = 144
+    Top = 408
+  end
+end

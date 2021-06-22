@@ -1,0 +1,10 @@
+﻿[ListView]
+Coordinates=10,10,107,168
+Visible=True
+
+[ToolBar1]
+Coordinates=127,10,67,36
+
+[]
+Coordinates=126,1,91,36
+
