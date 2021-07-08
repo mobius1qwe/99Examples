@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView;
+  FMX.ListView, FMX.Layouts;
 
 type
   TFrmPrincipal = class(TForm)
@@ -37,15 +37,32 @@ type
     imgOpcao: TImage;
     imgAberta: TImage;
     imgFechada: TImage;
+    lytMenuOS: TLayout;
+    rectFundoMenu: TRectangle;
+    rectMenuFechar: TRectangle;
+    lblMenuFechar: TLabel;
+    rectMenu: TRectangle;
+    lblMenuEncerrar: TLabel;
+    lblMenuExcluir: TLabel;
+    lblMenuAssinatura: TLabel;
+    lblMenuReabrir: TLabel;
     procedure imgAbaOSClick(Sender: TObject);
     procedure rectBuscaOSClick(Sender: TObject);
     procedure rectBuscaClienteClick(Sender: TObject);
+    procedure lvOSItemClickEx(const Sender: TObject; ItemIndex: Integer;
+      const LocalClickPos: TPointF; const ItemObject: TListItemDrawable);
+    procedure lblMenuFecharClick(Sender: TObject);
+    procedure lblMenuReabrirClick(Sender: TObject);
+    procedure lblMenuEncerrarClick(Sender: TObject);
+    procedure lblMenuExcluirClick(Sender: TObject);
+    procedure lblMenuAssinaturaClick(Sender: TObject);
   private
     procedure MudarAba(Image: TImage);
     procedure ConsultarOS(filtro: string);
     procedure AddOS(codOS, cliente, dt, hora, status, assunto: string);
     procedure ConsultarCliente(filtro: string);
     procedure AddCliente(codCliente, nome, endereco, cidade, uf: string);
+    procedure AlterarStatusOS(codOS, status: string);
     { Private declarations }
   public
     { Public declarations }
@@ -58,9 +75,98 @@ implementation
 
 {$R *.fmx}
 
+uses UnitDM, UnitAssinatura;
+
 procedure TFrmPrincipal.imgAbaOSClick(Sender: TObject);
 begin
     MudarAba(TImage(Sender));
+end;
+
+procedure TFrmPrincipal.lblMenuFecharClick(Sender: TObject);
+begin
+    lytMenuOS.Visible := false;
+end;
+
+procedure TFrmPrincipal.AlterarStatusOS(codOS, status: string);
+begin
+    try
+        dm.qryGeral.Active := false;
+        dm.qryGeral.SQL.Clear;
+        dm.qryGeral.SQL.Add('UPDATE TAB_OS SET STATUS=:STATUS');
+        dm.qryGeral.SQL.Add('WHERE COD_OS=:COD_OS');
+        dm.qryGeral.ParamByName('STATUS').Value := status;
+        dm.qryGeral.ParamByName('COD_OS').Value := codOS;
+        dm.qryGeral.ExecSQL;
+
+        lytMenuOS.Visible := false;
+        ConsultarOS(edtBuscaOS.Text);
+
+    except on ex:exception do
+        showmessage('Erro alterar status da OS: ' + ex.Message);
+    end;
+end;
+
+procedure TFrmPrincipal.lblMenuAssinaturaClick(Sender: TObject);
+begin
+    if NOT Assigned(FrmAssinatura) then
+        Application.CreateForm(TFrmAssinatura, FrmAssinatura);
+
+    FrmAssinatura.codOS := lytMenuOS.TagString;
+    FrmAssinatura.Show;
+
+    lytMenuOS.Visible := false;
+end;
+
+procedure TFrmPrincipal.lblMenuEncerrarClick(Sender: TObject);
+begin
+    AlterarStatusOS(lytMenuOS.TagString, 'F');
+end;
+
+procedure TFrmPrincipal.lblMenuExcluirClick(Sender: TObject);
+begin
+    try
+        dm.qryGeral.Active := false;
+        dm.qryGeral.SQL.Clear;
+        dm.qryGeral.SQL.Add('DELETE TAB_OS_FOTO WHERE COD_OS=:COD_OS');
+        dm.qryGeral.ParamByName('COD_OS').Value := lytMenuOS.TagString;
+        dm.qryGeral.ExecSQL;
+
+        dm.qryGeral.Active := false;
+        dm.qryGeral.SQL.Clear;
+        dm.qryGeral.SQL.Add('DELETE TAB_OS WHERE COD_OS=:COD_OS');
+        dm.qryGeral.ParamByName('COD_OS').Value := lytMenuOS.TagString;
+        dm.qryGeral.ExecSQL;
+
+        lytMenuOS.Visible := false;
+        ConsultarOS(edtBuscaOS.Text);
+
+    except on ex:exception do
+        showmessage('Erro ao excluir OS: ' + ex.Message);
+    end;
+end;
+
+procedure TFrmPrincipal.lblMenuReabrirClick(Sender: TObject);
+begin
+    AlterarStatusOS(lytMenuOS.TagString, 'A');
+end;
+
+procedure TFrmPrincipal.lvOSItemClickEx(const Sender: TObject;
+  ItemIndex: Integer; const LocalClickPos: TPointF;
+  const ItemObject: TListItemDrawable);
+var
+    codOS: string;
+begin
+    codOS := lvOS.Items[ItemIndex].TagString;
+
+    if Assigned(ItemObject) then
+        if ItemObject.Name = 'imgOpcoes' then
+        begin
+            lytMenuOS.TagString := codOS;
+            lytMenuOS.Visible := true;
+            exit;
+        end;
+
+     //OpenCadOS(codOS);
 end;
 
 procedure TFrmPrincipal.MudarAba(Image: TImage);
@@ -104,14 +210,33 @@ procedure TFrmPrincipal.ConsultarOS(filtro: string);
 begin
     lvOS.Items.Clear;
 
-    // Montar a query (select)...
+    dm.qryConsOS.Active := false;
+    dm.qryConsOS.SQL.Clear;
+    dm.qryConsOS.SQL.Add('SELECT O.*, C.NOME');
+    dm.qryConsOS.SQL.Add('FROM TAB_OS O');
+    dm.qryConsOS.SQL.Add('JOIN TAB_CLIENTE C ON (C.COD_CLIENTE = O.COD_CLIENTE)');
 
-    AddOS('001', '99 Coders', '15/10/2021', '15:00', 'A',
-          'Impressora não está imprimindo corretamente');
-    AddOS('002', '99 Coders', '15/10/2021', '15:00', 'F',
-          'Impressora não está imprimindo corretamente');
-    AddOS('003', '99 Coders', '15/10/2021', '15:00', 'F',
-          'Impressora não está imprimindo corretamente');
+    if filtro <> '' then
+    begin
+        dm.qryConsOS.SQL.Add('WHERE C.NOME LIKE :NOME');
+        dm.qryConsOS.ParamByName('NOME').Value := '%' + filtro + '%';
+    end;
+
+    dm.qryConsOS.SQL.Add('ORDER BY O.COD_OS DESC');
+    dm.qryConsOS.Active := true;
+
+    while NOT dm.qryConsOS.Eof do
+    begin
+        AddOS(dm.qryConsOS.FieldByName('COD_OS').AsString,
+              dm.qryConsOS.FieldByName('NOME').AsString,
+              FormatDateTime('dd/mm/yyyy', dm.qryConsOS.FieldByName('DT_OS').AsDateTime),
+              FormatDateTime('HH:nn', dm.qryConsOS.FieldByName('DT_OS').AsDateTime),
+              dm.qryConsOS.FieldByName('STATUS').AsString,
+              dm.qryConsOS.FieldByName('ASSUNTO').AsString);
+
+        dm.qryConsOS.Next;
+    end;
+
 end;
 
 procedure TFrmPrincipal.AddCliente(codCliente, nome, endereco, cidade, uf: string);
@@ -135,11 +260,30 @@ procedure TFrmPrincipal.ConsultarCliente(filtro: string);
 begin
     lvCliente.Items.Clear;
 
-    // Montar a query (select)...
+    dm.qryConsCliente.Active := false;
+    dm.qryConsCliente.SQL.Clear;
+    dm.qryConsCliente.SQL.Add('SELECT C.*');
+    dm.qryConsCliente.SQL.Add('FROM TAB_CLIENTE C');
 
-    AddCliente('001', '99 Coders', 'Av. Paulista, 9000 - CJ 123', 'São Paulo', 'SP');
-    AddCliente('001', 'Walmart Brasil', 'Av. Paulista, 9000 - CJ 123', 'São Paulo', 'SP');
-    AddCliente('001', 'Facebook', 'Av. Paulista, 9000 - CJ 123', 'São Paulo', 'SP');
+    if filtro <> '' then
+    begin
+        dm.qryConsCliente.SQL.Add('WHERE C.NOME LIKE :NOME');
+        dm.qryConsCliente.ParamByName('NOME').Value := '%' + filtro + '%';
+    end;
+
+    dm.qryConsCliente.SQL.Add('ORDER BY C.NOME');
+    dm.qryConsCliente.Active := true;
+
+    while NOT dm.qryConsCliente.Eof do
+    begin
+        AddCliente(dm.qryConsCliente.FieldByName('COD_CLIENTE').AsString,
+                   dm.qryConsCliente.FieldByName('NOME').AsString,
+                   dm.qryConsCliente.FieldByName('ENDERECO').AsString,
+                   dm.qryConsCliente.FieldByName('CIDADE').AsString,
+                   dm.qryConsCliente.FieldByName('UF').AsString);
+
+        dm.qryConsCliente.Next;
+    end;
 
 end;
 

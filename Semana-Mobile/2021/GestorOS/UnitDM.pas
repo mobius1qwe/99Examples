@@ -7,11 +7,15 @@ uses
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.FMXUI.Wait, Data.DB,
-  FireDAC.Comp.Client, System.IOUtils;
+  FireDAC.Comp.Client, System.IOUtils, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
   Tdm = class(TDataModule)
     conn: TFDConnection;
+    qryConsOS: TFDQuery;
+    qryConsCliente: TFDQuery;
+    qryGeral: TFDQuery;
     procedure connBeforeConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
     procedure connAfterConnect(Sender: TObject);

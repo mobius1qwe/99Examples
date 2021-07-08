@@ -13,4 +13,19 @@ object dm: Tdm
     Left = 64
     Top = 32
   end
+  object qryConsOS: TFDQuery
+    Connection = conn
+    Left = 144
+    Top = 32
+  end
+  object qryConsCliente: TFDQuery
+    Connection = conn
+    Left = 240
+    Top = 32
+  end
+  object qryGeral: TFDQuery
+    Connection = conn
+    Left = 64
+    Top = 104
+  end
 end
