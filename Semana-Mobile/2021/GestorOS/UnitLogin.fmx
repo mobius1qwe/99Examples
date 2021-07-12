@@ -2,8 +2,8 @@ object FrmLogin: TFrmLogin
   Left = 0
   Top = 0
   Caption = 'Gestor OS'
-  ClientHeight = 572
-  ClientWidth = 348
+  ClientHeight = 648
+  ClientWidth = 411
   Fill.Kind = Solid
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -626,8 +626,8 @@ object FrmLogin: TFrmLogin
     Align = Bottom
     Opacity = 0.500000000000000000
     Margins.Bottom = 5.000000000000000000
-    Position.Y = 527.000000000000000000
-    Size.Width = 348.000000000000000000
+    Position.Y = 603.000000000000000000
+    Size.Width = 411.000000000000000000
     Size.Height = 40.000000000000000000
     Size.PlatformDefault = False
   end

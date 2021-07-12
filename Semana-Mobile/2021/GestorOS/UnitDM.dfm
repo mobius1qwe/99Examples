@@ -28,4 +28,9 @@ object dm: Tdm
     Left = 64
     Top = 104
   end
+  object qryFoto: TFDQuery
+    Connection = conn
+    Left = 144
+    Top = 104
+  end
 end

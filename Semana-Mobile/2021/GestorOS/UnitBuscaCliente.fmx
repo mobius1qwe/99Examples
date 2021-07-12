@@ -1,0 +1,189 @@
+object FrmBuscaCliente: TFrmBuscaCliente
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 627
+  ClientWidth = 364
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object rectOSToolbar: TRectangle
+    Align = Top
+    Fill.Color = xFE4162FF
+    Size.Width = 364.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+    object lblTitulo: TLabel
+      Align = Center
+      StyledSettings = [Family, Style]
+      Size.Width = 206.000000000000000000
+      Size.Height = 29.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 16.000000000000000000
+      TextSettings.FontColor = claWhite
+      TextSettings.HorzAlign = Center
+      Text = 'Consultar Clientes'
+      TabOrder = 0
+    end
+    object imgVoltar: TImage
+      MultiResBitmap.Height = 64
+      MultiResBitmap.Width = 64
+      MultiResBitmap = <
+        item
+          Width = 64
+          Height = 64
+          PNG = {
+            89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+            DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+            029649444154785EED9ACD6A14511085474490E0CA4788A0A01B05C1F8073E8A
+            4A12150C262AA20B772E7C029F4A045183D14449447C0227997FBF3B737A1333
+            765770917BE67ED0DC99EE3E03A7BAAABAA6675A8542A15038828C46A3E7C3E1
+            F091DECE16185F6DB7DB438230E2F533ED9E0D64BE9FCC57B0EF25CB319DE20B
+            469FEC375F31180C5EB11CD7A97EC87C6F62F76F5412AFD94E48E283CC0FC64E
+            6B2013DEB09C92347F54F38DCC273A9DCE2F34E725CF1B8CAC4DABF983E8F57A
+            5B68AE499E374AFB9935FF3462BEDBED6EA3B92979DE60E431E6C7434E1330BF
+            E3643E54F3BAF2D725CF1B5DF9C6DD9E9ADF4463D5F0A60E39FBC1FC3727F3A9
+            E135BEF26E0D2FD57CC4FC0ECB0DC9F346E623F779ABB48F0E39A9E15D953C6F
+            30121A721CAF7C64C8D966B1AAF950C3436333E4441B9E55CD471BDE57345724
+            CF1B8C441BDE7734560D2F3AE1E55FF3789993F9C8955F47E351F3F899C77C7B
+            62AD19985F913C7FF07312430F88416762AF1E32608BE5963EC20382709F2074
+            2716EBA107FC64B10B42281334FC787CD5ADC0D0BD6039F8DC0A2BF0B57C8820
+            78DC152AF0150A02E5F0C32E08184A3D21F2EC2F65C282E41E6028F5843D79AC
+            8520A4EF069725F7404188F4840D349724F7005FD1C6987EFBF30A8232A1F1B0
+            E41A84E8D8FC85E5A2E41E10843436471AE327341724F740E5D03813FAFDFE47
+            341EFF04A9C0576A8C914CF86C9709F84A418834C6F430C52B1330146A8C94C3
+            0734E724F70043A9314682F00ECD19C93DC057A8271084F704E1ACE41E606831
+            9209F016CD69C93DC050EA09B58D51815A66F3FBCF3041F8E7B0C4B1DF2CB775
+            BA2704E1C061897DBB1CBBABD3BCC168EA09BBF23E4E7BF6DDD1E1D900C34B18
+            AF9E2C79A7FD3408C20BB6877A5B28140A85C27FA7D5FA03EE33FEC56B58891D
+            0000000049454E44AE426082}
+          FileName = 'D:\OS\FontesFull\Images\voltar.png'
+        end>
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 8.000000000000000000
+      Margins.Bottom = 8.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 42.000000000000000000
+      Size.Height = 34.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object Rectangle2: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Right = 10.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 60.000000000000000000
+    Size.Width = 344.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFE5E5E5
+    XRadius = 4.000000000000000000
+    YRadius = 4.000000000000000000
+    object edtBuscaCliente: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Client
+      StyleLookup = 'transparentedit'
+      TabOrder = 0
+      TextSettings.Font.Size = 14.000000000000000000
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 262.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TextPrompt = 'Pesquisar'
+      StyledSettings = [Family, Style, FontColor]
+    end
+    object rectBuscaCliente: TRectangle
+      Align = Right
+      Corners = [TopRight, BottomRight]
+      Fill.Color = xFE4162FF
+      Position.X = 282.000000000000000000
+      Size.Width = 62.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      XRadius = 4.000000000000000000
+      YRadius = 4.000000000000000000
+      OnClick = rectBuscaClienteClick
+      object Label4: TLabel
+        Align = Center
+        StyledSettings = [Family, Style]
+        Size.Width = 206.000000000000000000
+        Size.Height = 29.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Buscar'
+        TabOrder = 0
+      end
+    end
+  end
+  object lvCliente: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 364.000000000000000000
+    Size.Height = 512.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    ItemAppearance.ItemHeight = 70
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'txtNome'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFE4162FF
+        Appearance.Width = 328.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.X = 10.000000000000000000
+        Appearance.PlaceOffset.Y = 5.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'txtEndereco'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF828282
+        Appearance.Width = 328.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.X = 10.000000000000000000
+        Appearance.PlaceOffset.Y = 26.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'txtCidade'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextColor = xFF828282
+        Appearance.Width = 328.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.X = 10.000000000000000000
+        Appearance.PlaceOffset.Y = 46.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    OnItemClick = lvClienteItemClick
+    ShowSelection = False
+  end
+end

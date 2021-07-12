@@ -56,6 +56,8 @@ type
     procedure lblMenuEncerrarClick(Sender: TObject);
     procedure lblMenuExcluirClick(Sender: TObject);
     procedure lblMenuAssinaturaClick(Sender: TObject);
+    procedure imgAddClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     procedure MudarAba(Image: TImage);
     procedure ConsultarOS(filtro: string);
@@ -63,6 +65,8 @@ type
     procedure ConsultarCliente(filtro: string);
     procedure AddCliente(codCliente, nome, endereco, cidade, uf: string);
     procedure AlterarStatusOS(codOS, status: string);
+    procedure OpenCadOS(OS: string);
+    procedure RefreshListaOS;
     { Private declarations }
   public
     { Public declarations }
@@ -75,11 +79,36 @@ implementation
 
 {$R *.fmx}
 
-uses UnitDM, UnitAssinatura;
+uses UnitDM, UnitAssinatura, UnitOS;
 
 procedure TFrmPrincipal.imgAbaOSClick(Sender: TObject);
 begin
     MudarAba(TImage(Sender));
+end;
+
+procedure TFrmPrincipal.RefreshListaOS;
+begin
+    ConsultarOS(edtBuscaOS.Text);
+end;
+
+procedure TFrmPrincipal.OpenCadOS(OS: string);
+begin
+    if NOT Assigned(FrmOS) then
+        Application.CreateForm(TFrmOS, FrmOS);
+
+    if OS.IsEmpty then
+        FrmOS.lblTitulo.Text := 'Nova OS'
+    else
+        FrmOS.lblTitulo.Text := 'Editar OS';
+
+    FrmOS.codOS := OS;
+    FrmOS.executeOnClose := RefreshListaOS;
+    FrmOS.Show;
+end;
+
+procedure TFrmPrincipal.imgAddClick(Sender: TObject);
+begin
+    OpenCadOS('');
 end;
 
 procedure TFrmPrincipal.lblMenuFecharClick(Sender: TObject);
@@ -166,7 +195,7 @@ begin
             exit;
         end;
 
-     //OpenCadOS(codOS);
+    OpenCadOS(codOS);
 end;
 
 procedure TFrmPrincipal.MudarAba(Image: TImage);
@@ -237,6 +266,12 @@ begin
         dm.qryConsOS.Next;
     end;
 
+end;
+
+procedure TFrmPrincipal.FormShow(Sender: TObject);
+begin
+    MudarAba(imgAbaOS);
+    ConsultarOS(edtBuscaOS.Text);
 end;
 
 procedure TFrmPrincipal.AddCliente(codCliente, nome, endereco, cidade, uf: string);

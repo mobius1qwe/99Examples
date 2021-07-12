@@ -16,6 +16,7 @@ type
     qryConsOS: TFDQuery;
     qryConsCliente: TFDQuery;
     qryGeral: TFDQuery;
+    qryFoto: TFDQuery;
     procedure connBeforeConnect(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
     procedure connAfterConnect(Sender: TObject);

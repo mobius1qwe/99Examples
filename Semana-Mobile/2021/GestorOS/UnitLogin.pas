@@ -36,7 +36,7 @@ uses UnitPrincipal;
 
 procedure TFrmLogin.rectAcessarClick(Sender: TObject);
 begin
-    if NOT Assigned(FrmPrincipal) then
+    if Assigned(FrmPrincipal) then
         Application.CreateForm(TFrmPrincipal, FrmPrincipal);
 
     Application.MainForm := FrmPrincipal;
