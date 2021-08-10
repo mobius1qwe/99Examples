@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2021/08/09 20:17:19.436,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 20:17:57.389,D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\UnitPrincipal.pas=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 20:17:57.389,D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\UnitPrincipal.fmx=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2021/08/09 20:18:04.629,D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\ServerRDW.dproj=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/08/09 20:28:20.461,=D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 20:28:45.986,D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\UnitDM.dfm=D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\Unit1.dfm</Transaction>
+    <Transaction>2021/08/09 20:28:45.986,D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\UnitDM.pas=D:\99Coders\Posts\256 - Transferindo arquivos do servidor para o meu app com Rest Dataware -------\Fontes\ServerRDW\Unit1.pas</Transaction>
+  </Transactions>
+  <ActiveMobileDevice>   <PMacMini iOSSimulator="iPhone5"/>
+  </ActiveMobileDevice>
+</BorlandProject>

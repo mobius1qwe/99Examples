@@ -1,0 +1,46 @@
+object FrmPrincipal: TFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Arquivos'
+  ClientHeight = 519
+  ClientWidth = 327
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object btnRDW: TButton
+    Align = Bottom
+    StyledSettings = [Family, FontColor]
+    Position.Y = 463.000000000000000000
+    Size.Width = 327.000000000000000000
+    Size.Height = 56.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Text = 'Getfile RDW'
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Font.StyleExt = {00060000000000000004000000}
+    OnClick = btnRDWClick
+  end
+  object RESTClient: TRESTClient
+    Authenticator = HTTPBasicAuthenticator1
+    BaseURL = 'http://localhost:9000'
+    Params = <>
+    Left = 40
+    Top = 16
+  end
+  object ReqRDW: TRESTRequest
+    AssignedValues = [rvConnectTimeout, rvReadTimeout]
+    Client = RESTClient
+    Params = <>
+    Resource = 'getfile'
+    Left = 40
+    Top = 96
+  end
+  object HTTPBasicAuthenticator1: THTTPBasicAuthenticator
+    Username = 'testserver'
+    Password = 'testserver'
+    Left = 192
+    Top = 16
+  end
+end
