@@ -1,0 +1,19 @@
+{
+	"info": {
+		"_postman_id": "9b4ad9e0-b4f0-4d6b-b2fc-35caedfcae62",
+		"name": "Produtos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8426445"
+	},
+	"item": [
+		{
+			"name": "Listar Unico Produto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/produtos/3"
+			},
+			"response": []
+		}
+	]
+}

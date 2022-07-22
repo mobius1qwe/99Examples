@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "25aa99c3-d82a-45fc-a8ed-8c6456679271",
+		"name": "Clientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8426445"
+	},
+	"item": [
+		{
+			"name": "Listar Clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/clientes?ordem=Nome&top=50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"clientes"
+					],
+					"query": [
+						{
+							"key": "ordem",
+							"value": "Nome"
+						},
+						{
+							"key": "top",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:3000/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": "http://localhost:3000/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Cliente",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": "http://localhost:3000/clientes"
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/clientes"
+			},
+			"response": []
+		}
+	]
+}

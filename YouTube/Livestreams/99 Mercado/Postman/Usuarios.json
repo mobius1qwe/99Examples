@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "150390d7-6f8c-41dd-bba8-03ba7458ff60",
+		"name": "Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8426445"
+	},
+	"item": [
+		{
+			"name": "Listar dados do Usuario",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/usuarios/3"
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Pedidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuarios/2/pedidos?id_pedido=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"2",
+						"pedidos"
+					],
+					"query": [
+						{
+							"key": "id_pedido",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"heber@teste.com.br\",\r\n    \"senha\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/usuarios/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Novo Usuário",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"password": "112233",
+						"username": "99coders"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"João Alberto\",\r\n    \"email\": \"janberto@teste.com.br\",\r\n    \"senha\": \"12345\",\r\n    \"endereco\": \"Av. Brasil, 1500\",\r\n    \"bairro\": \"Centro\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"uf\": \"SP\",\r\n    \"cep\": \"01510-000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/usuarios/cadastro"
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Usuário",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"João Guimarães\",\r\n    \"email\": \"jg@teste.com.br\",\r\n    \"senha\": \"123456\",\r\n    \"endereco\": \"Av. Interlagos, 999\",\r\n    \"bairro\": \"Interlagos\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"uf\": \"SP\",\r\n    \"cep\": \"99999-999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/usuarios/3"
+			},
+			"response": []
+		}
+	]
+}

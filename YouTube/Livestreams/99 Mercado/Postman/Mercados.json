@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "5842a93d-8186-4bb9-8fff-c064eaf040b8",
+		"name": "Mercados",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "8426445"
+	},
+	"item": [
+		{
+			"name": "Listar Mercados",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/mercados?busca=Pão&ind_entrega=&ind_retira=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"mercados"
+					],
+					"query": [
+						{
+							"key": "busca",
+							"value": "Pão"
+						},
+						{
+							"key": "ind_entrega",
+							"value": ""
+						},
+						{
+							"key": "ind_retira",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Unico Mercado",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/mercados/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"mercados",
+						"1"
+					],
+					"query": [
+						{
+							"key": "busca",
+							"value": "Pão",
+							"disabled": true
+						},
+						{
+							"key": "ind_entrega",
+							"value": "S",
+							"disabled": true
+						},
+						{
+							"key": "ind_retira",
+							"value": "S",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Categorias",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/mercados/1/categorias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"mercados",
+						"1",
+						"categorias"
+					],
+					"query": [
+						{
+							"key": "busca",
+							"value": "Pão",
+							"disabled": true
+						},
+						{
+							"key": "ind_entrega",
+							"value": "S",
+							"disabled": true
+						},
+						{
+							"key": "ind_retira",
+							"value": "S",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Produtos",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "99coders",
+						"password": "123456"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/mercados/1/produtos?id_categoria=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"mercados",
+						"1",
+						"produtos"
+					],
+					"query": [
+						{
+							"key": "busca",
+							"value": "Hei",
+							"disabled": true
+						},
+						{
+							"key": "id_categoria",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
