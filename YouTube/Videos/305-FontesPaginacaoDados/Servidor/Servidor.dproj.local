@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/16 11:08:17.000.563,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/16 12:50:48.000.217,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 18:20:14.000.625,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 18:20:30.000.720,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitPrincipal.pas=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 18:20:30.000.720,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitPrincipal.fmx=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2022/07/13 18:20:37.000.526,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Servidor.dproj=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/07/13 18:23:26.000.126,=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitDM.pas</Transaction>
+    <Transaction>2022/07/13 18:23:36.000.630,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitDM.pas=</Transaction>
+    <Transaction>2022/07/13 18:23:49.000.424,=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 18:23:53.000.990,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitDM.dfm=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Unit1.dfm</Transaction>
+    <Transaction>2022/07/13 18:23:53.000.990,D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\UnitDM.pas=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Unit1.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PMacMini iOSSimulator="iPhone5"/>
+		<NoProfile Android64="" Android=""/>
+	</ActiveMobileDevice>
+</BorlandProject>

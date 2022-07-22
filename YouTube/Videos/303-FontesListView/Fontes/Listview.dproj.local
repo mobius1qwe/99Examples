@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/16 11:08:17.000.563,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/16 12:50:48.000.217,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/11 14:19:22.000.356,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/11 14:19:50.000.697,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\UnitPrincipal.fmx</Transaction>
+    <Transaction>2022/07/11 14:19:50.000.697,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\UnitPrincipal.pas</Transaction>
+    <Transaction>2022/07/11 14:20:10.000.583,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Listview.dproj</Transaction>
+    <Transaction>2022/07/11 14:47:45.000.418,=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Unit1.pas</Transaction>
+    <Transaction>2022/07/11 14:48:20.000.150,D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Unit1.pas=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Units\UnitFunctions.pas</Transaction>
+    <Transaction>2022/07/11 17:39:44.000.456,=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Unit1.pas</Transaction>
+    <Transaction>2022/07/11 17:39:50.000.583,D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Unit1.dfm=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\UnitDM.dfm</Transaction>
+    <Transaction>2022/07/11 17:39:50.000.583,D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\Unit1.pas=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\FontesFull\UnitDM.pas</Transaction>
+    <Transaction>2022/07/11 18:58:18.977,D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\Fontes\UnitDM.pas=</Transaction>
+    <Transaction>2022/07/11 20:17:05.652,=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\Fontes\Units\UnitFunctions.pas</Transaction>
+    <Transaction>2022/07/11 20:17:15.372,=D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Listview\Fontes\UnitDM.pas</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PMacMini iOSSimulator="iPhone5"/>  <NoProfile Android="5200711f02614531"/>
+  </ActiveMobileDevice>
+</BorlandProject>

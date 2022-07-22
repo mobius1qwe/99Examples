@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/16 11:08:17.000.563,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/16 12:50:48.000.217,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 21:44:39.000.913,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/13 21:46:24.000.368,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Mobile\UnitPrincipal.pas</Transaction>
+    <Transaction>2022/07/13 21:46:24.000.368,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Mobile\UnitPrincipal.fmx</Transaction>
+    <Transaction>2022/07/13 21:46:29.000.143,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Posts\305 - Como fazer paginação de dados com Listview, Listbox e VertScrollBox\FontesFull\Mobile\Paginacao.dproj</Transaction>
+    <Transaction>2022/07/14 12:46:23.000.879,D:\Live\FontesFull\MobileListview\Listview.dproj=D:\Live\FontesFull\MobileListview\Paginacao.dproj</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PMacMini iOSSimulator="iPhone5"/>
+		<NoProfile Android="" Android64=""/>
+	</ActiveMobileDevice>
+	<BT_BuildType>Debug</BT_BuildType>
+</BorlandProject>

@@ -1,0 +1,25 @@
+object FrmPrincipal: TFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Servidor'
+  ClientHeight = 260
+  ClientWidth = 407
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object memo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    StyledSettings = [Family, Style, FontColor]
+    TextSettings.Font.Size = 18.000000000000000000
+    Align = Client
+    Size.Width = 407.000000000000000000
+    Size.Height = 260.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 403.000000000000000000
+    Viewport.Height = 256.000000000000000000
+  end
+end

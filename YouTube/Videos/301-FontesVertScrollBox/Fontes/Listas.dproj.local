@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/16 11:08:17.000.563,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/16 12:50:48.000.217,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 15:00:04.000.450,=C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 15:00:12.000.216,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.fmx=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\UnitPrincipal.fmx</Transaction>
+    <Transaction>2022/07/04 15:00:12.000.216,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\UnitPrincipal.pas</Transaction>
+    <Transaction>2022/07/04 15:00:16.000.484,C:\Users\INTEL\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Listas.dproj</Transaction>
+    <Transaction>2022/07/04 15:06:40.000.922,=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 15:07:26.000.912,D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Unit1.pas=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Frames\Frame.Cliente.pas</Transaction>
+    <Transaction>2022/07/04 15:07:26.000.912,D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Unit1.fmx=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\FontesFull\Frames\Frame.Cliente.fmx</Transaction>
+    <Transaction>2022/07/04 20:14:40.375,=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 20:15:26.199,D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\Fontes\Frames\Frame.Cliente.pas=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\Fontes\Unit1.pas</Transaction>
+    <Transaction>2022/07/04 20:15:26.199,D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\Fontes\Frames\Frame.Cliente.fmx=D:\99Coders\Posts\301 - Trabalhando com listas de dados no mundo mobile com Delphi ---------\Fontes\Unit1.fmx</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<PMacMini iOSSimulator="iPhone5"/>  <NoProfile Android="5200711f02614531"/>
+  </ActiveMobileDevice>
+</BorlandProject>

@@ -1,0 +1,36 @@
+object FrameProduto: TFrameProduto
+  Size.Width = 342.000000000000000000
+  Size.Height = 70.000000000000000000
+  Size.PlatformDefault = False
+  object imgFoto: TImage
+    MultiResBitmap = <
+      item
+      end>
+    HitTest = False
+    Position.X = 14.000000000000000000
+    Position.Y = 10.000000000000000000
+  end
+  object lblDescricao: TLabel
+    StyledSettings = [Family, Style, FontColor]
+    Position.X = 80.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 254.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 13.000000000000000000
+    Text = 'lblDescricao'
+    TabOrder = 2
+  end
+  object lblCategoria: TLabel
+    StyledSettings = [Family, Style]
+    Position.X = 80.000000000000000000
+    Position.Y = 36.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 11.000000000000000000
+    TextSettings.FontColor = xFF8D8D8D
+    Text = 'lblCategoria'
+    TabOrder = 1
+  end
+end
