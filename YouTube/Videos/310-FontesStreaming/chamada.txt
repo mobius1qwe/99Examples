@@ -1,0 +1,10 @@
+1 - definir url no _yutu
+2 - abrir form frmYouTube 
+
+procedure TForm1.YouHelp;
+begin
+  frmYouTube := TfrmYouTube.Create(application);
+  frmYouTube.BorderStyle := forms.bsToolWindow;
+  frmYouTube.ShowModal;
+  freeandnil(frmYouTube);
+end;

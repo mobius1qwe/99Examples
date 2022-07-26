@@ -1,0 +1,80 @@
+object FrmPrincipal: TFrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'V'#237'deos'
+  ClientHeight = 538
+  ClientWidth = 377
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lvVideos: TListView
+    ItemAppearanceClassName = 'TDynamicAppearance'
+    ItemEditAppearanceClassName = 'TDynamicAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    OnUpdateObjects = lvVideosUpdateObjects
+    ItemSpaces.Left = 0.000000000000000000
+    ItemSpaces.Right = 0.000000000000000000
+    Align = Client
+    Size.Width = 377.000000000000000000
+    Size.Height = 488.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    ItemAppearance.ItemHeight = 150
+    ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'imgVideo'
+        AppearanceClassName = 'TImageObjectAppearance'
+        Appearance.Width = 303.000000000000000000
+        Appearance.Height = 108.000000000000000000
+        Appearance.PlaceOffset.X = 10.000000000000000000
+        Appearance.PlaceOffset.Y = 13.000000000000000000
+      end
+      item
+        AppearanceObjectName = 'txtTitulo'
+        AppearanceClassName = 'TTextObjectAppearance'
+        Appearance.Font.Size = 13.000000000000000000
+        Appearance.TextAlign = Leading
+        Appearance.TextVertAlign = Leading
+        Appearance.WordWrap = True
+        Appearance.TextColor = xFF8D8D8D
+        Appearance.Width = 306.000000000000000000
+        Appearance.Height = 20.000000000000000000
+        Appearance.PlaceOffset.X = 6.000000000000000000
+        Appearance.PlaceOffset.Y = 125.000000000000000000
+      end>
+    ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+      item
+        AppearanceObjectName = 'Text1'
+        AppearanceClassName = 'TTextObjectAppearance'
+      end>
+    CanSwipeDelete = False
+    OnItemClick = lvVideosItemClick
+    ShowSelection = False
+    PullToRefresh = True
+  end
+  object Rectangle1: TRectangle
+    Align = Top
+    Fill.Color = claWhite
+    Sides = [Bottom]
+    Size.Width = 377.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xFFE6E6E6
+    object Label1: TLabel
+      Align = Left
+      StyledSettings = [Family, FontColor]
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 199.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      Text = 'V'#237'deos'
+      TabOrder = 0
+    end
+  end
+end
